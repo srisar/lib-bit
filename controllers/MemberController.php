@@ -11,4 +11,9 @@ class MemberController
 
     }
 
+    public function edit()
+    {
+
+    }
+
 }
