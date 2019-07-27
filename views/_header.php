@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="<?= App::getAssetsURL() ?>/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" href="<?= App::getAssetsURL() ?>/app.css">
+    <link rel="stylesheet" href="<?= App::getAssetsURL() ?>/lineicons/LineIcons.css">
 </head>
 <body>
 

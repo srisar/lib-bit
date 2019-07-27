@@ -12,7 +12,7 @@ $members = Member::select_all();
 
         <div class="row">
             <div class="col">
-                <h1 class="text-center">Books list</h1>
+                <h1 class="text-center">Members list</h1>
             </div>
         </div>
 

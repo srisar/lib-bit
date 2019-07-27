@@ -31,4 +31,16 @@ class Member
         return $statement->fetchAll(PDO::FETCH_CLASS, Member::class);
     }
 
+    public static function search($keyword)
+    {
+        $db = Database::get_instance();
+
+        $statement = $db->prepare("SELECT * FROM members WHERE fullname LIKE ? ORDER BY fullname LIMIT 1000");
+
+        $statement->execute(['%' . $keyword . '%']);
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, Member::class);
+    }
+
+
 }

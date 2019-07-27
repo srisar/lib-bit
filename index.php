@@ -15,6 +15,9 @@ Router::add("/books/adding", "BookController", "adding");
 Router::add("/books/edit", "BookController", "edit");
 Router::add("/books/editing", "BookController", "editing");
 
+Router::add('/t/search/members', TransactionsController::class, "show_search");
+Router::add('/t/results/members', TransactionsController::class, "search_results");
+
 
 Router::add("/books/instance/adding", "BookInstanceController", "adding");
 

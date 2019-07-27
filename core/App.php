@@ -57,12 +57,7 @@ class App
 
         if (isset($request[$field])) {
 
-            if (!empty(trim($request[$field]))) {
-                return trim($request[$field]);
-            } else {
-                throw new Exception(sprintf("Request field (%s) cannot be empty", $field));
-            }
-
+            return trim($request[$field]);
 
         } else {
             throw new Exception(sprintf("Request field (%s) not found", $field));

@@ -137,6 +137,7 @@ $book_instances = $book->get_all_book_instances();
                             <th>Book Instance</th>
                             <th>Status</th>
                             <th>History</th>
+                            <th>Actions</th>
                         </tr>
                         </thead>
 
@@ -147,6 +148,7 @@ $book_instances = $book->get_all_book_instances();
                                 <td><?= $book_instance ?></td>
                                 <td>Available</td>
                                 <td><a href="#">click here</a></td>
+                                <td><a href="<?= App::createURL('/t/search/members', ['instance_id' => $book_instance->id]) ?>">Lend</a></td>
                             </tr>
 
                         <?php endforeach; ?>
