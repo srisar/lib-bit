@@ -40,10 +40,11 @@ class App
 
     /**
      * @param $path
+     * @param array $query
      */
-    public static function redirect($path)
+    public static function redirect($path, $query = [])
     {
-        header('Location: ' . self::createURL($path));
+        header('Location: ' . self::createURL($path, $query));
     }
 
     /**

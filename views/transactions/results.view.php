@@ -30,56 +30,60 @@ $keyword = View::get_data('keyword');
             <?php View::render_error_messages() ?>
 
             <div class="alert alert-primary">
-                <div>Book: <?= $book->get_display_name() ?></div>
-                <div>Instance: <?= $book_instance->id ?></div>
+                <div>Book: <?= $book->get_display_name() ?> # <?= $book_instance->id ?></div>
             </div>
 
 
-            <div class="alert alert-primary">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Searched for <?= $keyword ?></h4>
+                </div>
+                <div class="card-body">
+                    <form action="<?= App::createURL('/transactions/members/results') ?>" method="get">
 
-                <form action="<?= App::createURL('/t/search/member') ?>" method="get">
+                        <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
 
-                    <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
+                        <div class="form-group">
+                            <label for="">Search for member:</label>
+                            <input type="text" class="form-control" name="q" value="<?= $keyword ?>">
+                        </div>
+                        <button type="submit">SEARCH</button>
+                    </form>
 
-                    <div class="form-group">
-                        <label for="">Search for member:</label>
-                        <input type="text" class="form-control" name="q" value="<?= $keyword ?>">
-                    </div>
-                    <button type="submit">SEARCH</button>
-                </form>
+                    <hr>
 
-                <hr>
 
-                <h4>Searched for <?= $keyword ?></h4>
 
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Member Since</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-
-                    <?php foreach ($members as $member): ?>
-
+                    <table class="table table-striped table-bordered">
+                        <thead>
                         <tr>
-                            <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
-                            <td><?= $member->get_member_since() ?></td>
-                            <td>
-                                <a class="btn btn-primary btn-sm" href="<?= App::createURL('/t/add', ['instance_id' => $book_instance->id, 'member_id' => $member->id]) ?>">
-                                    <i class="lni-enter"></i> Add
-                                </a>
-                            </td>
+                            <th>Full Name</th>
+                            <th>Member Since</th>
+                            <th>Actions</th>
                         </tr>
+                        </thead>
 
-                    <?php endforeach; ?>
+                        <tbody>
 
-                    </tbody>
+                        <?php foreach ($members as $member): ?>
 
-                </table>
+                            <tr>
+                                <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
+                                <td><?= $member->get_member_since() ?></td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm" href="<?= App::createURL('/transactions/add', ['instance_id' => $book_instance->id, 'member_id' => $member->id]) ?>">
+                                        <i class="lni-enter"></i> Add
+                                    </a>
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
+
+                        </tbody>
+
+                    </table>
+
+                </div><!--.card-body-->
 
 
             </div>

@@ -25,23 +25,32 @@ $book = View::get_data('book');
             <?php View::render_error_messages() ?>
 
             <div class="alert alert-primary">
-                <div>Book: <?= $book->get_display_name() ?></div>
-                <div>Instance: <?= $book_instance->id ?></div>
+                <div>Book: <?= $book->get_display_name() ?> # <?= $book_instance->id ?></div>
             </div>
 
 
-            <div class="alert alert-primary">
+            <div class="card">
 
-                <form action="<?= App::createURL('/t/results/members') ?>" method="get">
+                <div class="card-header">
 
-                    <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
+                </div>
 
-                    <div class="form-group">
-                        <label for="">Search for member:</label>
-                        <input type="text" class="form-control" name="q">
-                    </div>
-                    <button type="submit">SEARCH</button>
-                </form>
+                <div class="card-body">
+
+                    <form action="<?= App::createURL('/transactions/members/results') ?>" method="get">
+
+                        <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
+
+                        <div class="form-group">
+                            <label for="">Search for member:</label>
+                            <input type="text" class="form-control" name="q">
+                        </div>
+                        <button type="submit">SEARCH</button>
+                    </form>
+
+                </div>
+
+
 
             </div>
 

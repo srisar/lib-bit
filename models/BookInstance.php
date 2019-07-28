@@ -6,6 +6,8 @@ class BookInstance
 
     public $id, $book_id;
 
+    const STATE_AVAILABLE = "AVAILABLE";
+    const STATE_BORROWED = "BORROWED";
 
     /**
      * @return Book
@@ -52,6 +54,25 @@ class BookInstance
     public function get_all_transactions()
     {
         return BookTransaction::select_all_by_book_instance_id($this->id);
+    }
+
+    public function get_status()
+    {
+
+        $db = Database::get_instance();
+
+        $statement = $db->prepare("SELECT * FROM book_transactions WHERE book_instance_id = ? ORDER BY borrowed_date DESC LIMIT 1");
+        $statement->execute([$this->id]);
+
+        /** @var BookTransaction $transaction */
+        $transaction = $statement->fetchObject(BookTransaction::class);
+
+        if (!empty($transaction)) {
+            return $transaction->state;
+        } else {
+            return BookInstance::STATE_AVAILABLE;
+        }
+
     }
 
 }

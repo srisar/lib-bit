@@ -146,9 +146,13 @@ $book_instances = $book->get_all_book_instances();
                         <?php foreach ($book_instances as $book_instance): ?>
                             <tr>
                                 <td><?= $book_instance ?></td>
-                                <td>Available</td>
+                                <td><?= $book_instance->get_status() ?></td>
                                 <td><a href="#">click here</a></td>
-                                <td><a href="<?= App::createURL('/t/search/members', ['instance_id' => $book_instance->id]) ?>">Lend</a></td>
+                                <td>
+                                    <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
+                                        <a href="<?= App::createURL('/transactions/members/search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
+                                    <?php endif; ?>
+                                </td>
                             </tr>
 
                         <?php endforeach; ?>
