@@ -56,4 +56,13 @@ class Subcategory
         return true;
     }
 
+    public function get_all_books($limit = 100)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM books WHERE subcategory_id=?");
+        $statement->execute([$this->id]);
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, Book::class);
+    }
+
 }

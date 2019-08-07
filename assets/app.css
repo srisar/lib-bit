@@ -3,3 +3,11 @@
 body{
     font-family: 'Work Sans', sans-serif;
 }
+
+#categories-list{
+    font-size: 90%;
+}
+
+#categories-list .category-name{
+
+}

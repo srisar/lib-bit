@@ -15,6 +15,8 @@ Router::add("/books/adding", "BookController", "adding");
 Router::add("/books/edit", "BookController", "edit");
 Router::add("/books/editing", "BookController", "editing");
 
+Router::add('/books/subcategory', BookController::class, "subcategory");
+
 Router::add("/books/instance/adding", BookInstanceController::class, "adding");
 
 

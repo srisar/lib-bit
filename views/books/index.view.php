@@ -3,45 +3,89 @@
 <?php
 
 /** @var Book[] $books */
-$books = Book::select_all();
+$books = View::get_data('books');
+/** @var Category[] $categories */
+$categories = View::get_data('categories');
+
+$title = View::get_data('title');
 
 ?>
 
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row">
             <div class="col">
-                <h1 class="text-center">Books list</h1>
+                <h3 class="text-center">Books list - <?= $title ?></h3>
             </div>
         </div>
 
         <div class="row">
 
-            <div class="col">
+            <div class="col-3">
 
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Category</th>
-                    </tr>
-                    </thead>
+                <div id="categories-list" class="card">
+                    <div class="card-header">
+                        <div class="font-weight-bold">Categories</div>
+                    </div>
+                    <div class="card-body">
 
-                    <tbody>
+                        <ul class="list-group">
+                            <?php foreach ($categories as $category): ?>
+                                <?php
+                                /** @var Subcategory[] $subcategories */
+                                $subcategories = $category->get_all_subcategories();
+                                ?>
 
-                    <?php foreach ($books as $book): ?>
+                                <li class="list-group-item">
+                                    <div class="category-name font-weight-bold"><?= $category ?></div>
 
+                                    <ul class="list-group list-group-flush">
+                                        <?php foreach ($subcategories as $subcategory): ?>
+                                            <a href="<?= App::createURL('/books/subcategory', ['id' => $subcategory->id]) ?>">
+                                                <li class="list-group-item"><?= $subcategory->subcategory_name ?></li>
+                                            </a>
+                                        <?php endforeach; ?>
+                                    </ul>
+
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-9">
+                <?php if (!empty($books)): ?>
+                    <table class="table table-striped table-bordered">
+                        <thead>
                         <tr>
-                            <td><a href="<?= App::createURL('/books/edit', ['id' => $book->id]) ?>"><?= $book->title ?></a></td>
-                            <td><?= $book->get_category() ?></td>
+                            <th>Title</th>
+                            <th>Category</th>
                         </tr>
+                        </thead>
 
-                    <?php endforeach; ?>
+                        <tbody>
 
-                    </tbody>
 
-                </table>
+                        <?php foreach ($books as $book): ?>
+
+                            <tr>
+                                <td><a href="<?= App::createURL('/books/edit', ['id' => $book->id]) ?>"><?= $book->title ?></a></td>
+                                <td><?= $book->get_category() ?></td>
+                            </tr>
+
+                        <?php endforeach; ?>
+
+
+                        </tbody>
+
+                    </table>
+                <?php else: ?>
+                    <p class="lead">No books found</p>
+                <?php endif; ?>
 
             </div>
 

@@ -5,11 +5,12 @@ class Book
     public $id, $title, $category_id, $subcategory_id, $author_id;
 
 
-    public static function select_all()
+    public static function select_all($limit = 100)
     {
         $db = Database::get_instance();
 
-        $statement = $db->prepare("SELECT * FROM books");
+        $statement = $db->prepare("SELECT * FROM books LIMIT :limit_value");
+        $statement->bindParam(":limit_value", $limit, PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_CLASS, Book::class);
@@ -103,6 +104,16 @@ class Book
 
         return $statement->fetchAll(PDO::FETCH_CLASS, BookInstance::class);
 
+    }
+
+    /**
+     * @param $id
+     * @return Book[]
+     */
+    public static function get_all_books_by_subcategory($id)
+    {
+        $subcategory = Subcategory::get_subcategory_by_id($id);
+        return $subcategory->get_all_books();
     }
 
 }

@@ -6,6 +6,13 @@ class BookController
     public function index($req)
     {
 
+        $books = Book::select_all();
+        $categories = Category::select_all();
+
+        View::set_data('books', $books);
+        View::set_data('categories', $categories);
+        View::set_data('title', 'All Books');
+
         include "views/books/index.view.php";
 
     }
@@ -76,6 +83,31 @@ class BookController
 
     }
 
+    public function subcategory($request)
+    {
+
+        try {
+            $field = ['id' => App::validateField($request, 'id')];
+
+            $books = Book::get_all_books_by_subcategory($field['id']);
+
+            $categories = Category::select_all();
+
+            $subcat = Subcategory::get_subcategory_by_id($field['id']);
+
+            $title = sprintf("%s → %s", $subcat->get_category(), $subcat->subcategory_name);
+
+            View::set_data('books', $books);
+            View::set_data('categories', $categories);
+
+            View::set_data('title', $title);
+
+            include "views/books/index.view.php";
+        } catch (Exception $exception) {
+            die($exception->getMessage());
+        }
+
+    }
 
 
 }
