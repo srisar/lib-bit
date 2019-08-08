@@ -28,7 +28,7 @@ $title = View::get_data('title');
                     <div class="card-header">
                         <div class="font-weight-bold">Categories</div>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body p-1">
 
                         <ul class="list-group">
                             <?php foreach ($categories as $category): ?>
