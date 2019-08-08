@@ -30,7 +30,7 @@
                 <a class="nav-link" href="<?= App::createURL('/books/add') ?>">Add a book</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="<?= App::createURL('/categories') ?>">Edit categories</a>
+                <a class="nav-link" href="<?= App::createURL('/categories') ?>">Manage categories</a>
             </li>
             <li>
                 <a class="nav-link" href="<?= App::createURL('/members') ?>">Member</a>

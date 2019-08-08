@@ -15,7 +15,7 @@ Router::add("/books/adding", "BookController", "adding");
 Router::add("/books/edit", "BookController", "edit");
 Router::add("/books/editing", "BookController", "editing");
 
-Router::add('/books/subcategory', BookController::class, "subcategory");
+Router::add('/books/subcategory', BookController::class, "view_by_subcategory");
 
 Router::add("/books/instance/adding", BookInstanceController::class, "adding");
 
@@ -34,8 +34,11 @@ Router::add('/categories/editing', "CategoryController", "editing");
 
 Router::add('/members', 'MemberController', 'index');
 
-Router::add('/subcategories/add', "CategoryController", "subcat_add");
-Router::add('/subcategories/adding', "CategoryController", "subcat_adding");
+Router::add('/subcategories', "CategoryController", "view_subcategories");
+Router::add('/subcategories/add', "CategoryController", "add_subcategory");
+Router::add('/subcategories/adding', "CategoryController", "adding_subcategory");
+Router::add('/subcategories/edit', "CategoryController", "edit_subcategory");
+Router::add('/subcategories/editing', "CategoryController", "editing_subcategory");
 
 Router::add('/test', "TestController", "test");
 

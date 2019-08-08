@@ -83,17 +83,17 @@ class BookController
 
     }
 
-    public function subcategory($request)
+    public function view_by_subcategory($request)
     {
 
         try {
-            $field = ['id' => App::validateField($request, 'id')];
+            $field = ['subcat_id' => App::validateField($request, 'subcat_id')];
 
-            $books = Book::get_all_books_by_subcategory($field['id']);
+            $books = Book::get_all_books_by_subcategory($field['subcat_id']);
 
             $categories = Category::select_all();
 
-            $subcat = Subcategory::get_subcategory_by_id($field['id']);
+            $subcat = Subcategory::get_subcategory_by_id($field['subcat_id']);
 
             $title = sprintf("%s → %s", $subcat->get_category(), $subcat->subcategory_name);
 

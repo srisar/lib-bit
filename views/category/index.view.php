@@ -3,71 +3,76 @@
 <?php
 /** @var Category[] $categories */
 $categories = View::get_data('categories');
+
+/** @var Subcategory[] $subcategories */
+$subcategories = View::get_data('subcategories');
+
 ?>
 
 
-<div class="container">
+<div class="container-fluid">
 
     <div class="row mb-3">
         <div class="col text-center">
-            <h1 class="text-center">Book Categories</h1>
-            <a href="<?= App::createURL('/categories/add') ?>" class="btn btn-lg btn-primary">Add a category</a>
+            <h1 class="text-center">Manage Categories</h1>
+
         </div>
     </div><!--.row-->
 
-    <div class="row justify-content-center">
+    <div class="row">
 
-        <div class="col-6">
+        <div class="col-3">
 
-            <table class="table table-striped table-bordered">
-                <thead>
-                <tr>
-                    <th>Category</th>
-                </tr>
-                </thead>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="mb-0 font-weight-normal">Categories <a href="<?= App::createURL('/categories/add') ?>" class="btn btn-sm btn-primary">Add</a></h2>
+                </div>
 
-                <tbody>
+                <div class="card-body p-1">
 
-                <?php foreach ($categories as $category): ?>
+                    <ul class="list-group">
+                        <?php foreach ($categories as $category): ?>
+                            <li class="list-group-item"><a href="<?= App::createURL('/subcategories', ['cat_id' => $category->id]) ?>"><?= $category ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
 
+                </div>
+            </div>
+
+        </div><!--.col-2-->
+
+        <div class="col-19">
+
+            <?php if (!empty($subcategories)): ?>
+
+                <table class="table table-striped table-bordered">
+                    <thead>
                     <tr>
-                        <td>
-
-                            <div class="mb-3">
-                                <a class="font-weight-bold" href="<?= App::createURL('/categories/edit', ['id' => $category->id]) ?>"><?= $category->category_name ?></a>
-                            </div>
-
-                            <?php $subcats = $category->get_all_subcategories(); ?>
-
-                            <?php if (!empty($subcats)): ?>
-
-                                <ul class="list-group">
-                                    <?php foreach ($subcats as $subcat): ?>
-
-                                        <li class="list-group-item"><a href="<?= App::createURL('/subcategories/edit', ['id'=> $subcat->id]) ?>"><?= $subcat->subcategory_name ?></a></li>
-                                    <?php endforeach; ?>
-                                </ul>
-
-                            <?php endif; ?>
-
-                            <br>
-                            <a href="<?= App::createURL('/subcategories/add', ['cat_id' => $category->id]) ?>" class="btn btn-sm btn-secondary">Add a subcategory</a>
-
-                        </td>
-
-
+                        <th>Subcategories in <?= $subcategories[0]->get_category() ?></th>
+                        <th>Actions</th>
                     </tr>
+                    </thead>
+                    <tbody>
 
-                <?php endforeach; ?>
+                    <?php foreach ($subcategories as $subcategory): ?>
+                        <tr>
+                            <td><a href="<?= App::createURL('/subcategories/edit', ['subcat_id' => $subcategory->id]) ?>"><?= $subcategory ?></a></td>
+                            <td>
+                                <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>" class="btn btn-sm btn-success">View Books</a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
 
+                    </tbody>
+                </table>
 
-                </tbody>
+            <?php endif; ?>
 
-            </table>
+            <a href="<?= App::createURL('/subcategories/add', ['cat_id' => $category->id]) ?>" class="btn btn-sm btn-secondary">Add a subcategory</a>
 
-        </div>
+        </div><!--.col-10-->
 
-    </div><!--.row-->
+    </div><!-- .row -->
 
 
 </div>

@@ -32,6 +32,9 @@ class Category
         return $statement->fetchObject(Category::class);
     }
 
+    /**
+     * @return Category[]
+     */
     public static function select_all()
     {
         $db = Database::get_instance();

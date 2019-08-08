@@ -42,7 +42,7 @@ $title = View::get_data('title');
 
                                     <ul class="list-group list-group-flush">
                                         <?php foreach ($subcategories as $subcategory): ?>
-                                            <a href="<?= App::createURL('/books/subcategory', ['id' => $subcategory->id]) ?>">
+                                            <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>">
                                                 <li class="list-group-item"><?= $subcategory->subcategory_name ?></li>
                                             </a>
                                         <?php endforeach; ?>

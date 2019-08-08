@@ -29,7 +29,7 @@ $category = View::get_data('category');
 
                     <form action="<?= App::createURL('/subcategories/adding') ?>" method="get">
 
-                        <input type="hidden" name="category_id", value="<?= $category->id ?>">
+                        <input type="hidden" name="category_id" , value="<?= $category->id ?>">
 
                         <div class="form-group">
                             <label>Category Name</label>
@@ -54,9 +54,11 @@ $category = View::get_data('category');
         <div class="col-4">
 
             <div class="card">
-                <div class="card-body">
-                    <h5>Subcategories in <?= $category->category_name ?></h5>
+                <div class="card-header">
+                    <h4 class="m-0">Subcategories in <?= $category->category_name ?></h4>
+                </div>
 
+                <div class="card-body p-1">
                     <?php $subcats = $category->get_all_subcategories(); ?>
 
                     <?php if (!empty($subcats)): ?>
@@ -64,7 +66,7 @@ $category = View::get_data('category');
                         <ul class="list-group">
                             <?php foreach ($subcats as $subcat): ?>
 
-                                <li class="list-group-item"><a href="<?= App::createURL('/subcategories/edit', ['id'=> $subcat->id]) ?>"><?= $subcat->subcategory_name ?></a></li>
+                                <li class="list-group-item"><a href="<?= App::createURL('/subcategories/edit', ['id' => $subcat->id]) ?>"><?= $subcat->subcategory_name ?></a></li>
                             <?php endforeach; ?>
                         </ul>
 

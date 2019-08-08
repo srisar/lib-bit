@@ -8,10 +8,7 @@ class TestController
     {
 
 
-        $members = Member::select_all();
-
-        var_dump($members);
-
+       var_dump(Subcategory::get_subcategory_by_id(1)->get_books_count());
 
     }
 

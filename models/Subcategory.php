@@ -6,8 +6,14 @@ class Subcategory
 
     public $id, $category_id, $subcategory_name;
 
+    public function __toString()
+    {
+        return $this->subcategory_name;
+    }
+
 
     /**
+     * Returns an associated Category for the current Subcategory
      * @return Category
      */
     public function get_category()
@@ -30,6 +36,10 @@ class Subcategory
     }
 
 
+    /**
+     * Insert a new subcategory
+     * @return bool
+     */
     public function insert()
     {
         $db = Database::get_instance();
@@ -37,10 +47,24 @@ class Subcategory
         return $statement->execute([$this->category_id, $this->subcategory_name]);
     }
 
+    /**
+     * Update the current subcategory
+     * @return bool
+     */
+    public function update()
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("UPDATE subcategories SET subcategory_name=? WHERE id=?");
+        return $statement->execute([$this->subcategory_name, $this->id]);
+    }
 
+
+    /**
+     * Checks if subcategory exists under a category
+     * @return bool
+     */
     public function already_exists()
     {
-        // 1. check if subcategory exists under category
 
         $db = Database::get_instance();
         $statement = $db->prepare("SELECT * FROM subcategories WHERE category_id=? AND subcategory_name=?");
@@ -56,6 +80,11 @@ class Subcategory
         return true;
     }
 
+    /**
+     * Return all books in given subcategory
+     * @param int $limit
+     * @return Book[]
+     */
     public function get_all_books($limit = 100)
     {
         $db = Database::get_instance();
@@ -64,5 +93,23 @@ class Subcategory
 
         return $statement->fetchAll(PDO::FETCH_CLASS, Book::class);
     }
+
+
+    /**
+     * Returns the number of books in the subcategory
+     * @return int
+     */
+    public function get_books_count()
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT count(id) as count FROM books WHERE subcategory_id=?");
+        $statement->execute([$this->id]);
+
+        $result = $statement->fetchObject(StdClass::class);
+
+        return (int)$result->count;
+
+    }
+
 
 }
