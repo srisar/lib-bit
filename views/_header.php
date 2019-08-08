@@ -13,7 +13,7 @@
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="#">LibMan</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -24,16 +24,14 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item active">
-                <a class="nav-link" href="<?= App::createURL('/books') ?>">Book list</a>
+                <a class="nav-link" href="<?= App::createURL('/books') ?>">Books</a>
             </li>
+
             <li class="nav-item">
-                <a class="nav-link" href="<?= App::createURL('/books/add') ?>">Add a book</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?= App::createURL('/categories') ?>">Manage categories</a>
+                <a class="nav-link" href="<?= App::createURL('/categories') ?>">Categories</a>
             </li>
             <li>
-                <a class="nav-link" href="<?= App::createURL('/members') ?>">Member</a>
+                <a class="nav-link" href="<?= App::createURL('/members') ?>">Members</a>
             </li>
         </ul>
 
