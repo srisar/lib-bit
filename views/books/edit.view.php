@@ -17,7 +17,7 @@ $book_instances = $book->get_all_book_instances();
 
 <?php include_once "views/_header.php" ?>
 
-<div class="container">
+<div class="container-fluid">
 
     <div class="row">
         <div class="col">
@@ -28,10 +28,12 @@ $book_instances = $book->get_all_book_instances();
 
     <div class="row">
 
-        <div class="col">
+        <div class="col-3">
 
             <div class="card">
-
+                <div class="card-header">
+                    <h3 class="m-0">Book details</h3>
+                </div>
                 <div class="card-body">
 
                     <?php View::render_error_messages() ?>
@@ -42,7 +44,9 @@ $book_instances = $book->get_all_book_instances();
 
 
                         <div class="row">
-                            <div class="col">
+
+                            <div class="col-12">
+
                                 <div class="form-group">
                                     <label for="book-title">Title</label>
                                     <input class="form-control" type="text" value="<?= $book->title ?>" id="book-title"
@@ -51,7 +55,7 @@ $book_instances = $book->get_all_book_instances();
 
                             </div>
 
-                            <div class="col">
+                            <div class="col-12">
                                 <div class="form-group">
                                     <label for="book-category">Category</label>
 
@@ -70,7 +74,7 @@ $book_instances = $book->get_all_book_instances();
 
                             </div>
 
-                            <div class="col">
+                            <div class="col-12">
 
                                 <div id="output">
                                     <div class="form-group">
@@ -93,7 +97,7 @@ $book_instances = $book->get_all_book_instances();
 
                         </div><!--.row-->
 
-                        <div class="row">
+                        <div class="row text-right">
                             <div class="col">
                                 <button class="btn btn-warning" type="submit">Save</button>
                             </div>
@@ -106,11 +110,6 @@ $book_instances = $book->get_all_book_instances();
             </div>
 
         </div><!--.col-->
-
-    </div><!--.row-->
-
-
-    <div class="row my-3">
 
         <div class="col">
 
@@ -165,7 +164,6 @@ $book_instances = $book->get_all_book_instances();
 
 
         </div>
-
 
     </div><!--.row-->
 

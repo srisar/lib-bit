@@ -25,7 +25,7 @@ $subcategories = View::get_data('subcategories');
 
             <div class="card">
                 <div class="card-header">
-                    <h2 class="mb-0 font-weight-normal">Categories <a href="<?= App::createURL('/categories/add') ?>" class="btn btn-sm btn-primary">Add</a></h2>
+                    <h3 class="mb-0">Categories <a href="<?= App::createURL('/categories/add') ?>" class="btn btn-sm btn-primary">Add</a></h3>
                 </div>
 
                 <div class="card-body p-1">

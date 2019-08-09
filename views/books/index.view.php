@@ -26,7 +26,7 @@ $title = View::get_data('title');
 
                 <div id="categories-list" class="card">
                     <div class="card-header">
-                        <div class="font-weight-bold">Categories</div>
+                        <h3 class="m-0">Categories</h3>
                     </div>
                     <div class="card-body p-1">
 
