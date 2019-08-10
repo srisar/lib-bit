@@ -7,8 +7,11 @@ class TestController
     public function test($request)
     {
 
+        $book = new BookFactory();
 
-       var_dump(Subcategory::get_subcategory_by_id(1)->get_books_count());
+        var_dump(
+            $book->add_category_id(12)->add_subcategory_id(11)->add_id(112)->build()
+        );
 
     }
 

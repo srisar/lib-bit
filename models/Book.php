@@ -1,10 +1,24 @@
 <?php
 
+
 class Book
 {
     public $id, $title, $category_id, $subcategory_id, $author_id;
 
+    /**
+     * Returns a string representation of a Book
+     * @return string
+     */
+    public function __toString()
+    {
+        return sprintf("%s", $this->title);
+    }
 
+    /**
+     * Select all the books.
+     * @param int $limit
+     * @return Book[]
+     */
     public static function select_all($limit = 100)
     {
         $db = Database::get_instance();
@@ -18,6 +32,7 @@ class Book
     }
 
     /**
+     * Select a book by id
      * @param $id
      * @return Book
      */
@@ -32,6 +47,10 @@ class Book
     }
 
 
+    /**
+     * Insert multiple books at once.
+     * @param array $titles
+     */
     public static function batch_insert(array $titles)
     {
 
@@ -58,17 +77,35 @@ class Book
 
     }
 
+    /**
+     * Insert a new book into database.
+     * @return bool
+     */
     public function insert()
     {
-
         $db = Database::get_instance();
 
-        $statement = $db->prepare("INSERT INTO books(title) VALUE (?)");
-        return $statement->execute([$this->title]);
-
+        $statement = $db->prepare("INSERT INTO books(title, category_id, subcategory_id) VALUE (?,?,?)");
+        return $statement->execute(
+            [$this->title, $this->category_id, $this->subcategory_id]
+        );
     }
 
 
+    /**
+     * Returns the last inserted id.
+     * @return string
+     */
+    public static function get_last_insert_id()
+    {
+        $db = Database::get_instance();
+        return $db->lastInsertId();
+    }
+
+    /**
+     * Update book.
+     * @return bool
+     */
     public function update()
     {
 
@@ -80,6 +117,7 @@ class Book
 
 
     /**
+     * Get the Book's category.
      * @return Category
      */
     public function get_category()
@@ -87,6 +125,10 @@ class Book
         return Category::get_category_by_id($this->category_id);
     }
 
+    /**
+     * Returns a display name as [Title (category)]
+     * @return string
+     */
     public function get_display_name()
     {
         return sprintf("%s (%s)", $this->title, $this->get_category());
@@ -94,6 +136,7 @@ class Book
 
 
     /**
+     * Get all the books from the given instance.
      * @return BookInstance[]
      */
     public function get_all_book_instances()
@@ -107,6 +150,7 @@ class Book
     }
 
     /**
+     * Get all the books in a given subcategory id.
      * @param $id
      * @return Book[]
      */

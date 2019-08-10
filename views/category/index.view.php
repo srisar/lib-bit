@@ -12,7 +12,7 @@ $subcategories = View::get_data('subcategories');
 
 <div class="container-fluid">
 
-    <div class="row mb-3">
+    <div class="row">
         <div class="col text-center">
             <h1 class="text-center">Manage Categories</h1>
 

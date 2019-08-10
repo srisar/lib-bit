@@ -4,11 +4,11 @@
 
 /** @var Book[] $books */
 $books = View::get_data('books');
-/** @var Category[] $categories */
-$categories = View::get_data('categories');
 
+/** @var string $title */
 $title = View::get_data('title');
-
+/** @var Subcategory $selected_subcategory */
+$selected_subcategory = View::get_data('selected_subcategory');
 ?>
 
 
@@ -24,41 +24,18 @@ $title = View::get_data('title');
 
             <div class="col-3">
 
-                <div id="categories-list" class="card">
-                    <div class="card-header">
-                        <h3 class="m-0">Categories</h3>
-                    </div>
-                    <div class="card-body p-1">
+                <?php include_once "_categories_list.inc.php" ?>
 
-                        <ul class="list-group">
-                            <?php foreach ($categories as $category): ?>
-                                <?php
-                                /** @var Subcategory[] $subcategories */
-                                $subcategories = $category->get_all_subcategories();
-                                ?>
-
-                                <li class="list-group-item">
-                                    <div class="category-name font-weight-bold"><?= $category ?></div>
-
-                                    <ul class="list-group list-group-flush">
-                                        <?php foreach ($subcategories as $subcategory): ?>
-                                            <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>">
-                                                <li class="list-group-item"><?= $subcategory->subcategory_name ?></li>
-                                            </a>
-                                        <?php endforeach; ?>
-                                    </ul>
-
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-
-                    </div>
-                </div>
-
-            </div>
+            </div><!--.col-->
 
             <div class="col-9">
+
                 <?php if (!empty($books)): ?>
+
+                    <div class="mb-2">
+                        <a class="btn btn-sm btn-primary" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">Add a new book in <?= $selected_subcategory ?></a>
+                    </div>
+
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
@@ -66,10 +43,7 @@ $title = View::get_data('title');
                             <th>Category</th>
                         </tr>
                         </thead>
-
                         <tbody>
-
-
                         <?php foreach ($books as $book): ?>
 
                             <tr>
@@ -78,18 +52,16 @@ $title = View::get_data('title');
                             </tr>
 
                         <?php endforeach; ?>
-
-
                         </tbody>
-
                     </table>
                 <?php else: ?>
-                    <p class="lead">No books found</p>
+                    <p class="lead">No books found.</p>
+                    <p><a href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">Add a new book in <?= $selected_subcategory ?></a></p>
                 <?php endif; ?>
 
-            </div>
+            </div><!--.col-->
 
-        </div>
+        </div><!--.row-->
 
 
     </div>

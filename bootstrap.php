@@ -1,5 +1,6 @@
 <?php
 
+
 $config = [
     "host" => "localhost",
     "dbname" => "library_db",
@@ -12,6 +13,8 @@ $config = [
 ];
 
 include "core/Database.php";
+include "core/Request.php";
+include "core/RequestFilter.php";
 include "core/App.php";
 include "core/View.php";
 
@@ -26,6 +29,10 @@ spl_autoload_register(function ($class) {
 
     if (file_exists("models/" . $class . ".php")) {
         include "models/" . $class . ".php";
+    }
+
+    if (file_exists("models/factory/" . $class . ".php")) {
+        include "models/factory/" . $class . ".php";
     }
 
 });
