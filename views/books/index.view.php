@@ -32,9 +32,13 @@ $selected_subcategory = View::get_data('selected_subcategory');
 
                 <?php if (!empty($books)): ?>
 
-                    <div class="mb-2">
-                        <a class="btn btn-sm btn-primary" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">Add a new book in <?= $selected_subcategory ?></a>
-                    </div>
+                    <?php if (isset($selected_subcategory)): ?>
+                        <div class="mb-2">
+                            <a class="btn btn-sm btn-primary" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
+                                Add a new book in <?= $selected_subcategory ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
 
                     <table class="table table-striped table-bordered">
                         <thead>
