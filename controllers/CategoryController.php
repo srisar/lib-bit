@@ -13,12 +13,25 @@ class CategoryController
 
         $categories = Category::select_all();
 
-        if (!empty($categories)) {
-            View::set_data('subcategories', $categories[0]->get_all_subcategories());
+        $request = new Request();
+
+        if ($request->getParams()->has('cat_id')) {
+
+            $fields = ['cat_id' => $request->getParams()->getInt('cat_id')];
+
+            $selected_category = Category::get_category_by_id($fields['cat_id']);
+            View::set_data('selected_category', $selected_category);
+            View::set_data('subcategories', $selected_category->get_all_subcategories());
+
+        } else {
+            if (!empty($categories)) {
+                $selected_category = $categories[0];
+                View::set_data('subcategories', $selected_category->get_all_subcategories());
+                View::set_data('selected_category', $selected_category);
+            }
         }
 
         View::set_data('categories', $categories);
-
         include_once "views/category/index.view.php";
     }
 
@@ -58,8 +71,23 @@ class CategoryController
                 }
 
             } else {
-                View::set_error('error', "Category (%s) already exist!", $category->category_name);
-                include_once "views/category/add.view.php";
+                View::set_error('error', sprintf("Category (%s) already exist!", $category->category_name));
+
+                $categories = Category::select_all();
+
+                if (!empty($categories)) {
+                    View::set_data('subcategories', $categories[0]->get_all_subcategories());
+                }
+
+                if (!empty($categories)) {
+                    $selected_category = $categories[0];
+                    View::set_data('subcategories', $selected_category->get_all_subcategories());
+                    View::set_data('selected_category', $selected_category);
+                }
+
+                View::set_data('categories', $categories);
+
+                include_once "views/category/index.view.php";
             }
 
 
@@ -95,6 +123,7 @@ class CategoryController
     /**
      * View all subcategories under a category
      * @param $request
+     * @deprecated
      */
     public function view_subcategories($request)
     {
@@ -170,20 +199,31 @@ class CategoryController
             $subcategory->subcategory_name = $subcategory_name;
 
 
+            $r = new Request();
+
             if (!$subcategory->already_exists()) {
 
                 if ($subcategory->insert()) {
 
-                    App::redirect('/categories');
+                    App::redirect('/categories', ['cat_id' => $category_id]);
 
                 }
 
             } else {
                 $error = sprintf("%s already exist.", $subcategory_name);
 
-                View::set_data('category', Category::get_category_by_id($category_id));
+                $r = new Request();
+                $fields = ['cat_id' => $r->getParams()->getInt('category_id')];
 
-                include_once "views/category/subcat.add.view.php";
+                $selected_category = Category::get_category_by_id($fields['cat_id']);
+                View::set_data('selected_category', $selected_category);
+                View::set_data('subcategories', $selected_category->get_all_subcategories());
+
+                View::set_error('error_subcat', $error);
+
+                View::set_data('categories', Category::select_all());
+
+                include_once "views/category/index.view.php";
             }
 
 

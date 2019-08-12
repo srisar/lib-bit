@@ -39,7 +39,7 @@ class BookController
 
     }
 
-    public function adding($request)
+    public function adding()
     {
 
         try {

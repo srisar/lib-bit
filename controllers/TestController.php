@@ -4,14 +4,15 @@
 class TestController
 {
 
-    public function test($request)
+    public function test()
     {
 
-        $book = new BookFactory();
+        View::set_error('1', 'message a');
+        View::set_error('b', 'message b');
 
-        var_dump(
-            $book->add_category_id(12)->add_subcategory_id(11)->add_id(112)->build()
-        );
+        var_dump(View::$error);
+
+        View::render_error_messages('1');
 
     }
 

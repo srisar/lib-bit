@@ -35,4 +35,9 @@ class RequestFilter
         return $filter ? (string)trim(filter_var($this->map[$name], FILTER_SANITIZE_MAGIC_QUOTES)) : $this->map[$name];
     }
 
+    public function getEmail($name)
+    {
+        return (string)filter_var($this->map[$name], FILTER_VALIDATE_EMAIL);
+    }
+
 }

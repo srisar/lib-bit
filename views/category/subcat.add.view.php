@@ -8,24 +8,44 @@ $category = View::get_data('category');
 ?>
 
 
-<div class="container">
+<div class="container-fluid">
 
-    <div class="row mb-3">
-        <div class="col text-center">
-            <h1 class="text-center">Add a subcategory</h1>
-        </div>
-    </div><!--.row-->
+    <div class="row">
 
-    <div class="row justify-content-center">
         <div class="col-4">
 
             <div class="card">
-                <div class="card-body">
-                    <?php if (isset($error)): ?>
-                        <div class="alert-danger alert">
-                            <div><?= $error ?></div>
-                        </div>
+                <div class="card-header">
+                    <h3 class="m-0">Subcategories in <?= $category->category_name ?></h3>
+                </div>
+
+                <div class="card-body p-1">
+                    <?php $subcats = $category->get_all_subcategories(); ?>
+
+                    <?php if (!empty($subcats)): ?>
+
+                        <ul class="list-group">
+                            <?php foreach ($subcats as $subcat): ?>
+
+                                <li class="list-group-item"><a href="<?= App::createURL('/subcategories/edit', ['id' => $subcat->id]) ?>"><?= $subcat->subcategory_name ?></a></li>
+                            <?php endforeach; ?>
+                        </ul>
+
                     <?php endif; ?>
+                </div>
+            </div>
+
+        </div><!--.col-->
+
+
+        <div class="col-4">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="m-0"> Add a subcategory</h3>
+                </div>
+                <div class="card-body">
+                    <?php View::render_error_messages() ?>
 
                     <form action="<?= App::createURL('/subcategories/adding') ?>" method="get">
 
@@ -51,30 +71,6 @@ $category = View::get_data('category');
 
         </div><!--.col-->
 
-        <div class="col-4">
-
-            <div class="card">
-                <div class="card-header">
-                    <h4 class="m-0">Subcategories in <?= $category->category_name ?></h4>
-                </div>
-
-                <div class="card-body p-1">
-                    <?php $subcats = $category->get_all_subcategories(); ?>
-
-                    <?php if (!empty($subcats)): ?>
-
-                        <ul class="list-group">
-                            <?php foreach ($subcats as $subcat): ?>
-
-                                <li class="list-group-item"><a href="<?= App::createURL('/subcategories/edit', ['id' => $subcat->id]) ?>"><?= $subcat->subcategory_name ?></a></li>
-                            <?php endforeach; ?>
-                        </ul>
-
-                    <?php endif; ?>
-                </div>
-            </div>
-
-        </div>
 
     </div>
 

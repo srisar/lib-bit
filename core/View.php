@@ -6,7 +6,7 @@ class View
 
     private static $data = [];
 
-    private static $error = [];
+    public static $error = [];
 
     public static function set_data($key, $value)
     {
@@ -43,8 +43,11 @@ class View
 
         if (isset($error)) { ?>
 
-            <div class="alert-danger alert">
+            <div class="alert-danger alert alert-dismissible fade show">
                 <div><?= $error ?></div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
 
         <?php }
@@ -54,7 +57,7 @@ class View
 
     public static function render_error_messages($message_key = 'error')
     {
-        $error = !empty(View::get_error($message_key)) ? View::get_error('error') : null;
+        $error = View::get_error($message_key);
         View::error_container($error);
 
     }
