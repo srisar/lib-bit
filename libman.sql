@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS `books` (
   `category_id` int(11) DEFAULT NULL,
   `subcategory_id` int(11) DEFAULT NULL,
   `author_id` int(11) DEFAULT NULL,
+  `image_url` text,
   PRIMARY KEY (`id`),
   KEY `books_authors_fk` (`author_id`),
   KEY `books_categories_fk` (`category_id`),
@@ -45,25 +46,26 @@ CREATE TABLE IF NOT EXISTS `books` (
   CONSTRAINT `books_authors_fk` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id`),
   CONSTRAINT `books_categories_fk` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`),
   CONSTRAINT `books_subcats_fk` FOREIGN KEY (`subcategory_id`) REFERENCES `subcategories` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
--- Dumping data for table library_db.books: ~13 rows (approximately)
+-- Dumping data for table library_db.books: ~15 rows (approximately)
 /*!40000 ALTER TABLE `books` DISABLE KEYS */;
-REPLACE INTO `books` (`id`, `title`, `category_id`, `subcategory_id`, `author_id`) VALUES
-	(1, 'To Kill A Mokcingbird', 1, 4, 1),
-	(2, '1984', 3, 3, 1),
-	(9, 'Star Wars - A New Hope', 2, 2, 1),
-	(10, 'Book2', 1, 1, 2),
-	(11, 'Book3', 1, 1, 2),
-	(12, 'Learning PHP', 10, 11, 1),
-	(13, 'PHP Object-Oriented', 10, 11, 1),
-	(14, 'Python Stacks', 10, 13, 1),
-	(15, 'The Lord Of The Rings', 1, 1, 1),
-	(16, 'Dance of Fire and Snow', 1, 1, 1),
-	(17, 'Bootstrap Intro', 1, 1, 1),
-	(18, 'Learning Java', 10, 13, 1),
-	(19, 'Learning C#', 1, 1, 1),
-	(20, 'Pride and Prejudice', 1, 9, NULL);
+REPLACE INTO `books` (`id`, `title`, `category_id`, `subcategory_id`, `author_id`, `image_url`) VALUES
+	(1, 'To Kill A Mokcingbird', 1, 4, 1, NULL),
+	(2, '1984', 3, 3, 1, 'http://localhost/uploads/1565786681.jpeg'),
+	(9, 'Star Wars - A New Hope', 2, 2, 1, 'http://localhost/uploads/1565786943.jpeg'),
+	(10, 'Book2', 1, 1, 2, NULL),
+	(11, 'Book3', 1, 1, 2, NULL),
+	(12, 'Learning PHP', 10, 11, 1, NULL),
+	(13, 'PHP Object-Oriented', 10, 11, 1, NULL),
+	(14, 'Python Stacks', 10, 13, 1, NULL),
+	(15, 'The Lord Of The Rings', 1, 1, 1, 'http://localhost/uploads/1565786350.jpeg'),
+	(16, 'Dance of Fire and Snow', 1, 1, 1, NULL),
+	(17, 'Bootstrap Intro', 1, 1, 1, NULL),
+	(18, 'Learning Java', 10, 13, 1, NULL),
+	(19, 'Learning C#', 1, 1, 1, NULL),
+	(20, 'Pride and Prejudice', 1, 9, NULL, NULL),
+	(21, 'Star Trek: Discovery', 2, 2, NULL, NULL);
 /*!40000 ALTER TABLE `books` ENABLE KEYS */;
 
 -- Dumping structure for table library_db.book_instances
@@ -75,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `book_instances` (
   CONSTRAINT `FK_book_instances_books` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
--- Dumping data for table library_db.book_instances: ~18 rows (approximately)
+-- Dumping data for table library_db.book_instances: ~28 rows (approximately)
 /*!40000 ALTER TABLE `book_instances` DISABLE KEYS */;
 REPLACE INTO `book_instances` (`id`, `book_id`) VALUES
 	(1, 1),
@@ -121,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `book_transactions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table library_db.book_transactions: ~2 rows (approximately)
+-- Dumping data for table library_db.book_transactions: ~3 rows (approximately)
 /*!40000 ALTER TABLE `book_transactions` DISABLE KEYS */;
 REPLACE INTO `book_transactions` (`id`, `book_instance_id`, `member_id`, `borrowed_date`, `return_date`, `returned_date`, `remarks`, `state`) VALUES
 	(3, 22, 2, '2019-07-01', '2019-07-05', NULL, 'some remarks', 'BORROWED'),
@@ -136,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
--- Dumping data for table library_db.categories: ~5 rows (approximately)
+-- Dumping data for table library_db.categories: ~6 rows (approximately)
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
 REPLACE INTO `categories` (`id`, `category_name`) VALUES
 	(1, 'Fiction'),
@@ -155,7 +157,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table library_db.members: ~2 rows (approximately)
+-- Dumping data for table library_db.members: ~3 rows (approximately)
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
 REPLACE INTO `members` (`id`, `fullname`, `member_since`) VALUES
 	(1, 'David Birla', '2019-07-14 11:15:45'),
