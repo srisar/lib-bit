@@ -13,8 +13,6 @@ $config = [
 ];
 
 include "core/Database.php";
-include "core/Request.php";
-include "core/RequestFilter.php";
 include "core/App.php";
 include "core/View.php";
 
@@ -35,6 +33,12 @@ spl_autoload_register(function ($class) {
         include "models/factory/" . $class . ".php";
     }
 
+    if (file_exists('core/helpers/' . $class . '.php')) {
+        include 'core/helpers/' . $class . '.php';
+    }
+
 });
 
 include "core/Router.php";
+
+define('BASE_PATH', __DIR__);

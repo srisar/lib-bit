@@ -99,18 +99,30 @@ class BookController
 
         try {
 
-            $id = App::validateField($req, 'id');
-            $title = App::validateField($req, 'title');
-            $category_id = App::validateField($req, 'category_id');
-            $subcategory_id = App::validateField($req, 'subcategory_id');
 
-            $book = Book::select_by_id($id);
-            $book->title = $title;
-            $book->category_id = $category_id;
-            $book->subcategory_id = $subcategory_id;
+            $request = new Request();
 
-            if ($book->update()) {
-                App::redirect('/books/edit?id=' . $id);
+            $fields = [
+                'id' => $request->getParams()->getInt('id'),
+                'title' => $request->getParams()->getString('title'),
+                'category_id' => $request->getParams()->getInt('category_id'),
+                'subcategory_id' => $request->getParams()->getInt('subcategory_id'),
+            ];
+
+            $uploaded_image = new UploadedFile($request->getFiles()->get('image'));
+
+            if ($uploaded_image->saveFile()) {
+
+
+                $book = Book::select_by_id($fields['id']);
+                $book->title = $fields['title'];
+                $book->category_id = $fields['category_id'];
+                $book->subcategory_id = $fields['subcategory_id'];
+                $book->image_url = $uploaded_image->getUploadedFileUrl();
+
+                if ($book->update()) {
+                    App::redirect('/books/edit?id=' . $fields['id']);
+                }
             }
 
 

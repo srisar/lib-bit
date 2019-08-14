@@ -38,10 +38,17 @@ $book_instances = $book->get_all_book_instances();
 
                     <?php View::render_error_messages() ?>
 
-                    <form action="<?= App::createURL('/books/editing') ?>" method="post">
+                    <form action="<?= App::createURL('/books/editing') ?>" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" value="<?= $book->id ?>" name="id">
 
+                        <?php if ($book->has_image_url()): ?>
+                            <div class="row">
+                                <div class="col text-center">
+                                    <img id="cover-image" class="img-thumbnail" src="<?= $book->image_url ?>" alt="Cover Image">
+                                </div>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="row">
 
@@ -49,8 +56,7 @@ $book_instances = $book->get_all_book_instances();
 
                                 <div class="form-group">
                                     <label for="book-title">Title</label>
-                                    <input class="form-control" type="text" value="<?= $book->title ?>" id="book-title"
-                                           name="title" required>
+                                    <input class="form-control" type="text" value="<?= $book->title ?>" id="book-title" name="title" required>
                                 </div>
 
                             </div>
@@ -93,9 +99,20 @@ $book_instances = $book->get_all_book_instances();
                                     </div>
                                 </div>
 
-                            </div>
+                            </div><!--.col-->
+
 
                         </div><!--.row-->
+
+                        <div class="row mb-3">
+                            <div class="col">
+                                <div class="">
+                                    <label class="" for="image">Cover Image</label>
+                                    <input class="" type="file" name="image" id="image">
+                                </div>
+                            </div>
+                        </div><!--.row-->
+
 
                         <div class="row text-right">
                             <div class="col">

@@ -6,7 +6,7 @@ class Request
     const GET = 'GET';
     const POST = 'POST';
 
-    private $params, $method, $domain, $path, $cookies;
+    private $params, $method, $domain, $path, $cookies, $files;
 
     public function __construct()
     {
@@ -15,6 +15,7 @@ class Request
         $this->method = $_SERVER['REQUEST_METHOD'];
 
         $this->params = new RequestFilter($_REQUEST);
+        $this->files = new RequestFilter($_FILES);
     }
 
     public function getUrl(): string
@@ -48,6 +49,10 @@ class Request
     public function getParams()
     {
         return $this->params;
+    }
+
+    public function getFiles(){
+        return $this->files;
     }
 
 }

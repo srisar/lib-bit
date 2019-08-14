@@ -41,14 +41,14 @@ Router::add('/subcategories/edit', "CategoryController", "edit_subcategory");
 Router::add('/subcategories/editing', "CategoryController", "editing_subcategory");
 
 Router::add('/test', "TestController", "test");
+Router::add('/test/image_up', "TestController", "upload_image");
+Router::add('/test/uploading_image', "TestController", "uploading_image");
 
 
 Router::add('/api/get_subcategories', "ApiController", "get_subcategories_by_category_name");
 
 $route_url = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : '/home';
 
-// var_dump($_SERVER);
 
 Router::route($route_url);
 
-//var_dump(App::getAssetsURL());

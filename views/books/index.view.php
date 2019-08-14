@@ -43,6 +43,7 @@ $selected_subcategory = View::get_data('selected_subcategory');
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
+                            <th>Cover</th>
                             <th>Title</th>
                             <th>Category</th>
                         </tr>
@@ -51,6 +52,7 @@ $selected_subcategory = View::get_data('selected_subcategory');
                         <?php foreach ($books as $book): ?>
 
                             <tr>
+                                <td class="td-img-thumb"><img id="cover-thumb" src="<?= $book->image_url ?>" alt=""></td>
                                 <td><a href="<?= App::createURL('/books/edit', ['id' => $book->id]) ?>"><?= $book->title ?></a></td>
                                 <td><?= $book->get_category() ?></td>
                             </tr>

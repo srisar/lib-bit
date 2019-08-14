@@ -3,7 +3,7 @@
 
 class Book
 {
-    public $id, $title, $category_id, $subcategory_id, $author_id;
+    public $id, $title, $category_id, $subcategory_id, $author_id, $image_url;
 
     /**
      * Returns a string representation of a Book
@@ -111,8 +111,8 @@ class Book
 
         $db = Database::get_instance();
 
-        $statement = $db->prepare("UPDATE books SET title=?, subcategory_id=?, category_id=? WHERE id=?");
-        return $statement->execute([$this->title, $this->subcategory_id, $this->category_id, $this->id]);
+        $statement = $db->prepare("UPDATE books SET title=?, subcategory_id=?, category_id=?, image_url=? WHERE id=?");
+        return $statement->execute([$this->title, $this->subcategory_id, $this->category_id, $this->image_url, $this->id]);
     }
 
 
@@ -158,6 +158,12 @@ class Book
     {
         $subcategory = Subcategory::get_subcategory_by_id($id);
         return $subcategory->get_all_books();
+    }
+
+
+    public function has_image_url()
+    {
+        return !empty($this->image_url);
     }
 
 }

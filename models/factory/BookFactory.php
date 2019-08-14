@@ -34,6 +34,12 @@ class BookFactory
         return $this;
     }
 
+    public function add_image_url($image_url): BookFactory
+    {
+        $this->book->image_url = $image_url;
+        return $this;
+    }
+
     public function build()
     {
         return $this->book;
