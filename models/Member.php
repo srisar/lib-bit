@@ -21,14 +21,16 @@ class Member
 
     /**
      * @param int $limit
+     * @param int $offset
      * @return Member[]
      */
-    public static function select_all($limit = 100)
+    public static function select_all($limit = 100, $offset = 0): array
     {
         $db = Database::get_instance();
 
-        $statement = $db->prepare("SELECT * FROM members LIMIT :lim");
-        $statement->bindParam(':lim', $limit, PDO::PARAM_INT);
+        $statement = $db->prepare("SELECT * FROM members ORDER BY member_since DESC LIMIT :limit_value OFFSET :offset_value");
+        $statement->bindParam(':limit_value', $limit, PDO::PARAM_INT);
+        $statement->bindParam(':offset_value', $offset, PDO::PARAM_INT);
 
         $statement->execute();
 
@@ -39,7 +41,7 @@ class Member
      * @param $id
      * @return Member
      */
-    public static function select($id)
+    public static function select($id): Member
     {
         $db = Database::get_instance();
 
@@ -55,7 +57,7 @@ class Member
      * @param $keyword
      * @return Member[]
      */
-    public static function search($keyword)
+    public static function search($keyword): array
     {
         $db = Database::get_instance();
 

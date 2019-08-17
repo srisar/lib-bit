@@ -33,6 +33,7 @@ Router::add('/categories/edit', "CategoryController", "edit");
 Router::add('/categories/editing', "CategoryController", "editing");
 
 Router::add('/members', 'MemberController', 'index');
+Router::add('/members/department', 'MemberController', 'view_by_department');
 
 Router::add('/subcategories', "CategoryController", "view_subcategories");
 Router::add('/subcategories/add', "CategoryController", "add_subcategory");

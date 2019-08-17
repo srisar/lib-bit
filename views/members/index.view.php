@@ -3,45 +3,100 @@
 <?php
 
 /** @var Member[] $members */
-$members = Member::select_all();
+$members = View::get_data('members');
+/** @var Department[] $departments */
+$departments = View::get_data('departments');
+/** @var Department $selected_department */
+$selected_department = View::get_data('selected_department');
 
 ?>
 
 
-    <div class="container">
+    <div class="container-fluid">
 
         <div class="row">
             <div class="col">
-                <h1 class="text-center">Members list</h1>
+
+                <?php if (!empty($selected_department)): ?>
+                    <h1 class="text-center">Members in <?= $selected_department ?></h1>
+                <?php else: ?>
+                    <h1 class="text-center">Recent memebers</h1>
+                <?php endif; ?>
+
+
             </div>
         </div>
 
         <div class="row">
 
-            <div class="col">
+            <div class="col-3">
 
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>Full Name</th>
-                        <th>Member Since</th>
-                    </tr>
-                    </thead>
+                <div class="card">
+                    <div class="card-header">
+                        <?= HtmlHelper::render_card_header('Departments') ?>
+                    </div>
+                    <div class="card-body p-1">
 
-                    <tbody>
+                        <ul class="list-group">
+                            <?php foreach ($departments as $department): ?>
 
-                    <?php foreach ($members as $member): ?>
+                                <li class="list-group-item">
+                                    <div class="category-name"><a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>"><?= $department ?></a></div>
 
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-9">
+
+                <?php if (empty($members)): ?>
+                    <div class="mb-2">
+                        <a class="btn btn-sm btn-primary" href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id]) ?>">
+                            Add a new member in <?= $selected_department ?>
+                        </a>
+                    </div>
+                <?php else: ?>
+
+                    <?php if (!empty($selected_department)): ?>
+                        <div class="mb-2">
+                            <a class="btn btn-sm btn-primary" href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id]) ?>">
+                                Add a new member in <?= $selected_department ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+
+
+                    <table class="table table-striped table-bordered">
+                        <thead>
                         <tr>
-                            <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
-                            <td><?= $member->get_member_since() ?></td>
+                            <th>Full Name</th>
+                            <th>Member Since</th>
                         </tr>
+                        </thead>
 
-                    <?php endforeach; ?>
+                        <tbody>
 
-                    </tbody>
 
-                </table>
+                        <?php foreach ($members as $member): ?>
+
+                            <tr>
+                                <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
+                                <td><?= $member->get_member_since() ?></td>
+                            </tr>
+
+                        <?php endforeach; ?>
+
+
+                        </tbody>
+
+                    </table>
+
+                <?php endif; ?>
 
             </div>
 
