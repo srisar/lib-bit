@@ -4,28 +4,16 @@
 
 /** @var Member[] $members */
 $members = View::get_data('members');
+
 /** @var Department[] $departments */
 $departments = View::get_data('departments');
-/** @var Department $selected_department */
-$selected_department = View::get_data('selected_department');
+
 
 ?>
 
 
     <div class="container-fluid">
 
-        <div class="row">
-            <div class="col">
-
-                <?php if (!empty($selected_department)): ?>
-                    <h1 class="text-center">Members in <?= $selected_department ?></h1>
-                <?php else: ?>
-                    <h1 class="text-center">Recent memebers</h1>
-                <?php endif; ?>
-
-
-            </div>
-        </div>
 
         <div class="row">
 
@@ -33,9 +21,9 @@ $selected_department = View::get_data('selected_department');
 
                 <div class="card">
                     <div class="card-header">
-                        <?= HtmlHelper::render_card_header('Departments') ?>
+                        <?php HtmlHelper::render_card_header('Departments') ?>
                     </div>
-                    <div class="card-body p-1">
+                    <div class="card-body">
 
                         <ul class="list-group">
                             <?php foreach ($departments as $department): ?>
@@ -54,49 +42,34 @@ $selected_department = View::get_data('selected_department');
 
             <div class="col-9">
 
-                <?php if (empty($members)): ?>
-                    <div class="mb-2">
-                        <a class="btn btn-sm btn-primary" href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id]) ?>">
-                            Add a new member in <?= $selected_department ?>
-                        </a>
-                    </div>
-                <?php else: ?>
 
-                    <?php if (!empty($selected_department)): ?>
-                        <div class="mb-2">
-                            <a class="btn btn-sm btn-primary" href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id]) ?>">
-                                Add a new member in <?= $selected_department ?>
-                            </a>
-                        </div>
-                    <?php endif; ?>
+                <div class="card">
+                    <div class="card-header"><?php HtmlHelper::render_card_header('Recent members'); ?> (3)</div>
+                    <div class="card-body">
 
-
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Full Name</th>
-                            <th>Member Since</th>
-                        </tr>
-                        </thead>
-
-                        <tbody>
-
-
-                        <?php foreach ($members as $member): ?>
-
+                        <table class="table table-striped table-bordered">
+                            <thead>
                             <tr>
-                                <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
-                                <td><?= $member->get_member_since() ?></td>
+                                <th>Full Name</th>
+                                <th>Member Since</th>
                             </tr>
+                            </thead>
+                            <tbody>
 
-                        <?php endforeach; ?>
+                            <?php foreach ($members as $member): ?>
+                                <tr>
+                                    <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
+                                    <td><?= $member->get_member_since() ?></td>
+                                </tr>
+                            <?php endforeach; ?>
 
 
-                        </tbody>
+                            </tbody>
 
-                    </table>
+                        </table>
+                    </div>
+                </div><!--.card-->
 
-                <?php endif; ?>
 
             </div>
 

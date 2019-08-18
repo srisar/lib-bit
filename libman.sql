@@ -2,7 +2,7 @@
 -- Host:                         127.0.0.1
 -- Server version:               5.7.24 - MySQL Community Server (GPL)
 -- Server OS:                    Win64
--- HeidiSQL Version:             10.2.0.5669
+-- HeidiSQL Version:             10.2.0.5676
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -59,8 +59,8 @@ REPLACE INTO `books` (`id`, `title`, `category_id`, `subcategory_id`, `author_id
 	(12, 'Learning PHP', 10, 11, 1, NULL),
 	(13, 'PHP Object-Oriented', 10, 11, 1, NULL),
 	(14, 'Python Stacks', 10, 13, 1, NULL),
-	(15, 'The Lord Of The Rings', 1, 1, 1, 'http://localhost/uploads/1565786350.jpeg'),
-	(16, 'Dance of Fire and Snow', 1, 1, 1, NULL),
+	(15, 'The Lord Of The Rings', 1, 1, 1, 'http://localhost/uploads/1565843198.jpeg'),
+	(16, 'Dance of Fire and Snow', 1, 1, 1, 'http://localhost/uploads/1565843214.jpeg'),
 	(17, 'Bootstrap Intro', 1, 1, 1, NULL),
 	(18, 'Learning Java', 10, 13, 1, NULL),
 	(19, 'Learning C#', 1, 1, 1, NULL),
@@ -149,20 +149,39 @@ REPLACE INTO `categories` (`id`, `category_name`) VALUES
 	(10, 'Programming');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 
+-- Dumping structure for table library_db.departments
+CREATE TABLE IF NOT EXISTS `departments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `department_name` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table library_db.departments: ~2 rows (approximately)
+/*!40000 ALTER TABLE `departments` DISABLE KEYS */;
+REPLACE INTO `departments` (`id`, `department_name`) VALUES
+	(1, 'Natural Science'),
+	(2, 'Computer Science'),
+	(3, 'ICT');
+/*!40000 ALTER TABLE `departments` ENABLE KEYS */;
+
 -- Dumping structure for table library_db.members
 CREATE TABLE IF NOT EXISTS `members` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `fullname` varchar(200) DEFAULT NULL,
-  `member_since` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  `member_since` date DEFAULT NULL,
+  `department_id` int(11) DEFAULT NULL,
+  `member_type` enum('STUDENT','TEACHER') DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_members_departments` (`department_id`),
+  CONSTRAINT `FK_members_departments` FOREIGN KEY (`department_id`) REFERENCES `departments` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table library_db.members: ~3 rows (approximately)
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-REPLACE INTO `members` (`id`, `fullname`, `member_since`) VALUES
-	(1, 'David Birla', '2019-07-14 11:15:45'),
-	(2, 'Kumar Raja', '2019-07-14 11:16:00'),
-	(3, 'Sri Saravan', '2019-07-14 11:16:06');
+REPLACE INTO `members` (`id`, `fullname`, `member_since`, `department_id`, `member_type`) VALUES
+	(1, 'David Birla', '2019-08-14', 2, 'STUDENT'),
+	(2, 'Kumar Raja', '2019-07-11', 2, 'STUDENT'),
+	(3, 'Sri Saravana', '2019-06-14', 2, 'TEACHER');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 
 -- Dumping structure for table library_db.subcategories

@@ -5,11 +5,15 @@ class Member
 {
 
 
-    public $id, $fullname, $member_since;
+    public $id, $fullname, $member_since, $member_type;
+
+    const TYPE_STUDENT = 'STUDENT';
+    const TYPE_TEACHER = 'TEACHER';
+    const MEMBER_TYPES = ['STUDENT', 'TEACHER'];
 
     public function __toString()
     {
-        return sprintf("#%s %s", $this->id, $this->fullname);
+        return sprintf("#%s %s (%s)", $this->id, $this->fullname, $this->member_type);
     }
 
     function get_member_since()
@@ -75,6 +79,22 @@ class Member
     public function get_all_book_transactions()
     {
         return BookTransaction::select_by_member($this);
+    }
+
+    /**
+     * @param string $type
+     * @param Department $department
+     * @return Member[]
+     */
+    public static function get_by_type(Department $department, $type = Member::TYPE_STUDENT): array
+    {
+        $db = Database::get_instance();
+
+        $statement = $db->prepare("SELECT * FROM members WHERE member_type=? AND department_id=? ORDER BY fullname LIMIT 1000");
+
+        $statement->execute([$type, $department->id]);
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, Member::class);
     }
 
 }

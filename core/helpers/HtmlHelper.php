@@ -8,7 +8,7 @@ class HtmlHelper
     {
 
         ?>
-            <h3 class="mb-0"><?= $title ?></h3>
+            <span class="mb-0 font-weight-bold card-header-text"><?= $title ?></span>
         <?php
 
     }

@@ -15,19 +15,13 @@ $selected_category = View::get_data('selected_category');
 
 <div class="container-fluid">
 
-    <div class="row">
-        <div class="col text-center">
-            <h1 class="text-center">Manage Categories</h1>
-
-        </div>
-    </div><!--.row-->
 
     <div class="row">
 
         <div class="col-3">
 
             <div class="card mb-3">
-                <div class="card-header"><h3 class="mb-0">Add a new category</h3></div>
+                <div class="card-header"> <?php HtmlHelper::render_card_header('Add a new category'); ?> </div>
                 <div class="card-body p-2">
                     <?php View::render_error_messages() ?>
 
@@ -59,7 +53,7 @@ $selected_category = View::get_data('selected_category');
 
             <div class="card">
                 <div class="card-header">
-                    <h3 class="mb-0">Categories</h3>
+                    <?php HtmlHelper::render_card_header('Categories'); ?>
                 </div>
 
                 <div class="card-body p-2">
@@ -80,7 +74,7 @@ $selected_category = View::get_data('selected_category');
             <div class="card">
 
                 <div class="card-header">
-                    <h3 class="mb-0">Subcategories in <?= $selected_category ?></h3>
+                    <?php HtmlHelper::render_card_header("Subcategories in {$selected_category}"); ?>
                 </div>
 
                 <div class="card-body">

@@ -37,6 +37,7 @@ class Department extends Model
     /**
      * @param $id
      * @return Department
+     * @throws Exception
      */
     public static function select($id): Department
     {
@@ -45,7 +46,13 @@ class Department extends Model
 
         $statement->execute([$id]);
 
-        return $statement->fetchObject(Department::class);
+        $result = $statement->fetchObject(Department::class);
+
+        if (empty($result))
+            throw new Exception("Department not found!");
+
+        return $result;
+
     }
 
     /**
@@ -89,6 +96,22 @@ class Department extends Model
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_CLASS, Member::class);
+    }
+
+    /**
+     * @return Member[]
+     */
+    public function get_all_students(): array
+    {
+        return Member::get_by_type($this, Member::TYPE_STUDENT);
+    }
+
+    /**
+     * @return Member[]
+     */
+    public function get_all_teachers(): array
+    {
+        return Member::get_by_type($this, Member::TYPE_TEACHER);
     }
 
 }
