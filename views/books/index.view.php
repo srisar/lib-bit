@@ -61,8 +61,8 @@ $selected_subcategory = View::get_data('selected_subcategory');
                         </tbody>
                     </table>
                 <?php else: ?>
+                    <p><a class="btn btn-sm btn-primary" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">Add a new book in <?= $selected_subcategory ?></a></p>
                     <p class="lead">No books found.</p>
-                    <p><a href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">Add a new book in <?= $selected_subcategory ?></a></p>
                 <?php endif; ?>
 
             </div><!--.col-->

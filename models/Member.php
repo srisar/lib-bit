@@ -5,7 +5,7 @@ class Member
 {
 
 
-    public $id, $fullname, $member_since, $member_type;
+    public $id, $fullname, $member_since, $member_type, $dept_id;
 
     const TYPE_STUDENT = 'STUDENT';
     const TYPE_TEACHER = 'TEACHER';
@@ -56,6 +56,26 @@ class Member
         return $statement->fetchObject(Member::class);
 
     }
+
+    /**
+     * @return bool
+     */
+    public function insert()
+    {
+        $sql = "INSERT INTO members(fullname, member_since, department_id, member_type) VALUES (?,?,?,?)";
+
+        $db = Database::get_instance();
+
+        $statement = $db->prepare($sql);
+
+        return $statement->execute([
+            $this->fullname,
+            $this->member_since,
+            $this->dept_id,
+            $this->member_type
+        ]);
+    }
+
 
     /**
      * @param $keyword

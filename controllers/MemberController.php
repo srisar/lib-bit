@@ -38,19 +38,81 @@ class MemberController
         try {
 
             $request = new Request();
-            $dept_id = $request->getParams()->getInt('dept_id');
 
-            $department = Department::select($dept_id);
+            $fields = [
+                'dept_id' => $request->getParams()->getInt('dept_id'),
+                'type' => $request->getParams()->getString('type'),
+            ];
+
+            $department = Department::select($fields['dept_id']);
 
 
             View::set_data('department', $department);
+            View::set_data('type', $fields['type']);
 
-            include "views/members/add.view.php";
+            include "views/members/add_member.view.php";
 
         } catch (Exception $ex) {
             View::set_error('error', $ex->getMessage());
             include "views/error/error.view.php";
         }
+    }
+
+    public function adding()
+    {
+        try {
+
+            $request = new Request();
+
+            $errors = [];
+
+            $fields = [
+                'dept_id' => $request->getParams()->getInt('dept_id'),
+                'type' => $request->getParams()->getString('type'),
+                'full_name' => $request->getParams()->getString('full_name'),
+                'member_since' => $request->getParams()->getString('member_since'),
+            ];
+
+
+            // filter inputs!!!
+            if (empty($fields['full_name'])) {
+                $errors[] = "Full name cannot be empty.";
+            }
+
+
+            if (empty($errors)) {
+
+                // Proceed only if error array is empty.
+
+                $member = new Member();
+                $member->member_type = $fields['type'];
+                $member->dept_id = $fields['dept_id'];
+                $member->fullname = $fields['full_name'];
+                $member->member_since = $fields['member_since'];
+
+                if ($member->insert()) {
+                    App::redirect('/members/department', ['dept_id' => $fields['dept_id']]);
+                }
+            } else {
+                // Errors in the fields. Render the form again and display error message.
+
+                $department = Department::select($fields['dept_id']);
+
+                View::set_error('errors', $errors);
+                View::set_data('department', $department);
+                View::set_data('type', $fields['type']);
+
+                include_once "views/members/add_member.view.php";
+
+            }
+
+
+        } catch (Exception $ex) {
+            die($ex->getMessage());
+//            View::set_error('error', $ex->getMessage());
+//            include "views/error/error.view.php";
+        }
+
     }
 
     /**

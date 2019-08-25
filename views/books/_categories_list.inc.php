@@ -2,11 +2,11 @@
 /** @var Category[] $categories */
 $categories = View::get_data('categories');
 ?>
-<div id="categories-list" class="card">
+<div id="categories-list" class="card bg-light">
     <div class="card-header">
         <h3 class="m-0">Categories</h3>
     </div>
-    <div class="card-body p-1">
+    <div class="card-body">
 
         <ul class="list-group">
             <?php foreach ($categories as $cat): ?>

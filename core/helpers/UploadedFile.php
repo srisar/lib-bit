@@ -39,6 +39,15 @@ class UploadedFile
         return $this->data['size'];
     }
 
+    public function hasError()
+    {
+        if ($this->getError() == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public function getMaximumFileUploadSize()
     {
         $max_upload_size = ini_get('upload_max_filesize');

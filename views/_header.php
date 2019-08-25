@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <link rel="stylesheet" href="<?= App::getAssetsURL() ?>/bootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="<?= App::getAssetsURL() ?>/app.css">
-    <link rel="stylesheet" href="<?= App::getAssetsURL() ?>/lineicons/LineIcons.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/app.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/lineicons/LineIcons.css">
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">LibMan</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#"><img src="<?= App::getBaseURL() ?>/assets/img/logo.png" alt="LibMan" class="logo"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

@@ -106,9 +106,18 @@ $book_instances = $book->get_all_book_instances();
 
                         <div class="row mb-3">
                             <div class="col">
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" id="toggle_image_upload">
+                                    <label class="custom-control-label" for="toggle_image_upload">Enable cover image upload</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col">
                                 <div class="">
-                                    <label class="" for="image">Cover Image</label>
-                                    <input class="" type="file" name="image" id="image">
+
+                                    <input class="" type="file" name="image" id="image" disabled>
                                 </div>
                             </div>
                         </div><!--.row-->
@@ -195,14 +204,24 @@ $book_instances = $book->get_all_book_instances();
 
     $(document).ready(function () {
 
-
         let subcategorySelect = $("#book-subcategory");
         let categorySelect = $("#book-category");
+        let chkToggleImageUpload = $("#toggle_image_upload");
 
         generateSubcategories();
 
         categorySelect.click(function () {
             generateSubcategories();
+        });
+
+        chkToggleImageUpload.click(function () {
+            if(this.checked){
+                console.log('checked');
+                disableImageUploadField(false);
+            }else{
+                console.log('unchecked');
+                disableImageUploadField(true);
+            }
         });
 
 
@@ -212,7 +231,6 @@ $book_instances = $book->get_all_book_instances();
 
         let categorySelect = $("#book-category");
         let selectedCategoryId = categorySelect.val();
-        console.log(selectedCategoryId);
 
         $.get("<?= App::createURL('/api/get_subcategories') ?>", {
             id: selectedCategoryId,
@@ -220,6 +238,14 @@ $book_instances = $book->get_all_book_instances();
         }).done(function (data) {
             $("#output").html(data);
         });
+    }
+
+    function disableImageUploadField(state) {
+        let imageUploadField = document.getElementById("image");
+
+        console.log(imageUploadField);
+
+        imageUploadField.disabled = state;
     }
 
 </script>

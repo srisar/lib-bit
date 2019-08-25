@@ -109,22 +109,43 @@ class BookController
                 'subcategory_id' => $request->getParams()->getInt('subcategory_id'),
             ];
 
-            $uploaded_image = new UploadedFile($request->getFiles()->get('image'));
+            $has_image = $request->getFiles()->has('image');
 
-            if ($uploaded_image->saveFile()) {
+            if ($has_image) {
+                // 1. image upload enabled.
+
+                $uploaded_image = new UploadedFile($request->getFiles()->get('image'));
+
+                // check uploaded image is valid before calling the saveFile()
+
+                if (!$uploaded_image->hasError()) {
+                    if ($uploaded_image->saveFile()) {
+
+                        $book = Book::select_by_id($fields['id']);
+                        $book->title = $fields['title'];
+                        $book->category_id = $fields['category_id'];
+                        $book->subcategory_id = $fields['subcategory_id'];
+                        $book->image_url = $uploaded_image->getUploadedFileUrl();
+
+                        if ($book->update()) {
+                            App::redirect('/books/edit?id=' . $fields['id']);
+                        }
+
+                    }
+                }
 
 
+            } else {
+                // 2. image upload disabled. (default state)
                 $book = Book::select_by_id($fields['id']);
                 $book->title = $fields['title'];
                 $book->category_id = $fields['category_id'];
                 $book->subcategory_id = $fields['subcategory_id'];
-                $book->image_url = $uploaded_image->getUploadedFileUrl();
 
                 if ($book->update()) {
                     App::redirect('/books/edit?id=' . $fields['id']);
                 }
             }
-
 
         } catch (Exception $e) {
 
