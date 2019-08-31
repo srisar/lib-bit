@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/app.css">
     <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/lineicons/LineIcons.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/plugins/pickerjs/dist/picker.min.css">
 </head>
 <body>
 

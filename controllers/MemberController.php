@@ -119,9 +119,55 @@ class MemberController
      * Show edit member view
      * field: member_id
      */
-    public function edit()
+    public function edit_member()
     {
+        try {
+            $request = new Request();
+            $id = $request->getParams()->getInt('id');
 
+            $member = Member::select($id);
+
+
+            View::set_data('member', $member);
+            View::set_data('department', $member->get_department());
+            View::set_data('type', $member->member_type);
+
+            include_once "views/members/edit_member.view.php";
+
+        } catch (Exception $ex) {
+            die($ex->getMessage());
+        }
+
+    }
+
+    public function editing_member()
+    {
+        try {
+
+            $request = new Request();
+
+            $fields = [
+                'id' => $request->getParams()->getInt('id'),
+                'dept_id' => $request->getParams()->getInt('dept_id'),
+                'full_name' => $request->getParams()->getString('full_name'),
+                'type' => $request->getParams()->getString('type'),
+                'member_since' => $request->getParams()->getString('member_since'),
+            ];
+
+            $member = Member::select($fields['id']);
+
+            $member->department_id = $fields['dept_id'];
+            $member->fullname = $fields['full_name'];
+            $member->member_type = $fields['type'];
+            $member->member_since = $fields['member_since'];
+
+            if ($member->update()) {
+                App::redirect('/members/edit', ['id' => $fields['id']]);
+            }
+
+        } catch (Exception $ex) {
+            die($ex->getMessage());
+        }
     }
 
     /**

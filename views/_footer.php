@@ -12,6 +12,8 @@
 <script src="<?= App::getBaseURL() ?>/assets/bootstrap/js/jquery-3.3.1.min.js"></script>
 <script src="<?= App::getBaseURL() ?>/assets/bootstrap/js/popper.min.js"></script>
 <script src="<?= App::getBaseURL() ?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/plugins/pickerjs/dist/picker.min.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/app.js"></script>
 
 </body>
 </html>

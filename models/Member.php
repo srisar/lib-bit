@@ -5,7 +5,7 @@ class Member
 {
 
 
-    public $id, $fullname, $member_since, $member_type, $dept_id;
+    public $id, $fullname, $member_since, $member_type, $department_id;
 
     const TYPE_STUDENT = 'STUDENT';
     const TYPE_TEACHER = 'TEACHER';
@@ -71,11 +71,29 @@ class Member
         return $statement->execute([
             $this->fullname,
             $this->member_since,
-            $this->dept_id,
+            $this->department_id,
             $this->member_type
         ]);
     }
 
+
+    /**
+     * @return bool
+     */
+    public function update()
+    {
+        $db = Database::get_instance();
+
+        $statement = $db->prepare("UPDATE members SET fullname=:fname, member_since=:msince, department_id=:deptid, member_type=:mtype WHERE id=:id");
+
+        return $statement->execute([
+            ':fname' => $this->fullname,
+            ':msince' => $this->member_since,
+            ':deptid' => $this->department_id,
+            ':mtype' => $this->member_type,
+            ':id' => $this->id,
+        ]);
+    }
 
     /**
      * @param $keyword
@@ -115,6 +133,15 @@ class Member
         $statement->execute([$type, $department->id]);
 
         return $statement->fetchAll(PDO::FETCH_CLASS, Member::class);
+    }
+
+    /**
+     * @return Department
+     * @throws Exception
+     */
+    public function get_department()
+    {
+        return Department::select($this->department_id);
     }
 
 }

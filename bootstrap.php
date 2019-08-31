@@ -40,5 +40,6 @@ spl_autoload_register(function ($class) {
 });
 
 include "core/Router.php";
+include "routes.php";
 
 define('BASE_PATH', __DIR__);

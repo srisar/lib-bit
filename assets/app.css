@@ -55,11 +55,11 @@ h5 {
     text-align: center;
 }
 
-.card-header-text{
+.card-header-text {
     font-size: 16px;
 }
 
-.logo{
+.logo {
     height: 32px;
 }
 
@@ -72,7 +72,7 @@ h5 {
 /*    border-radius: 0.2rem;*/
 /*}*/
 
-a{
+a {
     color: #0c1722;
 }
 
@@ -82,4 +82,11 @@ a{
 
 .card-body {
     padding: 0.5rem;
+}
+
+.date-picker {
+}
+
+#date-picker-error {
+    color: #ff4136;
 }
