@@ -32,6 +32,7 @@ $selected_department = View::get_data('selected_department');
 
     <div class="row">
 
+        <!--SIDEBAR: DEPARTMENT-->
         <div class="col-3">
 
             <div class="card bg-light">
@@ -39,7 +40,6 @@ $selected_department = View::get_data('selected_department');
                     <?php HtmlHelper::render_card_header('Departments') ?>
                 </div>
                 <div class="card-body">
-
                     <ul class="list-group">
                         <?php foreach ($departments as $department): ?>
 
@@ -49,14 +49,12 @@ $selected_department = View::get_data('selected_department');
                             </li>
                         <?php endforeach; ?>
                     </ul>
-
                 </div>
-            </div>
-
-        </div>
+            </div><!--.card-->
+        </div><!--.col-->
+        <!--END SIDEBAR: DEPARTMENT-->
 
         <div class="col-9">
-
 
             <div class="card">
                 <div class="card-header">
@@ -65,7 +63,7 @@ $selected_department = View::get_data('selected_department');
                 </div>
                 <div class="card-body">
 
-                    <?php if (!empty($students)): ?>
+                    <?php if (!empty($teachers)): ?>
                         <table class="table table-striped table-bordered">
                             <thead>
                             <tr>

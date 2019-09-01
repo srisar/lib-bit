@@ -13,7 +13,7 @@ class ApiController
             $category_id = App::validateField($request, 'id');
             $selected_subcat_id = App::validateField($request, 'selected_subcat_id');
 
-            $category = Category::get_category_by_id($category_id);
+            $category = Category::select($category_id);
 
             if(!empty($category)){
 

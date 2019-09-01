@@ -16,7 +16,7 @@ class BookTransaction
     public static function select_all_by_book_instance_id($instance_id)
     {
         $db = Database::get_instance();
-        $statement = $db->prepare("SELECT * FROM book_transactions WHERE book_instance_id=?");
+        $statement = $db->prepare("SELECT * FROM book_transactions WHERE book_instance_id=? ORDER BY borrowed_date DESC");
         $statement->execute([$instance_id]);
 
         return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
@@ -59,7 +59,7 @@ class BookTransaction
      */
     public function get_book_instance()
     {
-        return BookInstance::select_by_id($this->book_instance_id);
+        return BookInstance::select($this->book_instance_id);
     }
 
     /**

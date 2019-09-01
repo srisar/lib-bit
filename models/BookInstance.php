@@ -28,7 +28,7 @@ class BookInstance
      * @param $id
      * @return BookInstance
      */
-    public static function select_by_id($id)
+    public static function select($id)
     {
         $db = Database::get_instance();
 

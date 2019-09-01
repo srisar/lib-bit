@@ -1,5 +1,8 @@
 <?php
 
+use Carbon\Carbon;
+use Carbon\CarbonInterval;
+
 
 class TestController
 {
@@ -7,12 +10,9 @@ class TestController
     public function test()
     {
 
-        View::set_error('1', 'message a');
-        View::set_error('b', 'message b');
+        printf("Now: %s", Carbon::now());
 
-        var_dump(View::$error);
-
-        View::render_error_messages('1');
+        printf("1 day: %s", CarbonInterval::day(5));
 
     }
 

@@ -14,7 +14,7 @@ class Category
      * @param $id
      * @return Category
      */
-    public static function get_category_by_id($id)
+    public static function select($id)
     {
         $db = Database::get_instance();
         $statement = $db->prepare("SELECT * FROM categories WHERE id=?");

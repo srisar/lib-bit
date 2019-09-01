@@ -18,7 +18,7 @@ class Subcategory
      */
     public function get_category()
     {
-        return Category::get_category_by_id($this->category_id);
+        return Category::select($this->category_id);
     }
 
 

@@ -9,7 +9,7 @@ class TransactionsController
         try {
             $book_instance_id = App::validateField($request, 'instance_id');
 
-            $book_instance = BookInstance::select_by_id($book_instance_id);
+            $book_instance = BookInstance::select($book_instance_id);
 
             View::set_data('book_instance', $book_instance);
             View::set_data('book', $book_instance->get_book());
@@ -32,7 +32,7 @@ class TransactionsController
                 'instance_id' => App::validateField($request, 'instance_id'),
             ];
 
-            $book_instance = BookInstance::select_by_id($fields['instance_id']);
+            $book_instance = BookInstance::select($fields['instance_id']);
 
             View::set_data('book_instance', $book_instance);
             View::set_data('book', $book_instance->get_book());
@@ -61,7 +61,7 @@ class TransactionsController
                 'member_id' => App::validateField($request, 'member_id'),
             ];
 
-            $book_instance = BookInstance::select_by_id($fields['instance_id']);
+            $book_instance = BookInstance::select($fields['instance_id']);
             $member = Member::select($fields['member_id']);
             $member_transactions = $member->get_all_book_transactions();
 

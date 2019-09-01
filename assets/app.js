@@ -33,6 +33,9 @@ function validateDate(chosen, field) {
         field.classList.remove("is-invalid");
     }
 
-
 }
 
+// Adding Datatable
+$(document).ready(function () {
+    $('.data-table').DataTable();
+});

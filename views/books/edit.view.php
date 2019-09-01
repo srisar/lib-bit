@@ -28,6 +28,7 @@ $book_instances = $book->get_all_book_instances();
 
     <div class="row">
 
+        <!--SIDEBAR-->
         <div class="col-3">
 
             <div class="card">
@@ -136,14 +137,13 @@ $book_instances = $book->get_all_book_instances();
             </div>
 
         </div><!--.col-->
+        <!--END: SIDEBAR -->
 
         <div class="col">
 
-
             <div class="card">
-                <div class="card-header">Book Instances (<?= count($book_instances) ?>)</div>
+                <div class="card-header"><?php HtmlHelper::render_card_header("Book Instances (" . count($book_instances) . ")"); ?></div>
                 <div class="card-body">
-
 
                     <?php if (isset($error)): ?>
                         <div class="alert-danger alert">
@@ -153,8 +153,10 @@ $book_instances = $book->get_all_book_instances();
                     <?php endif; ?>
 
 
-                    <a href="<?= App::createURL('/books/instance/adding', ['book_id' => $book->id]) ?>">Add a new
-                        instance</a>
+                    <a href="<?= App::createURL('/books/instance/adding', ['book_id' => $book->id]) ?>"
+                       class="btn btn-sm btn-primary mb-2">
+                        Add a new instance
+                    </a>
 
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -172,7 +174,7 @@ $book_instances = $book->get_all_book_instances();
                             <tr>
                                 <td><?= $book_instance ?></td>
                                 <td><?= $book_instance->get_status() ?></td>
-                                <td><a href="#">click here</a></td>
+                                <td><a href="<?= App::createURL('/book/instance/history', ['instance_id' => $book_instance->id]) ?>">click here</a></td>
                                 <td>
                                     <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
                                         <a href="<?= App::createURL('/transactions/members/search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
@@ -215,10 +217,10 @@ $book_instances = $book->get_all_book_instances();
         });
 
         chkToggleImageUpload.click(function () {
-            if(this.checked){
+            if (this.checked) {
                 console.log('checked');
                 disableImageUploadField(false);
-            }else{
+            } else {
                 console.log('unchecked');
                 disableImageUploadField(true);
             }

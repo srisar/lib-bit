@@ -19,7 +19,7 @@ class CategoryController
 
             $fields = ['cat_id' => $request->getParams()->getInt('cat_id')];
 
-            $selected_category = Category::get_category_by_id($fields['cat_id']);
+            $selected_category = Category::select($fields['cat_id']);
             View::set_data('selected_category', $selected_category);
             View::set_data('subcategories', $selected_category->get_all_subcategories());
 
@@ -132,7 +132,7 @@ class CategoryController
 
             $fields = ['cat_id' => App::validateField($request, 'cat_id')];
 
-            $category = Category::get_category_by_id($fields['cat_id']);
+            $category = Category::select($fields['cat_id']);
 
             View::set_data('category', $category);
             View::set_data('categories', Category::select_all());
@@ -164,7 +164,7 @@ class CategoryController
             $cat_id = App::validateField($reqest, 'cat_id');
 
 
-            $category = Category::get_category_by_id($cat_id);
+            $category = Category::select($cat_id);
 
             View::set_data('category', $category);
 
@@ -215,7 +215,7 @@ class CategoryController
                 $r = new Request();
                 $fields = ['cat_id' => $r->getParams()->getInt('category_id')];
 
-                $selected_category = Category::get_category_by_id($fields['cat_id']);
+                $selected_category = Category::select($fields['cat_id']);
                 View::set_data('selected_category', $selected_category);
                 View::set_data('subcategories', $selected_category->get_all_subcategories());
 
