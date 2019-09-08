@@ -24,7 +24,7 @@ class BookController
 
             $fields = ['subcat_id' => App::validateField($request, 'subcat_id')];
 
-            $subcategory = Subcategory::get_subcategory_by_id($fields['subcat_id']);
+            $subcategory = Subcategory::select($fields['subcat_id']);
             $category = $subcategory->get_category();
 
             View::set_data('category', $category);
@@ -78,7 +78,7 @@ class BookController
 
             $id = App::validateField($req, 'id');
 
-            $book = Book::select_by_id($id);
+            $book = Book::select($id);
 
             $categories = Category::select_all();
 
@@ -121,7 +121,7 @@ class BookController
                 if (!$uploaded_image->hasError()) {
                     if ($uploaded_image->saveFile()) {
 
-                        $book = Book::select_by_id($fields['id']);
+                        $book = Book::select($fields['id']);
                         $book->title = $fields['title'];
                         $book->category_id = $fields['category_id'];
                         $book->subcategory_id = $fields['subcategory_id'];
@@ -137,7 +137,7 @@ class BookController
 
             } else {
                 // 2. image upload disabled. (default state)
-                $book = Book::select_by_id($fields['id']);
+                $book = Book::select($fields['id']);
                 $book->title = $fields['title'];
                 $book->category_id = $fields['category_id'];
                 $book->subcategory_id = $fields['subcategory_id'];
@@ -150,7 +150,7 @@ class BookController
         } catch (Exception $e) {
 
             $id = $req['id'];
-            $book = Book::select_by_id($id);
+            $book = Book::select($id);
 
             $categories = Category::select_all();
 
@@ -175,7 +175,7 @@ class BookController
 
             $categories = Category::select_all();
 
-            $subcat = Subcategory::get_subcategory_by_id($field['subcat_id']);
+            $subcat = Subcategory::select($field['subcat_id']);
 
             $title = sprintf("%s → %s", $subcat->get_category(), $subcat->subcategory_name);
 

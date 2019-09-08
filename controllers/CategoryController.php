@@ -248,7 +248,7 @@ class CategoryController
 
             $fields = ['subcat_id' => App::validateField($request, 'subcat_id')];
 
-            $subcategory = Subcategory::get_subcategory_by_id($fields['subcat_id']);
+            $subcategory = Subcategory::select($fields['subcat_id']);
 
 
             View::set_data('subcategory', $subcategory);
@@ -276,7 +276,7 @@ class CategoryController
                 'subcategory_name' => App::validateField($request, 'subcategory_name'),
             ];
 
-            $subcategory = Subcategory::get_subcategory_by_id($fields['subcat_id']);
+            $subcategory = Subcategory::select($fields['subcat_id']);
             $subcategory->subcategory_name = $fields['subcategory_name'];
 
             if ($subcategory->update()) {

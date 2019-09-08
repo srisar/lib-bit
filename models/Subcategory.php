@@ -26,7 +26,7 @@ class Subcategory
      * @param $id
      * @return Subcategory
      */
-    public static function get_subcategory_by_id($id)
+    public static function select($id)
     {
         $db = Database::get_instance();
         $statement = $db->prepare("SELECT * FROM subcategories WHERE id=?");

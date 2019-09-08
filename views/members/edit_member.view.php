@@ -9,6 +9,9 @@ $member = View::get_data('member');
 
 $errors = View::get_error('errors');
 
+/** @var BookTransaction[] $member_transactions */
+$member_transactions = View::get_data('member_transactions');
+
 ?>
 
 
@@ -46,7 +49,7 @@ $errors = View::get_error('errors');
                                 <div class="form-group">
                                     <label for="member_since">Member since</label>
                                     <input type="text" name="member_since" id="member_since" class="form-control date-picker" value="<?= $member->member_since ?>">
-<!--                                    <div class="" id="date-picker-error"></div>-->
+                                    <!--                                    <div class="" id="date-picker-error"></div>-->
                                     <div class="invalid-feedback">Invalid date</div>
                                     <div class="valid-feedback">Looks good</div>
                                 </div>
@@ -72,11 +75,18 @@ $errors = View::get_error('errors');
                     </form>
 
                 </div>
-            </div>
+            </div><!--.card-->
 
+
+        </div><!--.col-->
+
+        <div class="col-8">
+
+            <?php include_once BASE_PATH . "/views/transactions/_transaction_history_table.inc.php" ?>
 
         </div>
-    </div>
+
+    </div><!--.row-->
 
 
 </div>

@@ -36,7 +36,7 @@ class Book
      * @param $id
      * @return Book
      */
-    public static function select_by_id($id)
+    public static function select($id)
     {
         $db = Database::get_instance();
 
@@ -126,6 +126,15 @@ class Book
     }
 
     /**
+     * Get the book's subcategory
+     * @return Subcategory
+     */
+    public function get_subcategory()
+    {
+        return Subcategory::select($this->subcategory_id);
+    }
+
+    /**
      * Returns a display name as [Title (category)]
      * @return string
      */
@@ -156,7 +165,7 @@ class Book
      */
     public static function get_all_books_by_subcategory($id)
     {
-        $subcategory = Subcategory::get_subcategory_by_id($id);
+        $subcategory = Subcategory::select($id);
         return $subcategory->get_all_books();
     }
 

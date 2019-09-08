@@ -11,6 +11,8 @@ $member = View::get_data('member');
 /** @var BookTransaction[] $member_transactions */
 $member_transactions = View::get_data('member_transactions');
 
+$borrowing_date = View::get_data('borrowing_date');
+$returning_date = View::get_data('returning_date');
 
 ?>
 
@@ -28,17 +30,12 @@ $member_transactions = View::get_data('member_transactions');
 
             <?php View::render_error_messages() ?>
 
-            <div class="alert alert-primary">
-                <div>Book: <?= $book->get_display_name() ?> # <?= $book_instance->id ?></div>
-            </div>
-
-
         </div>
     </div>
 
     <div class="row">
 
-        <div class="col-6">
+        <div class="col-4">
 
             <div class="card">
                 <div class="card-header"></div>
@@ -59,12 +56,12 @@ $member_transactions = View::get_data('member_transactions');
 
                         <div class="form-group">
                             <label for="">Borrowing Date</label>
-                            <input type="date" class="form-control" name="borrowed_date">
+                            <input type="text" class="form-control date-picker" name="borrowing_date" value="<?= $borrowing_date ?>" >
                         </div>
 
                         <div class="form-group">
                             <label for="">Returning Date</label>
-                            <input type="date" class="form-control" name="return_date">
+                            <input type="text" class="form-control date-picker" name="returning_date" value="<?= $returning_date ?>">
                         </div>
 
                         <div class="form-group">
@@ -83,38 +80,8 @@ $member_transactions = View::get_data('member_transactions');
 
         </div>
 
-        <div class="col-6">
-
-            <table class="table table-bordered table-striped">
-
-                <thead>
-                <tr>
-                    <th>Book</th>
-                    <th>BD</th>
-                    <th>RD</th>
-                    <th>State</th>
-
-                </tr>
-                </thead>
-
-                <tbody>
-
-                <?php foreach ($member_transactions as $transaction): ?>
-
-                <tr>
-                    <td><?= $transaction->get_book_instance() ?></td>
-                    <td><?= $transaction->borrowed_date ?></td>
-                    <td><?= $transaction->returned_date ?></td>
-                    <td><?= $transaction->state ?></td>
-                </tr>
-
-                <?php endforeach; ?>
-
-                </tbody>
-
-            </table>
-
-
+        <div class="col-8">
+            <?php include_once BASE_PATH . "/views/transactions/_transaction_history_table.inc.php" ?>
         </div>
 
     </div>

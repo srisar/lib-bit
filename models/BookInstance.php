@@ -13,7 +13,7 @@ class BookInstance
      */
     public function get_book()
     {
-        return Book::select_by_id($this->book_id);
+        return Book::select($this->book_id);
     }
 
 
@@ -60,7 +60,7 @@ class BookInstance
 
         $db = Database::get_instance();
 
-        $statement = $db->prepare("SELECT * FROM book_transactions WHERE book_instance_id = ? ORDER BY borrowed_date DESC LIMIT 1");
+        $statement = $db->prepare("SELECT * FROM book_transactions WHERE book_instance_id = ? ORDER BY borrowing_date DESC LIMIT 1");
         $statement->execute([$this->id]);
 
         /** @var BookTransaction $transaction */
