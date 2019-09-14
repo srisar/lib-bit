@@ -35,13 +35,11 @@ $searched = View::get_data('searched');
                 <div class="card-body">
 
 
-                    <?php if ($book->has_image_url()): ?>
-                        <div class="row">
-                            <div class="col text-center">
-                                <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>" alt="Cover Image">
-                            </div>
+                    <div class="row">
+                        <div class="col text-center">
+                            <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>" alt="Cover Image">
                         </div>
-                    <?php endif; ?>
+                    </div>
 
                     <div class="row">
 
@@ -106,7 +104,7 @@ $searched = View::get_data('searched');
 
                 <div class="card-body">
 
-                    <form action="<?= App::createURL('/transactions/members/results') ?>" method="get">
+                    <form action="<?= App::createURL('/transactions/search-member-results') ?>" method="get">
 
                         <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
 
