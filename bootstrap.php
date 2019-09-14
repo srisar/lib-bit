@@ -44,4 +44,9 @@ spl_autoload_register(function ($class) {
 include "core/Router.php";
 include "routes.php";
 
+// base path of the app
 define('BASE_PATH', __DIR__);
+
+// location of the uploaded paths
+define('BOOK_COVERS_UPLOAD_PATH', '/uploads/books');
+define('MEMBER_PROFILES_UPLOAD_PATH', '/uploads/members');

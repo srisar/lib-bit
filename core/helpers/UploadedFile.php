@@ -6,6 +6,7 @@ class UploadedFile
 
     private $data;
     private $uploaded_file_path;
+    private $uploaded_filename;
     private $is_saved;
 
     public function __construct($files_image_array)
@@ -63,14 +64,14 @@ class UploadedFile
         return explode('/', $this->getType())[1];
     }
 
-    public function saveFile()
+    public function saveFile($path)
     {
         $time = time();
 
-        $upload_dir = '/uploads';
+        $upload_dir = $path;
 
-        $this->uploaded_file_path = sprintf("%s/%d.%s", $upload_dir, $time, $this->getFileExtension());
-
+        $this->uploaded_filename = sprintf("%d.%s", $time, $this->getFileExtension());
+        $this->uploaded_file_path = sprintf("%s/%s", $upload_dir, $this->uploaded_filename);
         $full_path = BASE_PATH . $this->uploaded_file_path;
 
         $result = move_uploaded_file($this->getTempFile(), $full_path);
@@ -84,9 +85,22 @@ class UploadedFile
 
     }
 
+    /**
+     * Returns the full uploaded file url
+     * @return string
+     */
     public function getUploadedFileUrl()
     {
         return App::getBaseURL() . $this->uploaded_file_path;
+    }
+
+    /**
+     * Returns the uploaded file name.
+     * @return string
+     */
+    public function getUploadedFileName()
+    {
+        return $this->uploaded_filename;
     }
 
 }

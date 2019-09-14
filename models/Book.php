@@ -3,7 +3,7 @@
 
 class Book
 {
-    public $id, $title, $category_id, $subcategory_id, $author_id, $image_url;
+    public $id, $title, $category_id, $subcategory_id, $author_id, $image_url, $isbn, $page_count, $book_overview;
 
     /**
      * Returns a string representation of a Book
@@ -170,9 +170,26 @@ class Book
     }
 
 
+    /**
+     * Check if a book has uploaded image.
+     * @return bool
+     */
     public function has_image_url()
     {
         return !empty($this->image_url);
+    }
+
+
+    /**
+     *
+     */
+    public function get_image()
+    {
+        if ($this->has_image_url()) {
+            return sprintf("%s/%s", BOOK_COVERS_UPLOAD_PATH, $this->image_url);
+        } else {
+            return App::getAssetsURL() . "/img/no-cover.png";
+        }
     }
 
 }

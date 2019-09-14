@@ -14,13 +14,13 @@ $subcategory = View::get_data('subcategory')
 
     <div class="row">
 
-        <div class="col-3">
+        <div class="d-none d-lg-block col-lg-3">
 
             <?php include_once "_categories_list.inc.php" ?>
 
         </div><!--.col-->
 
-        <div class="col-6">
+        <div class="col-lg-6 mb-3">
 
             <div class="card">
                 <div class="card-header">
@@ -37,9 +37,11 @@ $subcategory = View::get_data('subcategory')
 
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-group">
-                                    <label for="book-title">Title</label>
-                                    <input class="form-control" type="text" id="book-title" name="title" required>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="text" id="book-title" name="title" placeholder="Book's title" required>
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button" id="btn_check_title">Check</button>
+                                    </div>
                                 </div>
                             </div>
                         </div><!--.row-->
@@ -63,6 +65,34 @@ $subcategory = View::get_data('subcategory')
                         </div><!--.row-->
 
 
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label>Page count</label>
+                                    <input class="form-control" type="text" name="page_count">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mb-2">ISBN</div>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" name="isbn">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="button" id="btn_check_isbn">Check</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="book-title">Book overview</label>
+                                    <textarea name="book_overview" class="form-control" rows="6" placeholder="Summery or brief review of a book."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <div class="row text-right">
                             <div class="col">
                                 <button class="btn btn-warning" type="submit">Save</button>
@@ -76,6 +106,22 @@ $subcategory = View::get_data('subcategory')
             </div>
 
         </div><!--.col-->
+
+        <div class="col-lg-3">
+            <div class="card bg-dark text-light">
+                <div class="card-header">
+                    <?php HtmlHelper::render_card_header("Hints"); ?>
+                </div>
+                <div class="card-body">
+                   <ul class="list-group list-group-flush">
+                       <li class="list-group-item bg-transparent">You can add cover image in the edit page.</li>
+                       <li class="list-group-item bg-transparent">ISBN number is 10 digits and older.</li>
+                       <li class="list-group-item bg-transparent">ISBN13 number is 13 digits and newer format.</li>
+                       <li class="list-group-item bg-transparent">You can quickly look up book details on amazon.</li>
+                   </ul>
+                </div>
+            </div>
+        </div>
 
 
     </div><!--.row-->

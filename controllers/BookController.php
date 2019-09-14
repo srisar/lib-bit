@@ -119,13 +119,14 @@ class BookController
                 // check uploaded image is valid before calling the saveFile()
 
                 if (!$uploaded_image->hasError()) {
-                    if ($uploaded_image->saveFile()) {
+                    if ($uploaded_image->saveFile(BOOK_COVERS_UPLOAD_PATH)) {
 
                         $book = Book::select($fields['id']);
                         $book->title = $fields['title'];
                         $book->category_id = $fields['category_id'];
                         $book->subcategory_id = $fields['subcategory_id'];
-                        $book->image_url = $uploaded_image->getUploadedFileUrl();
+                        $book->image_url = $uploaded_image->getUploadedFileName();
+
 
                         if ($book->update()) {
                             App::redirect('/books/edit?id=' . $fields['id']);

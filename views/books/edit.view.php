@@ -43,13 +43,12 @@ $book_instances = $book->get_all_book_instances();
 
                         <input type="hidden" value="<?= $book->id ?>" name="id">
 
-                        <?php if ($book->has_image_url()): ?>
-                            <div class="row">
-                                <div class="col text-center">
-                                    <img id="cover-image" class="img-thumbnail" src="<?= $book->image_url ?>" alt="Cover Image">
-                                </div>
+                        <div class="row">
+                            <div class="col text-center">
+                                <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>" alt="Cover Image">
                             </div>
-                        <?php endif; ?>
+                        </div>
+
 
                         <div class="row">
 
