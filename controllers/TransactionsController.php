@@ -5,7 +5,7 @@ use Carbon\Carbon;
 
 class TransactionsController
 {
-    public function show_search($request)
+    public function show_member_search($request)
     {
 
         try {
@@ -25,7 +25,7 @@ class TransactionsController
 
     }
 
-    public function search_results($request)
+    public function search_member_results($request)
     {
 
         try {

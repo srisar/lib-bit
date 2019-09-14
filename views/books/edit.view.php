@@ -152,7 +152,7 @@ $book_instances = $book->get_all_book_instances();
                     <?php endif; ?>
 
 
-                    <a href="<?= App::createURL('/books/instance/adding', ['book_id' => $book->id]) ?>"
+                    <a href="<?= App::createURL('/book-instance/adding', ['book_id' => $book->id]) ?>"
                        class="btn btn-sm btn-primary mb-2">
                         Add a new instance
                     </a>
@@ -173,10 +173,10 @@ $book_instances = $book->get_all_book_instances();
                             <tr>
                                 <td><?= $book_instance ?></td>
                                 <td><?= $book_instance->get_status() ?></td>
-                                <td><a href="<?= App::createURL('/book/instance/history', ['instance_id' => $book_instance->id]) ?>">click here</a></td>
+                                <td><a href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">click here</a></td>
                                 <td>
                                     <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
-                                        <a href="<?= App::createURL('/transactions/members/search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
+                                        <a href="<?= App::createURL('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

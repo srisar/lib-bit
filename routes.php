@@ -2,43 +2,43 @@
 /**
  * Routing table
  */
-Router::add("/home", "HomeController", "home");
-Router::add("/about", "HomeController", "about");
-Router::add("/contact", "HomeController", "contact");
+Router::add("/home", HomeController::class, "home");
+Router::add("/about", HomeController::class, "about");
+Router::add("/contact", HomeController::class, "contact");
 
 /** Books */
-Router::add("/books", "BookController", "index");
-Router::add("/books/add", "BookController", "add");
-Router::add("/books/adding", "BookController", "adding");
-Router::add("/books/edit", "BookController", "edit");
-Router::add("/books/editing", "BookController", "editing");
-Router::add('/books/subcategory', BookController::class, "view_by_subcategory");
+Router::add("/books", BooksController::class, "index");
+Router::add("/books/add", BooksController::class, "add");
+Router::add("/books/adding", BooksController::class, "adding");
+Router::add("/books/edit", BooksController::class, "edit");
+Router::add("/books/editing", BooksController::class, "editing");
+Router::add('/books/subcategory', BooksController::class, "view_by_subcategory");
 
 /** Book Instance */
-Router::add("/books/instance/adding", BookInstanceController::class, "adding");
-Router::add("/book/instance/history", BookInstanceController::class, "view_instance_history");
+Router::add("/book-instance/adding", BookInstanceController::class, "adding");
+Router::add("/book-instance/view-history", BookInstanceController::class, "view_history");
 
 /** Transactions */
-Router::add('/transactions/members/search', TransactionsController::class, "show_search");
-Router::add('/transactions/members/results', TransactionsController::class, "search_results");
+Router::add('/transactions/show-member-search', TransactionsController::class, "show_member_search");
+Router::add('/transactions/search-member-results', TransactionsController::class, "search_member_results");
 Router::add('/transactions/add', TransactionsController::class, "add");
 Router::add('/transactions/adding', TransactionsController::class, "adding");
 
 /** Categories */
-Router::add('/categories', "CategoryController", "index");
-Router::add('/categories/add', "CategoryController", "add");
-Router::add('/categories/adding', "CategoryController", "adding");
-Router::add('/categories/edit', "CategoryController", "edit");
-Router::add('/categories/editing', "CategoryController", "editing");
+Router::add('/categories', CategoriesController::class, "index");
+Router::add('/categories/add', CategoriesController::class, "add");
+Router::add('/categories/adding', CategoriesController::class, "adding");
+Router::add('/categories/edit', CategoriesController::class, "edit");
+Router::add('/categories/editing', CategoriesController::class, "editing");
 
 /** Members */
-Router::add('/members', 'MemberController', 'index');
-Router::add('/members/add', 'MemberController', 'add');
-Router::add('/members/adding', 'MemberController', 'adding');
-Router::add('/members/edit', 'MemberController', 'edit_member');
-Router::add('/members/editing', 'MemberController', 'editing_member');
+Router::add('/members', MembersController::class, 'index');
+Router::add('/members/add', MembersController::class, 'add');
+Router::add('/members/adding', MembersController::class, 'adding');
+Router::add('/members/edit', MembersController::class, 'edit_member');
+Router::add('/members/editing', MembersController::class, 'editing_member');
 
-Router::add('/members/department', 'MemberController', 'view_by_department');
+Router::add('/members/department', MembersController::class, 'view_by_department');
 
 
 /** Subcategories */

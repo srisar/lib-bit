@@ -1,6 +1,6 @@
 <?php
 
-class BookController
+class BooksController
 {
 
     public function index($req)

@@ -35,7 +35,7 @@ class BookInstanceController
     /**
      * View book instance's transaction history
      */
-    public function view_instance_history()
+    public function view_history()
     {
         try {
 
