@@ -123,4 +123,32 @@ class TransactionsController
 
     }
 
+    public function single()
+    {
+
+        try {
+
+            $request = new Request();
+            $id = $request->getParams()->getInt('id');
+
+            $book_transaction = BookTransaction::select($id);
+
+            $bookInstance = $book_transaction->get_book_instance();
+            $book = $bookInstance->get_book();
+            $member = $book_transaction->get_member();
+
+            View::set_data('book_transaction', $book_transaction);
+            View::set_data('book', $book);
+            View::set_data('book_instance', $bookInstance);
+            View::set_data('member', $member);
+
+            include_once "views/transactions/single.php";
+
+
+        } catch (Exception $ex) {
+            die($ex->getMessage());
+        }
+
+    }
+
 }

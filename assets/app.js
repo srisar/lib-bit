@@ -37,5 +37,9 @@ function validateDate(chosen, field) {
 
 // Adding Datatable
 $(document).ready(function () {
-    $('.data-table').DataTable();
+    $('.data-table').DataTable({
+        "language": {
+            "search": "Filter records:"
+        }
+    });
 });

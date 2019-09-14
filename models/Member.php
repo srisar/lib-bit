@@ -13,7 +13,7 @@ class Member
 
     public function __toString()
     {
-        return sprintf("#%s %s (%s)", $this->id, $this->fullname, $this->member_type);
+        return sprintf("#%s %s (%s/%s)", $this->id, $this->fullname, $this->member_type, $this->get_department());
     }
 
     function get_member_since()

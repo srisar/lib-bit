@@ -157,7 +157,7 @@ $book_instances = $book->get_all_book_instances();
                         Add a new instance
                     </a>
 
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-bordered table-striped data-table">
                         <thead>
                         <tr>
                             <th>Book Instance</th>
@@ -170,7 +170,8 @@ $book_instances = $book->get_all_book_instances();
                         <tbody>
 
                         <?php foreach ($book_instances as $book_instance): ?>
-                            <tr>
+                            <?php $row_color = $book_instance->get_status() == BookTransaction::STATE_BORROWED ? "table-danger" : "table-success"; ?>
+                            <tr class="<?= $row_color ?>">
                                 <td><?= $book_instance ?></td>
                                 <td><?= $book_instance->get_status() ?></td>
                                 <td><a href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">click here</a></td>

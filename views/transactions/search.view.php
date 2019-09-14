@@ -26,79 +26,19 @@ $searched = View::get_data('searched');
 
     <div class="row justify-content-center">
 
-        <div class="col-3">
-
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="m-0">Book details</h3>
-                </div>
-                <div class="card-body">
+        <div class="col-12 col-lg-3 mb-3">
+            <?php include_once BASE_PATH . "/views/books/_single_book_card.inc.php" ?>
+        </div><!--.col-->
 
 
-                    <div class="row">
-                        <div class="col text-center">
-                            <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>" alt="Cover Image">
-                        </div>
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-12">
-
-                            <div class="form-group">
-                                <label for="book-title">Title</label>
-                                <input class="form-control" type="text" value="<?= $book->title ?>" readonly>
-                            </div>
-
-                        </div>
-
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="book-title">Instance #</label>
-                                <input class="form-control" type="text" value="<?= $book_instance->id ?>" readonly>
-                            </div>
-                        </div>
-
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="book-category">Category</label>
-                                <input type="text" class="form-control" value="<?= $book->get_category() ?>" readonly>
-
-                            </div>
-
-                        </div>
-
-                        <div class="col-12">
-
-                            <div id="output">
-                                <div class="form-group">
-                                    <label for="book-category">Subcategory</label>
-
-                                    <input type="text" class="form-control" value="<?= $book->get_subcategory() ?>" readonly>
-                                </div>
-                            </div>
-
-                        </div><!--.col-->
-
-
-                    </div><!--.row-->
-
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="col-9">
+        <div class="col-12 col-lg-9">
             <?php View::render_error_messages() ?>
 
             <div class="card">
 
                 <div class="card-header">
-                    <?php if($searched): ?>
-                        <?php HtmlHelper::render_card_header("Search result for '{$keyword}'");?>
+                    <?php if ($searched): ?>
+                        <?php HtmlHelper::render_card_header("Search result for '{$keyword}'"); ?>
                     <?php endif; ?>
                 </div>
 
@@ -108,14 +48,21 @@ $searched = View::get_data('searched');
 
                         <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
 
-                        <div class="form-row">
+                        <div class="row">
 
-                            <div class="col-auto">
-                                <input type="text" class="form-control" name="q" placeholder="Search for member">
+                            <div class="col">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Search for member" aria-label="Recipient's username" name="q">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="col-auto">
-                                <button class="btn btn-primary" type="submit">SEARCH</button>
-                            </div>
+
+                        </div>
+
+                        <div class="form-row">
 
                         </div>
 
@@ -126,8 +73,12 @@ $searched = View::get_data('searched');
                         <?php if (!empty($members)): ?>
                             <?php include_once '_results.inc.php' ?>
                         <?php else: ?>
-                            <div class="alert alert-warning">
-                                No result for "<?= $keyword ?>"
+                            <div class="row justify-content-center">
+                                <div class="col-12 col-lg-6">
+                                    <div class="alert alert-danger text-center">
+                                        No result for "<?= $keyword ?>"
+                                    </div>
+                                </div>
                             </div>
                         <?php endif; ?>
 

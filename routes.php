@@ -16,6 +16,7 @@ Router::add('/books/subcategory', BooksController::class, "view_by_subcategory")
 
 /** Book Instance */
 Router::add("/book-instance/adding", BookInstanceController::class, "adding");
+Router::add("/book-instance/single", BookInstanceController::class, "single");
 Router::add("/book-instance/view-history", BookInstanceController::class, "view_history");
 
 /** Transactions */
@@ -23,6 +24,7 @@ Router::add('/transactions/show-member-search', TransactionsController::class, "
 Router::add('/transactions/search-member-results', TransactionsController::class, "search_member_results");
 Router::add('/transactions/add', TransactionsController::class, "add");
 Router::add('/transactions/adding', TransactionsController::class, "adding");
+Router::add('/transactions/single', TransactionsController::class, "single");
 
 /** Categories */
 Router::add('/categories', CategoriesController::class, "index");

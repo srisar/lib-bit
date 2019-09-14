@@ -13,6 +13,20 @@ class BookTransaction
         'RETURNED' => 'Returned',
     ];
 
+
+    /**
+     * @param $id
+     * @return BookTransaction
+     */
+    public static function select($id)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM book_transactions WHERE id=?");
+        $statement->execute([$id]);
+
+        return $statement->fetchObject(BookTransaction::class);
+    }
+
     public static function select_all_by_book_instance_id($instance_id)
     {
         $db = Database::get_instance();

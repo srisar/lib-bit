@@ -35,25 +35,26 @@ $book = View::get_data('book');
             <table class="data-table table table-bordered">
                 <thead>
                 <tr>
+                    <th>Id</th>
                     <th>Member</th>
                     <th>Borrowed Date</th>
                     <th>Return Date</th>
                     <th>Actual Returned Date</th>
                     <th>State</th>
-                    <th>Remarks</th>
                 </tr>
                 </thead>
                 <tbody>
 
                 <?php if (!empty($transactions)): ?>
                     <?php foreach ($transactions as $transaction): ?>
-                        <tr>
+                        <?php $row_color = $transaction->state == BookTransaction::STATE_BORROWED ? "table-danger" : ""; ?>
+                        <tr class="<?= $row_color ?>">
+                            <td><a href="<?= App::createURL('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
                             <td><a target="_blank" href="<?= App::createURL("/members/edit", ['id' => $transaction->get_member()->id]) ?>"><?= $transaction->get_member() ?></a></td>
-                            <td><?= $transaction->borrowed_date ?></td>
-                            <td><?= $transaction->return_date ?></td>
+                            <td><?= $transaction->borrowing_date ?></td>
+                            <td><?= $transaction->returning_date ?></td>
                             <td><?= $transaction->returned_date ?></td>
                             <td><?= $transaction->state ?></td>
-                            <td><?= $transaction->remarks ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>

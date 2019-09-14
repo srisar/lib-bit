@@ -56,4 +56,20 @@ class BookInstanceController
         }
     }
 
+    /**
+     * Show a single page for book instance transaction.
+     */
+    public function single()
+    {
+        try{
+
+            $request = new Request();
+
+
+
+        }catch(Exception $ex){
+            die($ex->getMessage());
+        }
+    }
+
 }
