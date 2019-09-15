@@ -12,6 +12,9 @@ $book = View::get_data('book');
 /** @var Member $member */
 $member = View::get_data('member');
 
+$overdue_payment = View::get_data('overdue_payment');
+$is_overdue = View::get_data('is_overdue');
+$days_elapsed = View::get_data('days_elapsed');
 
 ?>
 
@@ -68,7 +71,7 @@ $member = View::get_data('member');
 
                         <div class="form-group">
                             <label for="">Returned Date</label>
-                            <input type="text" class="form-control date-picker" name="returning_date" value="">
+                            <input type="text" class="form-control date-picker" name="returning_date" value="<?= $book_transaction->returned_date ?>">
                         </div>
 
                         <div class="form-group">
@@ -78,6 +81,8 @@ $member = View::get_data('member');
 
                         <div>
                             <button class="btn btn-success" type="submit">Update</button>
+                            <a href="<?= App::createURL('/transactions/single/set-as-returned', ['transaction_id' => $book_transaction->id, 'amount' => $overdue_payment]) ?>"
+                               class="btn btn-danger" type="submit">Set as returned</a>
                         </div>
 
                     </form>
@@ -88,12 +93,44 @@ $member = View::get_data('member');
         </div>
 
         <div class="col-12 col-lg-3">
-            <div class="card">
-                <div class="card-header">
-                    <?php HtmlHelper::render_card_header("Options & Actions"); ?>
+
+            <div class="card mb-3">
+                <div class="card-header"><?php HtmlHelper::render_card_header("Overdue & payments"); ?></div>
+                <div class="card-body">
+
+                    <?php if ($is_overdue): ?>
+
+                        <div class="row">
+                            <div class="col">
+                                <p> <?= $days_elapsed ?> day(s) have passed since returning date.</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="overdue-value">Overdue payment (<?= $days_elapsed ?> days x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
+                                    <input class="form-control" type="text" value="<?= App::toCurrencyFormat($overdue_payment) ?>">
+                                </div>
+                            </div>
+                        </div>
+
+                    <?php else: ?>
+                        <div class="row">
+                            <div class="col">
+                                <p> <?= $days_elapsed ?> day(s) left to return the book.</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
                 </div>
+            </div>
+
+            <div class="card mb-3">
+                <div class="card-header"><?php HtmlHelper::render_card_header("Options & Actions"); ?></div>
 
                 <div class="card-body">
+
 
                 </div>
 

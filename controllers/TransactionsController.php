@@ -137,10 +137,36 @@ class TransactionsController
             $book = $bookInstance->get_book();
             $member = $book_transaction->get_member();
 
+
+            // calculate overdue and payments
+
+            $today = Carbon::today();
+            $returning_date = Carbon::parse($book_transaction->returning_date);
+            $days_elapsed = $returning_date->diffInDays($today, false);
+
+//            var_dump($today);
+//            var_dump($returning_date);
+//            var_dump($days_elapsed);
+
+            $overdue_payment = 0;
+            $is_overdue = false;
+
+            if ($days_elapsed > 0) {
+                $is_overdue = true;
+                $overdue_payment = $days_elapsed * OVERDUE_DAY_PAYMENT;
+            }
+
+            $days_elapsed = abs($days_elapsed);
+
+
             View::set_data('book_transaction', $book_transaction);
             View::set_data('book', $book);
             View::set_data('book_instance', $bookInstance);
             View::set_data('member', $member);
+            View::set_data('overdue_payment', $overdue_payment);
+            View::set_data('is_overdue', $is_overdue);
+            View::set_data('days_elapsed', $days_elapsed);
+
 
             include_once "views/transactions/single.php";
 
@@ -149,6 +175,38 @@ class TransactionsController
             die($ex->getMessage());
         }
 
+    }
+
+
+    public function single_set_as_returned()
+    {
+
+        try {
+
+            $request = new Request();
+            $id = $request->getParams()->getInt('transaction_id');
+            $amount = $request->getParams()->getFloat('amount');
+
+            $book_transaction = BookTransaction::select($id);
+
+            var_dump($book_transaction);
+
+            $today = Carbon::today();
+
+            $book_transaction->state = BookTransaction::STATE_RETURNED;
+            $book_transaction->returned_date = $today->toDateString();
+            $book_transaction->amount = $amount;
+
+            if ($book_transaction->update()) {
+
+                App::redirect("/transactions/single", ['id' => $id]);
+
+            }
+
+
+        } catch (Exception $ex) {
+            die($ex->getMessage());
+        }
     }
 
 }

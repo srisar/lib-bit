@@ -68,5 +68,11 @@ class App
     }
 
 
+    public static function toCurrencyFormat($number, $currency = "Rs.")
+    {
+        $value = number_format($number, 2, ".", ",");
+        return sprintf("%s %s", $currency, $value);
+    }
+
 
 }

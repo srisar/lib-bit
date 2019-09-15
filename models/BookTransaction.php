@@ -3,14 +3,16 @@
 class BookTransaction
 {
 
-    public $id, $book_instance_id, $member_id, $borrowing_date, $returning_date, $returned_date, $remarks, $state;
+    public $id, $book_instance_id, $member_id, $borrowing_date, $returning_date, $returned_date, $remarks, $state, $amount;
 
     const STATE_BORROWED = 'BORROWED';
     const STATE_RETURNED = 'RETURNED';
+    const STATE_DAMAGED = 'DAMAGED';
 
     const STATES = [
         'BORROWED' => 'Borrowed',
         'RETURNED' => 'Returned',
+        'DAMAGED' => 'Damaged',
     ];
 
 
@@ -27,6 +29,10 @@ class BookTransaction
         return $statement->fetchObject(BookTransaction::class);
     }
 
+    /**
+     * @param $instance_id
+     * @return array
+     */
     public static function select_all_by_book_instance_id($instance_id)
     {
         $db = Database::get_instance();
@@ -36,6 +42,9 @@ class BookTransaction
         return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
     }
 
+    /**
+     * @return bool
+     */
     public function insert()
     {
         $db = Database::get_instance();
@@ -54,6 +63,33 @@ class BookTransaction
         ]);
     }
 
+
+    public function update()
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("
+            UPDATE book_transactions SET
+                returned_date = :returned_date,
+                remarks = :remarks,
+                state = :state,
+                amount = :amount
+            WHERE id = :id
+        ");
+
+        return $statement->execute([
+            ':returned_date' => $this->returned_date,
+            ':remarks' => $this->remarks,
+            ':state' => $this->state,
+            ':amount' => $this->amount,
+            ':id' => $this->id,
+        ]);
+    }
+
+    /**
+     * @param Member $member
+     * @param int $limit
+     * @return array
+     */
     public static function select_by_member(Member $member, $limit = 10)
     {
         $db = Database::get_instance();

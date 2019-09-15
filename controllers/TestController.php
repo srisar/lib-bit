@@ -10,9 +10,11 @@ class TestController
     public function test()
     {
 
-        printf("Now: %s", Carbon::now());
+//        printf("Now: %s", Carbon::now());
+//
+//        printf("1 day: %s", CarbonInterval::day(5));
 
-        printf("1 day: %s", CarbonInterval::day(5));
+        var_dump(new Carbon('2019-08-12'));
 
     }
 

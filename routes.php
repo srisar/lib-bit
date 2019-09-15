@@ -25,6 +25,7 @@ Router::add('/transactions/search-member-results', TransactionsController::class
 Router::add('/transactions/add', TransactionsController::class, "add");
 Router::add('/transactions/adding', TransactionsController::class, "adding");
 Router::add('/transactions/single', TransactionsController::class, "single");
+Router::add('/transactions/single/set-as-returned', TransactionsController::class, "single_set_as_returned");
 
 /** Categories */
 Router::add('/categories', CategoriesController::class, "index");

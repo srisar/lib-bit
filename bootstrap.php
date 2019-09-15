@@ -50,3 +50,5 @@ define('BASE_PATH', __DIR__);
 // location of the uploaded paths
 define('BOOK_COVERS_UPLOAD_PATH', '/uploads/books');
 define('MEMBER_PROFILES_UPLOAD_PATH', '/uploads/members');
+
+define('OVERDUE_DAY_PAYMENT', 8.0);
