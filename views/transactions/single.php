@@ -57,7 +57,7 @@ $days_elapsed = View::get_data('days_elapsed');
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Borrowing Date</label>
-                                    <input type="text" class="form-control date-picker" name="borrowing_date" value="<?= $book_transaction->borrowing_date ?>" disabled>
+                                    <input type="text" class="form-control date-picker" name="borrowing_date" value="<?= App::toDateString($book_transaction->borrowing_date) ?>" disabled>
                                 </div>
 
 
@@ -66,14 +66,14 @@ $days_elapsed = View::get_data('days_elapsed');
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Returning Date</label>
-                                    <input type="text" class="form-control date-picker" name="returning_date" value="<?= $book_transaction->returning_date ?>" disabled>
+                                    <input type="text" class="form-control date-picker" name="returning_date" value="<?= App::toDateString($book_transaction->returning_date) ?>" disabled>
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-group">
                             <label for="">Returned Date</label>
-                            <input type="text" class="form-control date-picker" name="returning_date" value="<?= $book_transaction->returned_date ?>">
+                            <input type="text" class="form-control date-picker" name="returning_date" value="<?= App::toDateString($book_transaction->returned_date) ?>">
                         </div>
 
                         <div class="form-group">

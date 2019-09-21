@@ -26,16 +26,22 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item active">
-                <a class="nav-link" href="<?= App::createURL('/books') ?>">Books</a>
+                <a class="nav-link" href="<?= App::createURL('/books') ?>">View Books</a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="<?= App::createURL('/categories') ?>">Categories</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="<?= App::createURL('/categories') ?>">Manage Categories</a>
             </li>
             <li>
-                <a class="nav-link" href="<?= App::createURL('/members') ?>">Members</a>
+                <a class="nav-link active" href="<?= App::createURL('/members') ?>">Manage Members</a>
             </li>
         </ul>
+
+        <form class="form-inline my-2 my-lg-0">
+            <span class="badge badge-pill badge-dark mr-2">Today is <?= App::todayString() ?></span>
+            <a class="btn btn-success my-2 my-sm-0 mr-2" href="#">Manage Users</a>
+            <a class="btn btn-danger my-2 my-sm-0" href="#">Logout</a>
+        </form>
 
     </div>
 </nav>

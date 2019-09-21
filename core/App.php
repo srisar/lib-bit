@@ -74,5 +74,14 @@ class App
         return sprintf("%s %s", $currency, $value);
     }
 
+    public static function todayString($format = DEFAULT_DATE_FORMAT)
+    {
+        return date($format);
+    }
+
+    public static function toDateString($date, $format = DEFAULT_DATE_FORMAT)
+    {
+        return date($format, strtotime($date));
+    }
 
 }

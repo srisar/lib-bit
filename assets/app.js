@@ -4,7 +4,7 @@ let submitButton = document.getElementById("submit-button");
 
 for (let i = 0; i < datePickerField.length; i++) {
     new Picker(datePickerField[i], {
-        format: 'YYYY-MM-DD',
+        format: 'DD/MMMM/YYYY',
         text: {
             title: "Pick a date"
         },

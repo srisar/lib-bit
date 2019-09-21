@@ -18,7 +18,7 @@ $member_transactions = View::get_data('member_transactions');
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-lg-6 mb-3">
+        <div class="col-lg-12 mb-3">
 
             <?php if (!empty($errors)): ?>
                 <div class="alert alert-warning mb-3">
@@ -31,7 +31,7 @@ $member_transactions = View::get_data('member_transactions');
 
             <div class="card">
                 <div class="card-header">
-                    <?php HtmlHelper::render_card_header("Edit {$type}") ?>
+                    <?php HtmlHelper::render_card_header("Edit {$type}: {$member->fullname}") ?>
                 </div>
                 <div class="card-body">
 
@@ -39,29 +39,35 @@ $member_transactions = View::get_data('member_transactions');
 
                         <input type="hidden" name="id" value="<?= $member->id ?>">
 
-                        <div class="form-group">
-                            <label for="full_name">Full name</label>
-                            <input type="text" name="full_name" id="full_name" class="form-control" required value="<?= $member->fullname ?>">
-                        </div>
-
                         <div class="row">
-                            <div class="col">
+
+                            <div class="col-12 col-lg-6">
+                                <div class="form-group">
+                                    <label for="full_name">Full name</label>
+                                    <input type="text" name="full_name" id="full_name" class="form-control" required value="<?= $member->fullname ?>">
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-lg-3">
                                 <div class="form-group">
                                     <label for="member_since">Member since</label>
-                                    <input type="text" name="member_since" id="member_since" class="form-control date-picker" value="<?= $member->member_since ?>">
+                                    <input type="text" name="member_since" id="member_since" class="form-control date-picker" value="<?= App::toDateString($member->member_since) ?>">
                                     <!--                                    <div class="" id="date-picker-error"></div>-->
                                     <div class="invalid-feedback">Invalid date</div>
                                     <div class="valid-feedback">Looks good</div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-12 col-lg-3">
                                 <div class="form-group">
                                     <label for="full_name">Department</label>
                                     <input type="text" value="<?= $department ?>" class="form-control" readonly>
                                     <input type="hidden" name="dept_id" value="<?= $department->id ?>">
                                 </div>
                             </div>
-                        </div><!--.row-->
+                        </div>
+
+
+
 
                         <input type="hidden" name="type" value="<?= $type ?>">
 

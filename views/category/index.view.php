@@ -36,7 +36,7 @@ $selected_category = View::get_data('selected_category');
 
                     </form>
                 </div>
-            </div>
+            </div><!--.card-->
 
             <div class="card">
                 <div class="card-header">

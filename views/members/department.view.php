@@ -35,6 +35,8 @@ $selected_department = View::get_data('selected_department');
         <!--SIDEBAR: DEPARTMENT-->
         <div class="col-3">
 
+
+
             <div class="card bg-light">
                 <div class="card-header">
                     <?php HtmlHelper::render_card_header('Departments') ?>

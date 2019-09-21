@@ -42,7 +42,7 @@ class Department extends Model
     public static function select($id): Department
     {
         $db = Database::get_instance();
-        $statement = $db->prepare("SELECT * FROM departments WHERE id=?");
+        $statement = $db->prepare("SELECT * FROM departments WHERE id=? LIMIT 1");
 
         $statement->execute([$id]);
 
@@ -53,6 +53,25 @@ class Department extends Model
 
         return $result;
 
+    }
+
+    /**
+     * @param $name
+     * @return mixed
+     * @throws Exception
+     */
+    public static function select_by_name($name)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM departments WHERE department_name=? LIMIT 1");
+
+        $statement->execute([$name]);
+
+        $result = $statement->fetchObject(Department::class);
+
+        if (empty($result))
+            return null;
+        return $result;
     }
 
     /**

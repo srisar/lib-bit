@@ -86,7 +86,7 @@ class MembersController
 
                 $member = new Member();
                 $member->member_type = $fields['type'];
-                $member->dept_id = $fields['dept_id'];
+                $member->department_id = $fields['dept_id'];
                 $member->fullname = $fields['full_name'];
                 $member->member_since = $fields['member_since'];
 

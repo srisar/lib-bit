@@ -52,3 +52,4 @@ define('BOOK_COVERS_UPLOAD_PATH', '/uploads/books');
 define('MEMBER_PROFILES_UPLOAD_PATH', '/uploads/members');
 
 define('OVERDUE_DAY_PAYMENT', 8.0);
+define('DEFAULT_DATE_FORMAT', 'd/F/Y');

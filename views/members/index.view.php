@@ -19,6 +19,9 @@ $departments = View::get_data('departments');
 
             <div class="col-3">
 
+                <?php include_once BASE_PATH . '/views/members/_add_department.inc.php' ?>
+
+
                 <div class="card bg-light">
                     <div class="card-header">
                         <?php HtmlHelper::render_card_header('Departments') ?>
@@ -30,13 +33,11 @@ $departments = View::get_data('departments');
 
                                 <li class="list-group-item">
                                     <div class="category-name"><a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>"><?= $department ?></a></div>
-
                                 </li>
                             <?php endforeach; ?>
                         </ul>
-
                     </div>
-                </div>
+                </div><!--.card-->
 
             </div>
 

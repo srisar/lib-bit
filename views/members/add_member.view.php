@@ -41,7 +41,7 @@ $errors = View::get_error('errors');
                                 <div class="col">
                                     <div class="form-group">
                                         <label for="member_since">Member since</label>
-                                        <input type="date" name="member_since" id="member_since" class="form-control" value="<?= date('Y-m-d') ?>">
+                                        <input type="text" name="member_since" id="member_since" class="form-control date-picker" value="<?= App::todayString() ?>">
                                     </div>
                                 </div>
                                 <div class="col">
@@ -54,6 +54,7 @@ $errors = View::get_error('errors');
                             </div><!--.row-->
 
                             <input type="hidden" name="type" value="<?= $type ?>">
+
 
                             <div class="row">
                                 <div class="col text-right">

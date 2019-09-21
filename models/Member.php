@@ -18,9 +18,8 @@ class Member
 
     function get_member_since()
     {
-
-        return date('d-F-Y', strtotime($this->member_since));
-
+//        return date('d-F-Y', strtotime($this->member_since));
+        return $this->member_since;
     }
 
     /**

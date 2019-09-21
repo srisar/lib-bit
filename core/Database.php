@@ -43,6 +43,10 @@ class Database
         return self::$pdo;
     }
 
+    public static function get_last_inserted_id()
+    {
+        return self::$pdo->lastInsertId();
+    }
 
     public static function close()
     {

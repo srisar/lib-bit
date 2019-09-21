@@ -16,6 +16,9 @@ class TestController
 
         var_dump(new Carbon('2019-08-12'));
 
+
+        var_dump(App::toDateString('2018-01-25'));
+
     }
 
 

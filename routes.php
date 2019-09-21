@@ -42,6 +42,7 @@ Router::add('/members/edit', MembersController::class, 'edit_member');
 Router::add('/members/editing', MembersController::class, 'editing_member');
 
 Router::add('/members/department', MembersController::class, 'view_by_department');
+Router::add('/departments/adding', DepartmentsController::class, 'adding');
 
 
 /** Subcategories */
