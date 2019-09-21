@@ -8,11 +8,13 @@ class BookTransaction
     const STATE_BORROWED = 'BORROWED';
     const STATE_RETURNED = 'RETURNED';
     const STATE_DAMAGED = 'DAMAGED';
+    const STATE_AVAILABLE = 'AVAILABLE';
 
     const STATES = [
         'BORROWED' => 'Borrowed',
         'RETURNED' => 'Returned',
         'DAMAGED' => 'Damaged',
+        'AVAILABLE' => 'Available',
     ];
 
 

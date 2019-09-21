@@ -133,7 +133,7 @@ class MembersController
             View::set_data('type', $member->member_type);
             View::set_data('member_transactions', $member->get_all_book_transactions());
 
-            include_once "views/members/edit_member.view.php";
+            include_once "views/members/single.view.php";
 
         } catch (Exception $ex) {
             die($ex->getMessage());

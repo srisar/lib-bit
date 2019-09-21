@@ -162,7 +162,7 @@ $book_instances = $book->get_all_book_instances();
                         <tr>
                             <th>Book Instance</th>
                             <th>Status</th>
-                            <th>History</th>
+
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -170,14 +170,25 @@ $book_instances = $book->get_all_book_instances();
                         <tbody>
 
                         <?php foreach ($book_instances as $book_instance): ?>
-                            <?php $row_color = $book_instance->get_status() == BookTransaction::STATE_BORROWED ? "table-danger" : "table-success"; ?>
-                            <tr class="<?= $row_color ?>">
+
+                            <tr>
                                 <td><?= $book_instance ?></td>
-                                <td><?= $book_instance->get_status() ?></td>
-                                <td><a href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">click here</a></td>
                                 <td>
+                                    <?php $status = $book_instance->get_status() ?>
+                                    <?php if ($status == BookTransaction::STATE_BORROWED): ?>
+                                        <span class="badge badge-pill badge-warning"><?= $status ?></span>
+                                    <?php elseif ($status == BookTransaction::STATE_AVAILABLE): ?>
+                                        <span class="badge badge-pill badge-success"><?= $status ?></span>
+                                    <?php elseif ($status == BookTransaction::STATE_DAMAGED): ?>
+                                        <span class="badge badge-pill badge-danger"><?= $status ?></span>
+                                    <?php endif; ?>
+
+                                </td>
+
+                                <td>
+                                    <a class="btn btn-sm btn-warning" href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
                                     <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
-                                        <a href="<?= App::createURL('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
+                                        <a class="btn btn-sm btn-primary" href="<?= App::createURL('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>

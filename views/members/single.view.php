@@ -18,7 +18,7 @@ $member_transactions = View::get_data('member_transactions');
 <div class="container-fluid">
 
     <div class="row">
-        <div class="col-4">
+        <div class="col-lg-6 mb-3">
 
             <?php if (!empty($errors)): ?>
                 <div class="alert alert-warning mb-3">
@@ -80,7 +80,7 @@ $member_transactions = View::get_data('member_transactions');
 
         </div><!--.col-->
 
-        <div class="col-8">
+        <div class="col-lg-12 mb-3">
 
             <?php include_once BASE_PATH . "/views/transactions/_transaction_history_table.inc.php" ?>
 

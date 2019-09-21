@@ -87,10 +87,15 @@ a {
 .date-picker {
 }
 
-.data-table{
+.data-table {
 
 }
 
 #date-picker-error {
     color: #ff4136;
+}
+
+.badge {
+    font-size: 90%;
+    font-weight: normal;
 }

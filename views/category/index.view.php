@@ -25,27 +25,14 @@ $selected_category = View::get_data('selected_category');
                 <div class="card-body p-2">
                     <?php View::render_error_messages() ?>
 
-                    <form class="form-inline" action="<?= App::createURL('/categories/adding') ?>" method="get">
-                        <div class="form-group">
-                            <label for="" class="sr-only">Category Name</label>
+                    <form class="form" action="<?= App::createURL('/categories/adding') ?>" method="get">
+
+                        <div class="input-group">
                             <input class="form-control" type="text" name="category_name" required>
-                        </div>
-
-                        <button type="submit" class="btn btn-primary ml-2">Add</button>
-
-                        <div class="text-right">
-
-                        </div>
-
-                        <div class="row">
-                            <div class="col-8">
-
-                            </div>
-                            <div class="col-4">
-
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">Add</button>
                             </div>
                         </div>
-
 
                     </form>
                 </div>

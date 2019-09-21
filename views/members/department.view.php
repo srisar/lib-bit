@@ -45,7 +45,6 @@ $selected_department = View::get_data('selected_department');
 
                             <li class="list-group-item">
                                 <div class="category-name"><a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>"><?= $department ?></a></div>
-
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -59,12 +58,12 @@ $selected_department = View::get_data('selected_department');
             <div class="card">
                 <div class="card-header">
                     <?php HtmlHelper::render_card_header('Teachers'); ?> |
-                    <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_TEACHER]) ?>" class="btn btn-sm btn-success">Add</a>
+                    <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_TEACHER]) ?>" class="btn btn-sm btn-primary">Add</a>
                 </div>
                 <div class="card-body">
 
                     <?php if (!empty($teachers)): ?>
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered data-table">
                             <thead>
                             <tr>
                                 <th>Full Name</th>
@@ -94,12 +93,12 @@ $selected_department = View::get_data('selected_department');
             <div class="card">
                 <div class="card-header">
                     <?php HtmlHelper::render_card_header('Students'); ?> |
-                    <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_STUDENT]) ?>" class="btn btn-sm btn-success">add</a>
+                    <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_STUDENT]) ?>" class="btn btn-sm btn-primary">add</a>
                 </div>
                 <div class="card-body">
 
                     <?php if (!empty($students)): ?>
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered data-table">
                             <thead>
                             <tr>
                                 <th>Full Name</th>

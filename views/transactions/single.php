@@ -14,6 +14,8 @@ $member = View::get_data('member');
 
 $overdue_payment = View::get_data('overdue_payment');
 $is_overdue = View::get_data('is_overdue');
+$is_returned = View::get_data('is_returned');
+$has_payment = View::get_data('has_payment');
 $days_elapsed = View::get_data('days_elapsed');
 
 ?>
@@ -55,7 +57,7 @@ $days_elapsed = View::get_data('days_elapsed');
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Borrowing Date</label>
-                                    <input type="text" class="form-control date-picker" name="borrowing_date" value="<?= $book_transaction->borrowing_date ?>" readonly>
+                                    <input type="text" class="form-control date-picker" name="borrowing_date" value="<?= $book_transaction->borrowing_date ?>" disabled>
                                 </div>
 
 
@@ -64,7 +66,7 @@ $days_elapsed = View::get_data('days_elapsed');
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Returning Date</label>
-                                    <input type="text" class="form-control date-picker" name="returning_date" value="<?= $book_transaction->returning_date ?>" readonly>
+                                    <input type="text" class="form-control date-picker" name="returning_date" value="<?= $book_transaction->returning_date ?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -76,13 +78,13 @@ $days_elapsed = View::get_data('days_elapsed');
 
                         <div class="form-group">
                             <label for="">Remarks</label>
-                            <textarea class="form-control" name="remarks" id="" cols="" rows="5"></textarea>
+                            <textarea class="form-control" name="remarks" id="" cols="" rows="5" placeholder="You can type some remarks about the transaction."></textarea>
                         </div>
 
                         <div>
-                            <button class="btn btn-success" type="submit">Update</button>
+                            <button class="btn btn-primary" type="submit">Update</button>
                             <a href="<?= App::createURL('/transactions/single/set-as-returned', ['transaction_id' => $book_transaction->id, 'amount' => $overdue_payment]) ?>"
-                               class="btn btn-danger" type="submit">Set as returned</a>
+                               class="btn btn-warning">Set as returned today</a>
                         </div>
 
                     </form>
@@ -102,7 +104,7 @@ $days_elapsed = View::get_data('days_elapsed');
 
                         <div class="row">
                             <div class="col">
-                                <p> <?= $days_elapsed ?> day(s) have passed since returning date.</p>
+                                <p class="badge badge-pill badge-danger"> <?= $days_elapsed ?> day(s) have passed since returning date.</p>
                             </div>
                         </div>
 
@@ -110,15 +112,33 @@ $days_elapsed = View::get_data('days_elapsed');
                             <div class="col">
                                 <div class="form-group">
                                     <label for="overdue-value">Overdue payment (<?= $days_elapsed ?> days x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
-                                    <input class="form-control" type="text" value="<?= App::toCurrencyFormat($overdue_payment) ?>">
+                                    <input class="form-control" type="text" value="<?= App::toCurrencyFormat($overdue_payment) ?>" disabled>
                                 </div>
                             </div>
                         </div>
 
+                    <?php elseif ($is_returned): ?>
+                        <div class="row">
+                            <div class="col">
+                                <p class="badge badge-pill badge-success">Book was returned.</p>
+
+                                <?php if ($has_payment): ?>
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="form-group">
+                                                <label for="overdue-value">Overdue payment paid for <br>(<?= $days_elapsed ?> days x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
+                                                <input class="form-control" type="text" value="<?= App::toCurrencyFormat($overdue_payment) ?>" disabled>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
+
+                            </div>
+                        </div>
                     <?php else: ?>
                         <div class="row">
                             <div class="col">
-                                <p> <?= $days_elapsed ?> day(s) left to return the book.</p>
+                                <p class="badge badge-pill badge-warning"><?= $days_elapsed ?> day(s) left to return the book.</p>
                             </div>
                         </div>
                     <?php endif; ?>

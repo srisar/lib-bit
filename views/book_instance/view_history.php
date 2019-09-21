@@ -26,20 +26,16 @@ $book = View::get_data('book');
 
     <div class="row">
 
-        <div class="col-12 col-lg-3">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid cumque eius itaque iusto molestias qui sapiente vero voluptatum! Architecto deleniti distinctio dolorum eos et harum
-            maiores, qui tempore voluptatum. Hic?
-        </div><!--.col-->
 
-        <div class="col-12 col-lg-9">
+        <div class="col-12 mb-3">
             <table class="data-table table table-bordered">
                 <thead>
                 <tr>
-                    <th>Id</th>
+                    <th>ID</th>
                     <th>Member</th>
                     <th>Borrowed Date</th>
-                    <th>Return Date</th>
-                    <th>Actual Returned Date</th>
+                    <th>Returning Date</th>
+                    <th>Returned Date</th>
                     <th>State</th>
                 </tr>
                 </thead>
@@ -47,14 +43,22 @@ $book = View::get_data('book');
 
                 <?php if (!empty($transactions)): ?>
                     <?php foreach ($transactions as $transaction): ?>
-                        <?php $row_color = $transaction->state == BookTransaction::STATE_BORROWED ? "table-danger" : ""; ?>
-                        <tr class="<?= $row_color ?>">
+
+                        <tr>
                             <td><a href="<?= App::createURL('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
                             <td><a target="_blank" href="<?= App::createURL("/members/edit", ['id' => $transaction->get_member()->id]) ?>"><?= $transaction->get_member() ?></a></td>
                             <td><?= $transaction->borrowing_date ?></td>
                             <td><?= $transaction->returning_date ?></td>
                             <td><?= $transaction->returned_date ?></td>
-                            <td><?= $transaction->state ?></td>
+                            <td>
+                                <?php if ($transaction->state == BookTransaction::STATE_BORROWED): ?>
+                                    <span class="badge badge-pill badge-warning"><?= $transaction->state ?></span>
+                                <?php elseif ($transaction->state == BookTransaction::STATE_RETURNED): ?>
+                                    <span class="badge badge-pill badge-success"><?= $transaction->state ?></span>
+                                <?php elseif ($transaction->state == BookTransaction::STATE_DAMAGED): ?>
+                                    <span class="badge badge-pill badge-danger"><?= $transaction->state ?></span>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>

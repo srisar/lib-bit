@@ -7,6 +7,7 @@ class BookInstance
 
     const STATE_AVAILABLE = "AVAILABLE";
     const STATE_BORROWED = "BORROWED";
+    const STATE_DAMAGED = "DAMAGED";
 
     /**
      * @return Book
@@ -67,7 +68,7 @@ class BookInstance
         $transaction = $statement->fetchObject(BookTransaction::class);
 
         if (!empty($transaction)) {
-            return $transaction->state;
+            return $transaction->state == BookTransaction::STATE_RETURNED ? BookTransaction::STATE_AVAILABLE : $transaction->state;
         } else {
             return BookInstance::STATE_AVAILABLE;
         }

@@ -138,25 +138,37 @@ class TransactionsController
             $member = $book_transaction->get_member();
 
 
-            // calculate overdue and payments
+            $overdue_payment = 0;
+            $days_elapsed = 0;
+            $is_overdue = false;
+            $is_returned = false;
+            $has_payment = false;
 
             $today = Carbon::today();
+
             $returning_date = Carbon::parse($book_transaction->returning_date);
-            $days_elapsed = $returning_date->diffInDays($today, false);
 
-//            var_dump($today);
-//            var_dump($returning_date);
-//            var_dump($days_elapsed);
+            if ($book_transaction->state == BookTransaction::STATE_RETURNED) {
+                $returning_date = Carbon::parse($book_transaction->returning_date);
+                $returned_date = Carbon::parse($book_transaction->returned_date);
 
-            $overdue_payment = 0;
-            $is_overdue = false;
+                $days_elapsed = $returning_date->diffInDays($returned_date);
 
-            if ($days_elapsed > 0) {
-                $is_overdue = true;
-                $overdue_payment = $days_elapsed * OVERDUE_DAY_PAYMENT;
+                if ($book_transaction->amount > 0) $has_payment = true;
+
+                $overdue_payment = $book_transaction->amount;
+                $is_returned = true;
+
+            } elseif ($book_transaction->state == BookTransaction::STATE_BORROWED) {
+                $days_elapsed = $returning_date->diffInDays($today, false);
+
+                if ($days_elapsed > 0) {
+                    $is_overdue = true;
+                    $overdue_payment = $days_elapsed * OVERDUE_DAY_PAYMENT;
+                }
+
+                $days_elapsed = abs($days_elapsed);
             }
-
-            $days_elapsed = abs($days_elapsed);
 
 
             View::set_data('book_transaction', $book_transaction);
@@ -165,6 +177,8 @@ class TransactionsController
             View::set_data('member', $member);
             View::set_data('overdue_payment', $overdue_payment);
             View::set_data('is_overdue', $is_overdue);
+            View::set_data('is_returned', $is_returned);
+            View::set_data('has_payment', $has_payment);
             View::set_data('days_elapsed', $days_elapsed);
 
 
