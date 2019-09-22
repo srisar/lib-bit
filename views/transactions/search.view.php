@@ -27,7 +27,7 @@ $searched = View::get_data('searched');
     <div class="row justify-content-center">
 
         <div class="col-12 col-lg-3 mb-3">
-            <?php include_once BASE_PATH . "/views/books/_single_book_card.inc.php" ?>
+            <?php include_once BASE_PATH . "/views/book_instance/_single_instance_card.inc.php" ?>
         </div><!--.col-->
 
 
