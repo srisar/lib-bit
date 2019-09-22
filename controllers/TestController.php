@@ -10,14 +10,7 @@ class TestController
     public function test()
     {
 
-//        printf("Now: %s", Carbon::now());
-//
-//        printf("1 day: %s", CarbonInterval::day(5));
-
-        var_dump(new Carbon('2019-08-12'));
-
-
-        var_dump(App::toDateString('2018-01-25'));
+        var_dump(Book::search('mokc'));
 
     }
 

@@ -25,6 +25,30 @@ class BookInstance
         return $statement->execute([$this->book_id]);
     }
 
+
+    public static function batch_insert($book_id, $instance_count)
+    {
+        $db = Database::get_instance();
+
+        $statement = $db->prepare("INSERT INTO book_instances(book_id) VALUE (:book_id)");
+        $statement->bindValue(':book_id', $book_id, PDO::PARAM_INT);
+
+        try {
+            $db->beginTransaction();
+
+            for ($i = 0; $i < $instance_count; $i++)
+                $statement->execute();
+
+            $db->commit();
+
+            return true;
+
+        } catch (Exception $ex) {
+            $db->rollBack();
+            die($ex->getMessage());
+        }
+    }
+
     /**
      * @param $id
      * @return BookInstance

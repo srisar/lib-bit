@@ -140,6 +140,7 @@ $book_instances = $book->get_all_book_instances();
 
         <div class="col">
 
+            <!--BOOK INSTANCES-->
             <div class="card">
                 <div class="card-header"><?php HtmlHelper::render_card_header("Book Instances (" . count($book_instances) . ")"); ?></div>
                 <div class="card-body">
@@ -151,26 +152,38 @@ $book_instances = $book->get_all_book_instances();
                         <br>
                     <?php endif; ?>
 
+                    <div class="alert alert-secondary">
+                        <form class="form-inline" action="<?= App::createURL('/book-instance/adding') ?>" method="get">
 
-                    <a href="<?= App::createURL('/book-instance/adding', ['book_id' => $book->id]) ?>"
-                       class="btn btn-sm btn-primary mb-2">
-                        Add a new instance
-                    </a>
+                            <input type="hidden" name="book_id" value="<?= $book->id ?>">
+
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <div class="input-group-text">
+                                        <input type="checkbox" id="toggle_add_instance">
+                                    </div>
+                                    <span class="input-group-text">New book instances</span>
+                                </div>
+                                <input type="number" class="form-control" value="1" name="instance_count" id="instance_count" disabled>
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary" id="btn_add_instance" disabled>Add</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
 
                     <table class="table table-bordered table-striped data-table">
                         <thead>
                         <tr>
                             <th>Book Instance</th>
                             <th>Status</th>
-
                             <th>Actions</th>
                         </tr>
                         </thead>
-
                         <tbody>
-
                         <?php foreach ($book_instances as $book_instance): ?>
-
                             <tr>
                                 <td><?= $book_instance ?></td>
                                 <td>
@@ -184,7 +197,6 @@ $book_instances = $book->get_all_book_instances();
                                     <?php endif; ?>
 
                                 </td>
-
                                 <td>
                                     <a class="btn btn-sm btn-warning" href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
                                     <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
@@ -192,18 +204,12 @@ $book_instances = $book->get_all_book_instances();
                                     <?php endif; ?>
                                 </td>
                             </tr>
-
                         <?php endforeach; ?>
-
                         </tbody>
-
                     </table>
                 </div>
-            </div>
-
-
+            </div><!--.card-->
         </div>
-
     </div><!--.row-->
 
 
@@ -220,9 +226,13 @@ $book_instances = $book->get_all_book_instances();
         let subcategorySelect = $("#book-subcategory");
         let categorySelect = $("#book-category");
         let chkToggleImageUpload = $("#toggle_image_upload");
+        let chkToggleAddBookInstance = $("#toggle_add_instance");
 
+        // run the functions when page loads.
         generateSubcategories();
 
+
+        // add listeners
         categorySelect.click(function () {
             generateSubcategories();
         });
@@ -234,6 +244,14 @@ $book_instances = $book->get_all_book_instances();
             } else {
                 console.log('unchecked');
                 disableImageUploadField(true);
+            }
+        });
+
+        chkToggleAddBookInstance.click(function () {
+            if (this.checked) {
+                disableAddBookInstanceForm(false);
+            } else {
+                disableAddBookInstanceForm(true);
             }
         });
 
@@ -259,6 +277,20 @@ $book_instances = $book->get_all_book_instances();
         console.log(imageUploadField);
 
         imageUploadField.disabled = state;
+    }
+
+
+    function disableAddBookInstanceForm(state) {
+        let btnAddInstance = document.getElementById("btn_add_instance");
+        let textInstanceCount = document.getElementById("instance_count");
+
+        if (state === true) {
+            btnAddInstance.disabled = true;
+            textInstanceCount.disabled = true;
+        } else {
+            btnAddInstance.disabled = false;
+            textInstanceCount.disabled = false;
+        }
     }
 
 </script>

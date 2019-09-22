@@ -13,6 +13,7 @@ Router::add("/books/adding", BooksController::class, "adding");
 Router::add("/books/edit", BooksController::class, "edit");
 Router::add("/books/editing", BooksController::class, "editing");
 Router::add('/books/subcategory', BooksController::class, "view_by_subcategory");
+Router::add('/books/search', BooksController::class, "search");
 
 /** Book Instance */
 Router::add("/book-instance/adding", BookInstanceController::class, "adding");

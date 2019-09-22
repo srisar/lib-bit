@@ -17,6 +17,27 @@ class BooksController
 
     }
 
+    public function search(){
+        try{
+
+            $request = new Request();
+            $keyword = $request->getParams()->getString('q');
+
+            $books = Book::search($keyword);
+            $categories = Category::select_all();
+
+            View::set_data('books', $books);
+            View::set_data('categories', $categories);
+            View::set_data('title', "Search results for \"{$keyword}\"");
+            View::set_data('keyword', $keyword);
+
+            include "views/books/search_results.view.php";
+
+        }catch(Exception $ex){
+            die($ex->getMessage());
+        }
+    }
+
     public function add($request)
     {
 

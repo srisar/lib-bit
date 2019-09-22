@@ -10,7 +10,7 @@
         </div>
     <?php endif; ?>
 
-    <table class="table table-striped table-bordered">
+    <table class="table table-striped table-bordered data-table">
         <thead>
         <tr>
             <th>Cover</th>

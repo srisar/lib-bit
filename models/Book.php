@@ -23,12 +23,24 @@ class Book
     {
         $db = Database::get_instance();
 
-        $statement = $db->prepare("SELECT * FROM books LIMIT :limit_value");
+        $statement = $db->prepare("SELECT * FROM books ORDER BY id DESC LIMIT :limit_value");
         $statement->bindParam(":limit_value", $limit, PDO::PARAM_INT);
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_CLASS, Book::class);
 
+    }
+
+    public static function search($keyword)
+    {
+        $db = Database::get_instance();
+
+        $statement = $db->prepare("SELECT * FROM books WHERE title LIKE :title OR isbn LIKE :isbn ORDER BY id DESC");
+        $statement->bindValue(":title", "%{$keyword}%", PDO::PARAM_STR);
+        $statement->bindValue(":isbn", "%{$keyword}%", PDO::PARAM_STR);
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, Book::class);
     }
 
     /**

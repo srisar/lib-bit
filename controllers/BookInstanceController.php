@@ -13,16 +13,15 @@ class BookInstanceController
     {
         try {
 
-            $book_id = App::validateField($request, 'book_id');
+            $request = new Request();
+            $fields = [
+                'book_id' => $request->getParams()->getInt('book_id'),
+                'instance_count' => $request->getParams()->getInt('instance_count'),
+            ];
 
 
-            $instance = new BookInstance();
-            $instance->book_id = $book_id;
-
-            if ($instance->insert()) {
-
-                App::redirect('/books/edit?id=' . $book_id);
-
+            if (BookInstance::batch_insert($fields['book_id'], $fields['instance_count'])) {
+                App::redirect('/books/edit?id=' . $fields['book_id']);
             }
 
 
@@ -61,13 +60,12 @@ class BookInstanceController
      */
     public function single()
     {
-        try{
+        try {
 
             $request = new Request();
 
 
-
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             die($ex->getMessage());
         }
     }

@@ -7,13 +7,13 @@ $books = View::get_data('books');
 
 /** @var string $title */
 $title = View::get_data('title');
+$keyword = View::get_data('keyword');
 /** @var Subcategory $selected_subcategory */
 $selected_subcategory = View::get_data('selected_subcategory');
 ?>
 
 
     <div class="container-fluid">
-
 
 
         <div class="row">
@@ -26,16 +26,23 @@ $selected_subcategory = View::get_data('selected_subcategory');
 
             <div class="col-9">
 
-                <div class="alert alert-light">
+                <div class="alert alert-secondary">
                     <form class="form" action="<?= App::createURL('/books/search') ?>" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for book by title or ISBN" name="q">
+                            <input type="text" class="form-control" placeholder="Search for book by title or ISBN" name="q" value="<?= $keyword ?>">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
                             </div>
                         </div>
                     </form>
                 </div>
+
+                <div class="row">
+                    <div class="col">
+                        <h3 class="text-center"><?= $title ?></h3>
+                    </div>
+                </div>
+
 
                 <div class="alert alert-light">
                     <?php include_once BASE_PATH . "/views/books/_books_table.inc.php"; ?>
