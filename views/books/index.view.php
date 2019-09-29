@@ -14,8 +14,6 @@ $selected_subcategory = View::get_data('selected_subcategory');
 
     <div class="container-fluid">
 
-
-
         <div class="row">
 
             <div class="col-3">
@@ -38,7 +36,29 @@ $selected_subcategory = View::get_data('selected_subcategory');
                 </div>
 
                 <div class="alert alert-light">
-                    <?php include_once BASE_PATH . "/views/books/_books_table.inc.php"; ?>
+
+                    <?php if (!empty($books)): ?>
+
+                        <?php if (isset($selected_subcategory)): ?>
+                            <div class="mb-2">
+                                <a class="btn btn-success" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
+                                    Add a new book in <?= $selected_subcategory ?>
+                                </a>
+                            </div>
+                        <?php endif; ?>
+
+                        <?php include_once BASE_PATH . "/views/books/_books_table.inc.php"; ?>
+
+                    <?php else: ?>
+                        <p>
+                            <a class="btn btn-sm btn-primary" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
+                                Add a new book in <?= $selected_subcategory ?>
+                            </a>
+                        </p>
+                        <p class="lead mb-0">No books found.</p>
+                    <?php endif; ?>
+
+
                 </div>
 
             </div><!--.col-->

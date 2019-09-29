@@ -8,8 +8,7 @@ $books = View::get_data('books');
 /** @var string $title */
 $title = View::get_data('title');
 $keyword = View::get_data('keyword');
-/** @var Subcategory $selected_subcategory */
-$selected_subcategory = View::get_data('selected_subcategory');
+
 ?>
 
 
@@ -45,7 +44,11 @@ $selected_subcategory = View::get_data('selected_subcategory');
 
 
                 <div class="alert alert-light">
-                    <?php include_once BASE_PATH . "/views/books/_books_table.inc.php"; ?>
+                    <?php if (!empty($books)): ?>
+                        <?php include_once BASE_PATH . "/views/books/_books_table.inc.php"; ?>
+                    <?php else: ?>
+                        <p class="lead mb-0">No books found.</p>
+                    <?php endif; ?>
                 </div>
 
             </div><!--.col-->
