@@ -5,6 +5,26 @@ use Carbon\Carbon;
 
 class TransactionsController
 {
+
+    public function index(){
+
+        try{
+
+            $request = new Request();
+
+            $book_transactions = BookTransaction::select_all();
+
+            View::set_data('book_transactions', $book_transactions);
+
+            include_once "views/transactions/index.view.php";
+
+
+        }catch(Exception $ex){
+            die($ex->getMessage());
+        }
+
+    }
+
     public function show_member_search($request)
     {
 

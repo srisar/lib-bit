@@ -21,6 +21,7 @@ Router::add("/book-instance/single", BookInstanceController::class, "single");
 Router::add("/book-instance/view-history", BookInstanceController::class, "view_history");
 
 /** Transactions */
+Router::add('/transactions', TransactionsController::class, "index");
 Router::add('/transactions/show-member-search', TransactionsController::class, "show_member_search");
 Router::add('/transactions/search-member-results', TransactionsController::class, "search_member_results");
 Router::add('/transactions/add', TransactionsController::class, "add");

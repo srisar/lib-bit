@@ -31,6 +31,26 @@ class BookTransaction
         return $statement->fetchObject(BookTransaction::class);
     }
 
+
+    /**
+     * Fetch all latest 100 book transactions.
+     * @param int $limit
+     * @return BookTransaction[]
+     */
+    public static function select_all($limit = 100)
+    {
+
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM book_transactions ORDER BY borrowing_date LIMIT :limit_val");
+        $statement->bindValue(':limit_val', $limit, PDO::PARAM_INT);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
+
+
+    }
+
     /**
      * @param $instance_id
      * @return array

@@ -60,7 +60,7 @@ $departments = View::get_data('departments');
                             <?php foreach ($members as $member): ?>
                                 <tr>
                                     <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
-                                    <td><?= $member->get_member_since() ?></td>
+                                    <td><?= App::toDateString($member->get_member_since()) ?></td>
                                 </tr>
                             <?php endforeach; ?>
 

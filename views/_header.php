@@ -32,9 +32,13 @@
             <li class="nav-item active">
                 <a class="nav-link" href="<?= App::createURL('/categories') ?>">Manage Categories</a>
             </li>
-            <li>
-                <a class="nav-link active" href="<?= App::createURL('/members') ?>">Manage Members</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="<?= App::createURL('/members') ?>">Manage Members</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="<?= App::createURL('/transactions') ?>">View Transactions</a>
+            </li>
+
         </ul>
 
         <form class="form-inline my-2 my-lg-0">
