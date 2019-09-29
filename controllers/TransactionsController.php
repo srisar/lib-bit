@@ -6,20 +6,26 @@ use Carbon\Carbon;
 class TransactionsController
 {
 
-    public function index(){
+    public function index()
+    {
 
-        try{
+        try {
 
             $request = new Request();
 
-            $book_transactions = BookTransaction::select_all();
+            $recent_transactions = BookTransaction::select_all();
+            $today_returnable = BookTransaction::select_by_returning_date(TODAY, TODAY);
 
-            View::set_data('book_transactions', $book_transactions);
+            $overdue_transactions = BookTransaction::select_overdue_transactions();
+
+            View::set_data('recent_transactions', $recent_transactions);
+            View::set_data('today_returnable', $today_returnable);
+            View::set_data('overdue_transactions', $overdue_transactions);
 
             include_once "views/transactions/index.view.php";
 
 
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             die($ex->getMessage());
         }
 
@@ -131,8 +137,8 @@ class TransactionsController
             $transaction->state = BookTransaction::STATE_BORROWED;
 
             if ($transaction->insert()) {
-
-                App::redirect('/members/view', ['id' => $fields['member_id']]);
+                $transaction_id = Database::get_last_inserted_id();
+                App::redirect('/transactions/single', ['id' => $transaction_id]);
 
             }
 

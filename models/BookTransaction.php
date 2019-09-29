@@ -142,4 +142,29 @@ class BookTransaction
         return Member::select($this->member_id);
     }
 
+    public static function select_by_returning_date($start_date, $end_date)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM book_transactions WHERE returning_date BETWEEN :start_date AND :end_date ORDER BY borrowing_date DESC");
+
+        $statement->bindValue(':start_date', $start_date);
+        $statement->bindValue(':end_date', $end_date);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
+    }
+
+    public static function select_overdue_transactions(){
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM book_transactions WHERE (returning_date < :today AND state=:state) ORDER BY returning_date ASC");
+
+        $statement->bindValue(':today', TODAY);
+        $statement->bindValue(':state', BookTransaction::STATE_BORROWED);
+
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
+    }
+
 }

@@ -56,12 +56,12 @@ $returning_date = View::get_data('returning_date');
 
                         <div class="form-group">
                             <label for="">Borrowing Date</label>
-                            <input type="text" class="form-control date-picker" name="borrowing_date" value="<?= $borrowing_date ?>" >
+                            <input type="text" class="form-control date-picker" name="borrowing_date" value="<?= App::toDateString($borrowing_date) ?>" >
                         </div>
 
                         <div class="form-group">
                             <label for="">Returning Date</label>
-                            <input type="text" class="form-control date-picker" name="returning_date" value="<?= $returning_date ?>">
+                            <input type="text" class="form-control date-picker" name="returning_date" value="<?= App::toDateString($returning_date) ?>">
                         </div>
 
                         <div class="form-group">

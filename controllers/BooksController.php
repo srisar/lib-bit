@@ -6,10 +6,8 @@ class BooksController
     public function index($req)
     {
 
-        $books = Book::select_all();
         $categories = Category::select_all();
 
-        View::set_data('books', $books);
         View::set_data('categories', $categories);
         View::set_data('title', 'All Books');
 
@@ -17,8 +15,9 @@ class BooksController
 
     }
 
-    public function search(){
-        try{
+    public function search()
+    {
+        try {
 
             $request = new Request();
             $keyword = $request->getParams()->getString('q');
@@ -33,7 +32,7 @@ class BooksController
 
             include "views/books/search_results.view.php";
 
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             die($ex->getMessage());
         }
     }

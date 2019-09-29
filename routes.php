@@ -48,11 +48,11 @@ Router::add('/departments/adding', DepartmentsController::class, 'adding');
 
 
 /** Subcategories */
-Router::add('/subcategories', "CategoryController", "view_subcategories");
-Router::add('/subcategories/add', "CategoryController", "add_subcategory");
-Router::add('/subcategories/adding', "CategoryController", "adding_subcategory");
-Router::add('/subcategories/edit', "CategoryController", "edit_subcategory");
-Router::add('/subcategories/editing', "CategoryController", "editing_subcategory");
+Router::add('/subcategories', CategoriesController::class, "view_subcategories");
+Router::add('/subcategories/add', CategoriesController::class, "add_subcategory");
+Router::add('/subcategories/adding', CategoriesController::class, "adding_subcategory");
+Router::add('/subcategories/edit', CategoriesController::class, "edit_subcategory");
+Router::add('/subcategories/editing', CategoriesController::class, "editing_subcategory");
 
 /** Test Routes */
 Router::add('/test', "TestController", "test");

@@ -33,6 +33,7 @@ $book = View::get_data('book');
                 <tr>
                     <th>ID</th>
                     <th>Member</th>
+                    <th>Book</th>
                     <th>Borrowed Date</th>
                     <th>Returning Date</th>
                     <th>Returned Date</th>
@@ -47,9 +48,14 @@ $book = View::get_data('book');
                         <tr>
                             <td><a href="<?= App::createURL('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
                             <td><a target="_blank" href="<?= App::createURL("/members/edit", ['id' => $transaction->get_member()->id]) ?>"><?= $transaction->get_member() ?></a></td>
-                            <td><?= $transaction->borrowing_date ?></td>
-                            <td><?= $transaction->returning_date ?></td>
-                            <td><?= $transaction->returned_date ?></td>
+                            <td>
+                                <a target="_blank" href="<?= App::createURL("/books/edit", ['id' => $transaction->get_book_instance()->book_id]) ?>">
+                                    <?= $transaction->get_book_instance()->get_book() ?>
+                                </a>
+                            </td>
+                            <td><?= App::toDateString($transaction->borrowing_date) ?></td>
+                            <td><?= App::toDateString($transaction->returning_date) ?></td>
+                            <td><?= App::toDateString($transaction->returned_date) ?></td>
                             <td>
                                 <?php if ($transaction->state == BookTransaction::STATE_BORROWED): ?>
                                     <span class="badge badge-pill badge-warning"><?= $transaction->state ?></span>

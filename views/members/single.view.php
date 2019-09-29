@@ -88,7 +88,7 @@ $member_transactions = View::get_data('member_transactions');
 
         <div class="col-lg-12 mb-3">
 
-            <?php include_once BASE_PATH . "/views/transactions/_transaction_history_table.inc.php" ?>
+            <?php include_once BASE_PATH . "/views/members/_transaction_history_table.inc.php" ?>
 
         </div>
 

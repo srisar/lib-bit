@@ -16,10 +16,9 @@ class View
 
     public static function get_data($key)
     {
-        if (empty(self::$data[$key])) {
+        if (!isset(self::$data[$key])) {
             return null;
         }
-
         return self::$data[$key];
     }
 

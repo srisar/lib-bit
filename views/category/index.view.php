@@ -13,12 +13,12 @@ $selected_category = View::get_data('selected_category');
 ?>
 
 
-<div class="container-fluid">
+<div class="container">
 
 
     <div class="row">
 
-        <div class="col-3">
+        <div class="col-4">
 
             <div class="card mb-3">
                 <div class="card-header"> <?php HtmlHelper::render_card_header('Add a new category'); ?> </div>
@@ -56,7 +56,7 @@ $selected_category = View::get_data('selected_category');
 
         </div><!--.col-2-->
 
-        <div class="col-9">
+        <div class="col-8">
 
             <div class="card">
 
@@ -75,15 +75,12 @@ $selected_category = View::get_data('selected_category');
 
                             <input type="hidden" name="category_id" value="<?= $selected_category->id ?>">
 
-                            <div class="form-group">
-                                <label class="sr-only">Subcategory Name</label>
-                                <input class="form-control" type="text" name="subcategory_name" placeholder="Add a subcategory" required>
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="subcategory_name" required>
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">Add</button>
+                                </div>
                             </div>
-
-                            <div class="text-right">
-                                <button type="submit" class="btn btn-primary ml-2">Save</button>
-                            </div>
-
                         </form>
 
                     </div>

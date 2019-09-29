@@ -1,6 +1,5 @@
 <?php
-/** @var Category[] $categories */
-$categories = View::get_data('categories');
+
 ?>
 <div id="categories-list" class="card bg-light">
     <div class="card-header">

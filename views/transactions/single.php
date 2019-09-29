@@ -17,7 +17,6 @@ $is_overdue = View::get_data('is_overdue');
 $is_returned = View::get_data('is_returned');
 $has_payment = View::get_data('has_payment');
 $days_elapsed = View::get_data('days_elapsed');
-
 ?>
 
 

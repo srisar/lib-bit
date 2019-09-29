@@ -81,7 +81,7 @@ class App
 
     public static function toDateString($date, $format = DEFAULT_DATE_FORMAT)
     {
-        return date($format, strtotime($date));
+        return !empty($date) ? date($format, strtotime($date)) : "";
     }
 
 }

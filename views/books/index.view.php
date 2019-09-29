@@ -9,6 +9,8 @@ $books = View::get_data('books');
 $title = View::get_data('title');
 /** @var Subcategory $selected_subcategory */
 $selected_subcategory = View::get_data('selected_subcategory');
+/** @var Category[] $categories */
+$categories = View::get_data('categories');
 ?>
 
 
@@ -35,31 +37,38 @@ $selected_subcategory = View::get_data('selected_subcategory');
                     </form>
                 </div>
 
-                <div class="alert alert-light">
+                <?php if (!empty($books)): ?>
+                    <h2 class=""><?= $selected_subcategory->get_category() ?> &rarr; <a href=""><?= $selected_subcategory ?></a></h2>
 
-                    <?php if (!empty($books)): ?>
+                    <div class="alert alert-light">
 
-                        <?php if (isset($selected_subcategory)): ?>
-                            <div class="mb-2">
+                        <?php if (!empty($books)): ?>
+
+                            <?php if (isset($selected_subcategory)): ?>
+                                <div class="mb-2">
+                                    <a class="btn btn-success" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
+                                        Add a new book in <?= $selected_subcategory ?>
+                                    </a>
+                                </div>
+                            <?php endif; ?>
+
+                            <?php include_once BASE_PATH . "/views/books/_books_table.inc.php"; ?>
+
+                        <?php else: ?>
+                            <p>
                                 <a class="btn btn-success" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
                                     Add a new book in <?= $selected_subcategory ?>
                                 </a>
-                            </div>
+                            </p>
+                            <p class="lead mb-0 text-center">No books found in <?= $selected_subcategory ?>.</p>
                         <?php endif; ?>
 
-                        <?php include_once BASE_PATH . "/views/books/_books_table.inc.php"; ?>
-
-                    <?php else: ?>
-                        <p>
-                            <a class="btn btn-sm btn-primary" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
-                                Add a new book in <?= $selected_subcategory ?>
-                            </a>
-                        </p>
-                        <p class="lead mb-0">No books found.</p>
-                    <?php endif; ?>
-
-
-                </div>
+                    </div><!--.alert-->
+                <?php else: ?>
+                    <div class="alert alert-light">
+                        <p class="lead mb-0 text-center">Search for books...</p>
+                    </div>
+                <?php endif; ?>
 
             </div><!--.col-->
 

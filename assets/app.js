@@ -4,7 +4,7 @@ let submitButton = document.getElementById("submit-button");
 
 for (let i = 0; i < datePickerField.length; i++) {
     new Picker(datePickerField[i], {
-        format: 'DD/MMMM/YYYY',
+        format: 'YYYY-MM-DD',
         text: {
             title: "Pick a date"
         },
@@ -40,6 +40,7 @@ $(document).ready(function () {
     $('.data-table').DataTable({
         "language": {
             "search": "Filter records:"
-        }
+        },
+        "order": []
     });
 });

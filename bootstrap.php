@@ -31,8 +31,8 @@ spl_autoload_register(function ($class) {
         include "models/" . $class . ".php";
     }
 
-    if (file_exists("models/factory/" . $class . ".php")) {
-        include "models/factory/" . $class . ".php";
+    if (file_exists("models/helpers/" . $class . ".php")) {
+        include "models/helpers/" . $class . ".php";
     }
 
     if (file_exists('core/helpers/' . $class . '.php')) {
@@ -44,6 +44,8 @@ spl_autoload_register(function ($class) {
 include "core/Router.php";
 include "routes.php";
 
+$today = \Carbon\Carbon::today();
+
 // base path of the app
 define('BASE_PATH', __DIR__);
 
@@ -52,4 +54,6 @@ define('BOOK_COVERS_UPLOAD_PATH', '/uploads/books');
 define('MEMBER_PROFILES_UPLOAD_PATH', '/uploads/members');
 
 define('OVERDUE_DAY_PAYMENT', 8.0);
-define('DEFAULT_DATE_FORMAT', 'd/F/Y');
+define('DEFAULT_DATE_FORMAT', 'Y-m-d');
+
+define('TODAY', $today->toDateString());
