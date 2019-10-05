@@ -216,9 +216,6 @@ $book_instances = $book->get_all_book_instances();
 </div><!--.container-->
 
 
-<?php include_once "views/_footer.php" ?>
-
-
 <script>
 
     $(document).ready(function () {
@@ -294,3 +291,8 @@ $book_instances = $book->get_all_book_instances();
     }
 
 </script>
+
+
+<?php include_once "views/_footer.php" ?>
+
+

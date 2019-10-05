@@ -29,9 +29,9 @@ $categories = View::get_data('categories');
                 <div class="alert alert-light">
                     <form class="form" action="<?= App::createURL('/books/search') ?>" method="get">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for book by title or ISBN" name="q">
+                            <input type="text" class="form-control" placeholder="Search for book by title or ISBN" name="q" id="q">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                                <button class="btn btn-primary" type="submit" id="btn-search-books">Search</button>
                             </div>
                         </div>
                     </form>
