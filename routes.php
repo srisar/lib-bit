@@ -62,4 +62,5 @@ Router::add('/test/uploading_image', "TestController", "uploading_image");
 
 Router::add('/api/get_subcategories', "ApiController", "get_subcategories_by_category_name");
 Router::add('/api/get_author', "ApiController", "get_author_by_name");
+Router::add('/api/json_get_authors', "ApiController", "json_get_authors");
 Router::add('/api/add_author', "ApiController", "add_author");

@@ -53,7 +53,7 @@ class DepartmentsController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }

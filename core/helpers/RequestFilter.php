@@ -30,9 +30,21 @@ class RequestFilter
         return (float)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_FLOAT);
     }
 
+    /**
+     * @param $name
+     * @param bool $filter
+     * @return string
+     * @throws Exception
+     */
     public function getString($name, $filter = true): string
     {
-        return $filter ? (string)trim(filter_var($this->map[$name], FILTER_SANITIZE_MAGIC_QUOTES)) : $this->map[$name];
+        if (isset($this->map[$name])) {
+            return $filter ? (string)trim(filter_var($this->map[$name], FILTER_SANITIZE_STRING)) : $this->map[$name];
+        } else {
+            throw new Exception("Field not found.");
+        }
+
+
     }
 
     public function getEmail($name)

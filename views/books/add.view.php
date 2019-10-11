@@ -80,7 +80,9 @@ $categories = View::get_data('categories');
                                         </div>
                                     </div>
 
-                                    <div id="author_output"></div>
+                                    <div id="author_output">
+                                        <ul id="authors"></ul>
+                                    </div>
 
                                 </div>
                             </div>
@@ -190,23 +192,6 @@ $categories = View::get_data('categories');
 
 
 <script>
-
-
-    function generateAuthorSearchResults() {
-
-        let textAuthorQuery = $("#author_query");
-
-        $.get("<?= App::createURL('/api/get_author') ?>", {
-            author_query: textAuthorQuery.val()
-        }).done(function (data) {
-            $("#author_output").html(data);
-        });
-    }
-
-    $("#btn_search_author").click(function () {
-        generateAuthorSearchResults();
-    });
-
     $("#btn_modal_add_author").click(function () {
 
         let textAuthorName = $("#author_name").val().trim();
@@ -234,6 +219,61 @@ $categories = View::get_data('categories');
             });
 
         }
+    });
+
+
+    function generateAuthorSearchResults() {
+
+        let textAuthorQuery = $("#author_query");
+
+        $.get("<?= App::createURL('/api/get_author') ?>", {
+            author_query: textAuthorQuery.val()
+        }).done(function (data) {
+            $("#author_output").html(data);
+        });
+    }
+
+
+    function createNode(element) {
+        return document.createElement(element);
+    }
+
+    function appendChild(parent, element) {
+        return parent.appendChild(element);
+    }
+
+    $("#btn_search_author").click(function () {
+
+        fetch("<?= App::createURL('/api/json_get_authors', ['query' => 'o']) ?>")
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+
+                let ul = document.getElementById("authors");
+                ul.innerHTML = '';
+
+                return data.map(function (author) {
+
+                    let li = createNode('li'),
+                        checkbox = createNode('input'),
+                        label = createNode('label');
+
+                    checkbox.setAttribute('type', 'checkbox');
+                    checkbox.setAttribute('id', author.full_name + author.id);
+                    label.setAttribute('for', author.full_name + author.id);
+                    label.innerText = author.full_name;
+
+
+                    appendChild(li, checkbox);
+                    appendChild(li, label);
+                    appendChild(ul, li);
+                })
+            })
+            .catch(error => {
+                console.log(error);
+            });
+
     });
 
 </script>

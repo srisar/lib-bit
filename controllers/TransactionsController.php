@@ -26,7 +26,7 @@ class TransactionsController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -45,8 +45,8 @@ class TransactionsController
 
             include_once "views/transactions/search.view.php";
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -75,8 +75,8 @@ class TransactionsController
             include_once "views/transactions/search.view.php";
 
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -110,8 +110,8 @@ class TransactionsController
 
             include "views/transactions/add.view.php";
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -143,8 +143,8 @@ class TransactionsController
             }
 
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -212,7 +212,7 @@ class TransactionsController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -245,7 +245,7 @@ class TransactionsController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 

@@ -25,8 +25,8 @@ class BookInstanceController
             }
 
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -51,7 +51,7 @@ class BookInstanceController
             include_once "views/book_instance/view_history.php";
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ class BookInstanceController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 

@@ -22,8 +22,7 @@ class MembersController
 
 
         } catch (Exception $ex) {
-            View::set_error('error', $ex->getMessage());
-            include "views/error/error.view.php";
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
 
@@ -53,8 +52,7 @@ class MembersController
             include "views/members/add_member.view.php";
 
         } catch (Exception $ex) {
-            View::set_error('error', $ex->getMessage());
-            include "views/error/error.view.php";
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -108,9 +106,7 @@ class MembersController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
-//            View::set_error('error', $ex->getMessage());
-//            include "views/error/error.view.php";
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -136,7 +132,7 @@ class MembersController
             include_once "views/members/single.view.php";
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -167,7 +163,7 @@ class MembersController
             }
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -197,8 +193,7 @@ class MembersController
 
 
         } catch (Exception $ex) {
-            View::set_error('error', $ex->getMessage());
-            include "views/error/error.view.php";
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 

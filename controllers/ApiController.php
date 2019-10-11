@@ -25,8 +25,8 @@ class ApiController
                 include "views/api/subcategories.php";
 
             }
-        } catch (Exception $exception) {
-            var_dump($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -47,7 +47,28 @@ class ApiController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
+        }
+    }
+
+    public function json_get_authors()
+    {
+        try {
+
+            $request = new Request();
+
+            $query = $request->getParams()->getString('query');
+
+            if (!empty($query)) {
+                $authors = Author::search($query);
+
+                echo json_encode($authors);
+
+            }
+
+
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -72,7 +93,7 @@ class ApiController
 
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 

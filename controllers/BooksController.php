@@ -36,7 +36,7 @@ class BooksController
             }
 
         } catch (Exception $ex) {
-            die($ex->getMessage());
+            AppExceptions::showExceptionView($ex->getMessage());
         }
     }
 
@@ -56,8 +56,8 @@ class BooksController
 
             include "views/books/add.view.php";
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -88,8 +88,8 @@ class BooksController
             }
 
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }

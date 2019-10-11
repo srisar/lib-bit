@@ -91,10 +91,9 @@ class CategoriesController
             }
 
 
-        } catch (Exception $exception) {
+        } catch (Exception $ex) {
 
-            View::set_error('error', $exception->getMessage());
-            include_once "views/category/add.view.php";
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
 
@@ -144,8 +143,8 @@ class CategoriesController
 
             include_once "views/category/index.view.php";
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -171,10 +170,9 @@ class CategoriesController
             include_once "views/category/subcat.add.view.php";
 
 
-        } catch (Exception $exception) {
+        } catch (Exception $ex) {
 
-            View::set_error('error', $exception->getMessage());
-            include_once "views/category/add.view.php";
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
 
@@ -227,10 +225,9 @@ class CategoriesController
             }
 
 
-        } catch (Exception $exception) {
+        } catch (Exception $ex) {
 
-            View::set_error('error', $exception->getMessage());
-            include_once "views/category/subcat.add.view.php";
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -256,8 +253,8 @@ class CategoriesController
             include_once 'views/category/edit_subcategory.view.php';
 
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }
@@ -283,8 +280,8 @@ class CategoriesController
                 App::redirect('/subcategories', ['cat_id' => $subcategory->category_id]);
             }
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
         }
 
     }

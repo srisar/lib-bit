@@ -17,6 +17,7 @@ require "vendor/Carbon-2.24.0/autoload.php";
 include "core/Database.php";
 include "core/App.php";
 include "core/View.php";
+include "core/AppExceptions.php";
 
 Database::init($config);
 

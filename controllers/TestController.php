@@ -10,7 +10,7 @@ class TestController
     public function test()
     {
 
-        var_dump(Book::search('mokc'));
+        var_dump(App::createURL('/api/json_get_authors', ['query' => 'o']));
 
     }
 
