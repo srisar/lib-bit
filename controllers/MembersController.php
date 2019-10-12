@@ -49,7 +49,7 @@ class MembersController
             View::set_data('department', $department);
             View::set_data('type', $fields['type']);
 
-            include "views/members/add_member.view.php";
+            include "views/members/_modal_add_member_body.php";
 
         } catch (Exception $ex) {
             AppExceptions::showExceptionView($ex->getMessage());
@@ -100,7 +100,7 @@ class MembersController
                 View::set_data('department', $department);
                 View::set_data('type', $fields['type']);
 
-                include_once "views/members/add_member.view.php";
+                include_once "views/members/_modal_add_member_body.php";
 
             }
 

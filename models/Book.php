@@ -97,9 +97,17 @@ class Book
     {
         $db = Database::get_instance();
 
-        $statement = $db->prepare("INSERT INTO books(title, category_id, subcategory_id) VALUE (?,?,?)");
+        $statement = $db->prepare("INSERT INTO books(title, category_id, subcategory_id, author_id, page_count, isbn, book_overview) VALUE (?,?,?,?,?,?,?);");
         return $statement->execute(
-            [$this->title, $this->category_id, $this->subcategory_id]
+            [
+                $this->title,
+                $this->category_id,
+                $this->subcategory_id,
+                $this->author_id,
+                $this->page_count,
+                $this->isbn,
+                $this->book_overview
+            ]
         );
     }
 

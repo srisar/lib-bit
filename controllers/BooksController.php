@@ -45,7 +45,12 @@ class BooksController
 
         try {
 
-            $fields = ['subcat_id' => App::validateField($request, 'subcat_id')];
+            $request = new Request();
+
+            $fields = [
+                'subcat_id' => $request->getParams()->getInt('subcat_id'),
+            ];
+
 
             $subcategory = Subcategory::select($fields['subcat_id']);
             $category = $subcategory->get_category();
@@ -53,6 +58,7 @@ class BooksController
             View::set_data('category', $category);
             View::set_data('subcategory', $subcategory);
             View::set_data('categories', Category::select_all());
+
 
             include "views/books/add.view.php";
 
@@ -73,13 +79,26 @@ class BooksController
                 'cat_id' => $r->getParams()->getInt('cat_id'),
                 'subcat_id' => $r->getParams()->getInt('subcat_id'),
                 'title' => $r->getParams()->getString('title'),
+                'author_id' => $r->getParams()->getInt('author_id'),
+                'page_count' => $r->getParams()->getInt('page_count'),
+                'isbn' => $r->getParams()->getString('isbn'),
+                'book_overview' => $r->getParams()->getString('book_overview'),
             ];
 
-            $book_factory = new BookFactory();
-            $book = $book_factory->add_title($fields['title'])
-                ->add_category_id($fields['cat_id'])
-                ->add_subcategory_id($fields['subcat_id'])
-                ->build();
+
+            if (empty($fields['author_id'])) {
+                App::redirect('/books/add', ['subcat_id' => $fields['subcat_id'], 'error' => '1']);
+            }
+
+
+            $book = new Book();
+            $book->title = $fields['title'];
+            $book->category_id = $fields['cat_id'];
+            $book->subcategory_id = $fields['subcat_id'];
+            $book->author_id = $fields['author_id'];
+            $book->page_count = $fields['page_count'];
+            $book->isbn = $fields['isbn'];
+            $book->book_overview = $fields['book_overview'];
 
 
             if ($book->insert()) {

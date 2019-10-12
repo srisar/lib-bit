@@ -12,6 +12,7 @@ $departments = View::get_data('departments');
 /** @var Department $selected_department */
 $selected_department = View::get_data('selected_department');
 
+
 ?>
 
 
@@ -36,7 +37,6 @@ $selected_department = View::get_data('selected_department');
         <div class="col-3">
 
 
-
             <div class="card bg-light">
                 <div class="card-header">
                     <?php HtmlHelper::render_card_header('Departments') ?>
@@ -47,6 +47,7 @@ $selected_department = View::get_data('selected_department');
 
                             <li class="list-group-item">
                                 <div class="category-name"><a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>"><?= $department ?></a></div>
+
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -60,7 +61,7 @@ $selected_department = View::get_data('selected_department');
             <div class="card">
                 <div class="card-header">
                     <?php HtmlHelper::render_card_header('Teachers'); ?> |
-                    <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_TEACHER]) ?>" class="btn btn-sm btn-primary">Add</a>
+                    <button class="btn btn-sm btn-primary" id="btn_show_add_teacher_modal">Add</button>
                 </div>
                 <div class="card-body">
 
@@ -95,7 +96,7 @@ $selected_department = View::get_data('selected_department');
             <div class="card">
                 <div class="card-header">
                     <?php HtmlHelper::render_card_header('Students'); ?> |
-                    <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_STUDENT]) ?>" class="btn btn-sm btn-primary">add</a>
+                    <button class="btn btn-sm btn-primary" id="btn_show_add_student_modal">Add</button>
                 </div>
                 <div class="card-body">
 
@@ -128,8 +129,45 @@ $selected_department = View::get_data('selected_department');
         </div>
 
     </div>
-
-
 </div>
 
+
+<!--MODAL: Add teacher modal-->
+
+<div class="modal fade" id="modal_add_member" tabindex="-1" role="dialog" aria-labelledby="modal_add_member_title" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal_add_member_title">Add new {member type}</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <?php include_once "_modal_add_member_body.php" ?>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
 <?php include_once "views/_footer.php" ?>
+
+<script>
+
+    $("#btn_show_add_teacher_modal").on("click", function () {
+        $("#modal_add_member_title").text("Add new teacher");
+        $("#member_type").val("TEACHER");
+
+        $("#modal_add_member").modal("show");
+    });
+
+    $("#btn_show_add_student_modal").on("click", function () {
+        $("#modal_add_member_title").text("Add new student");
+        $("#member_type").val("STUDENT");
+        $("#modal_add_member").modal("show");
+    });
+
+
+</script>

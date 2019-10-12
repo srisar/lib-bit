@@ -10,18 +10,20 @@ $id_count = 0;
     <ul class="list-group">
         <?php foreach ($authors as $author): ?>
             <li class="list-group-item">
-                <input type="checkbox" id="<?= sprintf('author%d', $author->id) ?>" value="<?= $author->id ?>" class="author_id">
-                <label for="<?= sprintf('author%d', $author->id) ?>"><?= $author ?></label>
+                <input type="hidden" class="author_name" name="hidden_author_name" value="<?= $author ?>">
+                <input type="radio" name="radio_selected_author_id" id="<?= sprintf('author_%d', $author->id) ?>" value="<?= $author->id ?>" class="author_id">
+                <label class="author_label" for="<?= sprintf('author_%d', $author->id) ?>"><?= $author ?></label>
             </li>
         <?php endforeach; ?>
     </ul>
-
-    <input type="hidden" name="author_id" id="selected_author_id" value="">
 </div>
 
 
 <script>
-    $(".author_id").click(function () {
-        $("#selected_author_id").val(this.value);
+    $(document).on("click", ".list-group-item", function () {
+
+        $(this).find(".author_id").prop("checked", true);
+        $("#selected_author_id").val($(this).find(".author_id").val());
+        $("#selected_author_name").val($(this).find(".author_name").val());
     });
 </script>

@@ -42,7 +42,8 @@ $categories = View::get_data('categories');
                                 <div class="input-group mb-3">
                                     <input class="form-control" type="text" id="book-title" name="title" placeholder="Book's title" required>
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button" id="btn_check_title">Check</button>
+                                        <button class="btn btn-secondary" type="button" id="btn_check_title">Check
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -73,16 +74,16 @@ $categories = View::get_data('categories');
                                 <div class="alert alert-light">
                                     <p class="mb-2">Book Author</p>
                                     <div class="input-group mb-3">
-                                        <input class="form-control" type="text" id="author_query" placeholder="Search for author" required>
+
+                                        <input class="form-control" type="text" id="selected_author_name" required>
+                                        <input type="hidden" name="author_id" id="selected_author_id">
                                         <div class="input-group-append">
-                                            <button class="btn btn-secondary" type="button" id="btn_search_author">Search</button>
-                                            <button class="btn btn-secondary" type="button" id="btn_add_author" data-toggle="modal" data-target="#add_author_modal">Add New</button>
+                                            <button class="btn btn-secondary" type="button" id="btn_open_search_author_modal">Search</button>
+                                            <button class="btn btn-secondary" type="button" id="btn_add_author" data-toggle="modal" data-target="#modal_add_author">Add New</button>
                                         </div>
+
                                     </div>
 
-                                    <div id="author_output">
-                                        <ul id="authors"></ul>
-                                    </div>
 
                                 </div>
                             </div>
@@ -101,7 +102,8 @@ $categories = View::get_data('categories');
                                 <div class="input-group">
                                     <input class="form-control" type="text" name="isbn">
                                     <div class="input-group-append">
-                                        <button class="btn btn-secondary" type="button" id="btn_check_isbn">Check</button>
+                                        <button class="btn btn-secondary" type="button" id="btn_check_isbn">Check
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -122,7 +124,6 @@ $categories = View::get_data('categories');
                                 <button class="btn btn-warning" type="submit">Save</button>
                             </div>
                         </div>
-
 
                     </form>
                 </div>
@@ -153,8 +154,9 @@ $categories = View::get_data('categories');
 
 </div><!--.container-->
 
-<!-- Modal for add new author -->
-<div class="modal fade" id="add_author_modal" tabindex="-1" role="dialog" aria-labelledby="addNewAuthor" aria-hidden="true">
+<!-- MODAL: Add new author -->
+<div class="modal fade" id="modal_add_author" tabindex="-1" role="dialog" aria-labelledby="addNewAuthor"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -187,12 +189,49 @@ $categories = View::get_data('categories');
     </div>
 </div>
 
+<!--MODAL: Select Author-->
+
+<div class="modal fade" id="modal_search_authors" tabindex="-1" role="dialog" aria-labelledby="ModalSelectAuthor" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="ModalSelectedAuthor">Search for author</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <p class="mb-2">Book Author</p>
+                <div class="input-group mb-3">
+
+                    <input class="form-control" type="text" id="author_query" placeholder="Search for author" required>
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="button" id="btn_search_authors">Search</button>
+                    </div>
+
+                </div>
+
+                <div id="author_output"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn_cancel_author_select">Cancel</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Select</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php include_once "views/_footer.php" ?>
 
 
 <script>
-    $("#btn_modal_add_author").click(function () {
+
+    /**
+     * Event Listener: Open modal window to add new author.
+     */
+    $("#btn_modal_add_author").on("click", function () {
 
         let textAuthorName = $("#author_name").val().trim();
         let textAuthorEmail = $("#author_email").val();
@@ -210,7 +249,7 @@ $categories = View::get_data('categories');
 
                 if (data === 'true') {
                     alert("Successfully added.");
-                    $("#add_author_modal").modal('hide');
+                    $("#modal_add_author").modal('hide');
 
                     $("#search_author").val(textAuthorName);
                     generateAuthorSearchResults();
@@ -222,6 +261,9 @@ $categories = View::get_data('categories');
     });
 
 
+    /**
+     * Search authors, send ajax request and get the result page and display.
+     */
     function generateAuthorSearchResults() {
 
         let textAuthorQuery = $("#author_query");
@@ -233,46 +275,27 @@ $categories = View::get_data('categories');
         });
     }
 
+    /**
+     * Event Listener: Search authors within the modal.
+     */
+    $("#btn_search_authors").on("click", function () {
+        generateAuthorSearchResults();
+    });
 
-    function createNode(element) {
-        return document.createElement(element);
-    }
+    /**
+     * Event Listener: Open search authors modal.
+     */
+    $("#btn_open_search_author_modal").on("click", function () {
+        $("#modal_search_authors").modal("show");
+    });
 
-    function appendChild(parent, element) {
-        return parent.appendChild(element);
-    }
+    /**
+     * Event Listener: Cancel selected author
+     */
+    $("#btn_cancel_author_select").on("click", function () {
 
-    $("#btn_search_author").click(function () {
-
-        fetch("<?= App::createURL('/api/json_get_authors', ['query' => 'o']) ?>")
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-
-                let ul = document.getElementById("authors");
-                ul.innerHTML = '';
-
-                return data.map(function (author) {
-
-                    let li = createNode('li'),
-                        checkbox = createNode('input'),
-                        label = createNode('label');
-
-                    checkbox.setAttribute('type', 'checkbox');
-                    checkbox.setAttribute('id', author.full_name + author.id);
-                    label.setAttribute('for', author.full_name + author.id);
-                    label.innerText = author.full_name;
-
-
-                    appendChild(li, checkbox);
-                    appendChild(li, label);
-                    appendChild(ul, li);
-                })
-            })
-            .catch(error => {
-                console.log(error);
-            });
+        $("#selected_author_name").val("");
+        $("#selected_author_id").val("");
 
     });
 
