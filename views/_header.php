@@ -29,9 +29,18 @@
                 <a class="nav-link" href="<?= App::createURL('/books') ?>">View Books</a>
             </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="<?= App::createURL('/categories') ?>">Manage Categories</a>
+            <li class="nav-item active dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Manage Books
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="<?= App::createURL('/categories') ?>">Manage Categories</a>
+                    <a class="dropdown-item" href="<?= App::createURL('/authors') ?>">Manage Authors</a>
+
+                </div>
             </li>
+
+
             <li class="nav-item active">
                 <a class="nav-link" href="<?= App::createURL('/members') ?>">Manage Members</a>
             </li>

@@ -36,6 +36,9 @@ Router::add('/categories/adding', CategoriesController::class, "adding");
 Router::add('/categories/edit', CategoriesController::class, "edit");
 Router::add('/categories/editing', CategoriesController::class, "editing");
 
+/** Authors */
+Router::add('/authors', AuthorsController::class, "index");
+
 /** Members */
 Router::add('/members', MembersController::class, 'index');
 Router::add('/members/add', MembersController::class, 'add');
@@ -61,6 +64,8 @@ Router::add('/test/uploading_image', "TestController", "uploading_image");
 
 
 Router::add('/api/get_subcategories', "ApiController", "get_subcategories_by_category_name");
-Router::add('/api/get_author', "ApiController", "get_author_by_name");
+Router::add('/api/get_author_by_name', "ApiController", "get_author_by_name");
 Router::add('/api/json_get_authors', "ApiController", "json_get_authors");
 Router::add('/api/add_author', "ApiController", "add_author");
+Router::add('/api/get_author_by_id', "ApiController", "get_author_by_id");
+Router::add('/api/update_author', "ApiController", "update_author");

@@ -20,9 +20,18 @@ class RequestFilter
         return $this->map[$name];
     }
 
+    /**
+     * @param $name
+     * @return int
+     * @throws Exception
+     */
     public function getInt($name): int
     {
-        return (int)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_INT);
+        if (isset($this->map[$name])) {
+            return (int)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_INT);
+        } else {
+            throw new Exception("Field not found: " . $name);
+        }
     }
 
     public function getFloat($name): float
@@ -41,7 +50,7 @@ class RequestFilter
         if (isset($this->map[$name])) {
             return $filter ? (string)trim(filter_var($this->map[$name], FILTER_SANITIZE_STRING)) : $this->map[$name];
         } else {
-            throw new Exception("Field not found.");
+            throw new Exception("Field not found: " . $name);
         }
 
 

@@ -97,4 +97,65 @@ class ApiController
         }
     }
 
+
+    public function get_author_by_id()
+    {
+        try {
+
+            $request = new Request();
+
+            $author_id = $request->getParams()->getInt('author_id');
+
+            if (!empty($author_id)) {
+                $authors = Author::select($author_id);
+
+                echo json_encode($authors);
+
+            }
+
+
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
+        }
+
+
+    }
+
+    public function update_author()
+    {
+
+        try {
+
+            $request = new Request();
+
+            $author_id = $request->getParams()->getInt('author_id');
+            $author_name = $request->getParams()->getString('author_name');
+            $author_email = $request->getParams()->getString('author_email');
+
+            if (!empty($author_id)) {
+
+                $author = Author::select($author_id);
+
+                if (!empty($author)) {
+                    $author->full_name = $author_name;
+                    $author->email = $author_email;
+
+                    if ($author->update()) {
+                        echo json_encode(['result' => true]);
+                        return;
+                    }
+
+                }
+            }
+
+            echo json_encode(['result' => false]);
+            return;
+
+
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
+        }
+    }
+
+
 }

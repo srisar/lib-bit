@@ -39,6 +39,10 @@ class Author extends Model
         return $statement->fetchAll(PDO::FETCH_CLASS, Author::class);
     }
 
+    /**
+     * @param $id
+     * @return AUthor
+     */
     public static function select($id)
     {
         $db = Database::get_instance();
@@ -66,7 +70,14 @@ class Author extends Model
 
     public function update()
     {
-        // TODO: Implement update() method.
+        $db = Database::get_instance();
+        $statement = $db->prepare("UPDATE authors SET full_name=:full_name, email=:email WHERE id=:id;");
+
+        return $statement->execute([
+            ':full_name' => $this->full_name,
+            ':email' => $this->email,
+            ':id' => $this->id
+        ]);
     }
 
     public function delete()
