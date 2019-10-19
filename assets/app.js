@@ -36,11 +36,18 @@ function validateDate(chosen, field) {
 }
 
 // Adding Datatable
-$(document).ready(function () {
+$(function () {
     $('.data-table').DataTable({
         "language": {
             "search": "Filter records:"
         },
         "order": []
     });
+
+    getSiteURL();
+
 });
+
+function getSiteURL() {
+    return window.location.origin;
+}

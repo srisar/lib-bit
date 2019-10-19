@@ -130,7 +130,7 @@ $authors = View::get_data('authors');
     $(document).on("click", ".item_author", function () {
         let authorId = $(this).prop('id');
 
-        $.get("http://localhost/index.php/api/get_author_by_id", {"author_id": authorId}).done(function (data) {
+        $.get(`${getSiteURL()}/index.php/api/get_author_by_id`, {"author_id": authorId}).done(function (data) {
 
             let textAuthorName = $("#edit_author_name");
             let textAuthorEmail = $("#edit_author_email");

@@ -268,7 +268,7 @@ $categories = View::get_data('categories');
 
         let textAuthorQuery = $("#author_query");
 
-        $.get("<?= App::createURL('/api/get_author') ?>", {
+        $.get(`${getSiteURL()}/index.php/api/get_author_by_name`, {
             author_query: textAuthorQuery.val()
         }).done(function (data) {
             $("#author_output").html(data);
