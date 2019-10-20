@@ -32,18 +32,11 @@ class CategoriesController
         }
 
         View::set_data('categories', $categories);
-        include_once "views/category/index.view.php";
+        include_once "views/category/categories.view.php";
     }
 
 
-    /**
-     * Display add new category page
-     * url: /categories/add
-     */
-    public function add()
-    {
-        include_once "views/category/add.view.php";
-    }
+
 
 
     /**
@@ -87,7 +80,7 @@ class CategoriesController
 
                 View::set_data('categories', $categories);
 
-                include_once "views/category/index.view.php";
+                include_once "views/category/categories.view.php";
             }
 
 
@@ -141,40 +134,11 @@ class CategoriesController
                 View::set_data('subcategories', $subcategories);
             }
 
-            include_once "views/category/index.view.php";
+            include_once "views/category/categories.view.php";
 
         } catch (Exception $ex) {
             AppExceptions::showExceptionView($ex->getMessage());
         }
-
-    }
-
-    /**
-     * Show add subcategory page
-     * url: /subcategories/add?cat_id=x
-     * @param $reqest
-     */
-    public function add_subcategory($reqest)
-    {
-
-
-        try {
-
-            $cat_id = App::validateField($reqest, 'cat_id');
-
-
-            $category = Category::select($cat_id);
-
-            View::set_data('category', $category);
-
-            include_once "views/category/subcat.add.view.php";
-
-
-        } catch (Exception $ex) {
-
-            AppExceptions::showExceptionView($ex->getMessage());
-        }
-
 
     }
 
@@ -224,7 +188,7 @@ class CategoriesController
 
                     View::set_data('categories', Category::select_all());
 
-                    include_once "views/category/index.view.php";
+                    include_once "views/category/categories.view.php";
                 }
             }
 
@@ -254,7 +218,7 @@ class CategoriesController
 
             View::set_data('subcategory', $subcategory);
 
-            include_once 'views/category/edit_subcategory.view.php';
+            include_once 'views/category/subcategory_edit.view.php';
 
 
         } catch (Exception $ex) {

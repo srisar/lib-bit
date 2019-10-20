@@ -71,7 +71,7 @@ $selected_category = View::get_data('selected_category');
 
                         <?php View::render_error_messages('error_subcat') ?>
 
-                        <form class="form-inline" action="<?= App::createURL('/subcategories/adding') ?>" method="get">
+                        <form class="form-inline" action="<?= App::createURL('/subcategory/adding') ?>" method="get">
 
                             <input type="hidden" name="category_id" value="<?= $selected_category->id ?>">
 
@@ -99,7 +99,7 @@ $selected_category = View::get_data('selected_category');
 
                             <?php foreach ($subcategories as $subcategory): ?>
                                 <tr>
-                                    <td><a href="<?= App::createURL('/subcategories/edit', ['subcat_id' => $subcategory->id]) ?>"><?= $subcategory ?></a></td>
+                                    <td><a href="#" class="subcat_item" data-id="<?= $subcategory->id ?>"><?= $subcategory ?></a></td>
                                     <td>
                                         <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>" class="btn btn-sm btn-success">View Books</a>
                                     </td>
@@ -122,5 +122,87 @@ $selected_category = View::get_data('selected_category');
 
 </div>
 
+<?php include_once BASE_PATH . "/views/category/_modal_edit_subcategory.inc.php"; ?>
 
-<?php include_once "views/_footer.php" ?>
+<?php include_once "views/_footer.php"; ?>
+
+<script>
+    /**
+     * Edit selected subcategory
+     */
+    $(function () {
+
+
+        $(document).on("click", ".subcat_item", function () {
+
+            let dataId = $(this).attr("data-id");
+
+            let modalEditSubcategory = $("#modal_subcategory_edit");
+            let textModalEditSubcategorySubcategoryName = $("#modal_subcategory_edit_subcategory_name");
+            let textModalEditSubcategorySubcategoryId = $("#modal_subcategory_edit_id");
+            let btnModalEditSubcategory = $("#btn_modal_edit_subcategory");
+
+
+            /**
+             *
+             */
+            $.get(`${getSiteURL()}/index.php/api/get_subcategory`, {
+                id: dataId
+            }).done(function (response) {
+
+                let json = JSON.parse(response);
+
+                if (json.result === true) {
+
+                    textModalEditSubcategorySubcategoryId.val(json.data.id);
+                    textModalEditSubcategorySubcategoryName.val(json.data.subcategory_name);
+
+                    modalEditSubcategory.modal("show");
+
+                }
+            });
+
+
+            /**
+             *
+             */
+            btnModalEditSubcategory.on("click", function () {
+
+                let textSubcategoryName = textModalEditSubcategorySubcategoryName.val().trim();
+
+                console.log(textSubcategoryName);
+
+                if (textSubcategoryName !== "") {
+
+                    $.post(`${getSiteURL()}/index.php/api/edit_subcategory`, {
+                        id: textModalEditSubcategorySubcategoryId.val(),
+                        subcategory_name: textSubcategoryName
+                    }).done(function (response) {
+
+                        let json = JSON.parse(response);
+
+                        if (json.result === true) {
+
+                            reloadPage();
+
+                        } else {
+
+                            showMessageBox(json.error);
+
+                        }
+
+
+                    });
+
+                }
+
+
+            });
+
+
+        });
+
+
+    });
+
+</script>

@@ -51,3 +51,7 @@ $(function () {
 function getSiteURL() {
     return window.location.origin;
 }
+
+function reloadPage() {
+    window.location.reload();
+}

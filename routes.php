@@ -31,7 +31,6 @@ Router::add('/transactions/single/set-as-returned', TransactionsController::clas
 
 /** Categories */
 Router::add('/categories', CategoriesController::class, "index");
-Router::add('/categories/add', CategoriesController::class, "add");
 Router::add('/categories/adding', CategoriesController::class, "adding");
 Router::add('/categories/edit', CategoriesController::class, "edit");
 Router::add('/categories/editing', CategoriesController::class, "editing");
@@ -53,10 +52,13 @@ Router::add('/departments/adding', DepartmentsController::class, 'adding');
 
 /** Subcategories */
 Router::add('/subcategories', CategoriesController::class, "view_subcategories");
-Router::add('/subcategories/add', CategoriesController::class, "add_subcategory");
-Router::add('/subcategories/adding', CategoriesController::class, "adding_subcategory");
-Router::add('/subcategories/edit', CategoriesController::class, "edit_subcategory");
-Router::add('/subcategories/editing', CategoriesController::class, "editing_subcategory");
+Router::add('/subcategory/add', CategoriesController::class, "add_subcategory");
+Router::add('/subcategory/adding', CategoriesController::class, "adding_subcategory");
+Router::add('/subcategory/edit', CategoriesController::class, "edit_subcategory");
+Router::add('/subcategory/editing', CategoriesController::class, "editing_subcategory");
+
+Router::add('/api/get_subcategory', CategoriesApiController::class, "get_subcategory");
+Router::add('/api/edit_subcategory', CategoriesApiController::class, "edit_subcategory");
 
 /** Test Routes */
 Router::add('/test', "TestController", "test");
