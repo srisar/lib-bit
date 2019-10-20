@@ -11,7 +11,7 @@ class BooksController
         View::set_data('categories', $categories);
         View::set_data('title', 'All Books');
 
-        include "views/books/index.view.php";
+        include "views/books/books.view.php";
 
     }
 
@@ -30,7 +30,7 @@ class BooksController
                 View::set_data('categories', $categories);
                 View::set_data('title', sprintf("Search results for → %s", $keyword));
                 View::set_data('keyword', $keyword);
-                include "views/books/search_results.view.php";
+                include "views/books/books_search.view.php";
             } else {
                 App::redirect('/books');
             }
@@ -60,7 +60,7 @@ class BooksController
             View::set_data('categories', Category::select_all());
 
 
-            include "views/books/add.view.php";
+            include "views/books/books_add.view.php";
 
         } catch (Exception $ex) {
             AppExceptions::showExceptionView($ex->getMessage());
@@ -127,7 +127,7 @@ class BooksController
             View::set_data('book', $book);
             View::set_data('categories', $categories);
 
-            include "views/books/edit.view.php";
+            include "views/books/books_edit.view.php";
 
         } catch (Exception $exception) {
             die($exception->getMessage());
@@ -201,7 +201,7 @@ class BooksController
             View::set_data('categories', $categories);
 
             View::set_error('error', $e->getMessage());
-            include_once "views/books/edit.view.php";
+            include_once "views/books/books_edit.view.php";
 
         }
 
@@ -227,7 +227,7 @@ class BooksController
             View::set_data('title', $title);
             View::set_data('selected_subcategory', $subcat);
 
-            include "views/books/index.view.php";
+            include "views/books/books_subcategory.view.php";
         } catch (Exception $exception) {
             die($exception->getMessage());
         }

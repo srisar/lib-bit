@@ -27,6 +27,9 @@ $authors = View::get_data('authors');
                                     <div class="invalid-feedback">
                                         Author name cannot be empty.
                                     </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
@@ -216,6 +219,9 @@ $authors = View::get_data('authors');
     });
 
 
+    /**
+     * Event Listener: Edit author name key press validation
+     */
     $("#edit_author_name").on("keyup", function () {
 
         let btnModalEditAuthor = $("#btn_modal_edit_author");
@@ -272,7 +278,6 @@ $authors = View::get_data('authors');
             } else {
                 showMessageBox(json.errors);
             }
-
 
         });
 
