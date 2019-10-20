@@ -63,6 +63,8 @@ h5 {
     height: 32px;
 }
 
+
+
 /* ==== Modified BS4 styles ==== */
 
 /*.btn-sm, .btn-group-sm > .btn {*/
@@ -75,6 +77,10 @@ h5 {
 /*a {*/
 /*    color: #0c1722;*/
 /*}*/
+
+.card{
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important
+}
 
 .card-header {
     padding: 0.5rem 1.25rem;
