@@ -80,6 +80,21 @@ class Author extends Model
         ]);
     }
 
+    /**
+     * @param $name
+     * @return Author
+     */
+    public static function select_by_name($name)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM authors WHERE full_name=?");
+
+        $statement->execute([$name]);
+
+        return $statement->fetchObject(Author::class);
+
+    }
+
     public function delete()
     {
         // TODO: Implement delete() method.
@@ -94,8 +109,19 @@ class Author extends Model
             return sprintf("%s", $this->full_name);
     }
 
+    /**
+     * @return mixed
+     */
     public function get_fullname()
     {
         return $this->full_name;
+    }
+
+    /**
+     * @return string
+     */
+    public static function get_last_insert_id()
+    {
+        return Database::get_last_inserted_id();
     }
 }

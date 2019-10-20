@@ -38,6 +38,7 @@ Router::add('/categories/editing', CategoriesController::class, "editing");
 
 /** Authors */
 Router::add('/authors', AuthorsController::class, "index");
+Router::add('/api/add_author', AuthorsApiController::class, "add_author");
 
 /** Members */
 Router::add('/members', MembersController::class, 'index');

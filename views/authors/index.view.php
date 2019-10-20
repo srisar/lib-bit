@@ -11,13 +11,50 @@ $authors = View::get_data('authors');
 
     <div class="row justify-content-center">
 
+        <div class="col col-lg-8 mb-3">
+
+            <div class="card">
+                <div class="card-header"><?php HtmlHelper::render_card_header("Add new author"); ?></div>
+                <div class="card-body">
+
+                    <form action="" method="post">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Author Name</label>
+                                    <input type="text" name="author_name" class="form-control" value="" id="text_save_author_name">
+                                    <div class="invalid-feedback">
+                                        Author name cannot be empty.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Email</label>
+                                    <input type="text" name="author_email" class="form-control" value="" id="text_save_author_email">
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col text-right">
+                                <button class="btn btn-primary" type="button" id="btn_save_author">Save</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div><!--.card-body-->
+            </div><!--.card-->
+        </div><!--.col-->
+
+        <div class="w-100"></div>
+
         <div class="col col-lg-8">
 
             <div class="card">
                 <div class="card-header">
                     <?php HtmlHelper::render_card_header('Authors'); ?>
                 </div>
-
                 <div class="card-body p-2">
 
                     <table class="data-table table table-striped">
@@ -39,12 +76,9 @@ $authors = View::get_data('authors');
                         </tbody>
                     </table>
 
-                </div>
-            </div>
-
-
-        </div>
-
+                </div><!--.card-body-->
+            </div><!--.card-->
+        </div><!--.col-->
     </div><!--.row-->
 
 </div><!--.container-->
@@ -136,6 +170,8 @@ $authors = View::get_data('authors');
             let textAuthorEmail = $("#edit_author_email");
             let textAuthorId = $("#edit_author_id");
 
+            textAuthorName.removeClass("is-valid is-invalid");
+
             let author = JSON.parse(data);
 
             textAuthorName.val(author.full_name);
@@ -182,19 +218,65 @@ $authors = View::get_data('authors');
 
     $("#edit_author_name").on("keyup", function () {
 
-        let textAuthorName = $(this);
         let btnModalEditAuthor = $("#btn_modal_edit_author");
 
-        if (textAuthorName.val().trim() === "") {
-            textAuthorName.addClass('is-invalid');
-            btnModalEditAuthor.prop("disabled", true);
-        } else {
-            textAuthorName.removeClass('is-invalid');
-            textAuthorName.addClass('is-valid');
+        if (validateForEmptyField($(this))) {
             btnModalEditAuthor.prop("disabled", false);
+        } else {
+            btnModalEditAuthor.prop("disabled", true);
         }
+    });
+
+
+    let textSaveAuthorName = $("#text_save_author_name");
+    let textSaveAuthorEmail = $("#text_save_author_email");
+    let btnSaveAuthor = $("#btn_save_author");
+    /**
+     * Runs code once the page is completely loaded.
+     */
+    $(function () {
+        validateSaveAuthorsFields();
+
+        textSaveAuthorName.on("keyup", function () {
+            validateSaveAuthorsFields();
+        });
+
+        btnSaveAuthor.on("click", function () {
+            insertAuthor(textSaveAuthorName.val(), textSaveAuthorEmail.val());
+        });
 
     });
+
+    function validateSaveAuthorsFields() {
+
+        if (validateForEmptyField(textSaveAuthorName)) {
+            enableField(btnSaveAuthor);
+        } else {
+            disableField(btnSaveAuthor);
+        }
+    }
+
+
+    function insertAuthor(authorName, authorEmail) {
+
+        $.post(`${getSiteURL()}/index.php/api/add_author`, {
+            "author_name": authorName,
+            "author_email": authorEmail
+        }).done(function (response) {
+
+
+            let json = JSON.parse(response);
+
+            if (json.result === true) {
+                window.location.reload();
+            } else {
+                showMessageBox(json.errors);
+            }
+
+
+        });
+
+    }
 
 
 </script>
