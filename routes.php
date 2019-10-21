@@ -28,6 +28,7 @@ Router::add('/transactions/add', TransactionsController::class, "add");
 Router::add('/transactions/adding', TransactionsController::class, "adding");
 Router::add('/transactions/single', TransactionsController::class, "single");
 Router::add('/transactions/single/set-as-returned', TransactionsController::class, "single_set_as_returned");
+Router::add('/transactions/single/print', TransactionsController::class, "print_single_receipt");
 
 /** Categories */
 Router::add('/categories', CategoriesController::class, "index");

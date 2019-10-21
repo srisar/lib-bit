@@ -64,6 +64,19 @@ h5 {
 }
 
 
+.featured-image {
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.featured-image img{
+    height: 180px;
+    border-radius: 8px;
+}
+
+.featured-book .card-footer{
+    font-size: 90%;
+}
 
 /* ==== Modified BS4 styles ==== */
 
@@ -78,8 +91,8 @@ h5 {
 /*    color: #0c1722;*/
 /*}*/
 
-.card{
-    box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15) !important
+.card {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important
 }
 
 .card-header {

@@ -20,7 +20,7 @@ class DepartmentsController
                 View::set_data('members', $members);
                 View::set_data('departments', $departments);
 
-                include_once "views/members/index.view.php";
+                include_once "views/members/members.view.php";
 
             } else {
 
@@ -35,7 +35,7 @@ class DepartmentsController
                     View::set_data('members', $members);
                     View::set_data('departments', $departments);
 
-                    include_once "views/members/index.view.php";
+                    include_once "views/members/members.view.php";
 
                 } else {
 
