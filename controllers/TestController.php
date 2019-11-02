@@ -10,8 +10,38 @@ class TestController
     public function test()
     {
 
-        var_dump(App::createURL('/api/add_author', ['author_name' => 'o']));
+//       $user = new User();
+//       $user->display_name = "Admin";
+//       $user->username = "admin";
+//       $user->password = "123";
+//       $user->role = User::ROLE_ADMIN;
+//
+//       $user->insert();
 
+        $user = User::find_user("admin", "123");
+
+        if (!empty($user)) {
+            Session::set_user($user);
+        }
+
+//        Session::kill_session();
+
+        var_dump(Session::is_user_logged_in());
+
+        var_dump($_SESSION);
+
+
+    }
+
+    public function session_init()
+    {
+        $_SESSION['color'] = "red";
+        $_SESSION['name'] = "kumar";
+    }
+
+    public function session_view()
+    {
+        var_dump($_SESSION);
     }
 
 

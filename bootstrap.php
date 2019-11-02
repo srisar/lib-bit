@@ -1,5 +1,8 @@
 <?php
 
+include_once "core/Session.php";
+
+Session::init_session();
 
 $config = [
     "host" => "localhost",

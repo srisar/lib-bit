@@ -6,6 +6,7 @@ class BooksController
     public function index($req)
     {
 
+
         $categories = Category::select_all();
 
         View::set_data('categories', $categories);
@@ -15,11 +16,10 @@ class BooksController
 
     }
 
-    public function search()
+    public function search(Request $request)
     {
         try {
 
-            $request = new Request();
             $keyword = $request->getParams()->getString('q');
 
             if (!empty($keyword)) {
@@ -40,12 +40,10 @@ class BooksController
         }
     }
 
-    public function add($request)
+    public function add(Request $request)
     {
 
         try {
-
-            $request = new Request();
 
             $fields = [
                 'subcat_id' => $request->getParams()->getInt('subcat_id'),
@@ -208,11 +206,11 @@ class BooksController
 
     }
 
-    public function view_by_subcategory($request)
+    public function view_by_subcategory(Request $request)
     {
 
         try {
-            $field = ['subcat_id' => App::validateField($request, 'subcat_id')];
+            $field = ['subcat_id' => $request->getParams()->getInt('subcat_id')];
 
             $books = Book::get_all_books_by_subcategory($field['subcat_id']);
 

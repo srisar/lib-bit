@@ -6,6 +6,10 @@ Router::add("/home", HomeController::class, "home");
 Router::add("/about", HomeController::class, "about");
 Router::add("/contact", HomeController::class, "contact");
 
+Router::add("/login", LoginController::class, "login");
+Router::add("/login/process", LoginController::class, "login_process");
+Router::add("/logout", LoginController::class, "logout");
+
 /** Books */
 Router::add("/books", BooksController::class, "index");
 Router::add("/books/add", BooksController::class, "add");
@@ -65,11 +69,13 @@ Router::add('/api/edit_subcategory', CategoriesApiController::class, "edit_subca
 Router::add('/test', "TestController", "test");
 Router::add('/test/image_up', "TestController", "upload_image");
 Router::add('/test/uploading_image', "TestController", "uploading_image");
+Router::add('/test/session_init', "TestController", "session_init");
+Router::add('/test/session_view', "TestController", "session_view");
 
 
-Router::add('/api/get_subcategories', "ApiController", "get_subcategories_by_category_name");
-Router::add('/api/get_author_by_name', "ApiController", "get_author_by_name");
-Router::add('/api/json_get_authors', "ApiController", "json_get_authors");
-Router::add('/api/add_author', "ApiController", "add_author");
-Router::add('/api/get_author_by_id', "ApiController", "get_author_by_id");
-Router::add('/api/update_author', "ApiController", "update_author");
+Router::add('/api/get_subcategories', "ApiCallsController", "get_subcategories_by_category_name");
+Router::add('/api/get_author_by_name', "ApiCallsController", "get_author_by_name");
+Router::add('/api/json_get_authors', "ApiCallsController", "json_get_authors");
+Router::add('/api/add_author', "ApiCallsController", "add_author");
+Router::add('/api/get_author_by_id', "ApiCallsController", "get_author_by_id");
+Router::add('/api/update_author', "ApiCallsController", "update_author");

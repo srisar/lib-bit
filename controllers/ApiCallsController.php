@@ -1,7 +1,7 @@
 <?php
 
 
-class ApiController
+class ApiCallsController
 {
 
     public function get_subcategories_by_category_name($request)

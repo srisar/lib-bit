@@ -52,6 +52,7 @@ class App
      * @param $field
      * @return string
      * @throws Exception
+     * @deprecated
      */
     public static function validateField($request, $field)
     {
@@ -82,6 +83,18 @@ class App
     public static function toDateString($date, $format = DEFAULT_DATE_FORMAT)
     {
         return !empty($date) ? date($format, strtotime($date)) : "";
+    }
+
+    public static function is_admin_or_redirect()
+    {
+        if (!Session::is_admin())
+            App::redirect("/login");
+    }
+
+    public static function is_user_or_redirect()
+    {
+        if (!Session::is_user_logged_in())
+            App::redirect("/login");
     }
 
 }
