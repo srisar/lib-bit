@@ -30,7 +30,7 @@ class RequestFilter
         if (isset($this->map[$name])) {
             return (int)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_INT);
         } else {
-            throw new Exception("Field not found: " . $name);
+            throw new AppExceptions("Field not found: " . $name);
         }
     }
 
@@ -50,7 +50,7 @@ class RequestFilter
         if (isset($this->map[$name])) {
             return $filter ? (string)trim(filter_var($this->map[$name], FILTER_SANITIZE_STRING)) : $this->map[$name];
         } else {
-            throw new Exception("Field not found: " . $name);
+            throw new AppExceptions("Field not found: " . $name);
         }
 
 
