@@ -3,7 +3,7 @@
 class BooksController
 {
 
-    public function index($req)
+    public function index(Request $request)
     {
 
 
@@ -66,21 +66,20 @@ class BooksController
 
     }
 
-    public function adding()
+    public function adding(Request $request)
     {
 
         try {
 
-            $r = new Request();
 
             $fields = [
-                'cat_id' => $r->getParams()->getInt('cat_id'),
-                'subcat_id' => $r->getParams()->getInt('subcat_id'),
-                'title' => $r->getParams()->getString('title'),
-                'author_id' => $r->getParams()->getInt('author_id'),
-                'page_count' => $r->getParams()->getInt('page_count'),
-                'isbn' => $r->getParams()->getString('isbn'),
-                'book_overview' => $r->getParams()->getString('book_overview'),
+                'cat_id' => $request->getParams()->getInt('cat_id'),
+                'subcat_id' => $request->getParams()->getInt('subcat_id'),
+                'title' => $request->getParams()->getString('title'),
+                'author_id' => $request->getParams()->getInt('author_id'),
+                'page_count' => $request->getParams()->getInt('page_count'),
+                'isbn' => $request->getParams()->getString('isbn'),
+                'book_overview' => $request->getParams()->getString('book_overview'),
             ];
 
 
@@ -105,18 +104,18 @@ class BooksController
             }
 
 
-        } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
+        } catch (AppExceptions $ex) {
+            $ex->showMessage();
         }
 
     }
 
-    public function edit($req)
+    public function edit(Request $request)
     {
 
         try {
 
-            $id = App::validateField($req, 'id');
+            $id = $request->getParams()->getInt('id');
 
             $book = Book::select($id);
 
@@ -127,20 +126,17 @@ class BooksController
 
             include "views/books/books_edit.view.php";
 
-        } catch (Exception $exception) {
-            die($exception->getMessage());
+        } catch (AppExceptions $exception) {
+            $exception->showMessage();
         }
     }
 
 
-    public function editing($req)
+    public function editing(Request $request)
     {
 
 
         try {
-
-
-            $request = new Request();
 
             $fields = [
                 'id' => $request->getParams()->getInt('id'),
@@ -190,7 +186,7 @@ class BooksController
 
         } catch (Exception $e) {
 
-            $id = $req['id'];
+            $id = $request->getParams()->getInt('id');
             $book = Book::select($id);
 
             $categories = Category::select_all();
