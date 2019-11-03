@@ -69,12 +69,12 @@ h5 {
     padding: 5px;
 }
 
-.featured-image img{
+.featured-image img {
     height: 180px;
     border-radius: 8px;
 }
 
-.featured-book .card-footer{
+.featured-book .card-footer {
     font-size: 90%;
 }
 
@@ -120,3 +120,8 @@ h5 {
 }
 
 
+.login-img {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px 0;
+}

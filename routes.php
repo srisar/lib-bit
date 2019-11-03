@@ -6,9 +6,11 @@ Router::add("/home", HomeController::class, "home");
 Router::add("/about", HomeController::class, "about");
 Router::add("/contact", HomeController::class, "contact");
 
-Router::add("/login", LoginController::class, "login");
-Router::add("/login/process", LoginController::class, "login_process");
+/** Login */
+Router::add("/login", LoginController::class, "login", User::ROLE_NONE);
+Router::add("/login/process", LoginController::class, "login_process", User::ROLE_NONE);
 Router::add("/logout", LoginController::class, "logout");
+
 
 /** Books */
 Router::add("/books", BooksController::class, "index");
@@ -19,10 +21,12 @@ Router::add("/books/editing", BooksController::class, "editing");
 Router::add('/books/subcategory', BooksController::class, "view_by_subcategory");
 Router::add('/books/search', BooksController::class, "search");
 
+
 /** Book Instance */
 Router::add("/book-instance/adding", BookInstanceController::class, "adding");
 Router::add("/book-instance/single", BookInstanceController::class, "single");
 Router::add("/book-instance/view-history", BookInstanceController::class, "view_history");
+
 
 /** Transactions */
 Router::add('/transactions', TransactionsController::class, "index");
@@ -40,9 +44,29 @@ Router::add('/categories/adding', CategoriesController::class, "adding");
 Router::add('/categories/edit', CategoriesController::class, "edit");
 Router::add('/categories/editing', CategoriesController::class, "editing");
 
+
+/** Subcategories */
+Router::add('/subcategories', CategoriesController::class, "view_subcategories");
+Router::add('/subcategory/add', CategoriesController::class, "add_subcategory");
+Router::add('/subcategory/adding', CategoriesController::class, "adding_subcategory");
+Router::add('/subcategory/edit', CategoriesController::class, "edit_subcategory");
+Router::add('/subcategory/editing', CategoriesController::class, "editing_subcategory");
+
+Router::add('/api/get_subcategories', ApiCallsController::class, "get_subcategories_by_category_name");
+Router::add('/api/get_subcategory', CategoriesApiController::class, "get_subcategory");
+Router::add('/api/edit_subcategory', CategoriesApiController::class, "edit_subcategory");
+
+
 /** Authors */
 Router::add('/authors', AuthorsController::class, "index");
 Router::add('/api/add_author', AuthorsApiController::class, "add_author");
+
+Router::add('/api/get_author_by_name', ApiCallsController::class, "get_author_by_name");
+Router::add('/api/json_get_authors', ApiCallsController::class, "json_get_authors");
+Router::add('/api/add_author', ApiCallsController::class, "add_author");
+Router::add('/api/get_author_by_id', ApiCallsController::class, "get_author_by_id");
+Router::add('/api/update_author', ApiCallsController::class, "update_author");
+
 
 /** Members */
 Router::add('/members', MembersController::class, 'index');
@@ -55,16 +79,6 @@ Router::add('/members/department', MembersController::class, 'view_by_department
 Router::add('/departments/adding', DepartmentsController::class, 'adding');
 
 
-/** Subcategories */
-Router::add('/subcategories', CategoriesController::class, "view_subcategories");
-Router::add('/subcategory/add', CategoriesController::class, "add_subcategory");
-Router::add('/subcategory/adding', CategoriesController::class, "adding_subcategory");
-Router::add('/subcategory/edit', CategoriesController::class, "edit_subcategory");
-Router::add('/subcategory/editing', CategoriesController::class, "editing_subcategory");
-
-Router::add('/api/get_subcategory', CategoriesApiController::class, "get_subcategory");
-Router::add('/api/edit_subcategory', CategoriesApiController::class, "edit_subcategory");
-
 /** Test Routes */
 Router::add('/test', "TestController", "test");
 Router::add('/test/image_up', "TestController", "upload_image");
@@ -72,10 +86,4 @@ Router::add('/test/uploading_image', "TestController", "uploading_image");
 Router::add('/test/session_init', "TestController", "session_init");
 Router::add('/test/session_view', "TestController", "session_view");
 
-
-Router::add('/api/get_subcategories', "ApiCallsController", "get_subcategories_by_category_name");
-Router::add('/api/get_author_by_name', "ApiCallsController", "get_author_by_name");
-Router::add('/api/json_get_authors', "ApiCallsController", "json_get_authors");
-Router::add('/api/add_author', "ApiCallsController", "add_author");
-Router::add('/api/get_author_by_id', "ApiCallsController", "get_author_by_id");
-Router::add('/api/update_author', "ApiCallsController", "update_author");
+/** API Calls for AJAX */

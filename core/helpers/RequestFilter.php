@@ -23,7 +23,7 @@ class RequestFilter
     /**
      * @param $name
      * @return int
-     * @throws Exception
+     * @throws AppExceptions
      */
     public function getInt($name): int
     {
@@ -43,7 +43,7 @@ class RequestFilter
      * @param $name
      * @param bool $filter
      * @return string
-     * @throws Exception
+     * @throws AppExceptions
      */
     public function getString($name, $filter = true): string
     {

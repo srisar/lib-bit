@@ -8,6 +8,7 @@ class User
 
     const ROLE_ADMIN = "ADMIN";
     const ROLE_USER = "USER";
+    const ROLE_NONE = "NONE";
 
     const ROLES = ["ADMIN" => "Administrator", "USER" => "User"];
 

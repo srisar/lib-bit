@@ -7,33 +7,43 @@ class LoginController
     /**
      * Shows login page
      * @view:
+     * @param Request $request
      */
-    public function login()
+    public function login(Request $request)
     {
-        var_dump($_SESSION);
+
+        if ($request->getParams()->has('error')) {
+            View::set_error('error', 'Login failed');
+        }
+
         include_once "views/login/login_form.view.php";
     }
 
     /**
-     * @throws Exception
+     * @param Request $request
      */
-    public function login_process()
+    public function login_process(Request $request)
     {
 
+        try {
 
-        $request = new Request();
+            $fields = [
+                "username" => $request->getParams()->getString('username'),
+                "password" => $request->getParams()->getString('password'),
+            ];
 
-        $fields = [
-            "username" => $request->getParams()->getString('username'),
-            "password" => $request->getParams()->getString('password'),
-        ];
+            $user = User::find_user($fields['username'], $fields['password']);
 
-        $user = User::find_user($fields['username'], $fields['password']);
 
-        var_dump($user);
+            if (!empty($user)) {
+                Session::set_user($user);
+                App::redirect('/books');
+            } else {
+                App::redirect('/login', ['error' => '1']);
+            }
 
-        if (!empty($user)) {
-            Session::set_user($user);
+        } catch (AppExceptions $exception) {
+            $exception->showMessage();
         }
 
     }
