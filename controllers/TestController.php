@@ -10,26 +10,19 @@ class TestController
     public function test()
     {
 
-//       $user = new User();
-//       $user->display_name = "Admin";
-//       $user->username = "admin";
-//       $user->password = "123";
-//       $user->role = User::ROLE_ADMIN;
-//
-//       $user->insert();
+        try {
+            $image_url = BASE_PATH . BOOK_COVERS_UPLOAD_PATH . '/img.jpg';
+            var_dump($image_url);
 
-        $user = User::find_user("admin", "123");
+            $image_processor = new ImageProcessor($image_url);
 
-        if (!empty($user)) {
-            Session::set_user($user);
+            $image_processor->resize_exact(400, 600);
+
+            $image_processor->save_image($image_url);
+
+        } catch (AppExceptions $exception) {
+            $exception->showMessage();
         }
-
-//        Session::kill_session();
-
-        var_dump(Session::is_user_logged_in());
-
-        var_dump($_SESSION);
-
 
     }
 
@@ -60,9 +53,9 @@ class TestController
 
             $uploaded_file = new UploadedFile($files);
 
-            if ($uploaded_file->saveFile()) {
+            if ($uploaded_file->save_file()) {
 
-                $uploaded_file_url = $uploaded_file->getUploadedFileUrl();
+                $uploaded_file_url = $uploaded_file->get_uploaded_file_url();
 
             }
 

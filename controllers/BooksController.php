@@ -154,14 +154,18 @@ class BooksController
 
                 // check uploaded image is valid before calling the saveFile()
 
-                if (!$uploaded_image->hasError()) {
-                    if ($uploaded_image->saveFile(BOOK_COVERS_UPLOAD_PATH)) {
+                if (!$uploaded_image->has_error()) {
+                    if ($uploaded_image->save_file(BOOK_COVERS_UPLOAD_PATH)) {
+
+                        $img_resize = new ImageProcessor($uploaded_image->get_full_uploaded_file_path());
+                        $img_resize->resize_exact(400, 600);
+                        $img_resize->save_image($uploaded_image->get_full_uploaded_file_path());
 
                         $book = Book::select($fields['id']);
                         $book->title = $fields['title'];
                         $book->category_id = $fields['category_id'];
                         $book->subcategory_id = $fields['subcategory_id'];
-                        $book->image_url = $uploaded_image->getUploadedFileName();
+                        $book->image_url = $uploaded_image->get_uploaded_file_name();
 
 
                         if ($book->update()) {

@@ -45,7 +45,8 @@ $book_instances = $book->get_all_book_instances();
 
                         <div class="row">
                             <div class="col text-center">
-                                <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>" alt="Cover Image">
+                                <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>"
+                                     alt="Cover Image">
                             </div>
                         </div>
 
@@ -56,7 +57,8 @@ $book_instances = $book->get_all_book_instances();
 
                                 <div class="form-group">
                                     <label for="book-title">Title</label>
-                                    <input class="form-control" type="text" value="<?= $book->title ?>" id="book-title" name="title" required>
+                                    <input class="form-control" type="text" value="<?= $book->title ?>" id="book-title"
+                                           name="title" required>
                                 </div>
 
                             </div>
@@ -108,7 +110,8 @@ $book_instances = $book->get_all_book_instances();
                             <div class="col">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="toggle_image_upload">
-                                    <label class="custom-control-label" for="toggle_image_upload">Enable cover image upload</label>
+                                    <label class="custom-control-label" for="toggle_image_upload">Enable cover image
+                                        upload</label>
                                 </div>
                             </div>
                         </div>
@@ -164,9 +167,11 @@ $book_instances = $book->get_all_book_instances();
                                     </div>
                                     <span class="input-group-text">New book instances</span>
                                 </div>
-                                <input type="number" class="form-control" value="1" name="instance_count" id="instance_count" disabled>
+                                <input type="number" class="form-control" value="1" name="instance_count"
+                                       id="instance_count" disabled>
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary" id="btn_add_instance" disabled>Add</button>
+                                    <button type="submit" class="btn btn-primary" id="btn_add_instance" disabled>Add
+                                    </button>
                                 </div>
                             </div>
 
@@ -198,9 +203,11 @@ $book_instances = $book->get_all_book_instances();
 
                                 </td>
                                 <td>
-                                    <a class="btn btn-sm btn-warning" href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
+                                    <a class="btn btn-sm btn-warning"
+                                       href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
                                     <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
-                                        <a class="btn btn-sm btn-primary" href="<?= App::createURL('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
+                                        <a class="btn btn-sm btn-primary"
+                                           href="<?= App::createURL('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -216,9 +223,12 @@ $book_instances = $book->get_all_book_instances();
 </div><!--.container-->
 
 
+<?php include_once "views/_footer.php" ?>
+
+
 <script>
 
-    $(document).ready(function () {
+    $(function () {
 
         let subcategorySelect = $("#book-subcategory");
         let categorySelect = $("#book-category");
@@ -230,21 +240,19 @@ $book_instances = $book->get_all_book_instances();
 
 
         // add listeners
-        categorySelect.click(function () {
+        categorySelect.on('click', function () {
             generateSubcategories();
         });
 
-        chkToggleImageUpload.click(function () {
+        chkToggleImageUpload.on('click', function () {
             if (this.checked) {
-                console.log('checked');
                 disableImageUploadField(false);
             } else {
-                console.log('unchecked');
                 disableImageUploadField(true);
             }
         });
 
-        chkToggleAddBookInstance.click(function () {
+        chkToggleAddBookInstance.on('click', function () {
             if (this.checked) {
                 disableAddBookInstanceForm(false);
             } else {
@@ -270,9 +278,6 @@ $book_instances = $book->get_all_book_instances();
 
     function disableImageUploadField(state) {
         let imageUploadField = document.getElementById("image");
-
-        console.log(imageUploadField);
-
         imageUploadField.disabled = state;
     }
 
@@ -291,8 +296,3 @@ $book_instances = $book->get_all_book_instances();
     }
 
 </script>
-
-
-<?php include_once "views/_footer.php" ?>
-
-

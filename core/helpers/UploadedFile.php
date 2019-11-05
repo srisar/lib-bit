@@ -5,7 +5,7 @@ class UploadedFile
 {
 
     private $data;
-    private $uploaded_file_path;
+    private $uploaded_file_path, $full_uploaded_file_path;
     private $uploaded_filename;
     private $is_saved;
 
@@ -15,41 +15,41 @@ class UploadedFile
         $this->is_saved = false;
     }
 
-    public function getName()
+    public function get_name()
     {
         return $this->data['name'];
     }
 
-    public function getType()
+    public function get_type()
     {
         return $this->data['type'];
     }
 
-    public function getTempFile()
+    public function get_temp_file()
     {
         return $this->data['tmp_name'];
     }
 
-    public function getError()
+    public function get_error()
     {
         return $this->data['error'];
     }
 
-    public function getSize()
+    public function get_size()
     {
         return $this->data['size'];
     }
 
-    public function hasError()
+    public function has_error()
     {
-        if ($this->getError() == 0) {
+        if ($this->get_error() == 0) {
             return false;
         } else {
             return true;
         }
     }
 
-    public function getMaximumFileUploadSize()
+    public function get_max_file_upload_size()
     {
         $max_upload_size = ini_get('upload_max_filesize');
         $max_post_size = ini_get('post_max_size');
@@ -59,22 +59,22 @@ class UploadedFile
 
     }
 
-    public function getFileExtension()
+    public function get_file_extension()
     {
-        return explode('/', $this->getType())[1];
+        return explode('/', $this->get_type())[1];
     }
 
-    public function saveFile($path)
+    public function save_file($path)
     {
         $time = time();
 
         $upload_dir = $path;
 
-        $this->uploaded_filename = sprintf("%d.%s", $time, $this->getFileExtension());
+        $this->uploaded_filename = sprintf("%d.%s", $time, $this->get_file_extension());
         $this->uploaded_file_path = sprintf("%s/%s", $upload_dir, $this->uploaded_filename);
-        $full_path = BASE_PATH . $this->uploaded_file_path;
+        $this->full_uploaded_file_path = BASE_PATH . $this->uploaded_file_path;
 
-        $result = move_uploaded_file($this->getTempFile(), $full_path);
+        $result = move_uploaded_file($this->get_temp_file(), $this->full_uploaded_file_path);
 
         if ($result) {
             $this->is_saved = true;
@@ -89,7 +89,7 @@ class UploadedFile
      * Returns the full uploaded file url
      * @return string
      */
-    public function getUploadedFileUrl()
+    public function get_uploaded_file_url()
     {
         return App::getBaseURL() . $this->uploaded_file_path;
     }
@@ -98,9 +98,18 @@ class UploadedFile
      * Returns the uploaded file name.
      * @return string
      */
-    public function getUploadedFileName()
+    public function get_uploaded_file_name()
     {
         return $this->uploaded_filename;
+    }
+
+    /**
+     * Retuns the full uploaded file path in the local system.
+     * @return mixed
+     */
+    public function get_full_uploaded_file_path()
+    {
+        return $this->full_uploaded_file_path;
     }
 
 }
