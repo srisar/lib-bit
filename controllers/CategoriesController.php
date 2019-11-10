@@ -15,9 +15,9 @@ class CategoriesController
 
         $request = new Request();
 
-        if ($request->getParams()->has('cat_id')) {
+        if ($request->get_params()->has('cat_id')) {
 
-            $fields = ['cat_id' => $request->getParams()->getInt('cat_id')];
+            $fields = ['cat_id' => $request->get_params()->get_int('cat_id')];
 
             $selected_category = Category::select($fields['cat_id']);
             View::set_data('selected_category', $selected_category);
@@ -34,9 +34,6 @@ class CategoriesController
         View::set_data('categories', $categories);
         include_once "views/category/categories.view.php";
     }
-
-
-
 
 
     /**
@@ -147,16 +144,15 @@ class CategoriesController
      * Process add subcategory
      * @param $request
      */
-    public function adding_subcategory($request)
+    public function adding_subcategory(Request $request)
     {
 
 
         try {
 
 
-            $r = new Request();
-            $category_id = $r->getParams()->getInt('category_id');
-            $subcategory_name = $r->getParams()->getString('subcategory_name');
+            $category_id = $request->get_params()->get_int('category_id');
+            $subcategory_name = $request->get_params()->get_string('subcategory_name');
 
 
             if (empty($subcategory_name)) {
@@ -178,7 +174,7 @@ class CategoriesController
                     $error = sprintf("%s already exist.", $subcategory_name);
 
                     $r = new Request();
-                    $fields = ['cat_id' => $r->getParams()->getInt('category_id')];
+                    $fields = ['cat_id' => $r->get_params()->get_int('category_id')];
 
                     $selected_category = Category::select($fields['cat_id']);
                     View::set_data('selected_category', $selected_category);
@@ -206,12 +202,12 @@ class CategoriesController
      * url: /subcategories/edit?id=x
      * @param $request
      */
-    public function edit_subcategory($request)
+    public function edit_subcategory(Request $request)
     {
 
         try {
 
-            $fields = ['subcat_id' => App::validateField($request, 'subcat_id')];
+            $fields = ['subcat_id' => $request->get_params()->get_int('subcat_id')];
 
             $subcategory = Subcategory::select($fields['subcat_id']);
 
@@ -231,14 +227,14 @@ class CategoriesController
      * Process editing subcategory
      * @param $request
      */
-    public function editing_subcategory($request)
+    public function editing_subcategory(Request $request)
     {
 
         try {
 
             $fields = [
-                'subcat_id' => App::validateField($request, 'subcat_id'),
-                'subcategory_name' => App::validateField($request, 'subcategory_name'),
+                'subcat_id' => $request->get_params()->get_int('subcat_id'),
+                'subcategory_name' => $request->get_params()->get_int('subcat_id'),
             ];
 
             $subcategory = Subcategory::select($fields['subcat_id']);

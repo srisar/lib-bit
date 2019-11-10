@@ -49,7 +49,7 @@ class TestController
 
             $request = new Request();
 
-            $files = $request->getFiles()->get('image');
+            $files = $request->get_files()->get('image');
 
             $uploaded_file = new UploadedFile($files);
 

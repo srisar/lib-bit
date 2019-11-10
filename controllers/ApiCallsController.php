@@ -11,8 +11,8 @@ class ApiCallsController
 
             $request = new Request();
 
-            $category_id = $request->getParams()->getInt('id');
-            $selected_subcat_id = $request->getParams()->getInt('selected_subcat_id');
+            $category_id = $request->get_params()->get_int('id');
+            $selected_subcat_id = $request->get_params()->get_int('selected_subcat_id');
 
             $category = Category::select($category_id);
 
@@ -36,7 +36,7 @@ class ApiCallsController
 
             $request = new Request();
 
-            $author_query = $request->getParams()->getString('author_query');
+            $author_query = $request->get_params()->get_string('author_query');
 
             if (!empty($author_query)) {
                 $authors = Author::search($author_query);
@@ -57,7 +57,7 @@ class ApiCallsController
 
             $request = new Request();
 
-            $query = $request->getParams()->getString('query');
+            $query = $request->get_params()->get_string('query');
 
             if (!empty($query)) {
                 $authors = Author::search($query);
@@ -78,8 +78,8 @@ class ApiCallsController
         try {
 
             $request = new Request();
-            $author_name = $request->getParams()->getString('author_name');
-            $author_email = $request->getParams()->getString('author_email');
+            $author_name = $request->get_params()->get_string('author_name');
+            $author_email = $request->get_params()->get_string('author_email');
 
             $author = new Author();
             $author->full_name = $author_name;
@@ -104,7 +104,7 @@ class ApiCallsController
 
             $request = new Request();
 
-            $author_id = $request->getParams()->getInt('author_id');
+            $author_id = $request->get_params()->get_int('author_id');
 
             if (!empty($author_id)) {
                 $authors = Author::select($author_id);
@@ -128,9 +128,9 @@ class ApiCallsController
 
             $request = new Request();
 
-            $author_id = $request->getParams()->getInt('author_id');
-            $author_name = $request->getParams()->getString('author_name');
-            $author_email = $request->getParams()->getString('author_email');
+            $author_id = $request->get_params()->get_int('author_id');
+            $author_name = $request->get_params()->get_string('author_name');
+            $author_email = $request->get_params()->get_string('author_email');
 
             if (!empty($author_id)) {
 

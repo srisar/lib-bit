@@ -3,7 +3,7 @@
 class BooksController
 {
 
-    public function index(Request $request)
+    public function index()
     {
 
 
@@ -20,7 +20,7 @@ class BooksController
     {
         try {
 
-            $keyword = $request->getParams()->getString('q');
+            $keyword = $request->get_params()->get_string('q');
 
             if (!empty($keyword)) {
                 $books = Book::search($keyword);
@@ -46,7 +46,7 @@ class BooksController
         try {
 
             $fields = [
-                'subcat_id' => $request->getParams()->getInt('subcat_id'),
+                'subcat_id' => $request->get_params()->get_int('subcat_id'),
             ];
 
 
@@ -73,13 +73,13 @@ class BooksController
 
 
             $fields = [
-                'cat_id' => $request->getParams()->getInt('cat_id'),
-                'subcat_id' => $request->getParams()->getInt('subcat_id'),
-                'title' => $request->getParams()->getString('title'),
-                'author_id' => $request->getParams()->getInt('author_id'),
-                'page_count' => $request->getParams()->getInt('page_count'),
-                'isbn' => $request->getParams()->getString('isbn'),
-                'book_overview' => $request->getParams()->getString('book_overview'),
+                'cat_id' => $request->get_params()->get_int('cat_id'),
+                'subcat_id' => $request->get_params()->get_int('subcat_id'),
+                'title' => $request->get_params()->get_string('title'),
+                'author_id' => $request->get_params()->get_int('author_id'),
+                'page_count' => $request->get_params()->get_int('page_count'),
+                'isbn' => $request->get_params()->get_string('isbn'),
+                'book_overview' => $request->get_params()->get_string('book_overview'),
             ];
 
 
@@ -115,7 +115,7 @@ class BooksController
 
         try {
 
-            $id = $request->getParams()->getInt('id');
+            $id = $request->get_params()->get_int('id');
 
             $book = Book::select($id);
 
@@ -139,18 +139,18 @@ class BooksController
         try {
 
             $fields = [
-                'id' => $request->getParams()->getInt('id'),
-                'title' => $request->getParams()->getString('title'),
-                'category_id' => $request->getParams()->getInt('category_id'),
-                'subcategory_id' => $request->getParams()->getInt('subcategory_id'),
+                'id' => $request->get_params()->get_int('id'),
+                'title' => $request->get_params()->get_string('title'),
+                'category_id' => $request->get_params()->get_int('category_id'),
+                'subcategory_id' => $request->get_params()->get_int('subcategory_id'),
             ];
 
-            $has_image = $request->getFiles()->has('image');
+            $has_image = $request->get_files()->has('image');
 
             if ($has_image) {
                 // 1. image upload enabled.
 
-                $uploaded_image = new UploadedFile($request->getFiles()->get('image'));
+                $uploaded_image = new UploadedFile($request->get_files()->get('image'));
 
                 // check uploaded image is valid before calling the saveFile()
 
@@ -190,7 +190,7 @@ class BooksController
 
         } catch (Exception $e) {
 
-            $id = $request->getParams()->getInt('id');
+            $id = $request->get_params()->get_int('id');
             $book = Book::select($id);
 
             $categories = Category::select_all();
@@ -210,7 +210,7 @@ class BooksController
     {
 
         try {
-            $field = ['subcat_id' => $request->getParams()->getInt('subcat_id')];
+            $field = ['subcat_id' => $request->get_params()->get_int('subcat_id')];
 
             $books = Book::get_all_books_by_subcategory($field['subcat_id']);
 

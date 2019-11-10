@@ -4,7 +4,7 @@
 class AuthorsApiController
 {
 
-    public function add_author()
+    public function add_author(Request $request)
     {
 
         try {
@@ -15,10 +15,9 @@ class AuthorsApiController
                 "errors" => ""
             ];
 
-            $request = new Request();
 
-            $author_name = $request->getParams()->getString("author_name");
-            $author_email = $request->getParams()->getString("author_email");
+            $author_name = $request->get_params()->get_string("author_name");
+            $author_email = $request->get_params()->get_string("author_email");
 
             if (empty(Author::select_by_name($author_name))) {
                 // author name doesnt exist. proceed to add

@@ -9,14 +9,13 @@ class BookInstanceController
      * Adding a new book instance to a Book.
      * @param $request
      */
-    public function adding($request)
+    public function adding(Request $request)
     {
         try {
 
-            $request = new Request();
             $fields = [
-                'book_id' => $request->getParams()->getInt('book_id'),
-                'instance_count' => $request->getParams()->getInt('instance_count'),
+                'book_id' => $request->get_params()->get_int('book_id'),
+                'instance_count' => $request->get_params()->get_int('instance_count'),
             ];
 
 
@@ -33,14 +32,14 @@ class BookInstanceController
 
     /**
      * View book instance's transaction history
+     * @param Request $request
      */
-    public function view_history()
+    public function view_history(Request $request)
     {
         try {
 
-            $request = new Request();
 
-            $instance_id = $request->getParams()->getInt('instance_id');
+            $instance_id = $request->get_params()->get_int('instance_id');
 
             $bookInstance = BookInstance::select($instance_id);
 
@@ -57,12 +56,11 @@ class BookInstanceController
 
     /**
      * Show a single page for book instance transaction.
+     * @param Request $request
      */
-    public function single()
+    public function single(Request $request)
     {
         try {
-
-            $request = new Request();
 
 
         } catch (Exception $ex) {

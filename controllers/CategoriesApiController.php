@@ -18,7 +18,7 @@ class CategoriesApiController
 
       $request = new Request();
 
-      $id = $request->getParams()->getInt("id");
+      $id = $request->get_params()->get_int("id");
 
       $subcategory = Subcategory::select($id);
 
@@ -59,8 +59,8 @@ class CategoriesApiController
 
       $request = new Request();
 
-      $id = $request->getParams()->getInt("id");
-      $subcategory_name = $request->getParams()->getString("subcategory_name");
+      $id = $request->get_params()->get_int("id");
+      $subcategory_name = $request->get_params()->get_string("subcategory_name");
 
 
       $subcat_to_insert = new Subcategory();

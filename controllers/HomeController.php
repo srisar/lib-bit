@@ -1,18 +1,22 @@
 <?php
 
-class HomeController{
+class HomeController
+{
 
-    public function home($request){
+    public function home()
+    {
 
         $name = isset($_GET['name']) ? $_GET['name'] : "user";
         include "views/home/index.view.php";
     }
 
-    public function about(){
+    public function about()
+    {
         echo "this is an about page";
     }
 
-    public function contact(){
+    public function contact()
+    {
         echo "this is a contact page";
     }
 

@@ -12,7 +12,7 @@ class LoginController
     public function login(Request $request)
     {
 
-        if ($request->getParams()->has('error')) {
+        if ($request->get_params()->has('error')) {
             View::set_error('error', 'Login failed');
         }
 
@@ -28,8 +28,8 @@ class LoginController
         try {
 
             $fields = [
-                "username" => $request->getParams()->getString('username'),
-                "password" => $request->getParams()->getString('password'),
+                "username" => $request->get_params()->get_string('username'),
+                "password" => $request->get_params()->get_string('password'),
             ];
 
             $user = User::find_user($fields['username'], $fields['password']);

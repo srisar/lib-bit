@@ -4,12 +4,11 @@
 class DepartmentsController
 {
 
-    public function adding()
+    public function adding(Request $request)
     {
         try {
 
-            $request = new Request();
-            $department_name = $request->getParams()->getString('department_name');
+            $department_name = $request->get_params()->get_string('department_name');
 
             if (empty($department_name)) {
 
