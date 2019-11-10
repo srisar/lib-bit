@@ -14,7 +14,7 @@ $featured_books = Book::select_all(4);
         <div class="row">
             <?php foreach ($featured_books as $featured_book): ?>
 
-                <div class="col-3">
+                <div class="col-12 col-sm-6 col-lg-3 mb-3">
 
                     <div class="card shadow-none featured-book">
 

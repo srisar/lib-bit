@@ -5,7 +5,7 @@
 
     <div class="row justify-content-center mt-5">
 
-        <div class="col-6">
+        <div class="col-12 col-lg-6">
 
 
             <div class="card bg-secondary">
