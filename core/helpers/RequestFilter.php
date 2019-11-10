@@ -25,7 +25,7 @@ class RequestFilter
      * @return int
      * @throws AppExceptions
      */
-    public function getInt($name): int
+    public function get_int($name): int
     {
         if (isset($this->map[$name])) {
             return (int)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_INT);
@@ -34,7 +34,7 @@ class RequestFilter
         }
     }
 
-    public function getFloat($name): float
+    public function get_float($name): float
     {
         return (float)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_FLOAT);
     }
@@ -45,7 +45,7 @@ class RequestFilter
      * @return string
      * @throws AppExceptions
      */
-    public function getString($name, $filter = true): string
+    public function get_string($name, $filter = true): string
     {
         if (isset($this->map[$name])) {
             return $filter ? (string)trim(filter_var($this->map[$name], FILTER_SANITIZE_STRING)) : $this->map[$name];
@@ -56,7 +56,7 @@ class RequestFilter
 
     }
 
-    public function getEmail($name)
+    public function get_email($name)
     {
         return (string)filter_var($this->map[$name], FILTER_VALIDATE_EMAIL);
     }
