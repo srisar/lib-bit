@@ -18,27 +18,27 @@ class Request
         $this->files = new RequestFilter($_FILES);
     }
 
-    public function getUrl(): string
+    public function get_url(): string
     {
         return $this->domain . $this->path;
     }
 
-    public function getDomain(): string
+    public function get_domain(): string
     {
         return $this->domain;
     }
 
-    public function getPath(): string
+    public function get_path(): string
     {
         return $this->path;
     }
 
-    public function isGet(): bool
+    public function is_get(): bool
     {
         return $this->method == self::GET;
     }
 
-    public function isPost(): bool
+    public function is_post(): bool
     {
         return $this->method == self::POST;
     }
@@ -46,12 +46,12 @@ class Request
     /**
      * @return RequestFilter
      */
-    public function getParams()
+    public function get_params()
     {
         return $this->params;
     }
 
-    public function getFiles(){
+    public function get_files(){
         return $this->files;
     }
 
