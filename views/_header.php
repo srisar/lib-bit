@@ -17,8 +17,8 @@
 
 <?php if (Session::is_user_logged_in()): ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#"><img src="<?= App::getBaseURL() ?>/assets/img/logo.png" alt="LibMan"
-                                              class="logo"></a>
+        <a class="navbar-brand" href="#">
+            <img src="<?= App::getBaseURL() ?>/assets/img/logo.png" alt="LibMan" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -57,8 +57,12 @@
 
             <form class="form-inline my-2 my-lg-0">
                 <span class="badge badge-pill badge-dark mr-2">Today is <?= App::todayString() ?></span>
-                <a class="btn btn-success my-2 my-sm-0 mr-2" href="#">Manage Users</a>
-                <a class="btn btn-danger my-2 my-sm-0" href="#">Logout</a>
+
+                <?php if (Session::is_admin()): ?>
+                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="<?= App::createURL('/users') ?>">Manage Users</a>
+                <?php endif; ?>
+                <a class="btn btn-danger my-2 my-sm-0" href="<?= App::createURL('/logout') ?>">Logout</a>
+
             </form>
 
         </div>

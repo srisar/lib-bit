@@ -12,6 +12,10 @@ class LoginController
     public function login(Request $request)
     {
 
+        if (Session::is_user_logged_in()) {
+            App::redirect('/books');
+        }
+
         if ($request->get_params()->has('error')) {
             View::set_error('error', 'Login failed');
         }
@@ -53,7 +57,10 @@ class LoginController
      */
     public function logout()
     {
-
+        if (Session::is_user_logged_in()) {
+            Session::kill_session();
+            App::redirect('/login');
+        }
     }
 
 }

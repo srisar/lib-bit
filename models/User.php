@@ -12,6 +12,25 @@ class User
 
     const ROLES = ["ADMIN" => "Administrator", "USER" => "User"];
 
+    /**
+     * @return User[]
+     */
+    public static function select_all()
+    {
+
+        $db = Database::get_instance();
+
+        $statement = $db->prepare("SELECT * FROM users;");
+        $statement->execute();
+
+        return $statement->fetchAll(PDO::FETCH_CLASS, User::class);
+
+    }
+
+
+    /**
+     * @return bool
+     */
     public function insert()
     {
 

@@ -10,7 +10,7 @@ Router::add("/contact", HomeController::class, "contact");
 Router::add("/login", LoginController::class, "login", User::ROLE_NONE);
 Router::add("/login/process", LoginController::class, "login_process", User::ROLE_NONE);
 Router::add("/logout", LoginController::class, "logout");
-
+Router::add('/users', UsersController::class, "manage_users", User::ROLE_ADMIN);
 
 /** Books */
 Router::add("/books", BooksController::class, "index");
