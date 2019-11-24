@@ -8,7 +8,7 @@ class App
     /**
      * @return string
      */
-    public static function getBaseURL()
+    public static function get_base_url()
     {
         return sprintf("%s://%s", $_SERVER['REQUEST_SCHEME'], $_SERVER['HTTP_HOST']);
     }
@@ -16,9 +16,9 @@ class App
     /**
      * @return string
      */
-    public static function getAssetsURL()
+    public static function get_assets_url()
     {
-        return App::getBaseURL() . '/assets';
+        return App::get_base_url() . '/assets';
     }
 
     /**
@@ -26,15 +26,15 @@ class App
      * @param array $query
      * @return string
      */
-    public static function createURL($path, $query = [])
+    public static function create_url($path, $query = [])
     {
 
         if (!empty($query)) {
             $q = http_build_query($query);
-            return self::getBaseURL() . '/index.php' . $path . '?' . $q;
+            return self::get_base_url() . '/index.php' . $path . '?' . $q;
         }
 
-        return self::getBaseURL() . '/index.php' . $path;
+        return self::get_base_url() . '/index.php' . $path;
 
     }
 
@@ -44,43 +44,22 @@ class App
      */
     public static function redirect($path, $query = [])
     {
-        header('Location: ' . self::createURL($path, $query));
-    }
-
-    /**
-     * @param $request
-     * @param $field
-     * @return string
-     * @throws Exception
-     * @deprecated
-     */
-    public static function validateField($request, $field)
-    {
-
-        if (isset($request[$field])) {
-
-            return trim($request[$field]);
-
-        } else {
-            throw new Exception(sprintf("Request field (%s) not found", $field));
-        }
-
-
+        header('Location: ' . self::create_url($path, $query));
     }
 
 
-    public static function toCurrencyFormat($number, $currency = "Rs.")
+    public static function to_currency_format($number, $currency = "Rs.")
     {
         $value = number_format($number, 2, ".", ",");
         return sprintf("%s %s", $currency, $value);
     }
 
-    public static function todayString($format = DEFAULT_DATE_FORMAT)
+    public static function today_string($format = DEFAULT_DATE_FORMAT)
     {
         return date($format);
     }
 
-    public static function toDateString($date, $format = DEFAULT_DATE_FORMAT)
+    public static function to_date_string($date, $format = DEFAULT_DATE_FORMAT)
     {
         return !empty($date) ? date($format, strtotime($date)) : "";
     }

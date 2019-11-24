@@ -32,7 +32,7 @@ $categories = View::get_data('categories');
 
                     <?php View::render_error_messages() ?>
 
-                    <form action="<?= App::createURL('/books/adding') ?>" method="post">
+                    <form action="<?= App::create_url('/books/adding') ?>" method="post">
 
                         <input type="hidden" name="cat_id" value="<?= $category->id ?>">
                         <input type="hidden" name="subcat_id" value="<?= $subcategory->id ?>">
@@ -242,7 +242,7 @@ $categories = View::get_data('categories');
             alert("Author name cannot be empty.")
         } else {
 
-            $.get("<?= App::createURL('/api/add_author') ?>", {
+            $.get("<?= App::create_url('/api/add_author') ?>", {
                 author_name: textAuthorName,
                 author_email: textAuthorEmail
             }).done(function (data) {

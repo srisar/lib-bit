@@ -44,7 +44,7 @@ $searched = View::get_data('searched');
 
                 <div class="card-body">
 
-                    <form action="<?= App::createURL('/transactions/search-member-results') ?>" method="get">
+                    <form action="<?= App::create_url('/transactions/search-member-results') ?>" method="get">
 
                         <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
 

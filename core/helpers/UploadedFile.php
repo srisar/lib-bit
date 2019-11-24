@@ -91,7 +91,7 @@ class UploadedFile
      */
     public function get_uploaded_file_url()
     {
-        return App::getBaseURL() . $this->uploaded_file_path;
+        return App::get_base_url() . $this->uploaded_file_path;
     }
 
     /**

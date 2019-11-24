@@ -33,7 +33,7 @@ $departments = View::get_data('departments');
 
                 <li class="list-group-item">
                   <div class="category-name">
-                    <a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
+                    <a href="<?= App::create_url('/members/department', ['dept_id' => $department->id]) ?>">
                       <?= $department ?>
                     </a>
                   </div>
@@ -64,12 +64,12 @@ $departments = View::get_data('departments');
               <?php foreach ($members as $member): ?>
                 <tr>
                   <td>
-                    <a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>">
+                    <a href="<?= App::create_url('/members/edit', ['id' => $member->id]) ?>">
                       <?= $member->fullname ?>
                     </a>
                   </td>
                   <td>
-                    <?= App::toDateString($member->get_member_since()) ?>
+                    <?= App::to_date_string($member->get_member_since()) ?>
                   </td>
                 </tr>
               <?php endforeach; ?>

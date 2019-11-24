@@ -28,7 +28,7 @@ $featured_books = Book::select_all(4);
 
                         <div class="card-footer overflow-auto" style="height: 100px">
                             <div>
-                                <a href="<?= App::createURL('/books/edit', ['id' => $featured_book->id]) ?>"><?= $featured_book->title ?></a>
+                                <a href="<?= App::create_url('/books/edit', ['id' => $featured_book->id]) ?>"><?= $featured_book->title ?></a>
                             </div>
                             <div>By <?= (Author::select($featured_book->author_id))->full_name ?></div>
                         </div>

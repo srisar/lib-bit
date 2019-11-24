@@ -17,31 +17,58 @@ $users = View::get_data('users');
                 <div class="card-header"><?php HtmlHelper::render_card_header("Add new user"); ?></div>
                 <div class="card-body">
 
-                    <form action="" method="post">
+                    <form action="<?= App::create_url('/users/add') ?>" method="post">
 
                         <div class="row">
+
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="">User Name</label>
-                                    <input type="text" name="author_name" class="form-control" value="" id="text_save_author_name">
+                                    <label for="text_save_display_name">Display Name</label>
+                                    <input type="text" name="display_name" class="form-control" value="" id="text_save_display_name">
                                     <div class="invalid-feedback">
-                                        Author name cannot be empty.
+                                        Display name cannot be empty.
                                     </div>
                                     <div class="valid-feedback">
                                         Looks good!
                                     </div>
                                 </div>
                             </div>
+
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="">Email</label>
-                                    <input type="text" name="author_email" class="form-control" value=""
-                                           id="text_save_author_email">
+                                    <label for="text_save_username">Username</label>
+                                    <input type="text" name="username" class="form-control" value="" id="text_save_username">
                                 </div>
                             </div>
                             <div class="w-100"></div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="text_save_password_string">Password</label>
+                                    <input type="password" name="password_string" class="form-control" value="" id="text_save_password_string">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="text_save_confirm_password_string">Confirm Password</label>
+                                    <input type="password" name="confirm_password_string" class="form-control" value="" id="text_save_confirm_password_string">
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">User Role</label>
+                                    <?php HtmlHelper::render_select_box('user_role', User::ROLES, 'select_save_user_role') ?>
+                                </div>
+                            </div>
+
+                            <div class="w-100"></div>
+
+
                             <div class="col text-right">
-                                <button class="btn btn-primary" type="button" id="btn_save_author">Save</button>
+                                <button class="btn btn-primary" type="button" id="btn_save_user">Save</button>
                             </div>
                         </div>
 
@@ -92,3 +119,55 @@ $users = View::get_data('users');
 </div><!--.container-->
 
 <?php include BASE_PATH . '/views/_footer.php'; ?>
+
+<script>
+    $(function () {
+
+        let textDisplayName = $('#text_save_display_name');
+        let textUsername = $('#text_save_username');
+        let textPassword = $('#text_save_password_string');
+        let textConfirmPassword = $('#text_save_confirm_password_string');
+        let selectUserRole = $('#select_save_user_role');
+        let buttonSave = $('#btn_save_user');
+
+        buttonSave.on('click', function () {
+
+            let displayName = textDisplayName.val();
+            let username = textUsername.val();
+            let password = textPassword.val();
+            let confirmPassword = textConfirmPassword.val();
+            let userRole = selectUserRole.val();
+
+            if (password === "" || username === "" || displayName === "") {
+                alert("Required fields cannot be empty.");
+            } else if (password !== confirmPassword) {
+                alert("Password and confirm password does not match");
+            } else {
+
+                $.post(`${getSiteURL()}/index.php/users/add`, {
+                    'display_name': displayName,
+                    'username': username,
+                    'password_string': password,
+                    'user_role': userRole
+                }).done(function (response) {
+
+                    let json = JSON.parse(response);
+
+                    if (!json.has_error) {
+                        alert("User added successfully!");
+                        window.location.reload();
+                    } else {
+                        alert(json.errors[0]);
+                    }
+
+
+                });
+
+            }
+
+            console.log(selectUserRole);
+        });
+
+
+    });
+</script>

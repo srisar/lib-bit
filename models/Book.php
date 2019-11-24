@@ -208,7 +208,7 @@ class Book
         if ($this->has_image_url()) {
             return sprintf("%s/%s", BOOK_COVERS_UPLOAD_PATH, $this->image_url);
         } else {
-            return App::getAssetsURL() . "/img/no-cover.png";
+            return App::get_assets_url() . "/img/no-cover.png";
         }
     }
 

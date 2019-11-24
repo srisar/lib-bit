@@ -12,7 +12,7 @@
 
         <tr>
             <td class="td-img-thumb"><img id="cover-thumb" src="<?= $book->get_image() ?>" alt=""></td>
-            <td><a href="<?= App::createURL('/books/edit', ['id' => $book->id]) ?>"><?= $book->title ?></a></td>
+            <td><a href="<?= App::create_url('/books/edit', ['id' => $book->id]) ?>"><?= $book->title ?></a></td>
             <td><?= $book->get_category() ?></td>
         </tr>
 

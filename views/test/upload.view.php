@@ -2,7 +2,7 @@
 
     <div class="container-fluid">
 
-        <form action="<?= App::createURL('/test/uploading_image') ?>" method="post" enctype="multipart/form-data">
+        <form action="<?= App::create_url('/test/uploading_image') ?>" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
                 <label for="image">Image</label>

@@ -21,6 +21,7 @@ include "core/Database.php";
 include "core/App.php";
 include "core/View.php";
 include "core/AppExceptions.php";
+include "core/JSONResponse.php";
 
 Database::init($config);
 

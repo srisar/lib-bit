@@ -39,7 +39,7 @@ $book_instances = $book->get_all_book_instances();
 
                     <?php View::render_error_messages() ?>
 
-                    <form action="<?= App::createURL('/books/editing') ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= App::create_url('/books/editing') ?>" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" value="<?= $book->id ?>" name="id">
 
@@ -156,7 +156,7 @@ $book_instances = $book->get_all_book_instances();
                     <?php endif; ?>
 
                     <div class="alert alert-secondary">
-                        <form class="form-inline" action="<?= App::createURL('/book-instance/adding') ?>" method="get">
+                        <form class="form-inline" action="<?= App::create_url('/book-instance/adding') ?>" method="get">
 
                             <input type="hidden" name="book_id" value="<?= $book->id ?>">
 
@@ -204,10 +204,10 @@ $book_instances = $book->get_all_book_instances();
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-warning"
-                                       href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
+                                       href="<?= App::create_url('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
                                     <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
                                         <a class="btn btn-sm btn-primary"
-                                           href="<?= App::createURL('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
+                                           href="<?= App::create_url('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -268,7 +268,7 @@ $book_instances = $book->get_all_book_instances();
         let categorySelect = $("#book-category");
         let selectedCategoryId = categorySelect.val();
 
-        $.get("<?= App::createURL('/api/get_subcategories') ?>", {
+        $.get("<?= App::create_url('/api/get_subcategories') ?>", {
             id: selectedCategoryId,
             selected_subcat_id: <?= $book->subcategory_id ?>
         }).done(function (data) {

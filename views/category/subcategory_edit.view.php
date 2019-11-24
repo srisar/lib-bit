@@ -23,7 +23,7 @@ $all_subcategories = $subcategory->get_category()->get_all_subcategories();
 
       <?php View::render_error_messages() ?>
 
-      <form action="<?= App::createURL('/subcategories/editing') ?>" method="get">
+      <form action="<?= App::create_url('/subcategories/editing') ?>" method="get">
 
         <input type="hidden" name="subcat_id" value="<?= $subcategory->id ?>">
 

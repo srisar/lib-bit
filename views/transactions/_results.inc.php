@@ -12,10 +12,10 @@
     <?php foreach ($members as $member): ?>
 
         <tr>
-            <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
+            <td><a href="<?= App::create_url('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
             <td><?= $member->get_member_since() ?></td>
             <td>
-                <a class="btn btn-primary btn-sm" href="<?= App::createURL('/transactions/add', ['instance_id' => $book_instance->id, 'member_id' => $member->id]) ?>">
+                <a class="btn btn-primary btn-sm" href="<?= App::create_url('/transactions/add', ['instance_id' => $book_instance->id, 'member_id' => $member->id]) ?>">
                     <i class="lni-enter"></i> Add
                 </a>
             </td>

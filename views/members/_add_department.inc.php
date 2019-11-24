@@ -3,7 +3,7 @@
     <div class="card-body p-2">
         <?php View::render_error_messages() ?>
 
-        <form class="form" action="<?= App::createURL('/departments/adding') ?>" method="post">
+        <form class="form" action="<?= App::create_url('/departments/adding') ?>" method="post">
 
             <div class="input-group">
                 <input class="form-control" type="text" name="department_name" required>

@@ -46,7 +46,7 @@ $selected_department = View::get_data('selected_department');
                         <?php foreach ($departments as $department): ?>
 
                             <li class="list-group-item">
-                                <div class="category-name"><a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>"><?= $department ?></a></div>
+                                <div class="category-name"><a href="<?= App::create_url('/members/department', ['dept_id' => $department->id]) ?>"><?= $department ?></a></div>
 
                             </li>
                         <?php endforeach; ?>
@@ -76,7 +76,7 @@ $selected_department = View::get_data('selected_department');
                             <tbody>
                             <?php foreach ($teachers as $member): ?>
                                 <tr>
-                                    <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
+                                    <td><a href="<?= App::create_url('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
                                     <td><?= $member->get_member_since() ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -84,7 +84,7 @@ $selected_department = View::get_data('selected_department');
                         </table>
                     <?php else: ?>
                         <p>No teachers found. Start adding
-                            <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_TEACHER]) ?>">a new teacher</a>.
+                            <a href="<?= App::create_url('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_TEACHER]) ?>">a new teacher</a>.
                         </p>
                     <?php endif; ?>
 
@@ -111,7 +111,7 @@ $selected_department = View::get_data('selected_department');
                             <tbody>
                             <?php foreach ($students as $member): ?>
                                 <tr>
-                                    <td><a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
+                                    <td><a href="<?= App::create_url('/members/edit', ['id' => $member->id]) ?>"><?= $member->fullname ?></a></td>
                                     <td><?= $member->get_member_since() ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -119,7 +119,7 @@ $selected_department = View::get_data('selected_department');
                         </table>
                     <?php else: ?>
                         <p>No students found
-                            <a href="<?= App::createURL('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_STUDENT]) ?>">a new student</a>.
+                            <a href="<?= App::create_url('/members/add', ['dept_id' => $selected_department->id, 'type' => Member::TYPE_STUDENT]) ?>">a new student</a>.
                         </p>
                     <?php endif; ?>
                 </div>

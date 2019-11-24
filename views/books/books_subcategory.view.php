@@ -27,7 +27,7 @@ $categories = View::get_data('categories');
         <div class="col-9">
 
             <div class="alert alert-light">
-                <form class="form" action="<?= App::createURL('/books/search') ?>" method="get">
+                <form class="form" action="<?= App::create_url('/books/search') ?>" method="get">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search for book by title or ISBN" name="q" id="q">
                         <div class="input-group-append">
@@ -46,7 +46,7 @@ $categories = View::get_data('categories');
 
                         <?php if (isset($selected_subcategory)): ?>
                             <div class="mb-2">
-                                <a class="btn btn-success" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
+                                <a class="btn btn-success" href="<?= App::create_url('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
                                     Add a new book in <?= $selected_subcategory ?>
                                 </a>
                             </div>
@@ -56,7 +56,7 @@ $categories = View::get_data('categories');
 
                     <?php else: ?>
                         <p>
-                            <a class="btn btn-success" href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
+                            <a class="btn btn-success" href="<?= App::create_url('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
                                 Add a new book in <?= $selected_subcategory ?>
                             </a>
                         </p>
@@ -68,7 +68,7 @@ $categories = View::get_data('categories');
                 <div class="alert alert-light text-center">
 
                     <a class="btn btn-success mb-3"
-                       href="<?= App::createURL('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
+                       href="<?= App::create_url('/books/add', ['subcat_id' => $selected_subcategory->id]) ?>">
                         Add a new book in <?= $selected_subcategory ?>
                     </a>
 

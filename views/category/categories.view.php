@@ -25,7 +25,7 @@ $selected_category = View::get_data('selected_category');
         <div class="card-body p-2">
           <?php View::render_error_messages() ?>
 
-          <form class="form" action="<?= App::createURL('/categories/adding') ?>" method="get">
+          <form class="form" action="<?= App::create_url('/categories/adding') ?>" method="get">
 
             <div class="input-group">
               <input class="form-control" type="text" name="category_name" required>
@@ -48,7 +48,7 @@ $selected_category = View::get_data('selected_category');
           <ul class="list-group">
             <?php foreach ($categories as $category): ?>
               <li class="list-group-item">
-                <a href="<?= App::createURL('/categories', ['cat_id' => $category->id]) ?>">
+                <a href="<?= App::create_url('/categories', ['cat_id' => $category->id]) ?>">
                   <?= $category ?>
                 </a>
               </li>
@@ -76,7 +76,7 @@ $selected_category = View::get_data('selected_category');
             <?php View::render_error_messages('error_subcat') ?>
 
             <form class="form-inline"
-                  action="<?= App::createURL('/subcategory/adding') ?>"
+                  action="<?= App::create_url('/subcategory/adding') ?>"
                   method="get">
 
               <input type="hidden" name="category_id" value="<?= $selected_category->id ?>">
@@ -112,7 +112,7 @@ $selected_category = View::get_data('selected_category');
                     </a>
                   </td>
                   <td>
-                    <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>"
+                    <a href="<?= App::create_url('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>"
                        class="btn btn-sm btn-success">
                       View Books
                     </a>

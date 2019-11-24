@@ -2,15 +2,15 @@
 /**
  * Routing table
  */
-Router::add("/home", HomeController::class, "home");
-Router::add("/about", HomeController::class, "about");
-Router::add("/contact", HomeController::class, "contact");
+Router::add("/", HomeController::class, "home");
 
 /** Login */
 Router::add("/login", LoginController::class, "login", User::ROLE_NONE);
 Router::add("/login/process", LoginController::class, "login_process", User::ROLE_NONE);
 Router::add("/logout", LoginController::class, "logout");
+
 Router::add('/users', UsersController::class, "manage_users", User::ROLE_ADMIN);
+Router::add('/users/add', UsersController::class, "ajax_add_user", User::ROLE_ADMIN);
 
 /** Books */
 Router::add("/books", BooksController::class, "index");

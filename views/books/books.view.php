@@ -29,7 +29,7 @@ $categories = View::get_data('categories');
           <div class="col mb-4">
             <div class="card">
               <div class="card-body">
-                <form class="form" action="<?= App::createURL('/books/search') ?>" method="get">
+                <form class="form" action="<?= App::create_url('/books/search') ?>" method="get">
                   <div class="input-group">
                     <input type="text" class="form-control" placeholder="Search for book by title or ISBN" name="q"
                            id="q">

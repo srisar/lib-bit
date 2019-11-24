@@ -41,7 +41,7 @@ class LoginController
 
             if (!empty($user)) {
                 Session::set_user($user);
-                App::redirect('/books');
+                App::redirect('/');
             } else {
                 App::redirect('/login', ['error' => '1']);
             }

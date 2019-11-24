@@ -41,7 +41,7 @@ $returning_date = View::get_data('returning_date');
         <div class="card-header"></div>
         <div class="card-body">
 
-          <form action="<?= App::createURL('/transactions/adding') ?>" method="post">
+          <form action="<?= App::create_url('/transactions/adding') ?>" method="post">
 
             <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
             <input type="hidden" name="member_id" value="<?= $member->id ?>">
@@ -57,13 +57,13 @@ $returning_date = View::get_data('returning_date');
             <div class="form-group">
               <label for="">Borrowing Date</label>
               <input type="text" class="form-control date-picker" name="borrowing_date"
-                     value="<?= App::toDateString($borrowing_date) ?>">
+                     value="<?= App::to_date_string($borrowing_date) ?>">
             </div>
 
             <div class="form-group">
               <label for="">Returning Date</label>
               <input type="text" class="form-control date-picker" name="returning_date"
-                     value="<?= App::toDateString($returning_date) ?>">
+                     value="<?= App::to_date_string($returning_date) ?>">
             </div>
 
             <div class="form-group">

@@ -53,7 +53,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                 </div>
                 <div class="card-body">
 
-                    <form action="<?= App::createURL('/transactions/editing') ?>" method="post">
+                    <form action="<?= App::create_url('/transactions/editing') ?>" method="post">
 
                         <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
                         <input type="hidden" name="member_id" value="<?= $member->id ?>">
@@ -67,7 +67,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                                 <div class="form-group">
                                     <label for="">Borrowing Date</label>
                                     <input type="text" class="form-control date-picker" name="borrowing_date"
-                                           value="<?= App::toDateString($book_transaction->borrowing_date) ?>" disabled>
+                                           value="<?= App::to_date_string($book_transaction->borrowing_date) ?>" disabled>
                                 </div>
 
 
@@ -77,7 +77,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                                 <div class="form-group">
                                     <label for="">Returning Date</label>
                                     <input type="text" class="form-control date-picker" name="returning_date"
-                                           value="<?= App::toDateString($book_transaction->returning_date) ?>" disabled>
+                                           value="<?= App::to_date_string($book_transaction->returning_date) ?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                         <div class="form-group">
                             <label for="">Returned Date</label>
                             <input type="text" class="form-control date-picker" name="returning_date"
-                                   value="<?= App::toDateString($book_transaction->returned_date) ?>">
+                                   value="<?= App::to_date_string($book_transaction->returned_date) ?>">
                         </div>
 
                         <div class="form-group">
@@ -97,7 +97,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                         <div>
                             <button class="btn btn-primary" type="submit">Update</button>
 
-                            <a href="<?= App::createURL(
+                            <a href="<?= App::create_url(
                                 '/transactions/single/set-as-returned',
                                 ['transaction_id' => $book_transaction->id, 'amount' => $overdue_payment]) ?>"
                                class="btn btn-warning <?= $btn_set_as_returned_state ?>"
@@ -132,9 +132,9 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                             <div class="col">
                                 <div class="form-group">
                                     <label for="overdue-value">Overdue payment (<?= $days_elapsed ?> days
-                                        x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
+                                        x <?= App::to_currency_format(OVERDUE_DAY_PAYMENT) ?>)</label>
                                     <input class="form-control" type="text"
-                                           value="<?= App::toCurrencyFormat($overdue_payment) ?>"
+                                           value="<?= App::to_currency_format($overdue_payment) ?>"
                                            disabled>
                                 </div>
                             </div>
@@ -151,9 +151,9 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                                             <div class="form-group">
                                                 <label for="overdue-value">Overdue payment paid for
                                                     <br>(<?= $days_elapsed ?> days
-                                                    x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
+                                                    x <?= App::to_currency_format(OVERDUE_DAY_PAYMENT) ?>)</label>
                                                 <input class="form-control" type="text"
-                                                       value="<?= App::toCurrencyFormat($overdue_payment) ?>"
+                                                       value="<?= App::to_currency_format($overdue_payment) ?>"
                                                        disabled>
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
 
                 <div class="card-body">
 
-                    <a href="<?= App::createURL('/transactions/single/print', ['id' => $book_transaction->id]) ?>"
+                    <a href="<?= App::create_url('/transactions/single/print', ['id' => $book_transaction->id]) ?>"
                        class="btn btn-success btn-block" target="_blank">
                         Print receipt
                     </a>

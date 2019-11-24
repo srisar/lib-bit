@@ -78,5 +78,56 @@ class User
 
     }
 
+    /**
+     * Checks if username exists in the database.
+     * @param $username
+     * @return bool
+     */
+    public static function is_username_exist($username)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
+        $statement->execute([$username]);
+
+        $result = $statement->fetchObject(User::class);
+
+        if (!empty($result)) return true;
+
+        return false;
+    }
+
+    /**
+     * @param $username
+     * @return User|null
+     */
+    public static function find_by_username($username)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
+        $statement->execute([$username]);
+
+        $result = $statement->fetchObject(User::class);
+
+        if (!empty($result)) return $result;
+
+        return null;
+    }
+
+    /**
+     * @param $id
+     * @return User|null
+     */
+    public static function select($id)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
+        $statement->execute([$id]);
+
+        $result = $statement->fetchObject(User::class);
+
+        if (!empty($result)) return $result;
+
+        return null;
+    }
 
 }
