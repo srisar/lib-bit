@@ -1,9 +1,8 @@
-
 <footer class="my-3">
     <div class="container">
         <div class="row">
             <div class="col">
-<!--                &copy; --><?//= date('Y') ?><!--. All rights reserved. Developed for BIT Project.-->
+                <!--                &copy; --><? //= date('Y') ?><!--. All rights reserved. Developed for BIT Project.-->
             </div>
         </div>
     </div>
@@ -16,6 +15,7 @@
 <script src="<?= App::get_base_url() ?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= App::get_base_url() ?>/assets/plugins/pickerjs/dist/picker.min.js"></script>
 <script src="<?= App::get_base_url() ?>/assets/plugins/DataTables/datatables.min.js"></script>
+
 <script src="<?= App::get_base_url() ?>/assets/forms.js"></script>
 <script src="<?= App::get_base_url() ?>/assets/app.js"></script>
 

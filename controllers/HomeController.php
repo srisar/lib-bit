@@ -6,10 +6,9 @@ class HomeController
     public function home()
     {
 
+        App::redirect('/books');
 
-        include "views/home/index.view.php";
     }
-
 
 
 }

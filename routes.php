@@ -13,7 +13,7 @@ Router::add('/users', UsersController::class, "manage_users", User::ROLE_ADMIN);
 Router::add('/users/add', UsersController::class, "ajax_add_user", User::ROLE_ADMIN);
 
 /** Books */
-Router::add("/books", BooksController::class, "index");
+Router::add("/books", BooksController::class, "view_books");
 Router::add("/books/add", BooksController::class, "add");
 Router::add("/books/adding", BooksController::class, "adding");
 Router::add("/books/edit", BooksController::class, "edit");

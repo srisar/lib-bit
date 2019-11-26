@@ -3,7 +3,7 @@
 class BooksController
 {
 
-    public function index()
+    public function view_books()
     {
 
 
@@ -12,7 +12,7 @@ class BooksController
         View::set_data('categories', $categories);
         View::set_data('title', 'All Books');
 
-        include "views/books/books.view.php";
+        include "views/books/view_books.view.php";
 
     }
 

@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/lineicons/LineIcons.css">
     <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/plugins/pickerjs/dist/picker.min.css">
     <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/plugins/DataTables/datatables.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 </head>
 <body>
 

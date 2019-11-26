@@ -20,7 +20,7 @@
                     <ul class="list-group list-group-flush">
                         <?php foreach ($subcats as $subcat): ?>
                             <a href="<?= App::create_url('/books/subcategory', ['subcat_id' => $subcat->id]) ?>">
-                                <li class="list-group-item"><?= $subcat->subcategory_name ?></li>
+                                <li class="list-group-item p-1"><?= $subcat->subcategory_name ?></li>
                             </a>
                         <?php endforeach; ?>
                     </ul>

@@ -55,3 +55,7 @@ function getSiteURL() {
 function reloadPage() {
     window.location.reload();
 }
+
+
+
+
