@@ -18,11 +18,11 @@ $categories = View::get_data('categories');
 
         <div class="row">
 
-            <div class="col-lg-2 col-sm-3 col-12 d-none d-sm-block">
+            <div class="col-lg-3 col-sm-3 col-12 d-none d-sm-block">
                 <?php include_once "_categories_list.inc.php" ?>
             </div><!--.col-->
 
-            <div class="col-lg-10 col-sm-9 col-12">
+            <div class="col-lg-9 col-sm-9 col-12">
 
                 <div class="row">
 

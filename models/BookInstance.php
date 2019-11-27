@@ -99,4 +99,21 @@ class BookInstance
 
     }
 
+    /**
+     * @return int
+     */
+    public static function get_stats_total_book_instances()
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT COUNT(id) as result FROM book_instances;");
+        $statement->execute();
+
+        $result = $statement->fetchObject(stdClass::class);
+
+        if (!empty($result))
+            return $result->result;
+
+        return 0;
+    }
+
 }

@@ -1,5 +1,6 @@
 <?php
 
+$stats = View::get_data('stats');
 
 ?>
 <div class="card mb-4">
@@ -11,7 +12,41 @@
 
         <div class="row">
 
-            <div class="col-3">
+            <div class="col-4">
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td>Total Books</td>
+                        <td class="text-right"><?= $stats['total_books'] ?></td>
+                    </tr>
+                    <tr>
+                        <td>Total Book Copies</td>
+                        <td class="text-right"><?= $stats['total_book_copies'] ?></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Categories</td>
+                        <td class="text-right"><?= $stats['total_categories'] ?></td>
+                    </tr>
+                    </tbody>
+                </table>
+
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td>Total Departments</td>
+                        <td class="text-right"><?= $stats['total_departments'] ?></td>
+                    </tr>
+                    <tr>
+                        <td>Members count</td>
+                        <td class="text-right"><?= $stats['total_members'] ?></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <div class="col-4">
 
                 <div class="alert alert-secondary">
                     <p class="font-weight-bold">Current Month</p>
@@ -32,7 +67,7 @@
 
     let pie_data = {
         datasets: [{
-            data: [<?= 136 ?>, 20],
+            data: [<?= $stats['total_books'] ?>, <?= $stats['total_book_copies'] ?>],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.5)',
                 'rgba(54, 162, 235, 0.5)',

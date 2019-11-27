@@ -8,7 +8,7 @@ class Subcategory
 
   public function __toString()
   {
-    return $this->subcategory_name;
+    return sprintf("%s (%d)", $this->subcategory_name, $this->get_books_count());
   }
 
 

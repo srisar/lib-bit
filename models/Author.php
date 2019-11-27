@@ -124,4 +124,23 @@ class Author extends Model
     {
         return Database::get_last_inserted_id();
     }
+
+    /**
+     * @return int
+     */
+    public static function get_stats_total_authors()
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT COUNT(id) as result FROM authors;");
+        $statement->execute();
+
+        $result = $statement->fetchObject(stdClass::class);
+
+        if (!empty($result))
+            return $result->result;
+
+        return 0;
+
+    }
+
 }

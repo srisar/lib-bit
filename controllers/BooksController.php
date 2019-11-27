@@ -6,11 +6,21 @@ class BooksController
     public function view_books()
     {
 
-
         $categories = Category::select_all();
+
+        $stats = [
+            'total_books' => Book::get_stats_total_books(),
+            'total_book_copies' => BookInstance::get_stats_total_book_instances(),
+            'total_categories' => Category::get_stats_total_categories(),
+            'total_authors' => Author::get_stats_total_authors(),
+            'total_members' => Member::get_stats_total_members(),
+            'total_departments' => Department::get_stats_total_departments(),
+        ];
+
 
         View::set_data('categories', $categories);
         View::set_data('title', 'All Books');
+        View::set_data('stats', $stats);
 
         include "views/books/view_books.view.php";
 

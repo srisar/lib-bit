@@ -212,4 +212,22 @@ class Book
         }
     }
 
+
+    /**
+     * @return int
+     */
+    public static function get_stats_total_books()
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT COUNT(id) as result FROM books;");
+        $statement->execute();
+
+        $result = $statement->fetchObject(stdClass::class);
+
+        if (!empty($result))
+            return $result->result;
+
+        return 0;
+
+    }
 }

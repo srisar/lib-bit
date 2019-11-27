@@ -4,6 +4,9 @@ class Category
 {
     public $id, $category_name;
 
+    /**
+     * @return string
+     */
     public function get_category_name()
     {
         return $this->category_name;
@@ -23,6 +26,10 @@ class Category
         return $statement->fetchObject(Category::class);
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public static function get_category_by_name($name)
     {
         $db = Database::get_instance();
@@ -45,6 +52,9 @@ class Category
     }
 
 
+    /**
+     * @return bool
+     */
     public function insert()
     {
         $db = Database::get_instance();
@@ -52,6 +62,9 @@ class Category
         return $statement->execute([$this->category_name]);
     }
 
+    /**
+     * @return bool
+     */
     public function name_exists()
     {
         $db = Database::get_instance();
@@ -67,6 +80,9 @@ class Category
 
     }
 
+    /**
+     * @return mixed
+     */
     public function __toString()
     {
         return $this->category_name;
@@ -84,6 +100,23 @@ class Category
 
         return $statement->fetchAll(PDO::FETCH_CLASS, Subcategory::class);
 
+    }
+
+    /**
+     * @return int
+     */
+    public static function get_stats_total_categories()
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT COUNT(id) as result FROM categories;");
+        $statement->execute();
+
+        $result = $statement->fetchObject(stdClass::class);
+
+        if (!empty($result))
+            return $result->result;
+
+        return 0;
     }
 
 }
