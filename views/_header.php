@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/plugins/DataTables/datatables.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
 
@@ -61,7 +62,8 @@
                 <span class="badge badge-pill badge-dark mr-2">Today is <?= App::today_string() ?></span>
 
                 <?php if (Session::is_admin()): ?>
-                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="<?= App::create_url('/users') ?>">Manage Users</a>
+                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="<?= App::create_url('/users') ?>">Manage
+                        Users</a>
                 <?php endif; ?>
                 <a class="btn btn-danger my-2 my-sm-0" href="<?= App::create_url('/logout') ?>">Logout</a>
 

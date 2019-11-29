@@ -18,6 +18,8 @@ class TestController
             $now = Carbon::today()->startOfMonth();
             $now->month = $now->month - $index;
 
+            var_dump($now->monthName);
+
             var_dump('current: ' . $now->toDateString());
 
             $firstDay = $now->startOfMonth()->toDateString();

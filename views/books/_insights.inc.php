@@ -12,9 +12,10 @@ $stats = View::get_data('stats');
 
         <div class="row">
 
-            <div class="col-4">
-                <table class="table table-bordered">
-                    <tbody>
+            <div class="col-12 col-md-6 col-lg-4">
+                <div class="alert alert-secondary">
+                    <table class="table table-bordered">
+                        <tbody>
                         <tr>
                             <td>Total Books</td>
                             <td class="text-right"><?= $stats['total_books'] ?></td>
@@ -27,11 +28,11 @@ $stats = View::get_data('stats');
                             <td>Number of Categories</td>
                             <td class="text-right"><?= $stats['total_categories'] ?></td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
 
-                <table class="table table-bordered">
-                    <tbody>
+                    <table class="table table-bordered">
+                        <tbody>
                         <tr>
                             <td>Total Departments</td>
                             <td class="text-right"><?= $stats['total_departments'] ?></td>
@@ -41,17 +42,18 @@ $stats = View::get_data('stats');
                             <td class="text-right"><?= $stats['total_members'] ?></td>
                         </tr>
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
 
             </div>
 
-            <div class="col-4">
+            <div class="col-12 col-md-6 col-lg-6">
 
                 <div class="alert alert-secondary">
-                    <p class="font-weight-bold">Current Month</p>
-                    <div class="chart-container" style="position: relative;">
-                        <canvas id="books-canvas"></canvas>
+                    <p class="font-weight-bold">Last 5 months transactions</p>
+                    <div class="chart-container">
+                        <canvas id="monthly-transactions" style="width: 100%; height: 228px"></canvas>
                     </div>
                 </div>
             </div>
@@ -65,25 +67,28 @@ $stats = View::get_data('stats');
 <!--.card-->
 
 <script defer>
-    var ctx = document.getElementById('books-canvas');
+    let ctx = document.getElementById("monthly-transactions");
 
-    let pie_data = {
-        datasets: [{
-            data: [<?= $stats['total_books'] ?>, <?= $stats['total_book_copies'] ?>],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.5)',
-                'rgba(54, 162, 235, 0.5)',
-            ]
-        }],
-        labels: [
-            'Total Books',
-            'Borrowed Books',
-        ]
-    };
-
-    var myChart = new Chart(ctx, {
-        type: 'pie',
-        data: pie_data,
-
+    let chartData = <?= json_encode($stats['monthly_transactions_data']) ?>;
+    let chartLabels = <?= json_encode($stats['monthly_transactions_months']) ?>;
+    
+    let myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: chartLabels,
+            datasets: [{
+                label: 'Number of transactions',
+                data: chartData,
+                borderWidth: 1,
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)'
+                ]
+            }]
+        },
+        options: {
+            responsive: false
+        }
     });
+
+
 </script>

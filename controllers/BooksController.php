@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 class BooksController
 {
 
@@ -9,7 +11,6 @@ class BooksController
         $categories = Category::select_all();
 
 
-
         $stats = [
             'total_books' => Book::get_stats_total_books(),
             'total_book_copies' => BookInstance::get_stats_total_book_instances(),
@@ -17,6 +18,8 @@ class BooksController
             'total_authors' => Author::get_stats_total_authors(),
             'total_members' => Member::get_stats_total_members(),
             'total_departments' => Department::get_stats_total_departments(),
+            'monthly_transactions_data' => $this->get_month_on_month_transactions_count()['data'],
+            'monthly_transactions_months' => $this->get_month_on_month_transactions_count()['months'],
         ];
 
 
@@ -244,5 +247,26 @@ class BooksController
 
     }
 
+    private function get_month_on_month_transactions_count($months = 5)
+    {
+        $data = [];
+        $months = [];
+
+        for ($index = 0; $index < 5; $index++) {
+
+            $now = Carbon::today()->startOfMonth();
+            $now->month = $now->month - $index;
+
+            $months[] = $now->monthName;
+
+            $firstDay = $now->startOfMonth()->toDateString();
+            $lastDay = $now->endOfMonth()->toDateString();
+
+            $data[] = BookTransaction::get_stat_number_of_transaction($firstDay, $lastDay);
+
+        }
+
+        return ['months' => $months, 'data' => $data];
+    }
 
 }
