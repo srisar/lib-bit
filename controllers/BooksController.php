@@ -8,6 +8,8 @@ class BooksController
 
         $categories = Category::select_all();
 
+
+
         $stats = [
             'total_books' => Book::get_stats_total_books(),
             'total_book_copies' => BookInstance::get_stats_total_book_instances(),

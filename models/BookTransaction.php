@@ -47,8 +47,6 @@ class BookTransaction
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
-
-
     }
 
     /**
@@ -142,6 +140,9 @@ class BookTransaction
         return Member::select($this->member_id);
     }
 
+    /**
+     * @return BookInstance[]
+     */
     public static function select_by_returning_date($start_date, $end_date)
     {
         $db = Database::get_instance();
@@ -155,7 +156,11 @@ class BookTransaction
         return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
     }
 
-    public static function select_overdue_transactions(){
+    /**
+     * @return BookInstance[]
+     */
+    public static function select_overdue_transactions()
+    {
         $db = Database::get_instance();
         $statement = $db->prepare("SELECT * FROM book_transactions WHERE (returning_date < :today AND state=:state) ORDER BY returning_date ASC");
 
@@ -167,4 +172,23 @@ class BookTransaction
         return $statement->fetchAll(PDO::FETCH_CLASS, BookTransaction::class);
     }
 
+    /**
+     * @return int
+     */
+    public static function get_stat_number_of_transaction($start, $end)
+    {
+        $db = Database::get_instance();
+        $statement = $db->prepare("SELECT count(id) as result FROM book_transactions WHERE borrowing_date BETWEEN :start AND :end");
+        $statement->execute([
+            ':start' => $start,
+            ':end' => $end,
+        ]);
+
+        $result = $statement->fetchObject(stdClass::class);
+
+        if (!empty($result))
+            return $result->result;
+
+        return 0;
+    }
 }

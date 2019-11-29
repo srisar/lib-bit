@@ -15,31 +15,31 @@ $stats = View::get_data('stats');
             <div class="col-4">
                 <table class="table table-bordered">
                     <tbody>
-                    <tr>
-                        <td>Total Books</td>
-                        <td class="text-right"><?= $stats['total_books'] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Total Book Copies</td>
-                        <td class="text-right"><?= $stats['total_book_copies'] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Number of Categories</td>
-                        <td class="text-right"><?= $stats['total_categories'] ?></td>
-                    </tr>
+                        <tr>
+                            <td>Total Books</td>
+                            <td class="text-right"><?= $stats['total_books'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Total Book Copies</td>
+                            <td class="text-right"><?= $stats['total_book_copies'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Number of Categories</td>
+                            <td class="text-right"><?= $stats['total_categories'] ?></td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <table class="table table-bordered">
                     <tbody>
-                    <tr>
-                        <td>Total Departments</td>
-                        <td class="text-right"><?= $stats['total_departments'] ?></td>
-                    </tr>
-                    <tr>
-                        <td>Members count</td>
-                        <td class="text-right"><?= $stats['total_members'] ?></td>
-                    </tr>
+                        <tr>
+                            <td>Total Departments</td>
+                            <td class="text-right"><?= $stats['total_departments'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Members count</td>
+                            <td class="text-right"><?= $stats['total_members'] ?></td>
+                        </tr>
 
                     </tbody>
                 </table>
@@ -57,10 +57,12 @@ $stats = View::get_data('stats');
             </div>
 
 
-        </div><!--.row-->
+        </div>
+        <!--.row-->
 
     </div>
-</div><!--.card-->
+</div>
+<!--.card-->
 
 <script defer>
     var ctx = document.getElementById('books-canvas');

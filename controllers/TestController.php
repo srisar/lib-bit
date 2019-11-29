@@ -10,13 +10,29 @@ class TestController
     public function test()
     {
 
-        $response = new JSONResponse();
-        $response->add_error('some error');
-        $response->add_error('more errors');
 
-        var_dump($response->to_json());
+        $data = [];
 
-        var_dump(json_encode(['abc' => 'hello']));
+        for ($index = 0; $index < 5; $index++) {
+
+            $now = Carbon::today()->startOfMonth();
+            $now->month = $now->month - $index;
+
+            var_dump('current: ' . $now->toDateString());
+
+            $firstDay = $now->startOfMonth()->toDateString();
+            $lastDay = $now->endOfMonth()->toDateString();
+
+            var_dump($firstDay . ', ' . $lastDay);
+
+            $data[] = BookTransaction::get_stat_number_of_transaction($firstDay, $lastDay);
+
+
+            echo "<br><br>";
+        }
+
+        var_dump($data);
+
 
     }
 
