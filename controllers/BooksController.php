@@ -247,12 +247,12 @@ class BooksController
 
     }
 
-    private function get_month_on_month_transactions_count($months = 5)
+    private function get_month_on_month_transactions_count($n = 6)
     {
         $data = [];
         $months = [];
 
-        for ($index = 0; $index < 5; $index++) {
+        for ($index = 0; $index < $n; $index++) {
 
             $now = Carbon::today()->startOfMonth();
             $now->month = $now->month - $index;
