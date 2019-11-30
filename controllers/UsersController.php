@@ -11,8 +11,8 @@ class UsersController
 
 //            var_dump($_SESSION);
 
-            $users = User::select_all();
-            View::set_data('users', $users);
+            $users = User::selectAll();
+            View::setData('users', $users);
 
 
             include_once "views/users/manage_users.view.php";
@@ -30,15 +30,15 @@ class UsersController
             $response = new JSONResponse();
 
             $fields = [
-                'username' => $request->get_params()->get_string('username'),
-                'password_string' => $request->get_params()->get_string('password_string'),
-                'display_name' => $request->get_params()->get_string('display_name'),
-                'user_role' => $request->get_params()->get_string('user_role'),
+                'username' => $request->getParams()->getString('username'),
+                'password_string' => $request->getParams()->getString('password_string'),
+                'display_name' => $request->getParams()->getString('display_name'),
+                'user_role' => $request->getParams()->getString('user_role'),
             ];
 
 
-            if (!User::is_username_exist($fields['username'])) {
-                $response->add_data($fields);
+            if (!User::isUsernameExists($fields['username'])) {
+                $response->addData($fields);
 
                 $user = new User();
                 $user->username = $fields['username'];
@@ -48,17 +48,17 @@ class UsersController
 
                 if ($user->insert()) {
 
-                    echo $response->to_json();
+                    echo $response->toJSON();
                     return;
                 }
 
-                $response->add_error('User insert failed.');
-                echo $response->to_json();
+                $response->addError('User insert failed.');
+                echo $response->toJSON();
                 return;
 
             } else {
-                $response->add_error('Username already exist.');
-                echo $response->to_json();
+                $response->addError('Username already exist.');
+                echo $response->toJSON();
                 return;
             }
 

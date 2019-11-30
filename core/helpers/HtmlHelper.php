@@ -4,7 +4,7 @@
 class HtmlHelper
 {
 
-    public static function render_card_header($title = "Card Title")
+    public static function renderCardHeader($title = "Card Title")
     {
 
         ?>
@@ -13,7 +13,7 @@ class HtmlHelper
 
     }
 
-    public static function render_select_box($name, $data, $id = "", $selected_value = null)
+    public static function renderSelectBox($name, $data, $id = "", $selected_value = null)
     {
         ?>
         <select class="form-control" name="<?= $name ?>" id="<?= $id ?>">

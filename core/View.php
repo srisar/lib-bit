@@ -5,16 +5,23 @@ class View
 {
 
     private static $data = [];
-
     public static $error = [];
 
-    public static function set_data($key, $value)
+    /**
+     * @param $key
+     * @param $value
+     */
+    public static function setData($key, $value)
     {
         self::$data[$key] = $value;
     }
 
 
-    public static function get_data($key)
+    /**
+     * @param $key
+     * @return mixed|null
+     */
+    public static function getData($key)
     {
         if (!isset(self::$data[$key])) {
             return null;
@@ -22,12 +29,20 @@ class View
         return self::$data[$key];
     }
 
-    public static function set_error($key, $error)
+    /**
+     * @param $key
+     * @param $error
+     */
+    public static function setError($key, $error)
     {
         self::$error[$key] = $error;
     }
 
-    public static function get_error($key)
+    /**
+     * @param $key
+     * @return mixed|null
+     */
+    public static function getError($key)
     {
         if (empty(self::$error[$key])) {
             return null;
@@ -37,7 +52,10 @@ class View
     }
 
 
-    private static function error_container($error)
+    /**
+     * @param $error
+     */
+    private static function errorContainer($error)
     {
 
         if (isset($error)) { ?>
@@ -54,10 +72,13 @@ class View
     }
 
 
-    public static function render_error_messages($message_key = 'error')
+    /**
+     * @param string $message_key
+     */
+    public static function renderErrorMessages($message_key = 'error')
     {
-        $error = View::get_error($message_key);
-        View::error_container($error);
+        $error = View::getError($message_key);
+        View::errorContainer($error);
 
     }
 

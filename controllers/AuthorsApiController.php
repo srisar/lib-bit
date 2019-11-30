@@ -16,10 +16,10 @@ class AuthorsApiController
             ];
 
 
-            $author_name = $request->get_params()->get_string("author_name");
-            $author_email = $request->get_params()->get_string("author_email");
+            $author_name = $request->getParams()->getString("author_name");
+            $author_email = $request->getParams()->getString("author_email");
 
-            if (empty(Author::select_by_name($author_name))) {
+            if (empty(Author::selectByName($author_name))) {
                 // author name doesnt exist. proceed to add
 
                 $author = new Author();
@@ -28,7 +28,7 @@ class AuthorsApiController
 
                 if ($author->insert()) {
 
-                    $inserted_id = Author::get_last_insert_id();
+                    $inserted_id = Author::getLastInsertedID();
 
                     $author = Author::select($inserted_id);
 

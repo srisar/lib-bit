@@ -8,24 +8,24 @@ class BooksController
     public function view_books()
     {
 
-        $categories = Category::select_all();
+        $categories = Category::selectAll();
 
 
         $stats = [
-            'total_books' => Book::get_stats_total_books(),
-            'total_book_copies' => BookInstance::get_stats_total_book_instances(),
-            'total_categories' => Category::get_stats_total_categories(),
-            'total_authors' => Author::get_stats_total_authors(),
-            'total_members' => Member::get_stats_total_members(),
-            'total_departments' => Department::get_stats_total_departments(),
+            'total_books' => Book::getStatsTotalBooks(),
+            'total_book_copies' => BookInstance::getStatsTotalBookInstances(),
+            'total_categories' => Category::getStatsTotalCategories(),
+            'total_authors' => Author::getStatsTotalAuthors(),
+            'total_members' => Member::getStatsTotalMembers(),
+            'total_departments' => Department::getStatsTotalDepartments(),
             'monthly_transactions_data' => $this->get_month_on_month_transactions_count()['data'],
             'monthly_transactions_months' => $this->get_month_on_month_transactions_count()['months'],
         ];
 
 
-        View::set_data('categories', $categories);
-        View::set_data('title', 'All Books');
-        View::set_data('stats', $stats);
+        View::setData('categories', $categories);
+        View::setData('title', 'All Books');
+        View::setData('stats', $stats);
 
         include "views/books/view_books.view.php";
 
@@ -35,16 +35,16 @@ class BooksController
     {
         try {
 
-            $keyword = $request->get_params()->get_string('q');
+            $keyword = $request->getParams()->getString('q');
 
             if (!empty($keyword)) {
                 $books = Book::search($keyword);
-                $categories = Category::select_all();
+                $categories = Category::selectAll();
 
-                View::set_data('books', $books);
-                View::set_data('categories', $categories);
-                View::set_data('title', sprintf("Search results for → %s", $keyword));
-                View::set_data('keyword', $keyword);
+                View::setData('books', $books);
+                View::setData('categories', $categories);
+                View::setData('title', sprintf("Search results for → %s", $keyword));
+                View::setData('keyword', $keyword);
                 include "views/books/books_search.view.php";
             } else {
                 App::redirect('/books');
@@ -61,16 +61,16 @@ class BooksController
         try {
 
             $fields = [
-                'subcat_id' => $request->get_params()->get_int('subcat_id'),
+                'subcat_id' => $request->getParams()->getInt('subcat_id'),
             ];
 
 
             $subcategory = Subcategory::select($fields['subcat_id']);
-            $category = $subcategory->get_category();
+            $category = $subcategory->getCategory();
 
-            View::set_data('category', $category);
-            View::set_data('subcategory', $subcategory);
-            View::set_data('categories', Category::select_all());
+            View::setData('category', $category);
+            View::setData('subcategory', $subcategory);
+            View::setData('categories', Category::selectAll());
 
 
             include "views/books/books_add.view.php";
@@ -88,13 +88,13 @@ class BooksController
 
 
             $fields = [
-                'cat_id' => $request->get_params()->get_int('cat_id'),
-                'subcat_id' => $request->get_params()->get_int('subcat_id'),
-                'title' => $request->get_params()->get_string('title'),
-                'author_id' => $request->get_params()->get_int('author_id'),
-                'page_count' => $request->get_params()->get_int('page_count'),
-                'isbn' => $request->get_params()->get_string('isbn'),
-                'book_overview' => $request->get_params()->get_string('book_overview'),
+                'cat_id' => $request->getParams()->getInt('cat_id'),
+                'subcat_id' => $request->getParams()->getInt('subcat_id'),
+                'title' => $request->getParams()->getString('title'),
+                'author_id' => $request->getParams()->getInt('author_id'),
+                'page_count' => $request->getParams()->getInt('page_count'),
+                'isbn' => $request->getParams()->getString('isbn'),
+                'book_overview' => $request->getParams()->getString('book_overview'),
             ];
 
 
@@ -114,7 +114,7 @@ class BooksController
 
 
             if ($book->insert()) {
-                $book_id = Book::get_last_insert_id();
+                $book_id = Book::getLastInsertedID();
                 App::redirect('/books/edit', ['id' => $book_id]);
             }
 
@@ -130,14 +130,14 @@ class BooksController
 
         try {
 
-            $id = $request->get_params()->get_int('id');
+            $id = $request->getParams()->getInt('id');
 
             $book = Book::select($id);
 
-            $categories = Category::select_all();
+            $categories = Category::selectAll();
 
-            View::set_data('book', $book);
-            View::set_data('categories', $categories);
+            View::setData('book', $book);
+            View::setData('categories', $categories);
 
             include "views/books/books_edit.view.php";
 
@@ -154,18 +154,18 @@ class BooksController
         try {
 
             $fields = [
-                'id' => $request->get_params()->get_int('id'),
-                'title' => $request->get_params()->get_string('title'),
-                'category_id' => $request->get_params()->get_int('category_id'),
-                'subcategory_id' => $request->get_params()->get_int('subcategory_id'),
+                'id' => $request->getParams()->getInt('id'),
+                'title' => $request->getParams()->getString('title'),
+                'category_id' => $request->getParams()->getInt('category_id'),
+                'subcategory_id' => $request->getParams()->getInt('subcategory_id'),
             ];
 
-            $has_image = $request->get_files()->has('image');
+            $has_image = $request->getFiles()->has('image');
 
             if ($has_image) {
                 // 1. image upload enabled.
 
-                $uploaded_image = new UploadedFile($request->get_files()->get('image'));
+                $uploaded_image = new UploadedFile($request->getFiles()->get('image'));
 
                 // check uploaded image is valid before calling the saveFile()
 
@@ -173,8 +173,8 @@ class BooksController
                     if ($uploaded_image->save_file(BOOK_COVERS_UPLOAD_PATH)) {
 
                         $img_resize = new ImageProcessor($uploaded_image->get_full_uploaded_file_path());
-                        $img_resize->resize_exact(400, 600);
-                        $img_resize->save_image($uploaded_image->get_full_uploaded_file_path());
+                        $img_resize->resizeExact(400, 600);
+                        $img_resize->saveImage($uploaded_image->get_full_uploaded_file_path());
 
                         $book = Book::select($fields['id']);
                         $book->title = $fields['title'];
@@ -205,15 +205,15 @@ class BooksController
 
         } catch (Exception $e) {
 
-            $id = $request->get_params()->get_int('id');
+            $id = $request->getParams()->getInt('id');
             $book = Book::select($id);
 
-            $categories = Category::select_all();
+            $categories = Category::selectAll();
 
-            View::set_data('book', $book);
-            View::set_data('categories', $categories);
+            View::setData('book', $book);
+            View::setData('categories', $categories);
 
-            View::set_error('error', $e->getMessage());
+            View::setError('error', $e->getMessage());
             include_once "views/books/books_edit.view.php";
 
         }
@@ -225,20 +225,20 @@ class BooksController
     {
 
         try {
-            $field = ['subcat_id' => $request->get_params()->get_int('subcat_id')];
+            $field = ['subcat_id' => $request->getParams()->getInt('subcat_id')];
 
-            $books = Book::get_all_books_by_subcategory($field['subcat_id']);
+            $books = Book::getAllBySubcategory($field['subcat_id']);
 
-            $categories = Category::select_all();
+            $categories = Category::selectAll();
 
             $subcat = Subcategory::select($field['subcat_id']);
 
-            $title = sprintf("%s → %s", $subcat->get_category(), $subcat->subcategory_name);
+            $title = sprintf("%s → %s", $subcat->getCategory(), $subcat->subcategory_name);
 
-            View::set_data('books', $books);
-            View::set_data('categories', $categories);
-            View::set_data('title', $title);
-            View::set_data('selected_subcategory', $subcat);
+            View::setData('books', $books);
+            View::setData('categories', $categories);
+            View::setData('title', $title);
+            View::setData('selected_subcategory', $subcat);
 
             include "views/books/books_subcategory.view.php";
         } catch (Exception $exception) {
@@ -262,7 +262,7 @@ class BooksController
             $firstDay = $now->startOfMonth()->toDateString();
             $lastDay = $now->endOfMonth()->toDateString();
 
-            $data[] = BookTransaction::get_stat_number_of_transaction($firstDay, $lastDay);
+            $data[] = BookTransaction::getStatsNumberOfTransactions($firstDay, $lastDay);
 
         }
 

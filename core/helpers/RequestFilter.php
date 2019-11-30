@@ -10,11 +10,19 @@ class RequestFilter
         $this->map = $baseMap;
     }
 
+    /**
+     * @param $name
+     * @return bool
+     */
     public function has($name)
     {
         return isset($this->map[$name]);
     }
 
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function get($name)
     {
         return $this->map[$name];
@@ -25,7 +33,7 @@ class RequestFilter
      * @return int
      * @throws AppExceptions
      */
-    public function get_int($name): int
+    public function getInt($name): int
     {
         if (isset($this->map[$name])) {
             return (int)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_INT);
@@ -34,7 +42,11 @@ class RequestFilter
         }
     }
 
-    public function get_float($name): float
+    /**
+     * @param $name
+     * @return float
+     */
+    public function getFloat($name): float
     {
         return (float)filter_var($this->map[$name], FILTER_SANITIZE_NUMBER_FLOAT);
     }
@@ -45,7 +57,7 @@ class RequestFilter
      * @return string
      * @throws AppExceptions
      */
-    public function get_string($name, $filter = true): string
+    public function getString($name, $filter = true): string
     {
         if (isset($this->map[$name])) {
             return $filter ? (string)trim(filter_var($this->map[$name], FILTER_SANITIZE_STRING)) : $this->map[$name];
@@ -56,7 +68,11 @@ class RequestFilter
 
     }
 
-    public function get_email($name)
+    /**
+     * @param $name
+     * @return string
+     */
+    public function getEmail($name)
     {
         return (string)filter_var($this->map[$name], FILTER_VALIDATE_EMAIL);
     }

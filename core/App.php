@@ -8,7 +8,7 @@ class App
     /**
      * @return string
      */
-    public static function get_base_url()
+    public static function getBaseURL()
     {
         return sprintf("%s://%s", $_SERVER['REQUEST_SCHEME'], $_SERVER['HTTP_HOST']);
     }
@@ -16,9 +16,9 @@ class App
     /**
      * @return string
      */
-    public static function get_assets_url()
+    public static function getAssetsURL()
     {
-        return App::get_base_url() . '/assets';
+        return App::getBaseURL() . '/assets';
     }
 
     /**
@@ -26,15 +26,15 @@ class App
      * @param array $query
      * @return string
      */
-    public static function create_url($path, $query = [])
+    public static function createURL($path, $query = [])
     {
 
         if (!empty($query)) {
             $q = http_build_query($query);
-            return self::get_base_url() . '/index.php' . $path . '?' . $q;
+            return self::getBaseURL() . '/index.php' . $path . '?' . $q;
         }
 
-        return self::get_base_url() . '/index.php' . $path;
+        return self::getBaseURL() . '/index.php' . $path;
 
     }
 
@@ -44,35 +44,35 @@ class App
      */
     public static function redirect($path, $query = [])
     {
-        header('Location: ' . self::create_url($path, $query));
+        header('Location: ' . self::createURL($path, $query));
     }
 
 
-    public static function to_currency_format($number, $currency = "Rs.")
+    public static function toCurrencyFormat($number, $currency = "Rs.")
     {
         $value = number_format($number, 2, ".", ",");
         return sprintf("%s %s", $currency, $value);
     }
 
-    public static function today_string($format = DEFAULT_DATE_FORMAT)
+    public static function todayString($format = DEFAULT_DATE_FORMAT)
     {
         return date($format);
     }
 
-    public static function to_date_string($date, $format = DEFAULT_DATE_FORMAT)
+    public static function toDateString($date, $format = DEFAULT_DATE_FORMAT)
     {
         return !empty($date) ? date($format, strtotime($date)) : "";
     }
 
-    public static function is_admin_or_redirect()
+    public static function isAdminOrRedirect()
     {
-        if (!Session::is_admin())
+        if (!Session::isAdmin())
             App::redirect("/login");
     }
 
-    public static function is_user_or_redirect()
+    public static function isUserOrRedirect()
     {
-        if (!Session::is_user_logged_in())
+        if (!Session::isUserLoggedIn())
             App::redirect("/login");
     }
 

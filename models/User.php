@@ -15,10 +15,10 @@ class User
     /**
      * @return User[]
      */
-    public static function select_all()
+    public static function selectAll()
     {
 
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM users;");
         $statement->execute();
@@ -36,7 +36,7 @@ class User
 
         $hash = password_hash($this->password, PASSWORD_DEFAULT);
 
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("INSERT INTO users(username, password_hash, display_name, role) VALUES (:username, :p_hash, :display_name, :user_role);");
         return $statement->execute(
@@ -55,9 +55,9 @@ class User
      * @param $password
      * @return User
      */
-    public static function find_user($username, $password)
+    public static function findUser($username, $password)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM users WHERE username = ?");
 
         $statement->execute([$username]);
@@ -83,9 +83,9 @@ class User
      * @param $username
      * @return bool
      */
-    public static function is_username_exist($username)
+    public static function isUsernameExists($username)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
         $statement->execute([$username]);
 
@@ -100,9 +100,9 @@ class User
      * @param $username
      * @return User|null
      */
-    public static function find_by_username($username)
+    public static function findByUsername($username)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM users WHERE username = ? LIMIT 1");
         $statement->execute([$username]);
 
@@ -119,7 +119,7 @@ class User
      */
     public static function select($id)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
         $statement->execute([$id]);
 

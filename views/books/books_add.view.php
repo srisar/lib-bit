@@ -1,10 +1,10 @@
 <?php
 /** @var Category $category */
-$category = View::get_data('category');
+$category = View::getData('category');
 /** @var Subcategory $subcategory */
-$subcategory = View::get_data('subcategory');
+$subcategory = View::getData('subcategory');
 
-$categories = View::get_data('categories');
+$categories = View::getData('categories');
 
 ?>
 
@@ -30,9 +30,9 @@ $categories = View::get_data('categories');
                 </div>
                 <div class="card-body">
 
-                    <?php View::render_error_messages() ?>
+                    <?php View::renderErrorMessages() ?>
 
-                    <form action="<?= App::create_url('/books/adding') ?>" method="post">
+                    <form action="<?= App::createURL('/books/adding') ?>" method="post">
 
                         <input type="hidden" name="cat_id" value="<?= $category->id ?>">
                         <input type="hidden" name="subcat_id" value="<?= $subcategory->id ?>">
@@ -135,7 +135,7 @@ $categories = View::get_data('categories');
         <div class="col-lg-3">
             <div class="card bg-dark text-light">
                 <div class="card-header">
-                    <?php HtmlHelper::render_card_header("Hints"); ?>
+                    <?php HtmlHelper::renderCardHeader("Hints"); ?>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
@@ -242,7 +242,7 @@ $categories = View::get_data('categories');
             alert("Author name cannot be empty.")
         } else {
 
-            $.get("<?= App::create_url('/api/add_author') ?>", {
+            $.get("<?= App::createURL('/api/add_author') ?>", {
                 author_name: textAuthorName,
                 author_email: textAuthorEmail
             }).done(function (data) {

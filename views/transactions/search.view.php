@@ -3,15 +3,15 @@
 <?php
 
 /** @var BookInstance $book_instance */
-$book_instance = View::get_data('book_instance');
+$book_instance = View::getData('book_instance');
 
 /** @var Book $book */
-$book = View::get_data('book');
+$book = View::getData('book');
 
 /** @var Member[] $members */
-$members = View::get_data('members');
-$keyword = View::get_data('keyword');
-$searched = View::get_data('searched');
+$members = View::getData('members');
+$keyword = View::getData('keyword');
+$searched = View::getData('searched');
 
 ?>
 
@@ -32,19 +32,19 @@ $searched = View::get_data('searched');
 
 
         <div class="col-12 col-lg-9">
-            <?php View::render_error_messages() ?>
+            <?php View::renderErrorMessages() ?>
 
             <div class="card">
 
                 <div class="card-header">
                     <?php if ($searched): ?>
-                        <?php HtmlHelper::render_card_header("Search result for '{$keyword}'"); ?>
+                        <?php HtmlHelper::renderCardHeader("Search result for '{$keyword}'"); ?>
                     <?php endif; ?>
                 </div>
 
                 <div class="card-body">
 
-                    <form action="<?= App::create_url('/transactions/search-member-results') ?>" method="get">
+                    <form action="<?= App::createURL('/transactions/search-member-results') ?>" method="get">
 
                         <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
 

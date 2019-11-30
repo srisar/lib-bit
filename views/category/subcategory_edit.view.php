@@ -3,9 +3,9 @@
 <?php
 
 /** @var Subcategory $subcategory */
-$subcategory = View::get_data('subcategory');
+$subcategory = View::getData('subcategory');
 
-$all_subcategories = $subcategory->get_category()->get_all_subcategories();
+$all_subcategories = $subcategory->getCategory()->getAllSubcategories();
 
 ?>
 
@@ -14,16 +14,16 @@ $all_subcategories = $subcategory->get_category()->get_all_subcategories();
 
   <div class="row mb-3">
     <div class="col text-center">
-      <h1 class="text-center">Modify <?= $subcategory ?> in <?= $subcategory->get_category() ?></h1>
+      <h1 class="text-center">Modify <?= $subcategory ?> in <?= $subcategory->getCategory() ?></h1>
     </div>
   </div><!--.row-->
 
   <div class="row justify-content-center mb-3">
     <div class="col-6">
 
-      <?php View::render_error_messages() ?>
+      <?php View::renderErrorMessages() ?>
 
-      <form action="<?= App::create_url('/subcategories/editing') ?>" method="get">
+      <form action="<?= App::createURL('/subcategories/editing') ?>" method="get">
 
         <input type="hidden" name="subcat_id" value="<?= $subcategory->id ?>">
 
@@ -46,7 +46,7 @@ $all_subcategories = $subcategory->get_category()->get_all_subcategories();
     <div class="col-6">
       <div class="card">
         <div class="card-header">
-          <h3 class="m-0">Subcategories in <?= $subcategory->get_category() ?></h3>
+          <h3 class="m-0">Subcategories in <?= $subcategory->getCategory() ?></h3>
         </div>
 
         <div class="card-body p-1">

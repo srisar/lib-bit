@@ -24,7 +24,7 @@ class BookTransaction
      */
     public static function select($id)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM book_transactions WHERE id=?");
         $statement->execute([$id]);
 
@@ -37,10 +37,10 @@ class BookTransaction
      * @param int $limit
      * @return BookTransaction[]
      */
-    public static function select_all($limit = 100)
+    public static function selectAll($limit = 100)
     {
 
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM book_transactions ORDER BY borrowing_date LIMIT :limit_val");
         $statement->bindValue(':limit_val', $limit, PDO::PARAM_INT);
 
@@ -53,9 +53,9 @@ class BookTransaction
      * @param $instance_id
      * @return array
      */
-    public static function select_all_by_book_instance_id($instance_id)
+    public static function selectAllByBookInstanceID($instance_id)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM book_transactions WHERE book_instance_id=? ORDER BY borrowing_date DESC");
         $statement->execute([$instance_id]);
 
@@ -67,7 +67,7 @@ class BookTransaction
      */
     public function insert()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("INSERT INTO book_transactions(book_instance_id, member_id, borrowing_date, returning_date, remarks, state) 
                               VALUE (
@@ -86,7 +86,7 @@ class BookTransaction
 
     public function update()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("
             UPDATE book_transactions SET
                 returned_date = :returned_date,
@@ -110,9 +110,9 @@ class BookTransaction
      * @param int $limit
      * @return array
      */
-    public static function select_by_member(Member $member, $limit = 10)
+    public static function selectByMember(Member $member, $limit = 10)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM book_transactions WHERE member_id=:member_id ORDER BY borrowing_date DESC LIMIT :limit_value");
 
         $statement->bindValue(':member_id', $member->id);
@@ -127,7 +127,7 @@ class BookTransaction
     /**
      * @return BookInstance
      */
-    public function get_book_instance()
+    public function getBookInstance()
     {
         return BookInstance::select($this->book_instance_id);
     }
@@ -135,7 +135,7 @@ class BookTransaction
     /**
      * @return Member
      */
-    public function get_member()
+    public function getMember()
     {
         return Member::select($this->member_id);
     }
@@ -143,9 +143,9 @@ class BookTransaction
     /**
      * @return BookInstance[]
      */
-    public static function select_by_returning_date($start_date, $end_date)
+    public static function selectByReturningDate($start_date, $end_date)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM book_transactions WHERE returning_date BETWEEN :start_date AND :end_date ORDER BY borrowing_date DESC");
 
         $statement->bindValue(':start_date', $start_date);
@@ -159,9 +159,9 @@ class BookTransaction
     /**
      * @return BookInstance[]
      */
-    public static function select_overdue_transactions()
+    public static function selectOverdueTransactions()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM book_transactions WHERE (returning_date < :today AND state=:state) ORDER BY returning_date ASC");
 
         $statement->bindValue(':today', TODAY);
@@ -175,9 +175,9 @@ class BookTransaction
     /**
      * @return int
      */
-    public static function get_stat_number_of_transaction($start, $end)
+    public static function getStatsNumberOfTransactions($start, $end)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT count(id) as result FROM book_transactions WHERE borrowing_date BETWEEN :start AND :end");
         $statement->execute([
             ':start' => $start,

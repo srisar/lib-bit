@@ -26,7 +26,7 @@ class ImageProcessor
 
             $this->mime = $size['mime'];
 
-            if ($this->is_valid_image($image_file)) {
+            if ($this->isValidImage($image_file)) {
                 $this->image_height = imagesy($this->image);
                 $this->image_width = imagesx($this->image);
             } else {
@@ -44,7 +44,7 @@ class ImageProcessor
      * @param $image_file
      * @return bool
      */
-    private function is_valid_image($image_file)
+    private function isValidImage($image_file)
     {
         if ($this->mime == 'image/jpg' || $this->mime == 'image/jpeg') {
             $this->image = imagecreatefromjpeg($image_file);
@@ -64,7 +64,7 @@ class ImageProcessor
         return false;
     }
 
-    public function save_image($path, $quality = 100)
+    public function saveImage($path, $quality = 100)
     {
         if ($this->mime == 'image/jpg' || $this->mime == 'image/jpeg') {
             imagejpeg($this->temp_image, $path, $quality);
@@ -81,14 +81,14 @@ class ImageProcessor
 
     }
 
-    public function resize_exact($width, $height)
+    public function resizeExact($width, $height)
     {
         $this->temp_image = imagecreatetruecolor($width, $height);
         imagecopyresampled($this->temp_image, $this->image, 0, 0, 0, 0, $width, $height, $this->image_width, $this->image_height);
 
     }
 
-    public function resize_max_width($max_width)
+    public function resizeMaxWidth($max_width)
     {
         $ratio = $max_width / $this->image_width;
         $new_height = $this->image_height * $ratio;
@@ -98,7 +98,7 @@ class ImageProcessor
 
     }
 
-    public function resize_max_height($max_height)
+    public function resizeMaxHeight($max_height)
     {
         $ratio = $max_height / $this->image_height;
         $new_width = $this->image_width * $ratio;

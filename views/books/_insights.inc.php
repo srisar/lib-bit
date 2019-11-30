@@ -1,6 +1,6 @@
 <?php
 
-$stats = View::get_data('stats');
+$stats = View::getData('stats');
 
 ?>
 <div class="row">

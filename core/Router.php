@@ -24,11 +24,11 @@ class Router
             if ($route['url'] == $url) {
 
                 if ($route['access_role'] == User::ROLE_ADMIN) {
-                    App::is_admin_or_redirect();
+                    App::isAdminOrRedirect();
                     return call_user_func([new $route['classname'](), $route['method']], new Request());
 
                 } elseif ($route['access_role'] == User::ROLE_USER) {
-                    App::is_user_or_redirect();
+                    App::isUserOrRedirect();
                     return call_user_func([new $route['classname'](), $route['method']], new Request());
 
                 } else {

@@ -3,10 +3,10 @@
 <?php
 
 /** @var Member[] $members */
-$members = View::get_data('members');
+$members = View::getData('members');
 
 /** @var Department[] $departments */
-$departments = View::get_data('departments');
+$departments = View::getData('departments');
 
 
 ?>
@@ -24,7 +24,7 @@ $departments = View::get_data('departments');
 
         <div class="card bg-light">
           <div class="card-header">
-            <?php HtmlHelper::render_card_header('Departments') ?>
+            <?php HtmlHelper::renderCardHeader('Departments') ?>
           </div>
           <div class="card-body">
 
@@ -33,7 +33,7 @@ $departments = View::get_data('departments');
 
                 <li class="list-group-item">
                   <div class="category-name">
-                    <a href="<?= App::create_url('/members/department', ['dept_id' => $department->id]) ?>">
+                    <a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
                       <?= $department ?>
                     </a>
                   </div>
@@ -49,7 +49,7 @@ $departments = View::get_data('departments');
 
 
         <div class="card">
-          <div class="card-header"><?php HtmlHelper::render_card_header('Recent members'); ?></div>
+          <div class="card-header"><?php HtmlHelper::renderCardHeader('Recent members'); ?></div>
           <div class="card-body">
 
             <table class="table table-striped table-bordered">
@@ -64,12 +64,12 @@ $departments = View::get_data('departments');
               <?php foreach ($members as $member): ?>
                 <tr>
                   <td>
-                    <a href="<?= App::create_url('/members/edit', ['id' => $member->id]) ?>">
+                    <a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>">
                       <?= $member->fullname ?>
                     </a>
                   </td>
                   <td>
-                    <?= App::to_date_string($member->get_member_since()) ?>
+                    <?= App::toDateString($member->getMemberSince()) ?>
                   </td>
                 </tr>
               <?php endforeach; ?>

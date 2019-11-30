@@ -27,7 +27,7 @@ class TestController
 
             var_dump($firstDay . ', ' . $lastDay);
 
-            $data[] = BookTransaction::get_stat_number_of_transaction($firstDay, $lastDay);
+            $data[] = BookTransaction::getStatsNumberOfTransactions($firstDay, $lastDay);
 
 
             echo "<br><br>";

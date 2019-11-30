@@ -2,7 +2,7 @@
 
 include_once "core/Session.php";
 
-Session::init_session();
+Session::initSession();
 
 $config = [
     "host" => "localhost",

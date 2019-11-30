@@ -11,29 +11,29 @@ class Session
     private static $STATE = "state";
 
 
-    public static function init_session()
+    public static function initSession()
     {
         session_start();
     }
 
-    public static function kill_session()
+    public static function killSession()
     {
         session_destroy();
         // unset($_SESSION); // you dont really need this.
     }
 
-    public static function set_user($user)
+    public static function setUser($user)
     {
         $_SESSION[self::$USERNAME] = $user->username;
         $_SESSION[self::$DISPLAY_NAME] = $user->display_name;
         $_SESSION[self::$ROLE] = $user->role;
 
 
-        self::set_login_state(true);
+        self::setLoginState(true);
 
     }
 
-    public static function is_user_logged_in()
+    public static function isUserLoggedIn()
     {
         if (isset($_SESSION[self::$STATE])) {
             return $_SESSION[self::$STATE];
@@ -41,25 +41,25 @@ class Session
         return false;
     }
 
-    public static function is_admin()
+    public static function isAdmin()
     {
-        if (self::is_user_logged_in()) {
+        if (self::isUserLoggedIn()) {
             if ($_SESSION[self::$ROLE] == User::ROLE_ADMIN)
                 return true;
         }
         return false;
     }
 
-    public static function is_user()
+    public static function isUser()
     {
-        if (self::is_user_logged_in()) {
+        if (self::isUserLoggedIn()) {
             if ($_SESSION[self::$ROLE] == User::ROLE_USER)
                 return true;
         }
         return false;
     }
 
-    private static function set_login_state($state)
+    private static function setLoginState($state)
     {
         $_SESSION[self::$STATE] = true;
     }

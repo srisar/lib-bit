@@ -3,14 +3,14 @@
 <?php
 
 /** @var BookInstance $bookInstance */
-$bookInstance = View::get_data('book_instance');
+$bookInstance = View::getData('book_instance');
 
 /** @var BookTransaction[] $transactions */
-$transactions = View::get_data('transactions');
+$transactions = View::getData('transactions');
 
 
 /** @var Book $book */
-$book = View::get_data('book');
+$book = View::getData('book');
 
 
 ?>
@@ -46,16 +46,16 @@ $book = View::get_data('book');
                     <?php foreach ($transactions as $transaction): ?>
 
                         <tr>
-                            <td><a href="<?= App::create_url('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
-                            <td><a target="_blank" href="<?= App::create_url("/members/edit", ['id' => $transaction->get_member()->id]) ?>"><?= $transaction->get_member() ?></a></td>
+                            <td><a href="<?= App::createURL('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
+                            <td><a target="_blank" href="<?= App::createURL("/members/edit", ['id' => $transaction->getMember()->id]) ?>"><?= $transaction->getMember() ?></a></td>
                             <td>
-                                <a target="_blank" href="<?= App::create_url("/books/edit", ['id' => $transaction->get_book_instance()->book_id]) ?>">
-                                    <?= $transaction->get_book_instance()->get_book() ?>
+                                <a target="_blank" href="<?= App::createURL("/books/edit", ['id' => $transaction->getBookInstance()->book_id]) ?>">
+                                    <?= $transaction->getBookInstance()->getBook() ?>
                                 </a>
                             </td>
-                            <td><?= App::to_date_string($transaction->borrowing_date) ?></td>
-                            <td><?= App::to_date_string($transaction->returning_date) ?></td>
-                            <td><?= App::to_date_string($transaction->returned_date) ?></td>
+                            <td><?= App::toDateString($transaction->borrowing_date) ?></td>
+                            <td><?= App::toDateString($transaction->returning_date) ?></td>
+                            <td><?= App::toDateString($transaction->returned_date) ?></td>
                             <td>
                                 <?php if ($transaction->state == BookTransaction::STATE_BORROWED): ?>
                                     <span class="badge badge-pill badge-warning"><?= $transaction->state ?></span>

@@ -12,12 +12,12 @@ class LoginController
     public function login(Request $request)
     {
 
-        if (Session::is_user_logged_in()) {
+        if (Session::isUserLoggedIn()) {
             App::redirect('/books');
         }
 
-        if ($request->get_params()->has('error')) {
-            View::set_error('error', 'Login failed');
+        if ($request->getParams()->has('error')) {
+            View::setError('error', 'Login failed');
         }
 
         include_once "views/login/login_form.view.php";
@@ -32,15 +32,15 @@ class LoginController
         try {
 
             $fields = [
-                "username" => $request->get_params()->get_string('username'),
-                "password" => $request->get_params()->get_string('password'),
+                "username" => $request->getParams()->getString('username'),
+                "password" => $request->getParams()->getString('password'),
             ];
 
-            $user = User::find_user($fields['username'], $fields['password']);
+            $user = User::findUser($fields['username'], $fields['password']);
 
 
             if (!empty($user)) {
-                Session::set_user($user);
+                Session::setUser($user);
                 App::redirect('/books');
             } else {
                 App::redirect('/login', ['error' => '1']);
@@ -57,8 +57,8 @@ class LoginController
      */
     public function logout()
     {
-        if (Session::is_user_logged_in()) {
-            Session::kill_session();
+        if (Session::isUserLoggedIn()) {
+            Session::killSession();
             App::redirect('/login');
         }
     }

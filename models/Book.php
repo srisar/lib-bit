@@ -19,9 +19,9 @@ class Book
      * @param int $limit
      * @return Book[]
      */
-    public static function select_all($limit = 100)
+    public static function selectAll($limit = 100)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM books ORDER BY id DESC LIMIT :limit_value");
         $statement->bindParam(":limit_value", $limit, PDO::PARAM_INT);
@@ -33,7 +33,7 @@ class Book
 
     public static function search($keyword)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM books WHERE title LIKE :title OR isbn LIKE :isbn ORDER BY id DESC");
         $statement->bindValue(":title", "%{$keyword}%", PDO::PARAM_STR);
@@ -50,7 +50,7 @@ class Book
      */
     public static function select($id)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM books WHERE id=?");
         $statement->execute([$id]);
@@ -63,11 +63,11 @@ class Book
      * Insert multiple books at once.
      * @param array $titles
      */
-    public static function batch_insert(array $titles)
+    public static function batchInsert(array $titles)
     {
 
         try {
-            $db = Database::get_instance();
+            $db = Database::getInstance();
 
             $db->beginTransaction();
 
@@ -95,7 +95,7 @@ class Book
      */
     public function insert()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("INSERT INTO books(title, category_id, subcategory_id, author_id, page_count, isbn, book_overview) VALUE (?,?,?,?,?,?,?);");
         return $statement->execute(
@@ -116,9 +116,9 @@ class Book
      * Returns the last inserted id.
      * @return string
      */
-    public static function get_last_insert_id()
+    public static function getLastInsertedID()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         return $db->lastInsertId();
     }
 
@@ -129,7 +129,7 @@ class Book
     public function update()
     {
 
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("UPDATE books SET title=?, subcategory_id=?, category_id=?, image_url=? WHERE id=?");
         return $statement->execute([$this->title, $this->subcategory_id, $this->category_id, $this->image_url, $this->id]);
@@ -140,7 +140,7 @@ class Book
      * Get the Book's category.
      * @return Category
      */
-    public function get_category()
+    public function getCategory()
     {
         return Category::select($this->category_id);
     }
@@ -149,7 +149,7 @@ class Book
      * Get the book's subcategory
      * @return Subcategory
      */
-    public function get_subcategory()
+    public function getSubcategory()
     {
         return Subcategory::select($this->subcategory_id);
     }
@@ -158,9 +158,9 @@ class Book
      * Returns a display name as [Title (category)]
      * @return string
      */
-    public function get_display_name()
+    public function getDisplayName()
     {
-        return sprintf("%s (%s)", $this->title, $this->get_category());
+        return sprintf("%s (%s)", $this->title, $this->getCategory());
     }
 
 
@@ -168,9 +168,9 @@ class Book
      * Get all the books from the given instance.
      * @return BookInstance[]
      */
-    public function get_all_book_instances()
+    public function getAllBookInstances()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM book_instances WHERE book_id=?");
         $statement->execute([$this->id]);
 
@@ -183,10 +183,10 @@ class Book
      * @param $id
      * @return Book[]
      */
-    public static function get_all_books_by_subcategory($id)
+    public static function getAllBySubcategory($id)
     {
         $subcategory = Subcategory::select($id);
-        return $subcategory->get_all_books();
+        return $subcategory->getAllBooks();
     }
 
 
@@ -194,31 +194,34 @@ class Book
      * Check if a book has uploaded image.
      * @return bool
      */
-    public function has_image_url()
+    public function hasImageURL()
     {
         return !empty($this->image_url);
     }
 
 
     /**
-     *
+     * Returns the associated image with the book,
+     * if an image is not available, no-cover page image will be
+     * returned.
      */
-    public function get_image()
+    public function getImage()
     {
-        if ($this->has_image_url()) {
+        if ($this->hasImageURL()) {
             return sprintf("%s/%s", BOOK_COVERS_UPLOAD_PATH, $this->image_url);
         } else {
-            return App::get_assets_url() . "/img/no-cover.png";
+            return App::getAssetsURL() . "/img/no-cover.png";
         }
     }
 
 
     /**
+     * Returns total number of books in db
      * @return int
      */
-    public static function get_stats_total_books()
+    public static function getStatsTotalBooks()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT COUNT(id) as result FROM books;");
         $statement->execute();
 

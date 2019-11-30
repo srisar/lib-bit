@@ -7,7 +7,7 @@ class Category
     /**
      * @return string
      */
-    public function get_category_name()
+    public function getCategoryName()
     {
         return $this->category_name;
     }
@@ -19,7 +19,7 @@ class Category
      */
     public static function select($id)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM categories WHERE id=?");
         $statement->execute([$id]);
 
@@ -30,9 +30,9 @@ class Category
      * @param $name
      * @return mixed
      */
-    public static function get_category_by_name($name)
+    public static function getCategoryByName($name)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM categories WHERE category_name=?");
         $statement->execute([$name]);
 
@@ -42,9 +42,9 @@ class Category
     /**
      * @return Category[]
      */
-    public static function select_all()
+    public static function selectAll()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM categories");
         $statement->execute();
 
@@ -57,7 +57,7 @@ class Category
      */
     public function insert()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("INSERT INTO categories(category_name) VALUE (?)");
         return $statement->execute([$this->category_name]);
     }
@@ -65,9 +65,9 @@ class Category
     /**
      * @return bool
      */
-    public function name_exists()
+    public function nameExists()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM categories WHERE category_name=?");
         $statement->execute([$this->category_name]);
 
@@ -92,9 +92,9 @@ class Category
     /**
      * @return Subcategory[]
      */
-    public function get_all_subcategories()
+    public function getAllSubcategories()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM subcategories WHERE category_id=?");
         $statement->execute([$this->id]);
 
@@ -105,9 +105,9 @@ class Category
     /**
      * @return int
      */
-    public static function get_stats_total_categories()
+    public static function getStatsTotalCategories()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT COUNT(id) as result FROM categories;");
         $statement->execute();
 

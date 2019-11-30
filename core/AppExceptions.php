@@ -11,13 +11,13 @@ class AppExceptions extends Exception
 
     public static function showExceptionView($message = "")
     {
-        View::set_error('error', self::getMessage());
+        View::setError('error', self::getMessage());
         include_once "views/error/error.view.php";
     }
 
     public function showMessage()
     {
-        View::set_error('error', $this->getMessage());
+        View::setError('error', $this->getMessage());
         include_once "views/error/error.view.php";
     }
 

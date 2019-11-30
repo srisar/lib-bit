@@ -1,13 +1,13 @@
 <?php
 /** @var BookTransaction $book_transaction */
-$book_transaction = View::get_data('book_transaction');
+$book_transaction = View::getData('book_transaction');
 
 /** @var BookInstance $book_instance */
-$book_instance = View::get_data('book_instance');
+$book_instance = View::getData('book_instance');
 /** @var Book $book */
-$book = View::get_data('book');
+$book = View::getData('book');
 /** @var Member $member */
-$member = View::get_data('member');
+$member = View::getData('member');
 
 ?>
 

@@ -15,6 +15,10 @@ class Database
     private static $pdo;
 
 
+    /**
+     * Initialize database config and PDO connection
+     * @param $config
+     */
     public static function init($config)
     {
         self::$config = $config;
@@ -34,7 +38,11 @@ class Database
     }
 
 
-    public static function get_instance()
+    /**
+     * Returns the connected PDO instance
+     * @return PDO
+     */
+    public static function getInstance()
     {
         if (empty(self::$pdo)) {
             self::init(self::$config);
@@ -43,11 +51,18 @@ class Database
         return self::$pdo;
     }
 
-    public static function get_last_inserted_id()
+    /**
+     * Returns the last inserted id of the row
+     * @return string
+     */
+    public static function getLastInsertedId()
     {
         return self::$pdo->lastInsertId();
     }
 
+    /**
+     * Close the database connection
+     */
     public static function close()
     {
         self::$pdo = null;

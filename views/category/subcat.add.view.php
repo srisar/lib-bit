@@ -3,7 +3,7 @@
 <?php
 
 /** @var Category $category */
-$category = View::get_data('category');
+$category = View::getData('category');
 
 ?>
 
@@ -20,14 +20,14 @@ $category = View::get_data('category');
                 </div>
 
                 <div class="card-body p-1">
-                    <?php $subcats = $category->get_all_subcategories(); ?>
+                    <?php $subcats = $category->getAllSubcategories(); ?>
 
                     <?php if (!empty($subcats)): ?>
 
                         <ul class="list-group">
                             <?php foreach ($subcats as $subcat): ?>
 
-                                <li class="list-group-item"><a href="<?= App::create_url('/subcategory/edit', ['id' => $subcat->id]) ?>"><?= $subcat->subcategory_name ?></a></li>
+                                <li class="list-group-item"><a href="<?= App::createURL('/subcategory/edit', ['id' => $subcat->id]) ?>"><?= $subcat->subcategory_name ?></a></li>
                             <?php endforeach; ?>
                         </ul>
 
@@ -45,9 +45,9 @@ $category = View::get_data('category');
                     <h3 class="m-0"> Add a subcategory</h3>
                 </div>
                 <div class="card-body">
-                    <?php View::render_error_messages() ?>
+                    <?php View::renderErrorMessages() ?>
 
-                    <form action="<?= App::create_url('/subcategory/adding') ?>" method="get">
+                    <form action="<?= App::createURL('/subcategory/adding') ?>" method="get">
 
                         <input type="hidden" name="category_id" , value="<?= $category->id ?>">
 

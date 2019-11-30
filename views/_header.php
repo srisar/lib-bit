@@ -7,20 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Libman - A BIT Project</title>
 
-    <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/bootstrap/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/app.css">
-    <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/lineicons/LineIcons.css">
-    <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/plugins/pickerjs/dist/picker.min.css">
-    <link rel="stylesheet" href="<?= App::get_base_url() ?>/assets/plugins/DataTables/datatables.min.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/fonts/fonts.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/app.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/lineicons/LineIcons.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/plugins/pickerjs/dist/picker.min.css">
+    <link rel="stylesheet" href="<?= App::getBaseURL() ?>/assets/plugins/DataTables/datatables.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
 </head>
 <body>
 
-<?php if (Session::is_user_logged_in()): ?>
+<?php if (Session::isUserLoggedIn()): ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">
-            <img src="<?= App::get_base_url() ?>/assets/img/logo.png" alt="LibMan" class="logo"></a>
+            <img src="<?= App::getBaseURL() ?>/assets/img/logo.png" alt="LibMan" class="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -32,7 +33,7 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= App::create_url('/books') ?>">View Books</a>
+                    <a class="nav-link" href="<?= App::createURL('/books') ?>">View Books</a>
                 </li>
 
                 <li class="nav-item active dropdown">
@@ -41,30 +42,30 @@
                         Manage Books
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::create_url('/categories') ?>">Manage Categories</a>
-                        <a class="dropdown-item" href="<?= App::create_url('/authors') ?>">Manage Authors</a>
+                        <a class="dropdown-item" href="<?= App::createURL('/categories') ?>">Manage Categories</a>
+                        <a class="dropdown-item" href="<?= App::createURL('/authors') ?>">Manage Authors</a>
 
                     </div>
                 </li>
 
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= App::create_url('/members') ?>">Manage Members</a>
+                    <a class="nav-link" href="<?= App::createURL('/members') ?>">Manage Members</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= App::create_url('/transactions') ?>">View Transactions</a>
+                    <a class="nav-link" href="<?= App::createURL('/transactions') ?>">View Transactions</a>
                 </li>
 
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
-                <span class="badge badge-pill badge-dark mr-2">Today is <?= App::today_string() ?></span>
+                <span class="badge badge-pill badge-dark mr-2">Today is <?= App::todayString() ?></span>
 
-                <?php if (Session::is_admin()): ?>
-                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="<?= App::create_url('/users') ?>">Manage
+                <?php if (Session::isAdmin()): ?>
+                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="<?= App::createURL('/users') ?>">Manage
                         Users</a>
                 <?php endif; ?>
-                <a class="btn btn-danger my-2 my-sm-0" href="<?= App::create_url('/logout') ?>">Logout</a>
+                <a class="btn btn-danger my-2 my-sm-0" href="<?= App::createURL('/logout') ?>">Logout</a>
 
             </form>
 

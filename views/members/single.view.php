@@ -2,15 +2,15 @@
 
 <?php
 /** @var Department $department */
-$department = View::get_data('department');
-$type = View::get_data('type');
+$department = View::getData('department');
+$type = View::getData('type');
 /** @var Member $member */
-$member = View::get_data('member');
+$member = View::getData('member');
 
-$errors = View::get_error('errors');
+$errors = View::getError('errors');
 
 /** @var BookTransaction[] $member_transactions */
-$member_transactions = View::get_data('member_transactions');
+$member_transactions = View::getData('member_transactions');
 
 ?>
 
@@ -31,11 +31,11 @@ $member_transactions = View::get_data('member_transactions');
 
             <div class="card">
                 <div class="card-header">
-                    <?php HtmlHelper::render_card_header("Edit {$type}: {$member->fullname}") ?>
+                    <?php HtmlHelper::renderCardHeader("Edit {$type}: {$member->fullname}") ?>
                 </div>
                 <div class="card-body">
 
-                    <form action="<?= App::create_url('/members/editing') ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= App::createURL('/members/editing') ?>" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" name="id" value="<?= $member->id ?>">
 
@@ -51,7 +51,7 @@ $member_transactions = View::get_data('member_transactions');
                             <div class="col-12 col-lg-3">
                                 <div class="form-group">
                                     <label for="member_since">Member since</label>
-                                    <input type="text" name="member_since" id="member_since" class="form-control date-picker" value="<?= App::to_date_string($member->member_since) ?>">
+                                    <input type="text" name="member_since" id="member_since" class="form-control date-picker" value="<?= App::toDateString($member->member_since) ?>">
                                     <!--                                    <div class="" id="date-picker-error"></div>-->
                                     <div class="invalid-feedback">Invalid date</div>
                                     <div class="valid-feedback">Looks good</div>
@@ -74,7 +74,7 @@ $member_transactions = View::get_data('member_transactions');
                         <div class="row">
                             <div class="col text-right">
                                 <button type="submit" id="submit-button" class="btn btn-primary">Save</button>
-                                <a href="<?= App::create_url('/members/department', ['dept_id' => $department->id]) ?>" class="btn btn-secondary">Cancel</a>
+                                <a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>" class="btn btn-secondary">Cancel</a>
                             </div>
                         </div>
 

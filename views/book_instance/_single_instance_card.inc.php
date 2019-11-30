@@ -6,7 +6,7 @@
 
         <div class="row">
             <div class="col text-center">
-                <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>" alt="Cover Image">
+                <img id="cover-image" class="img-thumbnail" src="<?= $book->getImage() ?>" alt="Cover Image">
             </div>
         </div>
 
@@ -31,7 +31,7 @@
             <div class="col-6 col-lg-12">
                 <div class="form-group">
                     <label for="book-category">Category</label>
-                    <input type="text" class="form-control" value="<?= $book->get_category() ?>" readonly>
+                    <input type="text" class="form-control" value="<?= $book->getCategory() ?>" readonly>
 
                 </div>
 
@@ -43,7 +43,7 @@
                     <div class="form-group">
                         <label for="book-category">Subcategory</label>
 
-                        <input type="text" class="form-control" value="<?= $book->get_subcategory() ?>" readonly>
+                        <input type="text" class="form-control" value="<?= $book->getSubcategory() ?>" readonly>
                     </div>
                 </div>
 

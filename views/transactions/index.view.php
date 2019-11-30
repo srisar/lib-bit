@@ -3,12 +3,12 @@
 <?php
 
 /** @var BookTransaction[] $book_transactions */
-$recent_transactions = View::get_data('recent_transactions');
+$recent_transactions = View::getData('recent_transactions');
 /** @var BookTransaction[] $today_returnable */
-$today_returnable = View::get_data('today_returnable');
+$today_returnable = View::getData('today_returnable');
 
 /** @var BookTransaction[] $overdue_transactions */
-$overdue_transactions = View::get_data('overdue_transactions');
+$overdue_transactions = View::getData('overdue_transactions');
 ?>
 
 
@@ -17,7 +17,7 @@ $overdue_transactions = View::get_data('overdue_transactions');
     <div class="row">
         <div class="col-12 col-md-12 col-lg-3 d-none">
             <div class="card">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Statistics"); ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Statistics"); ?></div>
                 <div class="card-body">
 
                     <table class="table table-bordered table-striped">
@@ -47,7 +47,7 @@ $overdue_transactions = View::get_data('overdue_transactions');
 
             <!--Recently overdue transactions-->
             <div class="card mb-3">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Overdue Transactions") ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Overdue Transactions") ?></div>
                 <div class="card-body">
                     <?php if (!empty($overdue_transactions)): ?>
                         <?php BookTransactionsHelper::renderTransactionsTable($overdue_transactions); ?>
@@ -59,7 +59,7 @@ $overdue_transactions = View::get_data('overdue_transactions');
 
             <!--Today returnable transactions-->
             <div class="card mb-3">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Today Returnable Transactions") ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Today Returnable Transactions") ?></div>
                 <div class="card-body">
                     <?php if (!empty($today_returnable)): ?>
                         <?php BookTransactionsHelper::renderTransactionsTable($today_returnable); ?>
@@ -71,7 +71,7 @@ $overdue_transactions = View::get_data('overdue_transactions');
 
             <!--Recent transactions-->
             <div class="card mb-3">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Recent Transactions") ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Recent Transactions") ?></div>
                 <div class="card-body">
                     <?php if (!empty($recent_transactions)): ?>
                         <?php BookTransactionsHelper::renderTransactionsTable($recent_transactions); ?>

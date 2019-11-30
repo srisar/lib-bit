@@ -3,16 +3,16 @@
 <?php
 
 /** @var BookInstance $book_instance */
-$book_instance = View::get_data('book_instance');
+$book_instance = View::getData('book_instance');
 /** @var Book $book */
-$book = View::get_data('book');
+$book = View::getData('book');
 /** @var Member $member */
-$member = View::get_data('member');
+$member = View::getData('member');
 /** @var BookTransaction[] $member_transactions */
-$member_transactions = View::get_data('member_transactions');
+$member_transactions = View::getData('member_transactions');
 
-$borrowing_date = View::get_data('borrowing_date');
-$returning_date = View::get_data('returning_date');
+$borrowing_date = View::getData('borrowing_date');
+$returning_date = View::getData('returning_date');
 
 ?>
 
@@ -28,7 +28,7 @@ $returning_date = View::get_data('returning_date');
   <div class="row justify-content-center">
     <div class="col-12">
 
-      <?php View::render_error_messages() ?>
+      <?php View::renderErrorMessages() ?>
 
     </div>
   </div>
@@ -41,7 +41,7 @@ $returning_date = View::get_data('returning_date');
         <div class="card-header"></div>
         <div class="card-body">
 
-          <form action="<?= App::create_url('/transactions/adding') ?>" method="post">
+          <form action="<?= App::createURL('/transactions/adding') ?>" method="post">
 
             <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
             <input type="hidden" name="member_id" value="<?= $member->id ?>">
@@ -57,13 +57,13 @@ $returning_date = View::get_data('returning_date');
             <div class="form-group">
               <label for="">Borrowing Date</label>
               <input type="text" class="form-control date-picker" name="borrowing_date"
-                     value="<?= App::to_date_string($borrowing_date) ?>">
+                     value="<?= App::toDateString($borrowing_date) ?>">
             </div>
 
             <div class="form-group">
               <label for="">Returning Date</label>
               <input type="text" class="form-control date-picker" name="returning_date"
-                     value="<?= App::to_date_string($returning_date) ?>">
+                     value="<?= App::toDateString($returning_date) ?>">
             </div>
 
             <div class="form-group">

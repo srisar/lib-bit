@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'Arial Nova';
+    src: local('Arial Nova Regular'), local('Arial-Nova-Regular'),
+    url('ArialNova.woff2') format('woff2'),
+    url('ArialNova.woff') format('woff'),
+    url('ArialNova.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: local('Arial Nova Bold'), local('Arial-Nova-Bold'),
+    url('ArialNova-Bold.woff2') format('woff2'),
+    url('ArialNova-Bold.woff') format('woff'),
+    url('ArialNova-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: local('Arial Nova Italic'), local('Arial-Nova-Italic'),
+    url('ArialNova-Italic.woff2') format('woff2'),
+    url('ArialNova-Italic.woff') format('woff'),
+    url('ArialNova-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Arial Nova';
+    src: local('Arial Nova Bold Italic'), local('Arial-Nova-Bold-Italic'),
+    url('ArialNova-BoldItalic.woff2') format('woff2'),
+    url('ArialNova-BoldItalic.woff') format('woff'),
+    url('ArialNova-BoldItalic.ttf') format('truetype');
+    font-weight: 700;
+    font-style: italic;
+}

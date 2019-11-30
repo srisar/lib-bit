@@ -11,12 +11,19 @@ class Member
     const TYPE_TEACHER = 'TEACHER';
     const MEMBER_TYPES = ['STUDENT', 'TEACHER'];
 
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function __toString()
     {
-        return sprintf("#%s %s (%s/%s)", $this->id, $this->fullname, $this->member_type, $this->get_department());
+        return sprintf("#%s %s (%s/%s)", $this->id, $this->fullname, $this->member_type, $this->getDepartment());
     }
 
-    function get_member_since()
+    /**
+     * @return mixed
+     */
+    public function getMemberSince()
     {
 //        return date('d-F-Y', strtotime($this->member_since));
         return $this->member_since;
@@ -27,9 +34,9 @@ class Member
      * @param int $offset
      * @return Member[]
      */
-    public static function select_all($limit = 100, $offset = 0): array
+    public static function selectAll($limit = 100, $offset = 0): array
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM members ORDER BY member_since DESC LIMIT :limit_value OFFSET :offset_value");
         $statement->bindParam(':limit_value', $limit, PDO::PARAM_INT);
@@ -46,7 +53,7 @@ class Member
      */
     public static function select($id): Member
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM members WHERE id=? LIMIT 1");
 
@@ -63,7 +70,7 @@ class Member
     {
         $sql = "INSERT INTO members(fullname, member_since, department_id, member_type) VALUES (?,?,?,?)";
 
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare($sql);
 
@@ -81,7 +88,7 @@ class Member
      */
     public function update()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("UPDATE members SET fullname=:fname, member_since=:msince, department_id=:deptid, member_type=:mtype WHERE id=:id");
 
@@ -100,7 +107,7 @@ class Member
      */
     public static function search($keyword): array
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM members WHERE fullname LIKE ? ORDER BY fullname LIMIT 1000");
 
@@ -113,9 +120,9 @@ class Member
     /**
      * @return BookTransaction[]
      */
-    public function get_all_book_transactions()
+    public function getAllBookTransactions()
     {
-        return BookTransaction::select_by_member($this);
+        return BookTransaction::selectByMember($this);
     }
 
     /**
@@ -123,9 +130,9 @@ class Member
      * @param Department $department
      * @return Member[]
      */
-    public static function get_by_type(Department $department, $type = Member::TYPE_STUDENT): array
+    public static function getByType(Department $department, $type = Member::TYPE_STUDENT): array
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM members WHERE member_type=? AND department_id=? ORDER BY fullname LIMIT 1000");
 
@@ -138,7 +145,7 @@ class Member
      * @return Department
      * @throws Exception
      */
-    public function get_department()
+    public function getDepartment()
     {
         return Department::select($this->department_id);
     }
@@ -146,9 +153,9 @@ class Member
     /**
      * @return int
      */
-    public static function get_stats_total_members()
+    public static function getStatsTotalMembers()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT COUNT(id) as result FROM members;");
         $statement->execute();
 

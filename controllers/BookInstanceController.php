@@ -14,12 +14,12 @@ class BookInstanceController
         try {
 
             $fields = [
-                'book_id' => $request->get_params()->get_int('book_id'),
-                'instance_count' => $request->get_params()->get_int('instance_count'),
+                'book_id' => $request->getParams()->getInt('book_id'),
+                'instance_count' => $request->getParams()->getInt('instance_count'),
             ];
 
 
-            if (BookInstance::batch_insert($fields['book_id'], $fields['instance_count'])) {
+            if (BookInstance::batchInsert($fields['book_id'], $fields['instance_count'])) {
                 App::redirect('/books/edit?id=' . $fields['book_id']);
             }
 
@@ -39,13 +39,13 @@ class BookInstanceController
         try {
 
 
-            $instance_id = $request->get_params()->get_int('instance_id');
+            $instance_id = $request->getParams()->getInt('instance_id');
 
             $bookInstance = BookInstance::select($instance_id);
 
-            View::set_data('book_instance', $bookInstance);
-            View::set_data('transactions', $bookInstance->get_all_transactions());
-            View::set_data('book', $bookInstance->get_book());
+            View::setData('book_instance', $bookInstance);
+            View::setData('transactions', $bookInstance->getAllTransactions());
+            View::setData('book', $bookInstance->getBook());
 
             include_once "views/book_instance/view_history.php";
 

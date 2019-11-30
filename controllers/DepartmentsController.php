@@ -8,31 +8,31 @@ class DepartmentsController
     {
         try {
 
-            $department_name = $request->get_params()->get_string('department_name');
+            $department_name = $request->getParams()->getString('department_name');
 
             if (empty($department_name)) {
 
-                $members = Member::select_all();
-                $departments = Department::select_all();
+                $members = Member::selectAll();
+                $departments = Department::selectAll();
 
-                View::set_error('error', 'Department name cannot be empty');
-                View::set_data('members', $members);
-                View::set_data('departments', $departments);
+                View::setError('error', 'Department name cannot be empty');
+                View::setData('members', $members);
+                View::setData('departments', $departments);
 
                 include_once "views/members/members.view.php";
 
             } else {
 
-                $existing_dept = Department::select_by_name($department_name);
+                $existing_dept = Department::selectByName($department_name);
 
 
                 if (!empty($existing_dept)) {
-                    $members = Member::select_all();
-                    $departments = Department::select_all();
+                    $members = Member::selectAll();
+                    $departments = Department::selectAll();
 
-                    View::set_error('error', "Department: {$department_name} already exist.");
-                    View::set_data('members', $members);
-                    View::set_data('departments', $departments);
+                    View::setError('error', "Department: {$department_name} already exist.");
+                    View::setData('members', $members);
+                    View::setData('departments', $departments);
 
                     include_once "views/members/members.view.php";
 
@@ -43,7 +43,7 @@ class DepartmentsController
 
                     if ($department->insert()) {
 
-                        $dept_id = Database::get_last_inserted_id();
+                        $dept_id = Database::getLastInsertedId();
 
                         App::redirect('/members/department', ['dept_id' => $dept_id]);
                     }

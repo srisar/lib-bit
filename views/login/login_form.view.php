@@ -10,21 +10,21 @@
 
             <div class="card bg-secondary">
 
-                <div class="card-header text-center"><?php HtmlHelper::render_card_header("Libman: A library management system"); ?></div>
+                <div class="card-header text-center"><?php HtmlHelper::renderCardHeader("Libman: A library management system"); ?></div>
 
                 <div class="card-body">
 
-                    <?php View::render_error_messages(); ?>
+                    <?php View::renderErrorMessages(); ?>
 
                     <div class="text-center">
-                        <img class="login-img" src="<?= App::get_base_url() ?>/assets/img/login.png" alt="Login">
+                        <img class="login-img" src="<?= App::getBaseURL() ?>/assets/img/login.png" alt="Login">
                     </div>
 
                     <div class="alert alert-dark text-center">
                         You need a valid login to proceed. Contact administrator for a login detail.
                     </div>
 
-                    <form action="<?= App::create_url('/login/process') ?>" method="post">
+                    <form action="<?= App::createURL('/login/process') ?>" method="post">
 
                         <div class="form-group">
                             <label for="username">Username</label>

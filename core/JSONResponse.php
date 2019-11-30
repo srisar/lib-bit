@@ -16,18 +16,18 @@ class JSONResponse
     }
 
 
-    public function add_data($data)
+    public function addData($data)
     {
         array_push($this->data['results'], $data);
     }
 
-    public function add_error($error)
+    public function addError($error)
     {
         $this->data['has_error'] = true;
         array_push($this->data['errors'], $error);
     }
 
-    public function to_json()
+    public function toJSON()
     {
         return json_encode($this->data);
     }

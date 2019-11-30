@@ -1,7 +1,7 @@
 <?php
 
 /** @var Author[] $authors */
-$authors = View::get_data('authors');
+$authors = View::getData('authors');
 
 $id_count = 0;
 

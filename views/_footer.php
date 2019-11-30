@@ -10,14 +10,14 @@
 
 <?php include_once BASE_PATH . "/views/_common/messages.modal.inc.php" ?>
 
-<script src="<?= App::get_base_url() ?>/assets/bootstrap/js/jquery-3.3.1.min.js"></script>
-<script src="<?= App::get_base_url() ?>/assets/bootstrap/js/popper.min.js"></script>
-<script src="<?= App::get_base_url() ?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?= App::get_base_url() ?>/assets/plugins/pickerjs/dist/picker.min.js"></script>
-<script src="<?= App::get_base_url() ?>/assets/plugins/DataTables/datatables.min.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/bootstrap/js/jquery-3.3.1.min.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/bootstrap/js/popper.min.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/plugins/pickerjs/dist/picker.min.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/plugins/DataTables/datatables.min.js"></script>
 
-<script src="<?= App::get_base_url() ?>/assets/forms.js"></script>
-<script src="<?= App::get_base_url() ?>/assets/app.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/forms.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/app.js"></script>
 
 </body>
 </html>

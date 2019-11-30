@@ -4,7 +4,7 @@
 abstract class Model
 {
 
-    public static abstract function select_all($limit = 100, $offset = 0);
+    public static abstract function selectAll($limit = 100, $offset = 0);
 
     public static abstract function select($id);
 

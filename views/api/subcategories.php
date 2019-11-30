@@ -1,9 +1,9 @@
 <?php
 
 /** @var Subcategory[] $subcategories */
-$subcategories = View::get_data('subcategories');
+$subcategories = View::getData('subcategories');
 
-$selected_subcategory_id = View::get_data('selected_subcat_id');
+$selected_subcategory_id = View::getData('selected_subcat_id');
 
 ?>
 

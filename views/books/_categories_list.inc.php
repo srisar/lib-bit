@@ -11,7 +11,7 @@
             <?php foreach ($categories as $cat): ?>
                 <?php
                 /** @var Subcategory[] $subcats */
-                $subcats = $cat->get_all_subcategories();
+                $subcats = $cat->getAllSubcategories();
                 ?>
 
                 <li class="list-group-item">
@@ -19,7 +19,7 @@
 
                     <ul class="list-group list-group-flush">
                         <?php foreach ($subcats as $subcat): ?>
-                            <a href="<?= App::create_url('/books/subcategory', ['subcat_id' => $subcat->id]) ?>">
+                            <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcat->id]) ?>">
                                 <li class="list-group-item p-1"><?= $subcat ?></li>
                             </a>
                         <?php endforeach; ?>

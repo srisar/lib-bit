@@ -2,13 +2,13 @@
 
 <?php
 /** @var Category[] $categories */
-$categories = View::get_data('categories');
+$categories = View::getData('categories');
 
 /** @var Subcategory[] $subcategories */
-$subcategories = View::get_data('subcategories');
+$subcategories = View::getData('subcategories');
 
 /** @var Category $selected_category */
-$selected_category = View::get_data('selected_category');
+$selected_category = View::getData('selected_category');
 
 ?>
 
@@ -21,11 +21,11 @@ $selected_category = View::get_data('selected_category');
     <div class="col-4">
 
       <div class="card mb-3">
-        <div class="card-header"> <?php HtmlHelper::render_card_header('Add a new category'); ?> </div>
+        <div class="card-header"> <?php HtmlHelper::renderCardHeader('Add a new category'); ?> </div>
         <div class="card-body p-2">
-          <?php View::render_error_messages() ?>
+          <?php View::renderErrorMessages() ?>
 
-          <form class="form" action="<?= App::create_url('/categories/adding') ?>" method="get">
+          <form class="form" action="<?= App::createURL('/categories/adding') ?>" method="get">
 
             <div class="input-group">
               <input class="form-control" type="text" name="category_name" required>
@@ -40,7 +40,7 @@ $selected_category = View::get_data('selected_category');
 
       <div class="card">
         <div class="card-header">
-          <?php HtmlHelper::render_card_header('Categories'); ?>
+          <?php HtmlHelper::renderCardHeader('Categories'); ?>
         </div>
 
         <div class="card-body p-2">
@@ -48,7 +48,7 @@ $selected_category = View::get_data('selected_category');
           <ul class="list-group">
             <?php foreach ($categories as $category): ?>
               <li class="list-group-item">
-                <a href="<?= App::create_url('/categories', ['cat_id' => $category->id]) ?>">
+                <a href="<?= App::createURL('/categories', ['cat_id' => $category->id]) ?>">
                   <?= $category ?>
                 </a>
               </li>
@@ -65,7 +65,7 @@ $selected_category = View::get_data('selected_category');
       <div class="card">
 
         <div class="card-header">
-          <?php HtmlHelper::render_card_header("Subcategories in {$selected_category}"); ?>
+          <?php HtmlHelper::renderCardHeader("Subcategories in {$selected_category}"); ?>
         </div>
 
         <div class="card-body">
@@ -73,10 +73,10 @@ $selected_category = View::get_data('selected_category');
 
           <div class="mb-3">
 
-            <?php View::render_error_messages('error_subcat') ?>
+            <?php View::renderErrorMessages('error_subcat') ?>
 
             <form class="form-inline"
-                  action="<?= App::create_url('/subcategory/adding') ?>"
+                  action="<?= App::createURL('/subcategory/adding') ?>"
                   method="get">
 
               <input type="hidden" name="category_id" value="<?= $selected_category->id ?>">
@@ -112,7 +112,7 @@ $selected_category = View::get_data('selected_category');
                     </a>
                   </td>
                   <td>
-                    <a href="<?= App::create_url('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>"
+                    <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcategory->id]) ?>"
                        class="btn btn-sm btn-success">
                       View Books
                     </a>

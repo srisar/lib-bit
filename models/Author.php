@@ -12,9 +12,9 @@ class Author extends Model
      * @param int $offset
      * @return Author[]
      */
-    public static function select_all($limit = 100, $offset = 0)
+    public static function selectAll($limit = 100, $offset = 0)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM authors LIMIT :limit_val OFFSET :offset_val");
 
@@ -29,7 +29,7 @@ class Author extends Model
 
     public static function search($keyword)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM authors WHERE full_name LIKE :keyword OR email LIKE :keyword");
 
@@ -45,7 +45,7 @@ class Author extends Model
      */
     public static function select($id)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM authors WHERE id=?");
         $statement->execute([$id]);
@@ -58,7 +58,7 @@ class Author extends Model
 
     public function insert()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("INSERT INTO authors(full_name, email) VALUE (:full_name, :email)");
 
         return $statement->execute([
@@ -70,7 +70,7 @@ class Author extends Model
 
     public function update()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("UPDATE authors SET full_name=:full_name, email=:email WHERE id=:id;");
 
         return $statement->execute([
@@ -84,9 +84,9 @@ class Author extends Model
      * @param $name
      * @return Author
      */
-    public static function select_by_name($name)
+    public static function selectByName($name)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM authors WHERE full_name=?");
 
         $statement->execute([$name]);
@@ -112,7 +112,7 @@ class Author extends Model
     /**
      * @return mixed
      */
-    public function get_fullname()
+    public function getFullName()
     {
         return $this->full_name;
     }
@@ -120,17 +120,18 @@ class Author extends Model
     /**
      * @return string
      */
-    public static function get_last_insert_id()
+    public static function getLastInsertedID()
     {
-        return Database::get_last_inserted_id();
+        return Database::getLastInsertedId();
     }
 
     /**
+     * Returns total authors in db
      * @return int
      */
-    public static function get_stats_total_authors()
+    public static function getStatsTotalAuthors()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT COUNT(id) as result FROM authors;");
         $statement->execute();
 

@@ -3,7 +3,7 @@
 <?php
 
 /** @var Author[] $authors */
-$authors = View::get_data('authors');
+$authors = View::getData('authors');
 
 ?>
 
@@ -14,7 +14,7 @@ $authors = View::get_data('authors');
         <div class="col col-lg-8 mb-3">
 
             <div class="card">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Add new author"); ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Add new author"); ?></div>
                 <div class="card-body">
 
                     <form action="" method="post">
@@ -56,7 +56,7 @@ $authors = View::get_data('authors');
 
             <div class="card">
                 <div class="card-header">
-                    <?php HtmlHelper::render_card_header('Authors'); ?>
+                    <?php HtmlHelper::renderCardHeader('Authors'); ?>
                 </div>
                 <div class="card-body p-2">
 

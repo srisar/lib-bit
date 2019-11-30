@@ -3,20 +3,20 @@
 <?php
 
 /** @var BookTransaction $book_transaction */
-$book_transaction = View::get_data('book_transaction');
+$book_transaction = View::getData('book_transaction');
 
 /** @var BookInstance $book_instance */
-$book_instance = View::get_data('book_instance');
+$book_instance = View::getData('book_instance');
 /** @var Book $book */
-$book = View::get_data('book');
+$book = View::getData('book');
 /** @var Member $member */
-$member = View::get_data('member');
+$member = View::getData('member');
 
-$overdue_payment = View::get_data('overdue_payment');
-$is_overdue = View::get_data('is_overdue');
-$is_returned = View::get_data('is_returned');
-$has_payment = View::get_data('has_payment');
-$days_elapsed = View::get_data('days_elapsed');
+$overdue_payment = View::getData('overdue_payment');
+$is_overdue = View::getData('is_overdue');
+$is_returned = View::getData('is_returned');
+$has_payment = View::getData('has_payment');
+$days_elapsed = View::getData('days_elapsed');
 
 
 $btn_set_as_returned_state = "enabled";
@@ -33,7 +33,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
     <div class="row justify-content-center">
         <div class="col-12">
 
-            <?php View::render_error_messages() ?>
+            <?php View::renderErrorMessages() ?>
 
         </div>
     </div>
@@ -49,11 +49,11 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
             <div class="card">
                 <div
                         class="card-header">
-                    <?php HtmlHelper::render_card_header("Transaction Details ({$book_transaction->state})") ?>
+                    <?php HtmlHelper::renderCardHeader("Transaction Details ({$book_transaction->state})") ?>
                 </div>
                 <div class="card-body">
 
-                    <form action="<?= App::create_url('/transactions/editing') ?>" method="post">
+                    <form action="<?= App::createURL('/transactions/editing') ?>" method="post">
 
                         <input type="hidden" name="instance_id" value="<?= $book_instance->id ?>">
                         <input type="hidden" name="member_id" value="<?= $member->id ?>">
@@ -67,7 +67,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                                 <div class="form-group">
                                     <label for="">Borrowing Date</label>
                                     <input type="text" class="form-control date-picker" name="borrowing_date"
-                                           value="<?= App::to_date_string($book_transaction->borrowing_date) ?>" disabled>
+                                           value="<?= App::toDateString($book_transaction->borrowing_date) ?>" disabled>
                                 </div>
 
 
@@ -77,7 +77,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                                 <div class="form-group">
                                     <label for="">Returning Date</label>
                                     <input type="text" class="form-control date-picker" name="returning_date"
-                                           value="<?= App::to_date_string($book_transaction->returning_date) ?>" disabled>
+                                           value="<?= App::toDateString($book_transaction->returning_date) ?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -85,7 +85,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                         <div class="form-group">
                             <label for="">Returned Date</label>
                             <input type="text" class="form-control date-picker" name="returning_date"
-                                   value="<?= App::to_date_string($book_transaction->returned_date) ?>">
+                                   value="<?= App::toDateString($book_transaction->returned_date) ?>">
                         </div>
 
                         <div class="form-group">
@@ -97,7 +97,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                         <div>
                             <button class="btn btn-primary" type="submit">Update</button>
 
-                            <a href="<?= App::create_url(
+                            <a href="<?= App::createURL(
                                 '/transactions/single/set-as-returned',
                                 ['transaction_id' => $book_transaction->id, 'amount' => $overdue_payment]) ?>"
                                class="btn btn-warning <?= $btn_set_as_returned_state ?>"
@@ -115,7 +115,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
         <div class="col-12 col-lg-3">
 
             <div class="card mb-3">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Overdue & payments"); ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Overdue & payments"); ?></div>
                 <div class="card-body">
 
                     <?php if ($is_overdue): ?>
@@ -132,9 +132,9 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                             <div class="col">
                                 <div class="form-group">
                                     <label for="overdue-value">Overdue payment (<?= $days_elapsed ?> days
-                                        x <?= App::to_currency_format(OVERDUE_DAY_PAYMENT) ?>)</label>
+                                        x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
                                     <input class="form-control" type="text"
-                                           value="<?= App::to_currency_format($overdue_payment) ?>"
+                                           value="<?= App::toCurrencyFormat($overdue_payment) ?>"
                                            disabled>
                                 </div>
                             </div>
@@ -151,9 +151,9 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                                             <div class="form-group">
                                                 <label for="overdue-value">Overdue payment paid for
                                                     <br>(<?= $days_elapsed ?> days
-                                                    x <?= App::to_currency_format(OVERDUE_DAY_PAYMENT) ?>)</label>
+                                                    x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
                                                 <input class="form-control" type="text"
-                                                       value="<?= App::to_currency_format($overdue_payment) ?>"
+                                                       value="<?= App::toCurrencyFormat($overdue_payment) ?>"
                                                        disabled>
                                             </div>
                                         </div>
@@ -175,11 +175,11 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
             </div><!--.card-->
 
             <div class="card mb-3">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Options & Actions"); ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Options & Actions"); ?></div>
 
                 <div class="card-body">
 
-                    <a href="<?= App::create_url('/transactions/single/print', ['id' => $book_transaction->id]) ?>"
+                    <a href="<?= App::createURL('/transactions/single/print', ['id' => $book_transaction->id]) ?>"
                        class="btn btn-success btn-block" target="_blank">
                         Print receipt
                     </a>

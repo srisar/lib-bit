@@ -1,6 +1,6 @@
 <div class="card">
     <div class="card-header">
-        <?php HtmlHelper::render_card_header("Transactions for {$member->fullname}"); ?>
+        <?php HtmlHelper::renderCardHeader("Transactions for {$member->fullname}"); ?>
     </div>
     <div class="card-body">
 
@@ -26,11 +26,11 @@
                 <?php foreach ($member_transactions as $transaction): ?>
 
                     <tr>
-                        <td><a href="<?= App::create_url('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
-                        <td><?= $transaction->get_book_instance() ?></td>
-                        <td><?= App::to_date_string($transaction->borrowing_date) ?></td>
-                        <td><?= App::to_date_string($transaction->returning_date) ?></td>
-                        <td><?= App::to_date_string($transaction->returned_date) ?></td>
+                        <td><a href="<?= App::createURL('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
+                        <td><?= $transaction->getBookInstance() ?></td>
+                        <td><?= App::toDateString($transaction->borrowing_date) ?></td>
+                        <td><?= App::toDateString($transaction->returning_date) ?></td>
+                        <td><?= App::toDateString($transaction->returned_date) ?></td>
                         <td>
                             <?php if ($transaction->state == BookTransaction::STATE_BORROWED): ?>
                                 <span class="badge badge-pill badge-warning"><?= $transaction->state ?></span>

@@ -3,7 +3,7 @@
 <?php
 
 /** @var User[] $users */
-$users = View::get_data('users');
+$users = View::getData('users');
 
 ?>
 
@@ -14,10 +14,10 @@ $users = View::get_data('users');
         <div class="col col-lg-8 mb-3">
 
             <div class="card">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Add new user"); ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Add new user"); ?></div>
                 <div class="card-body">
 
-                    <form action="<?= App::create_url('/users/add') ?>" method="post">
+                    <form action="<?= App::createURL('/users/add') ?>" method="post">
 
                         <div class="row">
 
@@ -60,7 +60,7 @@ $users = View::get_data('users');
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">User Role</label>
-                                    <?php HtmlHelper::render_select_box('user_role', User::ROLES, 'select_save_user_role') ?>
+                                    <?php HtmlHelper::renderSelectBox('user_role', User::ROLES, 'select_save_user_role') ?>
                                 </div>
                             </div>
 
@@ -84,7 +84,7 @@ $users = View::get_data('users');
 
             <div class="card">
                 <div class="card-header">
-                    <?php HtmlHelper::render_card_header('Users'); ?>
+                    <?php HtmlHelper::renderCardHeader('Users'); ?>
                 </div>
                 <div class="card-body p-2">
 

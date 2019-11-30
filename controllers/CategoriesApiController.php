@@ -18,7 +18,7 @@ class CategoriesApiController
 
       $request = new Request();
 
-      $id = $request->get_params()->get_int("id");
+      $id = $request->getParams()->getInt("id");
 
       $subcategory = Subcategory::select($id);
 
@@ -59,8 +59,8 @@ class CategoriesApiController
 
       $request = new Request();
 
-      $id = $request->get_params()->get_int("id");
-      $subcategory_name = $request->get_params()->get_string("subcategory_name");
+      $id = $request->getParams()->getInt("id");
+      $subcategory_name = $request->getParams()->getString("subcategory_name");
 
 
       $subcat_to_insert = new Subcategory();
@@ -69,7 +69,7 @@ class CategoriesApiController
       $subcat_to_insert->category_id = 1;
 
 
-      if ($subcat_to_insert->already_exists()) {
+      if ($subcat_to_insert->alreadyExists()) {
 
         $json['result'] = false;
         $json['error'] = "Subcategory already exist.";

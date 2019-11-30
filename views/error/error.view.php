@@ -1,5 +1,5 @@
 <?php
-$error = View::get_error('error');
+$error = View::getError('error');
 ?>
 <!doctype html>
 <html lang="en">

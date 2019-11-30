@@ -10,9 +10,12 @@ class Department extends Model
     public $department_name;
 
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
-        return sprintf("%s (%d)", $this->department_name, $this->get_member_count());
+        return sprintf("%s (%d)", $this->department_name, $this->getMembersCount());
     }
 
     /**
@@ -20,9 +23,9 @@ class Department extends Model
      * @param int $offset
      * @return array
      */
-    public static function select_all($limit = 100, $offset = 0): array
+    public static function selectAll($limit = 100, $offset = 0): array
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM departments ORDER BY department_name ASC LIMIT :limit_value OFFSET :offset_value");
 
         $statement->bindValue(':limit_value', $limit, PDO::PARAM_INT);
@@ -41,7 +44,7 @@ class Department extends Model
      */
     public static function select($id): Department
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM departments WHERE id=? LIMIT 1");
 
         $statement->execute([$id]);
@@ -60,9 +63,9 @@ class Department extends Model
      * @return mixed
      * @throws Exception
      */
-    public static function select_by_name($name)
+    public static function selectByName($name)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM departments WHERE department_name=? LIMIT 1");
 
         $statement->execute([$name]);
@@ -79,7 +82,7 @@ class Department extends Model
      */
     public function insert()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("INSERT INTO departments(department_name) VALUE (?)");
         return $statement->execute([$this->department_name]);
 
@@ -90,7 +93,7 @@ class Department extends Model
      */
     public function update()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("UPDATE departments SET department_name=? WHERE id=?");
         return $statement->execute([$this->department_name, $this->id]);
     }
@@ -101,9 +104,9 @@ class Department extends Model
      * @param $department_name
      * @return Department|bool
      */
-    public static function department_name_exist($department_name)
+    public static function departmentNameExists($department_name)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM departments WHERE department_name=? LIMIT 1");
         $statement->execute([$department_name]);
 
@@ -125,9 +128,9 @@ class Department extends Model
      * @param int $offset
      * @return Member[]
      */
-    public function get_all_members($limit = 100, $offset = 0): array
+    public function getAllMembers($limit = 100, $offset = 0): array
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare(
             "SELECT * FROM members 
@@ -148,25 +151,25 @@ class Department extends Model
     /**
      * @return Member[]
      */
-    public function get_all_students(): array
+    public function getAllSudents(): array
     {
-        return Member::get_by_type($this, Member::TYPE_STUDENT);
+        return Member::getByType($this, Member::TYPE_STUDENT);
     }
 
     /**
      * @return Member[]
      */
-    public function get_all_teachers(): array
+    public function getAllTeachers(): array
     {
-        return Member::get_by_type($this, Member::TYPE_TEACHER);
+        return Member::getByType($this, Member::TYPE_TEACHER);
     }
 
     /**
      *  Get the member count associated with the department
      */
-    public function get_member_count()
+    public function getMembersCount()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT COUNT(id) as count FROM members WHERE department_id=?");
         $statement->execute([$this->id]);
 
@@ -182,9 +185,9 @@ class Department extends Model
     /**
      * @return int
      */
-    public static function get_stats_total_departments()
+    public static function getStatsTotalDepartments()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT COUNT(id) as result FROM departments;");
         $statement->execute();
 

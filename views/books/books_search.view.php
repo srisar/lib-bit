@@ -3,11 +3,11 @@
 <?php
 
 /** @var Book[] $books */
-$books = View::get_data('books');
+$books = View::getData('books');
 
 /** @var string $title */
-$title = View::get_data('title');
-$keyword = View::get_data('keyword');
+$title = View::getData('title');
+$keyword = View::getData('keyword');
 
 ?>
 
@@ -26,7 +26,7 @@ $keyword = View::get_data('keyword');
             <div class="col-9">
 
                 <div class="alert alert-secondary">
-                    <form class="form" action="<?= App::create_url('/books/search') ?>" method="get">
+                    <form class="form" action="<?= App::createURL('/books/search') ?>" method="get">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Search for book by title or ISBN" name="q" value="<?= $keyword ?>">
                             <div class="input-group-append">

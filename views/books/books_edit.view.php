@@ -1,16 +1,16 @@
 <?php
 /** @var Book $book */
-$book = View::get_data('book');
+$book = View::getData('book');
 
 /** @var Category[] $categories */
-$categories = View::get_data('categories');
+$categories = View::getData('categories');
 
 /** @var Subcategory[] $subcategories */
-$subcategories = $book->get_category()->get_all_subcategories();
+$subcategories = $book->getCategory()->getAllSubcategories();
 
 
 /** @var BookInstance[] $book_instances */
-$book_instances = $book->get_all_book_instances();
+$book_instances = $book->getAllBookInstances();
 
 ?>
 
@@ -37,15 +37,15 @@ $book_instances = $book->get_all_book_instances();
                 </div>
                 <div class="card-body">
 
-                    <?php View::render_error_messages() ?>
+                    <?php View::renderErrorMessages() ?>
 
-                    <form action="<?= App::create_url('/books/editing') ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= App::createURL('/books/editing') ?>" method="post" enctype="multipart/form-data">
 
                         <input type="hidden" value="<?= $book->id ?>" name="id">
 
                         <div class="row">
                             <div class="col text-center">
-                                <img id="cover-image" class="img-thumbnail" src="<?= $book->get_image() ?>"
+                                <img id="cover-image" class="img-thumbnail" src="<?= $book->getImage() ?>"
                                      alt="Cover Image">
                             </div>
                         </div>
@@ -145,7 +145,7 @@ $book_instances = $book->get_all_book_instances();
 
             <!--BOOK INSTANCES-->
             <div class="card">
-                <div class="card-header"><?php HtmlHelper::render_card_header("Book Instances (" . count($book_instances) . ")"); ?></div>
+                <div class="card-header"><?php HtmlHelper::renderCardHeader("Book Instances (" . count($book_instances) . ")"); ?></div>
                 <div class="card-body">
 
                     <?php if (isset($error)): ?>
@@ -156,7 +156,7 @@ $book_instances = $book->get_all_book_instances();
                     <?php endif; ?>
 
                     <div class="alert alert-secondary">
-                        <form class="form-inline" action="<?= App::create_url('/book-instance/adding') ?>" method="get">
+                        <form class="form-inline" action="<?= App::createURL('/book-instance/adding') ?>" method="get">
 
                             <input type="hidden" name="book_id" value="<?= $book->id ?>">
 
@@ -192,7 +192,7 @@ $book_instances = $book->get_all_book_instances();
                             <tr>
                                 <td><?= $book_instance ?></td>
                                 <td>
-                                    <?php $status = $book_instance->get_status() ?>
+                                    <?php $status = $book_instance->getStatus() ?>
                                     <?php if ($status == BookTransaction::STATE_BORROWED): ?>
                                         <span class="badge badge-pill badge-warning"><?= $status ?></span>
                                     <?php elseif ($status == BookTransaction::STATE_AVAILABLE): ?>
@@ -204,10 +204,10 @@ $book_instances = $book->get_all_book_instances();
                                 </td>
                                 <td>
                                     <a class="btn btn-sm btn-warning"
-                                       href="<?= App::create_url('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
-                                    <?php if ($book_instance->get_status() == BookInstance::STATE_AVAILABLE): ?>
+                                       href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $book_instance->id]) ?>">History</a>
+                                    <?php if ($book_instance->getStatus() == BookInstance::STATE_AVAILABLE): ?>
                                         <a class="btn btn-sm btn-primary"
-                                           href="<?= App::create_url('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
+                                           href="<?= App::createURL('/transactions/show-member-search', ['instance_id' => $book_instance->id]) ?>">Lend</a>
                                     <?php endif; ?>
                                 </td>
                             </tr>
@@ -268,7 +268,7 @@ $book_instances = $book->get_all_book_instances();
         let categorySelect = $("#book-category");
         let selectedCategoryId = categorySelect.val();
 
-        $.get("<?= App::create_url('/api/get_subcategories') ?>", {
+        $.get("<?= App::createURL('/api/get_subcategories') ?>", {
             id: selectedCategoryId,
             selected_subcat_id: <?= $book->subcategory_id ?>
         }).done(function (data) {

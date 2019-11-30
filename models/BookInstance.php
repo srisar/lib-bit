@@ -12,23 +12,31 @@ class BookInstance
     /**
      * @return Book
      */
-    public function get_book()
+    public function getBook()
     {
         return Book::select($this->book_id);
     }
 
 
+    /**
+     * @return bool
+     */
     public function insert()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("INSERT INTO book_instances(book_id) VALUE (?)");
         return $statement->execute([$this->book_id]);
     }
 
 
-    public static function batch_insert($book_id, $instance_count)
+    /**
+     * @param $book_id
+     * @param $instance_count
+     * @return bool
+     */
+    public static function batchInsert($book_id, $instance_count)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("INSERT INTO book_instances(book_id) VALUE (:book_id)");
         $statement->bindValue(':book_id', $book_id, PDO::PARAM_INT);
@@ -55,7 +63,7 @@ class BookInstance
      */
     public static function select($id)
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM book_instances WHERE id=?");
         $statement->execute([$id]);
@@ -63,27 +71,33 @@ class BookInstance
         return $statement->fetchObject(BookInstance::class);
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
 
         // #bookid #instance id #book name
 
-        return sprintf("#%s #%s (%s)", $this->book_id, $this->id, $this->get_book()->title);
+        return sprintf("#%s #%s (%s)", $this->book_id, $this->id, $this->getBook()->title);
     }
 
 
     /**
      * @return BookTransaction[]
      */
-    public function get_all_transactions()
+    public function getAllTransactions()
     {
-        return BookTransaction::select_all_by_book_instance_id($this->id);
+        return BookTransaction::selectAllByBookInstanceID($this->id);
     }
 
-    public function get_status()
+    /**
+     * @return string
+     */
+    public function getStatus()
     {
 
-        $db = Database::get_instance();
+        $db = Database::getInstance();
 
         $statement = $db->prepare("SELECT * FROM book_transactions WHERE book_instance_id = ? ORDER BY borrowing_date DESC LIMIT 1");
         $statement->execute([$this->id]);
@@ -102,9 +116,9 @@ class BookInstance
     /**
      * @return int
      */
-    public static function get_stats_total_book_instances()
+    public static function getStatsTotalBookInstances()
     {
-        $db = Database::get_instance();
+        $db = Database::getInstance();
         $statement = $db->prepare("SELECT COUNT(id) as result FROM book_instances;");
         $statement->execute();
 

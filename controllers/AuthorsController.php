@@ -9,9 +9,9 @@ class AuthorsController
 
         try {
 
-            $authors = Author::select_all();
+            $authors = Author::selectAll();
 
-            View::set_data('authors', $authors);
+            View::setData('authors', $authors);
 
             include_once "views/authors/index.view.php";
 

@@ -13,14 +13,14 @@ class TransactionsController
 
             $request = new Request();
 
-            $recent_transactions = BookTransaction::select_all();
-            $today_returnable = BookTransaction::select_by_returning_date(TODAY, TODAY);
+            $recent_transactions = BookTransaction::selectAll();
+            $today_returnable = BookTransaction::selectByReturningDate(TODAY, TODAY);
 
-            $overdue_transactions = BookTransaction::select_overdue_transactions();
+            $overdue_transactions = BookTransaction::selectOverdueTransactions();
 
-            View::set_data('recent_transactions', $recent_transactions);
-            View::set_data('today_returnable', $today_returnable);
-            View::set_data('overdue_transactions', $overdue_transactions);
+            View::setData('recent_transactions', $recent_transactions);
+            View::setData('today_returnable', $today_returnable);
+            View::setData('overdue_transactions', $overdue_transactions);
 
             include_once "views/transactions/index.view.php";
 
@@ -35,13 +35,13 @@ class TransactionsController
     {
 
         try {
-            $book_instance_id = $request->get_params()->get_int('instance_id');
+            $book_instance_id = $request->getParams()->getInt('instance_id');
 
             $book_instance = BookInstance::select($book_instance_id);
 
-            View::set_data('book_instance', $book_instance);
-            View::set_data('book', $book_instance->get_book());
-            View::set_data('searched', false);
+            View::setData('book_instance', $book_instance);
+            View::setData('book', $book_instance->getBook());
+            View::setData('searched', false);
 
             include_once "views/transactions/search.view.php";
 
@@ -57,20 +57,20 @@ class TransactionsController
         try {
 
             $fields = [
-                'q' => $request->get_params()->get_string('q'),
-                'instance_id' => $request->get_params()->get_int('instance_id'),
+                'q' => $request->getParams()->getString('q'),
+                'instance_id' => $request->getParams()->getInt('instance_id'),
             ];
 
             $book_instance = BookInstance::select($fields['instance_id']);
 
-            View::set_data('book_instance', $book_instance);
-            View::set_data('book', $book_instance->get_book());
+            View::setData('book_instance', $book_instance);
+            View::setData('book', $book_instance->getBook());
 
             // get the search results for members
             $members = Member::search($fields['q']);
-            View::set_data('members', $members);
-            View::set_data('keyword', $fields['q']);
-            View::set_data('searched', true);
+            View::setData('members', $members);
+            View::setData('keyword', $fields['q']);
+            View::setData('searched', true);
 
             include_once "views/transactions/search.view.php";
 
@@ -87,25 +87,25 @@ class TransactionsController
         try {
 
             $fields = [
-                'instance_id' => $request->get_params()->get_int('instance_id'),
-                'member_id' => $request->get_params()->get_int('member_id'),
+                'instance_id' => $request->getParams()->getInt('instance_id'),
+                'member_id' => $request->getParams()->getInt('member_id'),
             ];
 
             $book_instance = BookInstance::select($fields['instance_id']);
             $member = Member::select($fields['member_id']);
-            $member_transactions = $member->get_all_book_transactions();
+            $member_transactions = $member->getAllBookTransactions();
 
-            View::set_data('book_instance', $book_instance);
-            View::set_data('book', $book_instance->get_book());
-            View::set_data('member', $member);
-            View::set_data('member_transactions', $member_transactions);
+            View::setData('book_instance', $book_instance);
+            View::setData('book', $book_instance->getBook());
+            View::setData('member', $member);
+            View::setData('member_transactions', $member_transactions);
 
             // setup dates for borrowing and returning
             $borrowing_date = Carbon::now();
             $returning_date = (Carbon::now())->addDays(5);
 
-            View::set_data('borrowing_date', $borrowing_date->toDateString());
-            View::set_data('returning_date', $returning_date->toDateString());
+            View::setData('borrowing_date', $borrowing_date->toDateString());
+            View::setData('returning_date', $returning_date->toDateString());
 
 
             include "views/transactions/add.view.php";
@@ -121,11 +121,11 @@ class TransactionsController
         try {
 
             $fields = [
-                'instance_id' => $request->get_params()->get_int('instance_id'),
-                'member_id' => $request->get_params()->get_int('member_id'),
-                'borrowing_date' => $request->get_params()->get_string('borrowing_date'),
-                'returning_date' => $request->get_params()->get_string('returning_date'),
-                'remarks' => $request->get_params()->get_string('remarks'),
+                'instance_id' => $request->getParams()->getInt('instance_id'),
+                'member_id' => $request->getParams()->getInt('member_id'),
+                'borrowing_date' => $request->getParams()->getString('borrowing_date'),
+                'returning_date' => $request->getParams()->getString('returning_date'),
+                'remarks' => $request->getParams()->getString('remarks'),
             ];
 
             $transaction = new BookTransaction();
@@ -137,7 +137,7 @@ class TransactionsController
             $transaction->state = BookTransaction::STATE_BORROWED;
 
             if ($transaction->insert()) {
-                $transaction_id = Database::get_last_inserted_id();
+                $transaction_id = Database::getLastInsertedId();
                 App::redirect('/transactions/single', ['id' => $transaction_id]);
 
             }
@@ -155,13 +155,13 @@ class TransactionsController
         try {
 
             $request = new Request();
-            $id = $request->get_params()->get_int('id');
+            $id = $request->getParams()->getInt('id');
 
             $book_transaction = BookTransaction::select($id);
 
-            $book_instance = $book_transaction->get_book_instance();
-            $book = $book_instance->get_book();
-            $member = $book_transaction->get_member();
+            $book_instance = $book_transaction->getBookInstance();
+            $book = $book_instance->getBook();
+            $member = $book_transaction->getMember();
 
 
             $overdue_payment = 0;
@@ -197,15 +197,15 @@ class TransactionsController
             }
 
 
-            View::set_data('book_transaction', $book_transaction);
-            View::set_data('book', $book);
-            View::set_data('book_instance', $book_instance);
-            View::set_data('member', $member);
-            View::set_data('overdue_payment', $overdue_payment);
-            View::set_data('is_overdue', $is_overdue);
-            View::set_data('is_returned', $is_returned);
-            View::set_data('has_payment', $has_payment);
-            View::set_data('days_elapsed', $days_elapsed);
+            View::setData('book_transaction', $book_transaction);
+            View::setData('book', $book);
+            View::setData('book_instance', $book_instance);
+            View::setData('member', $member);
+            View::setData('overdue_payment', $overdue_payment);
+            View::setData('is_overdue', $is_overdue);
+            View::setData('is_returned', $is_returned);
+            View::setData('has_payment', $has_payment);
+            View::setData('days_elapsed', $days_elapsed);
 
 
             include_once "views/transactions/single.php";
@@ -224,8 +224,8 @@ class TransactionsController
         try {
 
             $request = new Request();
-            $id = $request->get_params()->get_int('transaction_id');
-            $amount = $request->get_params()->get_float('amount');
+            $id = $request->getParams()->getInt('transaction_id');
+            $amount = $request->getParams()->getFloat('amount');
 
             $book_transaction = BookTransaction::select($id);
 
@@ -256,18 +256,18 @@ class TransactionsController
 
             $request = new Request();
 
-            $transaction_id = $request->get_params()->get_int('id');
+            $transaction_id = $request->getParams()->getInt('id');
 
             $book_transaction = BookTransaction::select($transaction_id);
-            $book_instance = $book_transaction->get_book_instance();
-            $book = $book_instance->get_book();
-            $member = $book_transaction->get_member();
+            $book_instance = $book_transaction->getBookInstance();
+            $book = $book_instance->getBook();
+            $member = $book_transaction->getMember();
 
 
-            View::set_data('book_transaction', $book_transaction);
-            View::set_data('book', $book);
-            View::set_data('book_instance', $book_instance);
-            View::set_data('member', $member);
+            View::setData('book_transaction', $book_transaction);
+            View::setData('book', $book);
+            View::setData('book_instance', $book_instance);
+            View::setData('member', $member);
 
             include_once "views/transactions/single_print.view.php";
 
