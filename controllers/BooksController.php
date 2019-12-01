@@ -5,7 +5,7 @@ use Carbon\Carbon;
 class BooksController
 {
 
-    public function view_books()
+    public function viewBooks()
     {
 
         $categories = Category::selectAll();
@@ -18,8 +18,8 @@ class BooksController
             'total_authors' => Author::getStatsTotalAuthors(),
             'total_members' => Member::getStatsTotalMembers(),
             'total_departments' => Department::getStatsTotalDepartments(),
-            'monthly_transactions_data' => $this->get_month_on_month_transactions_count()['data'],
-            'monthly_transactions_months' => $this->get_month_on_month_transactions_count()['months'],
+            'monthly_transactions_data' => $this->getMonthOnMonthTransactionsCount()['data'],
+            'monthly_transactions_months' => $this->getMonthOnMonthTransactionsCount()['months'],
         ];
 
 
@@ -31,7 +31,7 @@ class BooksController
 
     }
 
-    public function search(Request $request)
+    public function viewSearchBooks(Request $request)
     {
         try {
 
@@ -55,7 +55,7 @@ class BooksController
         }
     }
 
-    public function add(Request $request)
+    public function viewAddBooks(Request $request)
     {
 
         try {
@@ -81,7 +81,7 @@ class BooksController
 
     }
 
-    public function adding(Request $request)
+    public function actionAddingBook(Request $request)
     {
 
         try {
@@ -125,7 +125,7 @@ class BooksController
 
     }
 
-    public function edit(Request $request)
+    public function viewEditBook(Request $request)
     {
 
         try {
@@ -147,7 +147,7 @@ class BooksController
     }
 
 
-    public function editing(Request $request)
+    public function actionEditingBook(Request $request)
     {
 
 
@@ -221,7 +221,7 @@ class BooksController
 
     }
 
-    public function view_by_subcategory(Request $request)
+    public function viewBooksBySubcategory(Request $request)
     {
 
         try {
@@ -247,7 +247,13 @@ class BooksController
 
     }
 
-    private function get_month_on_month_transactions_count($n = 6)
+    /**
+     * Returns the given number of last months' name and
+     * number of transactions as an array
+     * @param int $n
+     * @return array
+     */
+    private function getMonthOnMonthTransactionsCount($n = 6)
     {
         $data = [];
         $months = [];

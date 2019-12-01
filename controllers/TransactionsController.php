@@ -6,7 +6,7 @@ use Carbon\Carbon;
 class TransactionsController
 {
 
-    public function index()
+    public function viewTransactions()
     {
 
         try {
@@ -31,7 +31,7 @@ class TransactionsController
 
     }
 
-    public function show_member_search(Request $request)
+    public function viewMemberSearchForTransaction(Request $request)
     {
 
         try {
@@ -51,7 +51,7 @@ class TransactionsController
 
     }
 
-    public function search_member_results(Request $request)
+    public function viewMemberSearchResultsForTransaction(Request $request)
     {
 
         try {
@@ -81,7 +81,7 @@ class TransactionsController
 
     }
 
-    public function add(Request $request)
+    public function viewAddTransaction(Request $request)
     {
 
         try {
@@ -115,7 +115,7 @@ class TransactionsController
         }
     }
 
-    public function adding(Request $request)
+    public function actionAddingTransaction(Request $request)
     {
 
         try {
@@ -149,7 +149,7 @@ class TransactionsController
 
     }
 
-    public function single()
+    public function viewSingleTransaction()
     {
 
         try {
@@ -218,7 +218,7 @@ class TransactionsController
     }
 
 
-    public function single_set_as_returned()
+    public function actionSetAsReturned()
     {
 
         try {
@@ -249,7 +249,7 @@ class TransactionsController
         }
     }
 
-    public function print_single_receipt()
+    public function actionPrintSingleReceipt()
     {
 
         try {

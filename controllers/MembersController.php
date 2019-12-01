@@ -4,10 +4,8 @@
 class MembersController
 {
 
-    /**
-     * Show members view
-     */
-    public function index()
+
+    public function viewMembers()
     {
 
         try {
@@ -28,11 +26,7 @@ class MembersController
 
     }
 
-    /**
-     * Add a new member
-     * field: dept_id
-     * @param Request $request
-     */
+
     public function add(Request $request)
     {
         try {
@@ -108,11 +102,7 @@ class MembersController
 
     }
 
-    /**
-     * Show edit member view
-     * field: member_id
-     * @param Request $request
-     */
+
     public function edit_member(Request $request)
     {
         try {
@@ -163,11 +153,7 @@ class MembersController
         }
     }
 
-    /**
-     * Show members by department
-     * field: dept_id
-     * @param Request $request
-     */
+
     public function view_by_department(Request $request)
     {
         try {
@@ -176,20 +162,24 @@ class MembersController
 
             $department = Department::select($dept_id);
 
+            if (!empty($department)) {
+                $students = $department->getAllSudents();
+                $teachers = $department->getAllTeachers();
 
-            $students = $department->getAllSudents();
-            $teachers = $department->getAllTeachers();
+                View::setData('departments', Department::selectAll());
+                View::setData('teachers', $teachers);
+                View::setData('students', $students);
+                View::setData('selected_department', $department);
 
-            View::setData('departments', Department::selectAll());
-            View::setData('teachers', $teachers);
-            View::setData('students', $students);
-            View::setData('selected_department', $department);
+                include "views/members/department.view.php";
+                return;
+            } else {
+                throw new AppExceptions("Invalid Department");
+            }
 
-            include "views/members/department.view.php";
 
-
-        } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
+        } catch (AppExceptions $ex) {
+            $ex->showMessage();
         }
     }
 

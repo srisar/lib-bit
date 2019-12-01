@@ -8,7 +8,7 @@ class CategoriesController
      * Display categories pages
      * url: /categories
      */
-    public function index()
+    public function viewCategories()
     {
 
         $categories = Category::selectAll();
@@ -40,7 +40,7 @@ class CategoriesController
      * Process add new category
      * @param $request
      */
-    public function adding($request)
+    public function actionAddingCategory(Request $request)
     {
 
 
@@ -94,7 +94,7 @@ class CategoriesController
      * url: /categories/edit?id=x
      * @param $request
      */
-    public function edit($request)
+    public function viewEditCategory(Request $request)
     {
 
     }
@@ -103,7 +103,7 @@ class CategoriesController
      * Process editing category
      * @param $request
      */
-    public function updating($request)
+    public function actionEditingCategory(Request $request)
     {
 
     }
@@ -114,7 +114,7 @@ class CategoriesController
      * @param $request
      * @deprecated
      */
-    public function view_subcategories($request)
+    public function viewSubcategories($request)
     {
 
         try {
@@ -144,7 +144,7 @@ class CategoriesController
      * Process add subcategory
      * @param $request
      */
-    public function adding_subcategory(Request $request)
+    public function actionAddingSubcategory(Request $request)
     {
 
 
@@ -198,36 +198,10 @@ class CategoriesController
 
 
     /**
-     * Show edit subcategory page
-     * url: /subcategories/edit?id=x
-     * @param $request
-     */
-    public function edit_subcategory(Request $request)
-    {
-
-        try {
-
-            $fields = ['subcat_id' => $request->getParams()->getInt('subcat_id')];
-
-            $subcategory = Subcategory::select($fields['subcat_id']);
-
-
-            View::setData('subcategory', $subcategory);
-
-            include_once 'views/category/subcategory_edit.view.php';
-
-
-        } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
-        }
-
-    }
-
-    /**
      * Process editing subcategory
      * @param $request
      */
-    public function editing_subcategory(Request $request)
+    public function actionEditingSubcategory(Request $request)
     {
 
         try {

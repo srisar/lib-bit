@@ -9,7 +9,7 @@ class LoginController
      * @view:
      * @param Request $request
      */
-    public function login(Request $request)
+    public function viewLogin(Request $request)
     {
 
         if (Session::isUserLoggedIn()) {
@@ -26,7 +26,7 @@ class LoginController
     /**
      * @param Request $request
      */
-    public function login_process(Request $request)
+    public function actionProcessLogin(Request $request)
     {
 
         try {
@@ -55,7 +55,7 @@ class LoginController
     /**
      *
      */
-    public function logout()
+    public function actionLogout()
     {
         if (Session::isUserLoggedIn()) {
             Session::killSession();

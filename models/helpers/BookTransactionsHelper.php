@@ -29,8 +29,8 @@ class BookTransactionsHelper
 
                 <tr>
                     <td><a href="<?= App::createURL('/transactions/single', ['id' => $transaction->id]) ?>" class="btn btn-sm btn-success"><?= $transaction->id ?></a></td>
-                    <td><a href="<?= App::createURL('/members/edit', ['id' => $transaction->get_member()->id]) ?>"><?= $transaction->get_member() ?></a></td>
-                    <td><a href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $transaction->get_book_instance()->id]) ?>"><?= $transaction->get_book_instance() ?></a></td>
+                    <td><a href="<?= App::createURL('/members/edit', ['id' => $transaction->getMember()->id]) ?>"><?= $transaction->getMember() ?></a></td>
+                    <td><a href="<?= App::createURL('/book-instance/view-history', ['instance_id' => $transaction->getBookInstance()->id]) ?>"><?= $transaction->getBookInstance() ?></a></td>
                     <td><?= App::toDateString($transaction->borrowing_date) ?></td>
                     <td><?= App::toDateString($transaction->returning_date) ?></td>
                     <td><?= App::toDateString($transaction->returned_date) ?></td>

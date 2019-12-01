@@ -4,7 +4,7 @@
 class AuthorsApiController
 {
 
-    public function add_author(Request $request)
+    public function actionAddAuthor(Request $request)
     {
 
         try {

@@ -4,7 +4,7 @@
 class UsersController
 {
 
-    public function manage_users(Request $request)
+    public function viewUsers(Request $request)
     {
 
         try {
@@ -23,7 +23,7 @@ class UsersController
 
     }
 
-    public function ajax_add_user(Request $request)
+    public function actionAddUser(Request $request)
     {
         try {
 

@@ -9,7 +9,7 @@ class BookInstanceController
      * Adding a new book instance to a Book.
      * @param $request
      */
-    public function adding(Request $request)
+    public function actionAddingBookInstance(Request $request)
     {
         try {
 
@@ -34,7 +34,7 @@ class BookInstanceController
      * View book instance's transaction history
      * @param Request $request
      */
-    public function view_history(Request $request)
+    public function viewBookInstanceHistory(Request $request)
     {
         try {
 
@@ -54,18 +54,5 @@ class BookInstanceController
         }
     }
 
-    /**
-     * Show a single page for book instance transaction.
-     * @param Request $request
-     */
-    public function single(Request $request)
-    {
-        try {
-
-
-        } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
-        }
-    }
 
 }

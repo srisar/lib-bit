@@ -4,7 +4,7 @@
 class AuthorsController
 {
 
-    public function index()
+    public function viewAuthors()
     {
 
         try {

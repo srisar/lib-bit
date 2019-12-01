@@ -40,9 +40,8 @@ class Department extends Model
     /**
      * @param $id
      * @return Department
-     * @throws Exception
      */
-    public static function select($id): Department
+    public static function select($id): ?Department
     {
         $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM departments WHERE id=? LIMIT 1");
@@ -52,7 +51,7 @@ class Department extends Model
         $result = $statement->fetchObject(Department::class);
 
         if (empty($result))
-            throw new Exception("Department not found!");
+            return null;
 
         return $result;
 
