@@ -29,7 +29,7 @@ $selected_department = View::getData('selected_department');
         <!--SIDEBAR: DEPARTMENT-->
         <div class="col-2">
 
-            <div class="card">
+            <div class="card bg-dark text-light">
                 <div class="card-header">
                     <?php HtmlHelper::renderCardHeader('Departments') ?>
                 </div>
@@ -39,7 +39,7 @@ $selected_department = View::getData('selected_department');
 
                             <?php $selected = ($department->id == $selected_department->id) ? "active" : ""; ?>
 
-                            <a class="list-group-item list-group-item-action <?= $selected ?>" href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
+                            <a class="list-group-item list-group-item-action bg-dark text-warning <?= $selected ?>" href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
                                 <?= $department ?>
                             </a>
                         <?php endforeach; ?>
