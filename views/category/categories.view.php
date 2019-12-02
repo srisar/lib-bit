@@ -20,29 +20,11 @@ $selected_category = View::getData('selected_category');
 
         <div class="col-12 col-lg-3 mb-3">
 
-            <div class="card mb-3">
-                <div class="card-header"> <?php HtmlHelper::renderCardHeader('Add a new category'); ?> </div>
-                <div class="card-body p-2">
-                    <?php View::renderErrorMessages(Category::KEY_ERROR); ?>
-
-                    <form class="form" action="<?= App::createURL('/categories/adding') ?>" method="get">
-
-                        <div class="input-group">
-                            <input class="form-control" type="text" name="category_name" required>
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">Add</button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-            </div><!--.card-->
-
             <?php include_once BASE_PATH . '/views/category/_categories_list.inc.php' ?>
 
         </div><!--.col-->
 
-        <div class="col-12 col-lg-6">
+        <div class="col-12 col-lg-4">
             <?php include_once BASE_PATH . '/views/category/_subcategories_list.inc.php' ?>
         </div><!--.col-->
 
@@ -52,14 +34,61 @@ $selected_category = View::getData('selected_category');
 </div>
 
 <?php include_once BASE_PATH . "/views/category/_modal_edit_subcategory.inc.php"; ?>
+<?php include_once BASE_PATH . "/views/category/_modal_add_category.inc.php"; ?>
 
 <?php include_once "views/_footer.php"; ?>
 
 <script>
-    /**
-     * Edit selected subcategory
-     */
+
     $(function () {
+
+        let modalAddCategory = $("#modal_add_category");
+        let formMessages = $("#form-messages");
+
+        let btnAddCategory = $("#btn_modal_add_category");
+        let btnShowAddCategoryModal = $("#btn_show_add_category_modal");
+
+        let textFieldCategoryName = $("#text_category_name");
+
+        textFieldCategoryName.on('keyup', function () {
+            validateForEmptyField(textFieldCategoryName);
+        });
+
+
+        /**
+         * Show Add Category Modal Window
+         */
+        btnShowAddCategoryModal.on('click', function () {
+            modalAddCategory.modal('show');
+        });
+
+        /**
+         * Process Add Category
+         */
+        btnAddCategory.on('click', function () {
+
+            if (validateForEmptyField(textFieldCategoryName)) {
+
+                $.post(`${getSiteURL()}/index.php/categories/adding`, {
+                    'category_name': textFieldCategoryName.val().trim()
+                }).done(function (data) {
+                    let response = JSON.parse(data);
+
+                    console.log(response);
+
+                    if (!response.has_error) {
+                        alert("Category added successfully!");
+                        reloadPage();
+                    } else {
+                        formMessages.empty();
+                        formMessages.append(buildMessageList(response.errors));
+                    }
+
+                });
+
+            }
+
+        });
 
 
         $(document).on("click", ".subcat_item", function () {

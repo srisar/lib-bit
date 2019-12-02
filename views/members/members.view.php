@@ -22,7 +22,7 @@ $departments = View::getData('departments');
                 <?php include_once BASE_PATH . '/views/members/_add_department.inc.php' ?>
 
 
-                <div class="card bg-dark text-light">
+                <div class="card bg-info">
                     <div class="card-header">
                         <?php HtmlHelper::renderCardHeader('Departments') ?>
                     </div>
@@ -30,7 +30,7 @@ $departments = View::getData('departments');
 
                         <div class="list-group">
                             <?php foreach ($departments as $department): ?>
-                                <a class="list-group-item list-group-item-action bg-dark text-warning" href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
+                                <a class="list-group-item list-group-item-action" href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
                                     <?= $department ?>
                                 </a>
                             <?php endforeach; ?>
@@ -47,7 +47,7 @@ $departments = View::getData('departments');
                     <div class="card-header"><?php HtmlHelper::renderCardHeader('Recently added members'); ?></div>
                     <div class="card-body">
 
-                        <table class="table table-striped table-bordered">
+                        <table class="table table-striped table-bordered data-table-basic">
                             <thead>
                             <tr>
                                 <th>Full Name</th>

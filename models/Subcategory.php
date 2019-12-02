@@ -13,6 +13,11 @@ class Subcategory
      */
     public function __toString()
     {
+        return sprintf("%s", $this->subcategory_name);
+    }
+
+    public function getLongName()
+    {
         return sprintf("%s (%d)", $this->subcategory_name, $this->getBooksCount());
     }
 

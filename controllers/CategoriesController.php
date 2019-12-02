@@ -56,6 +56,7 @@ class CategoriesController
     public function actionAddingCategory(Request $request)
     {
 
+        $response = new JSONResponse();
 
         try {
 
@@ -65,44 +66,28 @@ class CategoriesController
             $category = new Category();
             $category->category_name = $category_name;
 
-            if (empty($category_name)) {
-                App::redirect('/categories', [Category::KEY_ERROR => 'Category name cannot be empty string.']);
-                return;
-            }
-
             if (!$category->nameExists()) {
 
                 if ($category->insert()) {
-                    App::redirect('/categories');
+                    $response->addData(Category::select(Database::getLastInsertedId()));
+                    echo $response->toJSON();
+                    return;
+
                 } else {
                     throw new AppExceptions("Cannot save category: " . $category_name);
                 }
 
             } else {
-                View::setError(Category::KEY_ERROR, sprintf("Category (%s) already exist!", $category->category_name));
-
-                $categories = Category::selectAll();
-
-                if (!empty($categories)) {
-                    View::setData('subcategories', $categories[0]->getAllSubcategories());
-                }
-
-                if (!empty($categories)) {
-                    $selected_category = $categories[0];
-                    View::setData('subcategories', $selected_category->getAllSubcategories());
-                    View::setData('selected_category', $selected_category);
-                }
-
-                View::setData('categories', $categories);
-
-                include_once "views/category/categories.view.php";
+                $response->addError(sprintf("Category (%s) already exist!", $category->category_name));
+                echo $response->toJSON();
                 return;
             }
 
 
         } catch (Exception $ex) {
-
-            AppExceptions::showExceptionView($ex->getMessage());
+            $response->addError($ex->getMessage());
+            echo $response->toJSON();
+            return;
         }
 
 

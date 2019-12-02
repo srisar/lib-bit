@@ -29,7 +29,7 @@ $selected_department = View::getData('selected_department');
         <!--SIDEBAR: DEPARTMENT-->
         <div class="col-2">
 
-            <div class="card bg-dark text-light">
+            <div class="card bg-info">
                 <div class="card-header">
                     <?php HtmlHelper::renderCardHeader('Departments') ?>
                 </div>
@@ -39,7 +39,7 @@ $selected_department = View::getData('selected_department');
 
                             <?php $selected = ($department->id == $selected_department->id) ? "active" : ""; ?>
 
-                            <a class="list-group-item list-group-item-action bg-dark text-warning <?= $selected ?>" href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
+                            <a class="list-group-item list-group-item-action <?= $selected ?>" href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
                                 <?= $department ?>
                             </a>
                         <?php endforeach; ?>
@@ -56,12 +56,12 @@ $selected_department = View::getData('selected_department');
                     <div class="card">
                         <div class="card-header">
                             <?php HtmlHelper::renderCardHeader('Teachers'); ?> |
-                            <button class="btn btn-sm btn-primary btn_show_add_teacher_modal">Add</button>
+                            <button class="btn btn-sm btn-warning btn_show_add_teacher_modal">Add a teacher</button>
                         </div>
                         <div class="card-body">
 
                             <?php if (!empty($teachers)): ?>
-                                <table class="table table-striped table-bordered data-table">
+                                <table class="table table-striped table-bordered data-table-basic">
                                     <thead>
                                     <tr>
                                         <th>Full Name</th>
@@ -91,12 +91,12 @@ $selected_department = View::getData('selected_department');
                     <div class="card">
                         <div class="card-header">
                             <?php HtmlHelper::renderCardHeader('Students'); ?> |
-                            <button class="btn btn-sm btn-primary btn_show_add_student_modal">Add</button>
+                            <button class="btn btn-sm btn-warning btn_show_add_student_modal">Add a student</button>
                         </div>
                         <div class="card-body">
 
                             <?php if (!empty($students)): ?>
-                                <table class="table table-striped table-bordered data-table">
+                                <table class="table table-striped table-bordered data-table-basic">
                                     <thead>
                                     <tr>
                                         <th>Full Name</th>

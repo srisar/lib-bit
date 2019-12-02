@@ -1,6 +1,7 @@
 body {
     font-family: "Arial Nova", "Arial", sans-serif;
     font-size: 14px;
+    background-color: #f7f1e3;
 }
 
 h1 {
@@ -106,6 +107,10 @@ h5 {
 
 }
 
+.data-table-basic {
+
+}
+
 #date-picker-error {
     color: #ff4136;
 }
@@ -129,4 +134,8 @@ h5 {
 .list-group-item.bg-dark.active {
     background-color: #3d3d3d !important;
     border: #3d3d3d;
+}
+
+.needs-validation {
+
 }

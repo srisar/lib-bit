@@ -1,4 +1,4 @@
-<!-- MODAL: Edit selected author -->
+<!-- MODAL: Edit selected subcategory -->
 <div class="modal fade" id="modal_subcategory_edit" tabindex="-1" role="dialog" aria-labelledby="editAuthor" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content shadow-sm">

@@ -60,7 +60,7 @@ $authors = View::getData('authors');
                 </div>
                 <div class="card-body p-2">
 
-                    <table class="data-table table table-striped">
+                    <table class="data-table-basic table table-bordered table-striped">
                         <thead>
                         <tr>
                             <th>Author Name</th>
