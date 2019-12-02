@@ -45,3 +45,20 @@ function showMessageBox(message) {
     modalWindow.modal("show");
 
 }
+
+
+function buildMessageList(array) {
+
+    let rootElement = document.createElement("ul");
+    rootElement.classList.add("list-group");
+
+    for (let i = 0; i < array.length; i++) {
+        let liElement = document.createElement("li");
+        liElement.classList.add("list-group-item");
+        liElement.innerText = array[i];
+        rootElement.append(liElement);
+    }
+
+    return rootElement;
+
+}

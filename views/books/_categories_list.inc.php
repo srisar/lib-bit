@@ -1,7 +1,7 @@
 <?php
 
 ?>
-<div id="categories-list" class="card bg-light">
+<div id="categories-list" class="card bg-dark text-light">
     <div class="card-header">
         <h3 class="m-0">Categories</h3>
     </div>
@@ -14,16 +14,16 @@
                 $subcats = $cat->getAllSubcategories();
                 ?>
 
-                <li class="list-group-item">
-                    <div class="category-name font-weight-bold"><?= $cat ?></div>
+                <li class="list-group-item px-1 bg-dark text-light">
+                    <div class="category-name font-weight-bold mb-2"><?= $cat ?></div>
 
-                    <ul class="list-group list-group-flush">
+                    <div class="list-group">
                         <?php foreach ($subcats as $subcat): ?>
-                            <a href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcat->id]) ?>">
-                                <li class="list-group-item p-1"><?= $subcat ?></li>
+                            <a class="list-group-item list-group-item-action p-1 bg-dark text-warning" href="<?= App::createURL('/books/subcategory', ['subcat_id' => $subcat->id]) ?>">
+                                <?= $subcat ?>
                             </a>
                         <?php endforeach; ?>
-                    </ul>
+                    </div>
 
                 </li>
             <?php endforeach; ?>

@@ -143,7 +143,6 @@ class Member
 
     /**
      * @return Department
-     * @throws Exception
      */
     public function getDepartment()
     {

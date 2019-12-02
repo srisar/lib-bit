@@ -1,7 +1,7 @@
 <?php
 
 
-class Department extends Model
+class Department
 {
 
     /** @var int */
@@ -14,6 +14,11 @@ class Department extends Model
      * @return string
      */
     public function __toString()
+    {
+        return $this->department_name;
+    }
+
+    public function getLongDepartmentName()
     {
         return sprintf("%s (%d)", $this->department_name, $this->getMembersCount());
     }
@@ -41,7 +46,7 @@ class Department extends Model
      * @param $id
      * @return Department
      */
-    public static function select($id): ?Department
+    public static function select($id): Department
     {
         $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM departments WHERE id=? LIMIT 1");
@@ -60,9 +65,8 @@ class Department extends Model
     /**
      * @param $name
      * @return mixed
-     * @throws Exception
      */
-    public static function selectByName($name)
+    public static function selectByName($name): Department
     {
         $db = Database::getInstance();
         $statement = $db->prepare("SELECT * FROM departments WHERE department_name=? LIMIT 1");

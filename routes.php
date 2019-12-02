@@ -69,13 +69,12 @@ Router::add('/api/update_author', ApiCallsController::class, "update_author");
 
 /** Members */
 Router::add('/members', MembersController::class, 'viewMembers');
-Router::add('/members/add', MembersController::class, 'add');
-Router::add('/members/adding', MembersController::class, 'adding');
-Router::add('/members/edit', MembersController::class, 'edit_member');
-Router::add('/members/editing', MembersController::class, 'editing_member');
+Router::add('/members/adding', MembersController::class, 'actionAddingMember');
+Router::add('/members/edit', MembersController::class, 'viewEditMember');
+Router::add('/members/editing', MembersController::class, 'actionEditingMember');
 
-Router::add('/members/department', MembersController::class, 'view_by_department');
-Router::add('/departments/adding', DepartmentsController::class, 'adding');
+Router::add('/members/department', MembersController::class, 'viewMembersByDepartment');
+Router::add('/departments/adding', DepartmentsController::class, 'actionAddingDepartment');
 
 
 /** Test Routes */

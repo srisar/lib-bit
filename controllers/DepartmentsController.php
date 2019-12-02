@@ -4,7 +4,7 @@
 class DepartmentsController
 {
 
-    public function adding(Request $request)
+    public function actionAddingDepartment(Request $request)
     {
         try {
 

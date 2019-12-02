@@ -25,9 +25,9 @@ class UsersController
 
     public function actionAddUser(Request $request)
     {
+        $response = new JSONResponse();
         try {
 
-            $response = new JSONResponse();
 
             $fields = [
                 'username' => $request->getParams()->getString('username'),
@@ -63,7 +63,9 @@ class UsersController
             }
 
         } catch (AppExceptions $exception) {
-            $exception->showMessage();
+            $response->addError($exception->getMessage());
+            echo $response->toJSON();
+            return;
         }
 
     }

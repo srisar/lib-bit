@@ -27,83 +27,49 @@ class MembersController
     }
 
 
-    public function add(Request $request)
+    public function actionAddingMember(Request $request)
     {
+
+        $response = new JSONResponse();
+
         try {
+
 
             $fields = [
                 'dept_id' => $request->getParams()->getInt('dept_id'),
-                'type' => $request->getParams()->getString('type'),
-            ];
-
-            $department = Department::select($fields['dept_id']);
-
-
-            View::setData('department', $department);
-            View::setData('type', $fields['type']);
-
-            include "views/members/_modal_add_member_body.php";
-
-        } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
-        }
-    }
-
-    public function adding(Request $request)
-    {
-        try {
-
-            $errors = [];
-
-            $fields = [
-                'dept_id' => $request->getParams()->getInt('dept_id'),
-                'type' => $request->getParams()->getString('type'),
+                'member_type' => $request->getParams()->getString('member_type'),
                 'full_name' => $request->getParams()->getString('full_name'),
                 'member_since' => $request->getParams()->getString('member_since'),
             ];
 
+            $member = new Member();
+            $member->member_type = $fields['member_type'];
+            $member->department_id = $fields['dept_id'];
+            $member->fullname = $fields['full_name'];
+            $member->member_since = $fields['member_since'];
 
-            // filter inputs!!!
-            if (empty($fields['full_name'])) {
-                $errors[] = "Full name cannot be empty.";
-            }
 
-
-            if (empty($errors)) {
-
-                // Proceed only if error array is empty.
-
-                $member = new Member();
-                $member->member_type = $fields['type'];
-                $member->department_id = $fields['dept_id'];
-                $member->fullname = $fields['full_name'];
-                $member->member_since = $fields['member_since'];
-
-                if ($member->insert()) {
-                    App::redirect('/members/department', ['dept_id' => $fields['dept_id']]);
-                }
+            if ($member->insert()) {
+                $response->addData(Member::select(Database::getLastInsertedId()));
+                echo $response->toJSON();
+                return;
             } else {
-                // Errors in the fields. Render the form again and display error message.
-
-                $department = Department::select($fields['dept_id']);
-
-                View::setError('errors', $errors);
-                View::setData('department', $department);
-                View::setData('type', $fields['type']);
-
-                include_once "views/members/_modal_add_member_body.php";
-
+                $response->addError("Insert failed.");
+                echo $response->toJSON();
+                return;
             }
 
 
         } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
+            $response->addError($ex->getMessage());
+            echo $response->toJSON();
+            return;
         }
 
     }
 
 
-    public function edit_member(Request $request)
+    public function viewEditMember(Request $request)
     {
         try {
             $id = $request->getParams()->getInt('id');
@@ -124,7 +90,7 @@ class MembersController
 
     }
 
-    public function editing_member(Request $request)
+    public function actionEditingMember(Request $request)
     {
         try {
 
@@ -154,7 +120,7 @@ class MembersController
     }
 
 
-    public function view_by_department(Request $request)
+    public function viewMembersByDepartment(Request $request)
     {
         try {
 

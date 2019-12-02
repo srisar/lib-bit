@@ -12,81 +12,80 @@ $departments = View::getData('departments');
 ?>
 
 
-  <div class="container-fluid">
+    <div class="container-fluid">
 
 
-    <div class="row">
+        <div class="row">
 
-      <div class="col-3">
+            <div class="col-12 col-xl-3 mb-3">
 
-        <?php include_once BASE_PATH . '/views/members/_add_department.inc.php' ?>
-
-
-        <div class="card bg-light">
-          <div class="card-header">
-            <?php HtmlHelper::renderCardHeader('Departments') ?>
-          </div>
-          <div class="card-body">
-
-            <ul class="list-group">
-              <?php foreach ($departments as $department): ?>
-
-                <li class="list-group-item">
-                  <div class="category-name">
-                    <a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
-                      <?= $department ?>
-                    </a>
-                  </div>
-                </li>
-              <?php endforeach; ?>
-            </ul>
-          </div>
-        </div><!--.card-->
-
-      </div>
-
-      <div class="col-9">
+                <?php include_once BASE_PATH . '/views/members/_add_department.inc.php' ?>
 
 
-        <div class="card">
-          <div class="card-header"><?php HtmlHelper::renderCardHeader('Recent members'); ?></div>
-          <div class="card-body">
+                <div class="card">
+                    <div class="card-header">
+                        <?php HtmlHelper::renderCardHeader('Departments') ?>
+                    </div>
+                    <div class="card-body">
 
-            <table class="table table-striped table-bordered">
-              <thead>
-              <tr>
-                <th>Full Name</th>
-                <th>Member Since</th>
-              </tr>
-              </thead>
-              <tbody>
+                        <div class="list-group">
+                            <?php foreach ($departments as $department): ?>
+                                <a class="list-group-item list-group-item-action" href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>">
+                                    <?= $department ?>
+                                </a>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div><!--.card-->
 
-              <?php foreach ($members as $member): ?>
-                <tr>
-                  <td>
-                    <a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>">
-                      <?= $member->fullname ?>
-                    </a>
-                  </td>
-                  <td>
-                    <?= App::toDateString($member->getMemberSince()) ?>
-                  </td>
-                </tr>
-              <?php endforeach; ?>
+            </div>
+
+            <div class="col-12 col-xl-9">
 
 
-              </tbody>
+                <div class="card">
+                    <div class="card-header"><?php HtmlHelper::renderCardHeader('Recently added members'); ?></div>
+                    <div class="card-body">
 
-            </table>
-          </div>
-        </div><!--.card-->
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Department</th>
+                                <th>Type</th>
+                                <th>Member Since</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+                            <?php foreach ($members as $member): ?>
+                                <tr>
+                                    <td>
+                                        <a href="<?= App::createURL('/members/edit', ['id' => $member->id]) ?>">
+                                            <?= $member->fullname ?>
+                                        </a>
+                                    </td>
+                                    <td><?= $member->getDepartment() ?></td>
+                                    <td><?= $member->member_type ?></td>
+                                    <td>
+                                        <?= App::toDateString($member->getMemberSince()) ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
 
 
-      </div>
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div><!--.card-->
+
+
+            </div>
+
+        </div>
+
 
     </div>
-
-
-  </div>
 
 <?php include_once "views/_footer.php" ?>
