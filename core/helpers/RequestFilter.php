@@ -77,4 +77,24 @@ class RequestFilter
         return (string)filter_var($this->map[$name], FILTER_VALIDATE_EMAIL);
     }
 
+    /**
+     * Checks if request has error parameter in it.
+     * @param string $key
+     * @return bool
+     */
+    public function hasError($key = 'error')
+    {
+        return $this->has($key);
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     * @throws AppExceptions
+     */
+    public function getError($key = 'error')
+    {
+        return $this->getString($key);
+    }
+
 }

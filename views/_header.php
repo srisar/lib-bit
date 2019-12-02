@@ -33,27 +33,20 @@
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= App::createURL('/books') ?>">View Books</a>
+                    <a class="nav-link" href="<?= App::createURL('/books') ?>">BOOKS</a>
                 </li>
-
-                <li class="nav-item active dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Manage Books
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="<?= App::createURL('/categories') ?>">Manage Categories</a>
-                        <a class="dropdown-item" href="<?= App::createURL('/authors') ?>">Manage Authors</a>
-
-                    </div>
-                </li>
-
 
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= App::createURL('/members') ?>">Manage Members</a>
+                    <a class="nav-link" href="<?= App::createURL('/categories') ?>">CATEGORIES</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="<?= App::createURL('/transactions') ?>">View Transactions</a>
+                    <a class="nav-link" href="<?= App::createURL('/authors') ?>">AUTHORS</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?= App::createURL('/members') ?>">MEMBERS</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="<?= App::createURL('/transactions') ?>">TRANSACTIONS</a>
                 </li>
 
             </ul>

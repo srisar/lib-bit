@@ -33,7 +33,7 @@ class View
      * @param $key
      * @param $error
      */
-    public static function setError($key, $error)
+    public static function setError($error, $key = 'error')
     {
         self::$error[$key] = $error;
     }
@@ -80,6 +80,18 @@ class View
         $error = View::getError($message_key);
         View::errorContainer($error);
 
+    }
+
+    /**
+     * @param Request $request
+     * @param $key
+     * @throws AppExceptions
+     */
+    public static function setErrorFromRequest(Request $request, $key)
+    {
+        if ($request->getParams()->hasError($key)) {
+            View::setError($request->getParams()->getError($key), $key);
+        }
     }
 
 }

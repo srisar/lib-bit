@@ -6,6 +6,8 @@ class Subcategory
 
     public $id, $category_id, $subcategory_name;
 
+    const KEY_ERROR = 'subcaterror';
+
     /**
      * @return string
      */

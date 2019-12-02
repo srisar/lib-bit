@@ -1,7 +1,7 @@
 <!-- MODAL: Edit selected author -->
 <div class="modal fade" id="modal_subcategory_edit" tabindex="-1" role="dialog" aria-labelledby="editAuthor" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content shadow-sm">
             <div class="modal-header">
                 <h3 class="modal-title">Edit Subcategory</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

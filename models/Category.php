@@ -4,6 +4,8 @@ class Category
 {
     public $id, $category_name;
 
+    const KEY_ERROR = 'caterror';
+
     /**
      * @return string
      */

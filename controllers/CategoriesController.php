@@ -7,32 +7,45 @@ class CategoriesController
     /**
      * Display categories pages
      * url: /categories
+     * @param Request $request
      */
-    public function viewCategories()
+    public function viewCategories(Request $request)
     {
 
-        $categories = Category::selectAll();
+        try {
+            $categories = Category::selectAll();
 
-        $request = new Request();
 
-        if ($request->getParams()->has('cat_id')) {
+            // checks if cat_id param is present, if not
+            // select and show first category
+            if ($request->getParams()->has('cat_id')) {
 
-            $fields = ['cat_id' => $request->getParams()->getInt('cat_id')];
+                $fields = ['cat_id' => $request->getParams()->getInt('cat_id')];
 
-            $selected_category = Category::select($fields['cat_id']);
-            View::setData('selected_category', $selected_category);
-            View::setData('subcategories', $selected_category->getAllSubcategories());
-
-        } else {
-            if (!empty($categories)) {
-                $selected_category = $categories[0];
-                View::setData('subcategories', $selected_category->getAllSubcategories());
+                $selected_category = Category::select($fields['cat_id']);
                 View::setData('selected_category', $selected_category);
-            }
-        }
+                View::setData('subcategories', $selected_category->getAllSubcategories());
 
-        View::setData('categories', $categories);
-        include_once "views/category/categories.view.php";
+            } else {
+
+
+                if (!empty($categories)) {
+                    $selected_category = $categories[0];
+                    View::setData('subcategories', $selected_category->getAllSubcategories());
+                    View::setData('selected_category', $selected_category);
+                }
+            }
+
+            View::setErrorFromRequest($request, Category::KEY_ERROR);
+            View::setErrorFromRequest($request, Subcategory::KEY_ERROR);
+
+            View::setData('categories', $categories);
+            include_once "views/category/categories.view.php";
+            return;
+
+        } catch (AppExceptions $exception) {
+            $exception->showMessage();
+        }
     }
 
 
@@ -46,22 +59,27 @@ class CategoriesController
 
         try {
 
-            $c_name = App::validateField($request, 'category_name');
+            $category_name = $request->getParams()->getString('category_name');
+
 
             $category = new Category();
-            $category->category_name = $c_name;
+            $category->category_name = $category_name;
 
+            if (empty($category_name)) {
+                App::redirect('/categories', [Category::KEY_ERROR => 'Category name cannot be empty string.']);
+                return;
+            }
 
             if (!$category->nameExists()) {
 
                 if ($category->insert()) {
                     App::redirect('/categories');
                 } else {
-                    die("Cannot save the category");
+                    throw new AppExceptions("Cannot save category: " . $category_name);
                 }
 
             } else {
-                View::setError('error', sprintf("Category (%s) already exist!", $category->category_name));
+                View::setError(Category::KEY_ERROR, sprintf("Category (%s) already exist!", $category->category_name));
 
                 $categories = Category::selectAll();
 
@@ -78,6 +96,7 @@ class CategoriesController
                 View::setData('categories', $categories);
 
                 include_once "views/category/categories.view.php";
+                return;
             }
 
 
@@ -156,7 +175,7 @@ class CategoriesController
 
 
             if (empty($subcategory_name)) {
-                App::redirect('/categories', ['cat_id' => $category_id]);
+                App::redirect('/categories', ['cat_id' => $category_id, Subcategory::KEY_ERROR => ('Subcategory name cannot be empty.')]);
             } else {
                 $subcategory = new Subcategory();
                 $subcategory->category_id = $category_id;
@@ -173,24 +192,24 @@ class CategoriesController
                 } else {
                     $error = sprintf("%s already exist.", $subcategory_name);
 
-                    $r = new Request();
-                    $fields = ['cat_id' => $r->getParams()->getInt('category_id')];
+                    $fields = ['cat_id' => $request->getParams()->getInt('category_id')];
 
                     $selected_category = Category::select($fields['cat_id']);
+
+
                     View::setData('selected_category', $selected_category);
                     View::setData('subcategories', $selected_category->getAllSubcategories());
-
-                    View::setError('error_subcat', $error);
-
                     View::setData('categories', Category::selectAll());
 
+                    View::setError($error, Subcategory::KEY_ERROR);
+
                     include_once "views/category/categories.view.php";
+                    return;
                 }
             }
 
 
         } catch (Exception $ex) {
-
             AppExceptions::showExceptionView($ex->getMessage());
         }
 
