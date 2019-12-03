@@ -160,9 +160,10 @@ class BooksController
                 'subcategory_id' => $request->getParams()->getInt('subcategory_id'),
             ];
 
-            $has_image = $request->getFiles()->has('image');
 
-            if ($has_image) {
+            if ($request->hasValidImage()) {
+
+
                 // 1. image upload enabled.
 
                 $uploaded_image = new UploadedFile($request->getFiles()->get('image'));
@@ -192,6 +193,8 @@ class BooksController
 
 
             } else {
+
+
                 // 2. image upload disabled. (default state)
                 $book = Book::select($fields['id']);
                 $book->title = $fields['title'];
@@ -203,19 +206,8 @@ class BooksController
                 }
             }
 
-        } catch (Exception $e) {
-
-            $id = $request->getParams()->getInt('id');
-            $book = Book::select($id);
-
-            $categories = Category::selectAll();
-
-            View::setData('book', $book);
-            View::setData('categories', $categories);
-
-            View::setError('error', $e->getMessage());
-            include_once "views/books/books_edit.view.php";
-
+        } catch (AppExceptions $exception) {
+            $exception->showMessage();
         }
 
 

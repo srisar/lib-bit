@@ -74,4 +74,13 @@ class Request
         return $this->files;
     }
 
+    public function hasValidImage()
+    {
+        if ($this->files->has('image')) {
+            if ($this->files->get('image')['error'] == 0) return true;
+        }
+
+        return false;
+    }
+
 }

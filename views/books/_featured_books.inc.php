@@ -5,7 +5,7 @@ $featured_books = Book::selectAll(4);
 
 ?>
 
-<div class="border px-4">
+<div class="border px-4 pt-2 bg-white shadow">
     <h1 class="text-center">Latest Books</h1>
 
     <div class="row">
