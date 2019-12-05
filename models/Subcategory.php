@@ -42,7 +42,11 @@ class Subcategory
         $statement = $db->prepare("SELECT * FROM subcategories WHERE id=?");
         $statement->execute([$id]);
 
-        return $statement->fetchObject(Subcategory::class);
+        $result = $statement->fetchObject(Subcategory::class);
+
+        if (!empty($result)) return $result;
+
+        return null;
     }
 
 

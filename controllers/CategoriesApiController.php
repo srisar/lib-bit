@@ -5,46 +5,7 @@ class CategoriesApiController
 {
 
 
-  public function get_subcategory()
-  {
 
-    try {
-
-      $json = [
-        "result" => false,
-        "data" => null,
-        "error" => null
-      ];
-
-      $request = new Request();
-
-      $id = $request->getParams()->getInt("id");
-
-      $subcategory = Subcategory::select($id);
-
-      if (!empty($subcategory)) {
-
-        $json['data'] = $subcategory;
-        $json['result'] = true;
-
-        echo json_encode($json);
-        return;
-
-      } else {
-
-        $json['result'] = false;
-        $json['error'] = "Subcategory not found!";
-        echo json_encode($json);
-        return;
-
-      }
-
-
-    } catch (Exception $exception) {
-      AppExceptions::showExceptionView($exception->getMessage());
-    }
-
-  }
 
   public function edit_subcategory()
   {

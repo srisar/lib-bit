@@ -64,6 +64,18 @@ class Category
         return $statement->execute([$this->category_name]);
     }
 
+
+    /**
+     * Updates the category
+     */
+    public function update()
+    {
+        $db = Database::getInstance();
+        $statement = $db->prepare("UPDATE categories SET category_name=? WHERE id=?");
+        return $statement->execute([$this->category_name, $this->id]);
+
+    }
+
     /**
      * @return bool
      */

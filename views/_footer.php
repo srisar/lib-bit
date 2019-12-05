@@ -16,8 +16,7 @@
 <script src="<?= App::getBaseURL() ?>/assets/plugins/pickerjs/dist/picker.min.js"></script>
 <script src="<?= App::getBaseURL() ?>/assets/plugins/DataTables/datatables.min.js"></script>
 
-<script src="<?= App::getBaseURL() ?>/assets/forms.js"></script>
-<script src="<?= App::getBaseURL() ?>/assets/app.js"></script>
+<script src="<?= App::getBaseURL() ?>/assets/js/app.js" type="module"></script>
 
 </body>
 </html>

@@ -42,18 +42,16 @@ Router::add('/transactions/single/print', TransactionsController::class, "action
 /** Categories */
 Router::add('/categories', CategoriesController::class, "viewCategories");
 Router::add('/categories/adding', CategoriesController::class, "actionAddingCategory");
-Router::add('/categories/edit', CategoriesController::class, "viewEditCategory");
+//Router::add('/categories/edit', CategoriesController::class, "viewEditCategory"); // to be deleted
 Router::add('/categories/editing', CategoriesController::class, "actionEditingCategory");
 
 
 /** Subcategories */
 Router::add('/subcategories', CategoriesController::class, "viewSubcategories");
-Router::add('/subcategory/adding', CategoriesController::class, "actionAddingSubcategory");
-Router::add('/subcategory/editing', CategoriesController::class, "actionEditingSubcategory");
+Router::add('/subcategories/adding', CategoriesController::class, "actionAddingSubcategory");
+Router::add('/subcategories/editing', CategoriesController::class, "actionEditingSubcategory");
+Router::add('/subcategories/single', CategoriesController::class, "actionSingleSubcategory");
 
-Router::add('/api/get_subcategories', ApiCallsController::class, "get_subcategories_by_category_name");
-Router::add('/api/get_subcategory', CategoriesApiController::class, "get_subcategory");
-Router::add('/api/edit_subcategory', CategoriesApiController::class, "edit_subcategory");
 
 
 /** Authors */

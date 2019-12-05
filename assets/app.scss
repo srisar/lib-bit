@@ -1,3 +1,4 @@
+//BASIC STYLES
 body {
   font-family: "Arial Nova", "Arial", sans-serif;
   font-size: 14px;
@@ -33,6 +34,10 @@ h5 {
   font-size: 90%;
 }
 
+#categories-list .category-name {
+
+}
+
 #cover-image {
   max-width: 150px;
   height: auto;
@@ -48,9 +53,11 @@ h5 {
   text-align: center;
 }
 
+
 .logo {
   height: 32px;
 }
+
 
 .featured-image {
   border-radius: 5px;
@@ -66,6 +73,18 @@ h5 {
   font-size: 90%;
 }
 
+
+.date-picker {
+}
+
+.data-table {
+
+}
+
+.data-table-basic {
+
+}
+
 #date-picker-error {
   color: #ff4136;
 }
@@ -74,6 +93,7 @@ h5 {
   font-size: 90%;
   font-weight: normal;
 }
+
 
 .login-img {
   display: inline-block;
@@ -90,8 +110,22 @@ h5 {
   border: #3d3d3d;
 }
 
+.needs-validation {
+
+}
+
+#main-navbar {
+  .nav-item i {
+
+  }
+}
+
+//=================================================
+//==== Card ====
+//=================================================
+
 .card {
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important
 }
 
 .card-header {
@@ -102,8 +136,7 @@ h5 {
   font-size: 16px;
 }
 
+
 .card-body {
   padding: 0.5rem;
 }
-
-/*# sourceMappingURL=app.css.map */

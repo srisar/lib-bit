@@ -1,8 +1,10 @@
 <div class="card">
 
     <div class="card-header">
+
+        <button class="btn btn-warning btn-sm" id="btn_open_edit_category_modal"><i class="far fa-edit"></i></button>
         <?php HtmlHelper::renderCardHeader("Subcategories in {$selected_category}"); ?>|
-        <button class="btn btn-sm btn-warning">Add new subcategory</button>
+        <button class="btn btn-sm btn-warning" id="btn_open_add_subcategory_modal"><i class="far fa-plus-circle"></i> Add new subcategory</button>
     </div>
 
 

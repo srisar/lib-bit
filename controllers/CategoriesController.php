@@ -94,22 +94,56 @@ class CategoriesController
     }
 
     /**
-     * Show edit category page
-     * url: /categories/edit?id=x
-     * @param $request
-     */
-    public function viewEditCategory(Request $request)
-    {
-
-    }
-
-    /**
      * Process editing category
      * @param $request
      */
     public function actionEditingCategory(Request $request)
     {
 
+        $response = new JSONResponse();
+
+        try {
+
+
+            $fields = [
+                'category_id' => $request->getParams()->getInt('category_id'),
+                'category_name' => $request->getParams()->getString('category_name')
+            ];
+
+            $selectedCategory = Category::select($fields['category_id']);
+
+            if (!empty($selectedCategory)) {
+
+                // it is a valid category, now check for already existing name
+
+                $selectedCategory->category_name = $fields['category_name'];
+
+                if ($selectedCategory->nameExists()) {
+                    $response->addError(sprintf("%s already exists", $fields['category_name']));
+                    echo $response->toJSON();
+                    return;
+                } else {
+
+                    if ($selectedCategory->update()) {
+                        echo $response->toJSON();
+                        return;
+                    }
+
+                }
+
+            } else {
+
+                $response->addError('Not a valid category');
+                echo $response->toJSON();
+                return;
+            }
+
+
+        } catch (AppExceptions $exception) {
+            $response->addError($exception->getMessage());
+            echo $response->toJSON();
+            return;
+        }
     }
 
 
@@ -151,6 +185,7 @@ class CategoriesController
     public function actionAddingSubcategory(Request $request)
     {
 
+        $response = new JSONResponse();
 
         try {
 
@@ -159,43 +194,36 @@ class CategoriesController
             $subcategory_name = $request->getParams()->getString('subcategory_name');
 
 
-            if (empty($subcategory_name)) {
-                App::redirect('/categories', ['cat_id' => $category_id, Subcategory::KEY_ERROR => ('Subcategory name cannot be empty.')]);
-            } else {
-                $subcategory = new Subcategory();
-                $subcategory->category_id = $category_id;
-                $subcategory->subcategory_name = $subcategory_name;
+            $subcategory = new Subcategory();
+            $subcategory->category_id = $category_id;
+            $subcategory->subcategory_name = $subcategory_name;
 
-                if (!$subcategory->alreadyExists()) {
+            if (!$subcategory->alreadyExists()) {
 
-                    if ($subcategory->insert()) {
+                if ($subcategory->insert()) {
 
-                        App::redirect('/categories', ['cat_id' => $category_id]);
-
-                    }
+                    echo $response->toJSON();
+                    return;
 
                 } else {
-                    $error = sprintf("%s already exist.", $subcategory_name);
-
-                    $fields = ['cat_id' => $request->getParams()->getInt('category_id')];
-
-                    $selected_category = Category::select($fields['cat_id']);
-
-
-                    View::setData('selected_category', $selected_category);
-                    View::setData('subcategories', $selected_category->getAllSubcategories());
-                    View::setData('categories', Category::selectAll());
-
-                    View::setError($error, Subcategory::KEY_ERROR);
-
-                    include_once "views/category/categories.view.php";
+                    $response->addError('Error adding new subcategory');
+                    echo $response->toJSON();
                     return;
                 }
+
+            } else {
+                $error = sprintf("%s already exist.", $subcategory_name);
+
+                $response->addError($error);
+                echo $response->toJSON();
+                return;
             }
 
 
-        } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
+        } catch (Exception $exception) {
+            $response->addError($exception->getMessage());
+            echo $response->toJSON();
+            return;
         }
 
     }
@@ -208,22 +236,60 @@ class CategoriesController
     public function actionEditingSubcategory(Request $request)
     {
 
+        $response = new JSONResponse();
+
         try {
 
             $fields = [
-                'subcat_id' => $request->getParams()->getInt('subcat_id'),
-                'subcategory_name' => $request->getParams()->getInt('subcat_id'),
+                'subcat_id' => $request->getParams()->getInt('id'),
+                'subcategory_name' => $request->getParams()->getString('subcategory_name'),
             ];
 
-            $subcategory = Subcategory::select($fields['subcat_id']);
-            $subcategory->subcategory_name = $fields['subcategory_name'];
 
-            if ($subcategory->update()) {
-                App::redirect('/subcategories', ['cat_id' => $subcategory->category_id]);
+            $subcategory = Subcategory::select($fields['subcat_id']);
+
+            if (!empty($subcategory)) {
+
+                $subcategory->subcategory_name = $fields['subcategory_name'];
+                if ($subcategory->update()) {
+                    echo $response->toJSON();
+                    return;
+                }
+            } else {
+                $response->addError('No subcategory found.');
+                echo $response->toJSON();
+                return;
             }
 
+
         } catch (Exception $ex) {
-            AppExceptions::showExceptionView($ex->getMessage());
+            $response->addError($ex->getMessage());
+            echo $response->toJSON();
+            return;
+        }
+
+    }
+
+    public function actionSingleSubcategory(Request $request)
+    {
+
+        $response = new JSONResponse();
+
+        try {
+
+            $id = $request->getParams()->getInt('id');
+
+            $selectedSubcategory = Subcategory::select($id);
+
+            $response->addData($selectedSubcategory);
+            echo $response->toJSON();
+            return;
+
+
+        } catch (AppExceptions $exception) {
+            $response->addError($exception->getMessage());
+            echo $response->toJSON();
+            return;
         }
 
     }
