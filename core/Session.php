@@ -64,4 +64,10 @@ class Session
         $_SESSION[self::$STATE] = true;
     }
 
+
+    public static function getUserDisplayName()
+    {
+        return $_SESSION[self::$DISPLAY_NAME];
+    }
+
 }

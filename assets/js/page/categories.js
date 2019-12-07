@@ -18,7 +18,7 @@ function actionAddCategory() {
     let btnAddCategory = $("#btn_modal_add_category");
     let btnShowAddCategoryModal = $("#btn_show_add_category_modal");
 
-    let textFieldCategoryName = $("#text_category_name");
+    let textFieldCategoryName = modalAddCategory.find("#text_category_name");
 
     textFieldCategoryName.on('keyup', function () {
         form.validateForEmptyField(textFieldCategoryName);

@@ -52,6 +52,7 @@
             </ul>
 
             <form class="form-inline my-2 my-lg-0">
+                <span class="badge badge-pill badge-dark mr-2">Logged in as <?= Session::getUserDisplayName() ?></span>
                 <span class="badge badge-pill badge-dark mr-2">Today is <?= App::todayString() ?></span>
 
                 <?php if (Session::isAdmin()): ?>

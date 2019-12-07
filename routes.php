@@ -77,9 +77,7 @@ Router::add('/departments/adding', DepartmentsController::class, 'actionAddingDe
 
 /** Test Routes */
 Router::add('/test', "TestController", "test");
-Router::add('/test/image_up', "TestController", "upload_image");
-Router::add('/test/uploading_image', "TestController", "uploading_image");
-Router::add('/test/session_init', "TestController", "session_init");
-Router::add('/test/session_view', "TestController", "session_view");
+Router::add('/test/ajax', "TestController", "viewAjax");
+
 
 /** API Calls for AJAX */

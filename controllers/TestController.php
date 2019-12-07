@@ -39,4 +39,18 @@ class TestController
     }
 
 
+    public function viewAjax(Request $request)
+    {
+
+        try {
+
+
+            include_once "views/test/ajax.view.php";
+
+        } catch (AppExceptions $exception) {
+
+        }
+
+    }
+
 }

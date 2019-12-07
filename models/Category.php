@@ -47,7 +47,7 @@ class Category
     public static function selectAll()
     {
         $db = Database::getInstance();
-        $statement = $db->prepare("SELECT * FROM categories");
+        $statement = $db->prepare("SELECT * FROM categories ORDER BY category_name");
         $statement->execute();
 
         return $statement->fetchAll(PDO::FETCH_CLASS, Category::class);
