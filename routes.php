@@ -56,13 +56,10 @@ Router::add('/subcategories/single', CategoriesController::class, "actionSingleS
 
 /** Authors */
 Router::add('/authors', AuthorsController::class, "viewAuthors");
-Router::add('/api/add_author', AuthorsApiController::class, "actionAddAuthor");
+Router::add('/authors/adding', AuthorsController::class, "actionAddingAuthor");
+Router::add('/authors/editing', AuthorsController::class, "actionEditingAuthor");
+Router::add('/authors/single', AuthorsController::class, "actionGetSingleAuthor");
 
-Router::add('/api/get_author_by_name', ApiCallsController::class, "get_author_by_name");
-Router::add('/api/json_get_authors', ApiCallsController::class, "json_get_authors");
-Router::add('/api/add_author', ApiCallsController::class, "add_author");
-Router::add('/api/get_author_by_id', ApiCallsController::class, "get_author_by_id");
-Router::add('/api/update_author', ApiCallsController::class, "update_author");
 
 
 /** Members */

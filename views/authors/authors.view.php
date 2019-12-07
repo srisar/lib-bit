@@ -15,39 +15,37 @@ $authors = View::getData('authors');
 
                 <div class="card">
                     <div class="card-header text-uppercase"><?php HtmlHelper::renderCardHeader("Add new author"); ?></div>
-                    <div class="card-body">
+                    <div class="card-body" id="form_add_author">
 
-                        <form action="" method="post">
-
-
-                            <div class="form-group">
-                                <label for="">Author Name</label>
-                                <input type="text" name="author_name" class="form-control" value="" id="text_save_author_name">
-                                <div class="invalid-feedback">
-                                    Author name cannot be empty.
-                                </div>
-                                <div class="valid-feedback">
-                                    Looks good!
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="text" name="author_email" class="form-control" value="" id="text_save_author_email">
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col">
-                                    <div class="col text-right">
-                                        <button class="btn btn-primary" type="button" id="btn_save_author"><i class="far fa-check"></i> Save</button>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="text_author_name">Author Name</label>
+                                    <input type="text" name="author_name" class="form-control" value="" id="text_author_name">
+                                    <div class="invalid-feedback">
+                                        Author name cannot be empty.
+                                    </div>
+                                    <div class="valid-feedback">
+                                        Looks good!
                                     </div>
                                 </div>
 
-
+                                <div class="form-group">
+                                    <label for="text_author_email">Email</label>
+                                    <input type="email" name="author_email" class="form-control" value="" id="text_author_email">
+                                </div>
                             </div>
+                        </div>
 
-                        </form>
+
+                        <div class="row">
+                            <div class="col text-right">
+                                <button class="btn btn-primary" type="button" id="btn_save_author"><i class="far fa-check"></i> Save</button>
+                            </div>
+                        </div>
+
+                        <div id="form_messages" class="text-danger"></div>
+
 
                     </div><!--.card-body-->
                 </div><!--.card-->
@@ -71,7 +69,7 @@ $authors = View::getData('authors');
 
                             <?php foreach ($authors as $author): ?>
                                 <tr>
-                                    <td><a href="#" id="<?= $author->id ?>" class="item_author"><?= $author->full_name ?></a></td>
+                                    <td><a href="#" data-author-id="<?= $author->id ?>" class="item_author"><?= $author->full_name ?></a></td>
                                     <td><?= $author->email ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -99,26 +97,29 @@ $authors = View::getData('authors');
                 </div>
                 <div class="modal-body">
 
-                    <input type="hidden" id="edit_author_id">
+                    <input type="hidden" id="author_id">
 
                     <div>
                         <div class="form-group">
                             <label for="">Author Name</label>
-                            <input type="text" class="form-control" value="" id="edit_author_name">
+                            <input type="text" class="form-control" value="" id="text_author_name">
                         </div>
 
                         <div class="form-group">
                             <label for="">Email</label>
-                            <input type="text" class="form-control" value="" id="edit_author_email">
+                            <input type="text" class="form-control" value="" id="text_author_email">
                         </div>
 
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btn_modal_edit_author"><i class="far fa-check"></i> Update</button>
+                    <button type="button" class="btn btn-primary" id="btn_edit_author"><i class="far fa-check"></i> Update</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="far fa-times"></i> Close</button>
                 </div>
+
+                <div id="form_messages" class="text-danger"></div>
+
             </div>
         </div>
     </div>
