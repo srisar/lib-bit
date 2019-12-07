@@ -8,7 +8,7 @@
             <div class="input-group">
                 <input class="form-control" type="text" name="department_name" required>
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Add</button>
+                    <button class="btn btn-primary" type="submit"><i class="far fa-check"></i> Add</button>
                 </div>
             </div>
 

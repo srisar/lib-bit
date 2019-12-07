@@ -38,9 +38,9 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
         </div>
     </div>
 
-    <div class="row">
+    <div class="row justify-content-center">
 
-        <div class="col-12 col-lg-3 mb-3">
+        <div class="col-12 col-lg-2 mb-3">
             <?php include_once BASE_PATH . "/views/book_instance/_single_instance_card.inc.php" ?>
         </div><!--.col-->
 
@@ -95,14 +95,14 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                         </div>
 
                         <div>
-                            <button class="btn btn-primary" type="submit">Update</button>
+                            <button class="btn btn-primary" type="submit"><i class="far fa-check"></i> Update</button>
 
                             <a href="<?= App::createURL(
                                 '/transactions/single/set-as-returned',
                                 ['transaction_id' => $book_transaction->id, 'amount' => $overdue_payment]) ?>"
                                class="btn btn-warning <?= $btn_set_as_returned_state ?>"
                                id="btn_set_as_returned_today">
-                                Set as returned today
+                                <i class="far fa-calendar-check"></i> Set as returned today
                             </a>
                         </div>
 
@@ -122,20 +122,15 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
 
                         <div class="row">
                             <div class="col">
-                                <p class="badge badge-pill badge-danger"> <?= $days_elapsed ?> day(s) have passed since
-                                    returning
-                                    date.</p>
+                                <p class="badge badge-pill badge-danger"> <?= $days_elapsed ?> day(s) have passed since returning date.</p>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="overdue-value">Overdue payment (<?= $days_elapsed ?> days
-                                        x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
-                                    <input class="form-control" type="text"
-                                           value="<?= App::toCurrencyFormat($overdue_payment) ?>"
-                                           disabled>
+                                    <label for="overdue-value">Overdue payment (<?= $days_elapsed ?> days x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
+                                    <input class="form-control" type="text" value="<?= App::toCurrencyFormat($overdue_payment) ?>" disabled>
                                 </div>
                             </div>
                         </div>
@@ -149,12 +144,10 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                                     <div class="row">
                                         <div class="col">
                                             <div class="form-group">
-                                                <label for="overdue-value">Overdue payment paid for
-                                                    <br>(<?= $days_elapsed ?> days
-                                                    x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)</label>
-                                                <input class="form-control" type="text"
-                                                       value="<?= App::toCurrencyFormat($overdue_payment) ?>"
-                                                       disabled>
+                                                <label for="overdue-value">
+                                                    Overdue payment paid for <br>(<?= $days_elapsed ?> days x <?= App::toCurrencyFormat(OVERDUE_DAY_PAYMENT) ?>)
+                                                </label>
+                                                <input class="form-control" type="text" value="<?= App::toCurrencyFormat($overdue_payment) ?>" disabled>
                                             </div>
                                         </div>
                                     </div>
@@ -165,8 +158,7 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
                     <?php else: ?>
                         <div class="row">
                             <div class="col">
-                                <p class="badge badge-pill badge-warning"><?= $days_elapsed ?> day(s) left to return the
-                                    book.</p>
+                                <p class="badge badge-pill badge-warning"><?= $days_elapsed ?> day(s) left to return the book.</p>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -179,9 +171,8 @@ if ($book_transaction->state == BookTransaction::STATE_RETURNED)
 
                 <div class="card-body">
 
-                    <a href="<?= App::createURL('/transactions/single/print', ['id' => $book_transaction->id]) ?>"
-                       class="btn btn-success btn-block" target="_blank">
-                        Print receipt
+                    <a href="<?= App::createURL('/transactions/single/print', ['id' => $book_transaction->id]) ?>" class="btn btn-success btn-block" target="_blank">
+                        <i class="far fa-print"></i> Print receipt
                     </a>
 
                 </div>

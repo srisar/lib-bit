@@ -17,8 +17,8 @@ $member_transactions = View::getData('member_transactions');
 
 <div class="container-fluid">
 
-    <div class="row">
-        <div class="col-lg-12 mb-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-4 mb-3">
 
             <?php if (!empty($errors)): ?>
                 <div class="alert alert-warning mb-3">
@@ -48,16 +48,21 @@ $member_transactions = View::getData('member_transactions');
                                 </div>
                             </div>
 
-                            <div class="col-12 col-lg-3">
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="member_since">Member since</label>
-                                    <input type="text" name="member_since" id="member_since" class="form-control date-picker" value="<?= App::toDateString($member->member_since) ?>">
+                                    <input type="text" name="member_since" id="member_since" class="form-control date-picker"
+                                           value="<?= App::toDateString($member->member_since) ?>">
                                     <!--                                    <div class="" id="date-picker-error"></div>-->
                                     <div class="invalid-feedback">Invalid date</div>
                                     <div class="valid-feedback">Looks good</div>
                                 </div>
                             </div>
-                            <div class="col-12 col-lg-3">
+                            <div class="col-12 col-lg-6">
                                 <div class="form-group">
                                     <label for="full_name">Department</label>
                                     <input type="text" value="<?= $department ?>" class="form-control" readonly>
@@ -67,14 +72,12 @@ $member_transactions = View::getData('member_transactions');
                         </div>
 
 
-
-
                         <input type="hidden" name="type" value="<?= $type ?>">
 
                         <div class="row">
                             <div class="col text-right">
-                                <button type="submit" id="submit-button" class="btn btn-primary">Save</button>
-                                <a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>" class="btn btn-secondary">Cancel</a>
+                                <button type="submit" id="submit-button" class="btn btn-primary"><i class="far fa-check"></i> Save</button>
+                                <a href="<?= App::createURL('/members/department', ['dept_id' => $department->id]) ?>" class="btn btn-secondary"><i class="far fa-times"></i> Cancel</a>
                             </div>
                         </div>
 

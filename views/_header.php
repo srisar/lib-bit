@@ -55,10 +55,9 @@
                 <span class="badge badge-pill badge-dark mr-2">Today is <?= App::todayString() ?></span>
 
                 <?php if (Session::isAdmin()): ?>
-                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="<?= App::createURL('/users') ?>">Manage
-                        Users</a>
+                    <a class="btn btn-success my-2 my-sm-0 mr-2" href="<?= App::createURL('/users') ?>"><i class="far fa-user-cog"></i> Manage Users</a>
                 <?php endif; ?>
-                <a class="btn btn-danger my-2 my-sm-0" href="<?= App::createURL('/logout') ?>">Logout</a>
+                <a class="btn btn-danger my-2 my-sm-0" href="<?= App::createURL('/logout') ?>"><i class="far fa-sign-out"></i> Logout</a>
 
             </form>
 

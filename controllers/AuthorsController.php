@@ -13,7 +13,7 @@ class AuthorsController
 
             View::setData('authors', $authors);
 
-            include_once "views/authors/index.view.php";
+            include_once "views/authors/authors.view.php";
 
         } catch (Exception $exception) {
             AppExceptions::showExceptionView($exception->getMessage());
