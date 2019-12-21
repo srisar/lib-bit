@@ -122,6 +122,8 @@ class AuthorsController
 
         try {
 
+            header('Content-Type: application/json');
+
             $authorId = $request->getParams()->getInt('author_id');
 
             $selectedAuthor = Author::select($authorId);

@@ -69,7 +69,7 @@ function editAuthor() {
             "author_id": authorId
         }).done(function (data) {
 
-            response = JSON.parse(data);
+            response = data;
 
             if (!response.has_error) {
 
@@ -104,7 +104,8 @@ function editAuthor() {
                 "author_email": fieldAuthorEmail.val().trim()
             }).done(function (data) {
 
-                response = JSON.parse(data);
+                // response = JSON.parse(data);
+                response = data;
 
                 if (!response.has_error) {
                     helpers.reloadPage();
