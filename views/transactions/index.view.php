@@ -14,33 +14,6 @@ $overdue_transactions = View::getData('overdue_transactions');
 
 <div class="container-fluid">
 
-    <div class="row">
-        <div class="col-12 col-md-12 col-lg-3 d-none">
-            <div class="card">
-                <div class="card-header"><?php HtmlHelper::renderCardHeader("Statistics"); ?></div>
-                <div class="card-body">
-
-                    <table class="table table-bordered table-striped">
-                        <tbody>
-                        <tr>
-                            <td>Total books</td>
-                            <td>1200</td>
-                        </tr>
-                        <tr>
-                            <td>Today's transactions</td>
-                            <td>24</td>
-                        </tr>
-                        <tr>
-                            <td>Week's transactions</td>
-                            <td>24</td>
-                        </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div><!--.card-->
-        </div><!--.col-->
-    </div>
 
     <div class="row">
         <div class="col-12">
@@ -73,6 +46,23 @@ $overdue_transactions = View::getData('overdue_transactions');
             <div class="card mb-3">
                 <div class="card-header"><?php HtmlHelper::renderCardHeader("Recent Transactions") ?></div>
                 <div class="card-body">
+
+                    <div class="alert alert-light">
+                        <form action="<?= App::createURL('/transactions/filter') ?>">
+                            <div class="form-group">
+                                <label for="">Start Date</label>
+                                <input class="form-control date-picker" type="date" name="start_date" value="">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Start Date</label>
+                                <input class="form-control date-picker" type="date" name="end_date" value="">
+                            </div>
+                            <div>
+                                <button class="btn btn-primary" type="submit">Filter</button>
+                            </div>
+                        </form>
+                    </div>
+
                     <?php if (!empty($recent_transactions)): ?>
                         <?php BookTransactionsHelper::renderTransactionsTable($recent_transactions); ?>
                     <?php else: ?>

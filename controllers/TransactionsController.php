@@ -278,4 +278,11 @@ class TransactionsController
 
     }
 
+    public function actionFilterTransactions(Request $request)
+    {
+
+        var_dump($request);
+
+    }
+
 }

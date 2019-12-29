@@ -11,7 +11,11 @@ export function initDatatables() {
         "language": {
             "search": "Filter records:"
         },
-        "order": []
+        "order": [],
+        // dom: 'Bfrtip',
+        // buttons: [
+        //     'pdf', 'excel', 'copy', 'print'
+        // ]
     });
 
     $(".data-table-basic").DataTable({

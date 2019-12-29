@@ -38,6 +38,8 @@ Router::add('/transactions/adding', TransactionsController::class, "actionAdding
 Router::add('/transactions/single', TransactionsController::class, "viewSingleTransaction");
 Router::add('/transactions/single/set-as-returned', TransactionsController::class, "actionSetAsReturned");
 Router::add('/transactions/single/print', TransactionsController::class, "actionPrintSingleReceipt");
+Router::add('/transactions/filter', TransactionsController::class, "actionFilterTransactions");
+
 
 /** Categories */
 Router::add('/categories', CategoriesController::class, "viewCategories");
