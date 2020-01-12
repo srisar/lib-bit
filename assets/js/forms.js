@@ -83,10 +83,18 @@ export function enableField(field) {
 /**
  * Show a message box with custom text.
  * @param message
+ * @param fnHandler
  */
-export function showMessageBox(message) {
+export function showMessageBox(message, fnHandler) {
     let modalWindow = $("#modal_message");
     let modalBody = modalWindow.find("#modal_message_body");
+    let closeButton = modalWindow.find("#box_close_button");
+
+    closeButton.on("click", function () {
+        fnHandler();
+    });
+
+
     modalBody.html(message);
     modalWindow.modal("show");
 

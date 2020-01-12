@@ -1,6 +1,7 @@
 import * as form from "../forms.js";
 import * as helper from '../helpers.js';
 
+
 let response = {
     'has_error': false,
     'errors': "",
@@ -45,8 +46,11 @@ function actionAddCategory() {
                 response = JSON.parse(data);
 
                 if (!response.has_error) {
-                    alert("Category added successfully!");
-                    helper.reloadPage();
+
+                    form.showMessageBox("Category added...", function(){
+                        helper.reloadPage();
+                    });
+
                 } else {
                     errorMessageContainer.empty();
                     errorMessageContainer.append(form.buildMessageList(response.errors));
@@ -58,6 +62,7 @@ function actionAddCategory() {
 
     });
 }
+
 
 
 /**
@@ -72,7 +77,7 @@ function editCategory() {
     let btnEditCategory = modalEditCategory.find("#btn_edit_category");
 
     let categoryIdField = modalEditCategory.find("#category_id");
-    let textCategoryNameField = modalEditCategory.find("#text_category_name");
+    let textCategoryNameField = modalEditCategory.find("#text_edit_category_category_name");
 
     // show edit category modal
     btnOpenEditCategoryModal.on('click', function () {
@@ -186,7 +191,7 @@ function actionAddSubcategory() {
     let errorMessageContainer = modalAddSubcategory.find("#form_messages");
     let btnAddSubcategory = $("#btn_add_subcategory");
 
-    let textSubcategory = modalAddSubcategory.find("#text_subcategory_name");
+    let textSubcategory = modalAddSubcategory.find("#text_add_subcat_category_name");
     let textCategoryId = modalAddSubcategory.find("#category_id");
 
     /**

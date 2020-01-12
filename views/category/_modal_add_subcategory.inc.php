@@ -16,7 +16,7 @@
 
                     <div class="form-group">
                         <label for="text_category_name">Category</label>
-                        <input class="form-control" type="text" id="text_category_name" value="<?= $selected_category ?>" readonly>
+                        <input class="form-control" type="text" id="text_add_subcat_category_name" value="<?= $selected_category ?>" readonly>
                     </div>
 
                     <div class="form-group">

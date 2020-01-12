@@ -55,7 +55,7 @@ class BooksController
         }
     }
 
-    public function viewAddBooks(Request $request)
+    public function viewAddBook(Request $request)
     {
 
         try {

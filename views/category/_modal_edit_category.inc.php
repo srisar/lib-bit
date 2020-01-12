@@ -15,7 +15,7 @@
 
                 <div class="form-group">
                     <label>Category Name</label>
-                    <input class="form-control" type="text" id="text_category_name" value="<?= $selected_category->category_name ?>" required>
+                    <input class="form-control" type="text" id="text_edit_category_category_name" value="<?= $selected_category->category_name ?>" required>
                     <div class="invalid-feedback">Category name cannot be empty</div>
                 </div>
 
