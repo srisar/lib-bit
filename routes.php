@@ -61,6 +61,7 @@ Router::add('/authors', AuthorsController::class, "viewAuthors");
 Router::add('/authors/adding', AuthorsController::class, "actionAddingAuthor");
 Router::add('/authors/editing', AuthorsController::class, "actionEditingAuthor");
 Router::add('/authors/single', AuthorsController::class, "actionGetSingleAuthor");
+Router::add('/authors/by-name', AuthorsController::class, "actionGetAuthorsByName");
 
 
 

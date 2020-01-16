@@ -147,4 +147,27 @@ class AuthorsController
 
     }
 
+    public function actionGetAuthorsByName(Request $request)
+    {
+        try {
+
+            $author_query = $request->getParams()->getString('author_query');
+
+            if (!empty($author_query)) {
+                $authors = Author::search($author_query);
+
+                View::setData('authors', $authors);
+                include_once "views/api/authors_list.php";
+            } else {
+                $authors = Author::selectAll();
+                View::setData('authors', $authors);
+                include_once "views/api/authors_list.php";
+            }
+
+
+        } catch (Exception $ex) {
+            AppExceptions::showExceptionView($ex->getMessage());
+        }
+    }
+
 }

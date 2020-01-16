@@ -5,7 +5,7 @@ import * as helper from '../helpers.js';
 let response = {
     'has_error': false,
     'errors': "",
-    "results": ""
+    'results': ""
 };
 
 /**

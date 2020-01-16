@@ -11,7 +11,7 @@ class AppExceptions extends Exception
 
     public static function showExceptionView($message = "")
     {
-        View::setError('error', self::getMessage());
+        View::setError($message);
         include_once "views/error/error.view.php";
     }
 

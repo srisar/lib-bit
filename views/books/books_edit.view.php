@@ -110,8 +110,7 @@ $book_instances = $book->getAllBookInstances();
                             <div class="col">
                                 <div class="custom-control custom-switch">
                                     <input type="checkbox" class="custom-control-input" id="toggle_image_upload">
-                                    <label class="custom-control-label" for="toggle_image_upload">Enable cover image
-                                        upload</label>
+                                    <label class="custom-control-label" for="toggle_image_upload">Enable cover image upload</label>
                                 </div>
                             </div>
                         </div>
@@ -128,6 +127,12 @@ $book_instances = $book->getAllBookInstances();
 
                         <div class="row text-right">
                             <div class="col">
+
+                                <?php if (empty($book_instances)): ?>
+                                    <a href="<?= App::createURL('/books/delete', ['id'=>$book->id]) ?>" class="btn btn-danger">Delete</a>
+                                <?php else: ?>
+                                    <a href="#" class="btn btn-danger disabled">Delete</a>
+                                <?php endif; ?>
                                 <button class="btn btn-warning" type="submit">Save</button>
                             </div>
                         </div>
